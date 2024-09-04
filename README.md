@@ -1,17 +1,3 @@
----
-output: github_document
----
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
 
 # wdi2
 
@@ -29,18 +15,18 @@ pak::pak("tidy-intelligence/r-wdi2")
 
 You can download a data frame with available indicators via:
 
-```{r}
+```r
 download_indicators()
 ```
 
 You can download a data frame with available countries via:
 
-```{r}
+```r
 download_countries()
 ```
 
 You can download single indicators via:
 
-```{r}
+```r
 download_indicator("all", "NY.GDP.PCAP.KD")
 ```
