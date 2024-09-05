@@ -1,79 +1,137 @@
-#' Download and process indicators data from the World Bank API
+#' Download World Bank indicator data for specific countries and multiple indicators
 #'
-#' This function retrieves a comprehensive list of indicators from the World Bank API.
-#' The data is processed to extract and organize relevant fields such as the indicator's
-#' ID, name, unit, source information, and associated topics. The function supports
-#' optional progress messages during the parsing of indicators.
+#' This function retrieves indicator data from the World Bank API for a specified set of countries and indicators.
+#' The user can specify one or more indicators, a date range, and other options to tailor the request. The data
+#' is processed and returned in a tidy format, including country, indicator, date, and value fields.
 #'
-#' @param progress A logical value indicating whether to show progress messages during the
-#' parsing of indicators. Defaults to `TRUE`. If set to `FALSE`, no progress message is shown.
+#' @param countries A character vector of ISO 2-country codes, or `"all"` to retrieve data for all countries.
+#' @param indicators A character vector specifying one or more World Bank indicators to download (e.g., c("NY.GDP.PCAP.KD", "SP.POP.TOTL")).
+#' @param start_date Optional. The starting date for the data, either as a year (e.g., `2010`) or a specific month (e.g., `"2012M01"`).
+#' @param end_date Optional. The ending date for the data, either as a year (e.g., `2020`) or a specific month (e.g., `"2012M05"`).
+#' @param language A character string specifying the language for the request. Defaults to `"en"`.
+#' @param per_page An integer specifying the number of results per page for the API. Defaults to 1000.
+#' @param progress A logical value indicating whether to show progress messages during the data download and parsing. Defaults to `TRUE`.
 #'
-#' @return A tibble containing processed indicator information. The following columns are included:
+#' @return A tibble containing the indicator data for the specified countries and indicators. The following columns are included:
 #' \describe{
-#'   \item{indicator_id}{The ID of the indicator.}
-#'   \item{indicator_name}{The name of the indicator.}
-#'   \item{unit}{The unit of measurement for the indicator.}
-#'   \item{source_id}{The ID of the source that provided the indicator.}
-#'   \item{source_value}{The name of the source that provided the indicator.}
-#'   \item{source_note}{Any additional notes from the source.}
-#'   \item{source_organization}{The organization providing the source.}
-#'   \item{topics}{A nested tibble containing the topics associated with the indicator, which includes topic_id and topic_value}
+#'   \item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
+#'   \item{country_id}{The ISO 2-country code of the country for which the data was retrieved.}
+#'   \item{date}{The date of the indicator data (either a year or month depending on the request).}
+#'   \item{value}{The value of the indicator for the given country and date.}
 #' }
 #'
-#' @details The data is fetched in JSON format from the World Bank API and is processed
-#' to handle missing or empty fields. Topics related to each indicator are nested in
-#' a separate tibble within the main dataframe. If there are no topics for an indicator,
-#' `NA` values are used.
+#' @details This function constructs a request URL for the World Bank API, retrieves the relevant data for the given countries
+#' and indicators, and processes the response into a tidy format. The user can optionally specify a date range, and the
+#' function will handle requests for multiple pages if necessary. If the `progress` parameter is `TRUE`,
+#' messages will be displayed during the request and parsing process.
+#'
+#' The function supports downloading multiple indicators by sending individual API requests for each indicator and then
+#' combining the results into a single tidy data frame.
 #'
 #' @export
 #'
 #' @examples
-#' download_indicators()
+#' # Download single indicator for multiple countries
+#' download_indicators(c("US", "CA", "GB"), "NY.GDP.PCAP.KD")
+#'
+#' # Download single indicator for a specific time frame
+#' download_indicators(c("US", "CA", "GB"), "DPANUSSPB", start_date = 2012, end_date = 2013)
+#'
+#' # Download single indicator for different frequency
+#' download_indicators(c("MX", "CA", "US"), "DPANUSSPB", start_date = "2012M01", end_date = "2012M05")
+#'
+#' # Download single indicator for all countries and disable progress bar
+#' download_indicators("all", "NY.GDP.PCAP.KD", progress = FALSE)
+#'
+#' # Download multiple indicators for multiple countries
+#' download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 #'
 download_indicators <- function(
-    progress = TRUE
+  countries, indicators, start_date = NULL, end_date = NULL, language = "en", per_page = 1000, progress = TRUE
 ) {
 
-  if (!is.logical(progress)) {
-    cli::cli_abort("The {.arg progress} must be either TRUE or FALSE.")
-  }
+  construct_request_indicator <- function(
+    countries,
+    indicator,
+    start_date = NULL,
+    end_date = NULL,
+    language = "en",
+    per_page = 1000
+  ) {
 
-  url <- "https://api.worldbank.org/v2/indicators?format=json&per_page=32500"
+    countries <- paste(countries, collapse = ";")
 
-  responses <- request(url) |>
-    req_perform()
+    if (!is.null(start_date) & !is.null(end_date)) {
+      date <- paste0("&date=", start_date, ":", end_date)
+    } else {
+      date <- NULL
+    }
 
-  body <- responses |>
-    resp_body_json()
-
-  check_for_failed_request(body)
-
-  indicators_raw <- body[[2]]
-
-  if (progress) {
-    progress <- "Parsing indicators:"
-  }
-
-  indicators_processed <- map_df(indicators_raw, function(x) {
-    tibble(
-      indicator_id = x$id,
-      indicator_name = x$name,
-      unit = x$unit %||% NA_character_,
-      source_id = x$source$id,
-      source_value = x$source$value,
-      source_note = x$sourceNote,
-      source_organization = x$sourceOrganization,
-      topics = if (length(x$topics) > 0) {
-        map_df(x$topics, ~ tibble(
-          topic_id = .x$id %||% NA_character_,
-          topic_value = .x$value %||% NA_character_
-        ))
-      } else {
-        tibble(topic_id = NA_character_, topic_value = NA_character_)
-      }
+    paste0(
+      "https://api.worldbank.org/v2/",
+      language, "/country/",
+      countries, "/indicator/", indicator,
+      "?format=json",
+      date,
+      "&per_page=", per_page
     )
-  }, .progress = progress) |>
-    tidyr::nest(topics = topics)
+  }
 
-  indicators_processed
+  indicators_processed <- list()
+
+  for (j in 1:length(indicators)) {
+    url <- construct_request_indicator(countries, indicators[j], start_date, end_date, language, per_page)
+
+    response <- request(url) |>
+      req_perform()
+
+    body <- response |>
+      resp_body_json()
+
+    check_for_failed_request(body)
+
+    pages <- body[[1]]$pages
+
+    if (progress) {
+      progress_req <- paste0("Sending requests for indicator ", indicators[j])
+    } else {
+      progress_req <- FALSE
+    }
+
+    if (pages > 1) {
+      responses <- request(url) |>
+        req_perform_iterative(next_req = iterate_with_offset("page"),
+                              max_reqs = pages,
+                              progress = progress_req)
+    } else {
+      responses <- list(response)
+    }
+
+    parse_response <- function(response) {
+      body <- response |>
+        resp_body_json()
+
+      indicator_raw <- body[[2]]
+
+      map_df(indicator_raw, function(x) {
+        tibble(
+          indicator_id = x$indicator$id,
+          country_id = x$country$id,
+          date = x$date,
+          value = x$value
+        )
+      })
+    }
+
+    if (progress) {
+      progress_parse <- paste0("Parsing responses for indicator ", indicators[j])
+    } else {
+      progress_parse <- FALSE
+    }
+
+    indicators_processed[[j]] <- map_df(responses, parse_response, .progress = progress_parse)
+  }
+
+  bind_rows(indicators_processed)
+
 }
