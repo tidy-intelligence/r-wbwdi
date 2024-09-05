@@ -40,7 +40,7 @@
 #' list_supported_indicators(language = "en")
 #'
 #' # List all supported indicators in Spanish
-#' list_supported_indicators(language = "es")
+#' list_supported_indicators(language = "es", include_details = TRUE)
 #' }
 list_supported_indicators <- function(language = "en", per_page = 32500, include_details = FALSE, progress = TRUE) {
 
@@ -96,15 +96,15 @@ list_supported_indicators <- function(language = "en", per_page = 32500, include
       tibble(
         indicator_id = x$id,
         indicator_name = x$name,
-        unit = x$unit %||% NA_character_,
+        unit = if_else(is.null(x$unit), NA_character_, x$unit),
         source_id = x$source$id,
         source_value = x$source$value,
         source_note = x$sourceNote,
         source_organization = x$sourceOrganization,
         topics = if (length(x$topics) > 0) {
           map_df(x$topics, ~ tibble(
-            topic_id = .x$id %||% NA_character_,
-            topic_value = .x$value %||% NA_character_
+            topic_id = if_else(is.null(x$id), NA_character_, x$unit),
+            topic_value = if_else(is.null(x$value), NA_character_, x$unit)
           ))
         } else {
           tibble(topic_id = NA_character_, topic_value = NA_character_)

@@ -56,6 +56,6 @@ If the \code{progress} parameter is set to \code{TRUE}, messages will be display
 list_supported_indicators(language = "en")
 
 # List all supported indicators in Spanish
-list_supported_indicators(language = "es")
+list_supported_indicators(language = "es", include_details = TRUE)
 }
 }
