@@ -34,12 +34,13 @@
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' # List all supported indicators in English
 #' list_supported_indicators(language = "en")
 #'
 #' # List all supported indicators in Spanish
 #' list_supported_indicators(language = "es")
-#'
+#' }
 list_supported_indicators <- function(language = "en", per_page = 32500, progress = TRUE) {
 
   supported_languages <- list_supported_languages()

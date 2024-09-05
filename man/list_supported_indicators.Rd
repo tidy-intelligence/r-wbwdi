@@ -44,10 +44,11 @@ It processes the response into a tidy tibble format. If the \code{progress} para
 during the parsing process.
 }
 \examples{
+\donttest{
 # List all supported indicators in English
 list_supported_indicators(language = "en")
 
 # List all supported indicators in Spanish
 list_supported_indicators(language = "es")
-
+}
 }

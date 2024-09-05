@@ -4,9 +4,9 @@
 \name{wdi2-package}
 \alias{wdi2}
 \alias{wdi2-package}
-\title{wdi2: Download indicators from the World Bank Indicators API}
+\title{wdi2: Download Indicators from the World Bank Indicators API}
 \description{
-The 'wdi2' package provides a modern, flexible interface for accessing the World Bank’s World Development Indicators (WDI). imilar to the 'WDI' package, 'wdi2' allows users to download, process, and analyze indicator data for multiple countries and years. However, 'wdi2' differs by relying on 'httr2' for multi-page request and error handling and providing the processed data in a tidy format.
+The 'wdi2' package provides a modern, flexible interface for accessing the World Bank’s World Development Indicators (WDI). imilar to the 'WDI' package, 'wdi2' allows users to download, process, and analyze indicator data for multiple countries and years. However, 'wdi2' differs by relying on 'httr2' for multi-page request and error handling, providing support for downloading multiple indicators with a single function call, using progress bars to keep users informed about the data processing, and returning the processed data in a tidy data format.
 }
 \seealso{
 Useful links:
@@ -17,7 +17,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Christoph Scheuch \email{christoph.scheuch@gmail.com} (\href{https://orcid.org/0009-0004-0423-6819}{ORCID})
+\strong{Maintainer}: Christoph Scheuch \email{christoph.scheuch@gmail.com} (\href{https://orcid.org/0009-0004-0423-6819}{ORCID}) [copyright holder]
 
 }
 \keyword{internal}

@@ -62,10 +62,11 @@ download_indicators(c("US", "CA", "GB"), "DPANUSSPB", start_date = 2012, end_dat
 # Download single indicator for different frequency
 download_indicators(c("MX", "CA", "US"), "DPANUSSPB", start_date = "2012M01", end_date = "2012M05")
 
+\donttest{
 # Download single indicator for all countries and disable progress bar
 download_indicators("all", "NY.GDP.PCAP.KD", progress = FALSE)
 
 # Download multiple indicators for multiple countries
 download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
-
+}
 }

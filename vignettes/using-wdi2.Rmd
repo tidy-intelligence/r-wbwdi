@@ -24,13 +24,15 @@ The `wdi2` package provides a modern and flexible interface for accessing the Wo
 
 You can install the released version of `wdi2` from CRAN via:
 
-```r
+```{r}
+#| eval: false
 install.packages("wdi2")
 ```
 
 To install the development version of `wdi2`, use:
 
-```r
+```{r}
+#| eval: false
 pak::pak("tidy-intelligence/r-wdi2")
 ```
 
@@ -38,21 +40,21 @@ pak::pak("tidy-intelligence/r-wdi2")
 
 The `wdi2` package allows you to retrieve a full list of all supported indicators from the World Bank [Indicators API](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation). Each indicator is accompanied by metadata such as its unit of measurement, source, and associated topics.
 
-```r
+```{r}
 # Retrieve the list of supported indicators
 list_supported_indicators()
 ```
 
 You can also get the list of supported indicators in a different language. For example, to retrieve the indicators in Spanish:
 
-```r
+```{r}
 # Retrieve indicators in Spanish
 list_supported_indicators(language = "es")
 ```
 
 To get the list of supported languages, call: 
 
-```r
+```{r}
 # List supported languages
 list_supported_languages()
 ```
@@ -63,7 +65,7 @@ Note that not all indicators might be translated into all languages.
 
 You can retrieve a list of all countries supported by the World Bank API along with metadata such as region, administrative region, income level, and lending type.
 
-```r
+```{r}
 # Retrieve the list of supported countries
 list_supported_countries()
 ```
@@ -81,7 +83,7 @@ With `wdi2`, you can download indicator data for multiple countries and indicato
 
 For example, to download GDP per capita and total population for Mexico, Canada, and the United States:
 
-```r
+```{r}
 # Download specific indicators for selected countries
 download_indicators(countries = c("MX", "CA", "US"), indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 ```
