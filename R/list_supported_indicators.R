@@ -54,6 +54,11 @@ list_supported_indicators <- function(language = "en", per_page = 32500, include
     cli::cli_abort("{.arg per_page} must be an integer between 1 and 32,500.")
   }
 
+  if (!is.logical(include_details)) {
+    cli::cli_abort("{.arg include_details} must be either TRUE or FALSE.")
+  }
+
+
   if (!is.logical(progress)) {
     cli::cli_abort("{.arg progress} must be either TRUE or FALSE.")
   }

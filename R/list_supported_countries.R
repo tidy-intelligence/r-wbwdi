@@ -5,6 +5,8 @@
 #' The user can specify the language of the API response.
 #'
 #' @param language A character string specifying the language for the request, see \link{list_supported_languages}. Defaults to `"en"`.
+#' @param per_page An integer specifying the number of results per page for the API. Defaults to 1000.
+#' Must be a value between 1 and 32,500.
 #'
 #' @return A tibble containing country information along with associated metadata. The tibble includes the following columns:
 #' \describe{
@@ -34,7 +36,7 @@
 #' # List all supported countries in Spanish
 #' list_supported_countries(language = "zh")
 #'
-list_supported_countries <- function(language = "en") {
+list_supported_countries <- function(language = "en", per_page = 1000) {
 
   supported_languages <- list_supported_languages()
   if (!language %in% supported_languages$code) {
@@ -42,7 +44,11 @@ list_supported_countries <- function(language = "en") {
     cli::cli_abort("Unsupported language. Please choose one of: {supported_languages}")
   }
 
-  url <- paste0("https://api.worldbank.org/v2/", language, "/countries/all?per_page=25000&format=json")
+  if (!is.numeric(per_page) || per_page %% 1 != 0 || per_page < 1 || per_page > 32500) {
+    cli::cli_abort("{.arg per_page} must be an integer between 1 and 32,500.")
+  }
+
+  url <- paste0("https://api.worldbank.org/v2/", language, "/countries/all?per_page=", per_page, "&format=json")
 
   responses <- request(url) |>
     req_perform()

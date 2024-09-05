@@ -4,10 +4,13 @@
 \alias{list_supported_countries}
 \title{List all supported countries and regions from the World Bank API}
 \usage{
-list_supported_countries(language = "en")
+list_supported_countries(language = "en", per_page = 1000)
 }
 \arguments{
 \item{language}{A character string specifying the language for the request, see \link{list_supported_languages}. Defaults to \code{"en"}.}
+
+\item{per_page}{An integer specifying the number of results per page for the API. Defaults to 1000.
+Must be a value between 1 and 32,500.}
 }
 \value{
 A tibble containing country information along with associated metadata. The tibble includes the following columns:
