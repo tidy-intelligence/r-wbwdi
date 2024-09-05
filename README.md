@@ -4,6 +4,12 @@ The goal of 'wdi2' is to provide a modern, flexible interface for accessing the 
 
 ## Installation
 
+You can install the released version of `wdi2` from CRAN via:
+
+```r
+install.packages("wdi2")
+```
+
 You can install the development version of wdi2 like so:
 
 ``` r

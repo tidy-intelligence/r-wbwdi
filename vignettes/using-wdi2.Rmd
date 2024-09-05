@@ -1,0 +1,100 @@
+---
+title: "Using `wdi2` to access World Development Indicators"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using `wdi2` to access World Development Indicators}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(wdi2)
+```
+
+The `wdi2` package provides a modern and flexible interface for accessing the World Bank’s [World Development Indicators (WDI)](https://datatopics.worldbank.org/world-development-indicators/). It improves upon existing packages by utilizing the `httr2` package for multi-page requests and enhanced error handling. With `wdi2`, you can download data for multiple indicators and countries in a single function call, benefit from progress bars, and receive the output in a tidy data format, making it ideal for further analysis.
+
+## Installation
+
+You can install the released version of `wdi2` from CRAN via:
+
+```r
+install.packages("wdi2")
+```
+
+To install the development version of `wdi2`, use:
+
+```r
+pak::pak("tidy-intelligence/r-wdi2")
+```
+
+## Listing supported indicators
+
+The `wdi2` package allows you to retrieve a full list of all supported indicators from the World Bank [Indicators API](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation). Each indicator is accompanied by metadata such as its unit of measurement, source, and associated topics.
+
+```r
+# Retrieve the list of supported indicators
+list_supported_indicators()
+```
+
+You can also get the list of supported indicators in a different language. For example, to retrieve the indicators in Spanish:
+
+```r
+# Retrieve indicators in Spanish
+list_supported_indicators(language = "es")
+```
+
+To get the list of supported languages, call: 
+
+```r
+# List supported languages
+list_supported_languages()
+```
+
+Note that not all indicators might be translated into all languages. 
+
+## Listing supported Countries
+
+You can retrieve a list of all countries supported by the World Bank API along with metadata such as region, administrative region, income level, and lending type.
+
+```r
+# Retrieve the list of supported countries
+list_supported_countries()
+```
+
+This information can also be requested in other languages. For example, to view the supported countries in Chinese:
+
+```r
+# Retrieve countries in Chinese
+list_supported_countries(language = "zh")
+```
+
+### Downloading indicator data
+
+With `wdi2`, you can download indicator data for multiple countries and indicators in a single function call. The function returns a tidy data frame with country, indicator, date, and value columns.
+
+For example, to download GDP per capita and total population for Mexico, Canada, and the United States:
+
+```r
+# Download specific indicators for selected countries
+download_indicators(countries = c("MX", "CA", "US"), indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
+```
+
+If you need the same indicators for all countries, you can pass `"all"` as the `countries` parameter:
+
+```r
+# Download indicators for all countries
+download_indicators(countries = "all", indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
+```
+
+## Conclusion
+
+The `wdi2` package is designed to simplify the process of accessing and analyzing World Bank data. By offering features like multi-indicator downloads, progress bars, and flexible language support, `wdi2` is a robust tool for users who need access to World Development Indicators in a modern, tidy format.
+
+If you encounter any errors or have suggestions for improvements, please consider opening an issue in the package repository on [GitHub](https://github.com/tidy-intelligence/r-wdi2/issues).
