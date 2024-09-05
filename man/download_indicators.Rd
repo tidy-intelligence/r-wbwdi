@@ -2,40 +2,65 @@
 % Please edit documentation in R/download_indicators.R
 \name{download_indicators}
 \alias{download_indicators}
-\title{Download and process indicators data from the World Bank API}
+\title{Download World Bank indicator data for specific countries}
 \usage{
-download_indicators(progress = TRUE)
+download_indicators(
+  countries,
+  indicators,
+  start_date = NULL,
+  end_date = NULL,
+  language = "en",
+  per_page = 1000,
+  progress = TRUE
+)
 }
 \arguments{
-\item{progress}{A logical value indicating whether to show progress messages during the
-parsing of indicators. Defaults to \code{TRUE}. If set to \code{FALSE}, no progress message is shown.}
+\item{countries}{A character vector of ISO 2-country codes, or \code{"all"} to retrieve data for all countries.}
+
+\item{start_date}{Optional. The starting date for the data, either as a year (e.g., \code{2010}) or a specific month (e.g., \code{"2012M01"}).}
+
+\item{end_date}{Optional. The ending date for the data, either as a year (e.g., \code{2020}) or a specific month (e.g., \code{"2012M05"}).}
+
+\item{language}{A character string specifying the language for the request. Defaults to \code{"en"}.}
+
+\item{progress}{A logical value indicating whether to show progress messages during the data download and parsing. Defaults to \code{TRUE}.}
+
+\item{indicator}{A character string specifying the World Bank indicator to download (e.g., "NY.GDP.PCAP.KD").}
 }
 \value{
-A tibble containing processed indicator information. The following columns are included:
+A tibble containing the indicator data for the specified countries. The following columns are included:
 \describe{
-\item{indicator_id}{The ID of the indicator.}
-\item{indicator_name}{The name of the indicator.}
-\item{unit}{The unit of measurement for the indicator.}
-\item{source_id}{The ID of the source that provided the indicator.}
-\item{source_value}{The name of the source that provided the indicator.}
-\item{source_note}{Any additional notes from the source.}
-\item{source_organization}{The organization providing the source.}
-\item{topics}{A nested tibble containing the topics associated with the indicator, which includes topic_id and topic_value}
+\item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
+\item{country_id}{The ISO 2-country code of the country for which the data was retrieved.}
+\item{date}{The date of the indicator data (either a year or month depending on the request).}
+\item{value}{The value of the indicator for the given country and date.}
 }
 }
 \description{
-This function retrieves a comprehensive list of indicators from the World Bank API.
-The data is processed to extract and organize relevant fields such as the indicator's
-ID, name, unit, source information, and associated topics. The function supports
-optional progress messages during the parsing of indicators.
+This function retrieves indicator data from the World Bank API for a specified set of countries.
+The user can specify an indicator, date range, and other options to tailor the request. The data
+is processed and returned in a tidy format, including country, indicator, date, and value fields.
 }
 \details{
-The data is fetched in JSON format from the World Bank API and is processed
-to handle missing or empty fields. Topics related to each indicator are nested in
-a separate tibble within the main dataframe. If there are no topics for an indicator,
-\code{NA} values are used.
+This function constructs a request URL for the World Bank API, retrieves the relevant data,
+and processes the response into a tidy format. The user can optionally specify a date range, and the
+function will handle requests for multiple pages if necessary. If the \code{progress} parameter is \code{TRUE},
+messages will be displayed during the request and parsing process.
 }
 \examples{
-download_indicators()
+# Download single indicator for multiple countries
+download_indicators(c("US", "CA", "GB"), "NY.GDP.PCAP.KD")
+
+# Download single indicator for a specific time frame
+download_indicators(c("US", "CA", "GB"), "DPANUSSPB", start_date = 2012, end_date = 2013)
+
+# Download single indicator for different frequency
+download_indicators(c("MX", "CA", "US"), "DPANUSSPB", start_date = "2012M01", end_date = "2012M05")
+
+# Download single indicator for all countries and disable progress bar
+download_indicators("all", "NY.GDP.PCAP.KD", progress = FALSE)
+
+# Download multiple indicators for multiple countries
+download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 
 }
