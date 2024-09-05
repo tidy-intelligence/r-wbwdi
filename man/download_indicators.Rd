@@ -23,7 +23,7 @@ download_indicators(
 
 \item{end_date}{Optional. The ending date for the data, either as a year (e.g., \code{2020}) or a specific month (e.g., \code{"2012M05"}).}
 
-\item{language}{A character string specifying the language for the request. Defaults to \code{"en"}.}
+\item{language}{A character string specifying the language for the request, see \link{list_supported_languages}. Defaults to \code{"en"}.}
 
 \item{per_page}{An integer specifying the number of results per page for the API. Defaults to 1000.}
 

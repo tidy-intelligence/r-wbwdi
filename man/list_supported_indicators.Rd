@@ -4,44 +4,51 @@
 \alias{list_supported_indicators}
 \title{List all supported World Bank indicators}
 \usage{
-list_supported_indicators(language = "en", per_page = 32500, progress = TRUE)
+list_supported_indicators(
+  language = "en",
+  per_page = 32500,
+  include_details = FALSE,
+  progress = TRUE
+)
 }
 \arguments{
-\item{language}{A character string specifying the language for the request. Supported values are:
-\describe{
-\item{"en"}{English (default)}
-\item{"es"}{Spanish}
-\item{"fr"}{French}
-\item{"ar"}{Arabic}
-\item{"zh"}{Chinese}
-}}
+\item{language}{A character string specifying the language for the request, see \link{list_supported_languages}. Defaults to \code{"en"}.}
 
-\item{per_page}{An integer specifying the number of results per page for the API. Defaults to 32500.}
+\item{per_page}{An integer specifying the number of results per page for the API. Defaults to 32,500.
+Must be a value between 1 and 32,500.}
+
+\item{include_details}{A logical value indicating whether to include additional details such as \code{unit} and \code{topics} in the result.
+When \code{FALSE}, only basic information (ID, name, source) is returned. Defaults to \code{FALSE}.}
 
 \item{progress}{A logical value indicating whether to show progress messages during the data parsing process. Defaults to \code{TRUE}.}
 }
 \value{
-A tibble containing the available indicators and their metadata. The tibble includes the following columns:
+A tibble containing the available indicators and their metadata. Depending on the value of \code{include_details},
+the tibble includes the following columns:
 \describe{
 \item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
 \item{indicator_name}{The name of the indicator (e.g., "GDP per capita, constant prices").}
-\item{unit}{The unit of measurement for the indicator, if available (e.g., "US Dollars").}
-\item{source_id}{The ID of the data source providing the indicator.}
-\item{source_value}{The name or description of the source of the indicator data.}
+\item{unit}{The unit of measurement for the indicator, if available (e.g., "US Dollars"). Included only if \code{include_details = TRUE}.}
+\item{source_id}{The ID of the data source providing the indicator. Included only if \code{include_details = TRUE}.}
+\item{source_value}{The name or description of the source of the indicator data. Included only if \code{include_details = TRUE}.}
 \item{source_note}{Additional notes or descriptions about the data source.}
 \item{source_organization}{The organization responsible for the data source.}
-\item{topics}{A nested tibble containing topics associated with the indicator, with two columns: \code{topic_id} and \code{topic_value}.}
+\item{topics}{A nested tibble containing topics associated with the indicator, with two columns: \code{topic_id} and \code{topic_value}.
+Included only if \code{include_details = TRUE}.}
 }
 }
 \description{
 This function retrieves a comprehensive list of all indicators supported by the World Bank API.
 The indicators include metadata such as the indicator ID, name, unit, source, and associated topics.
-The user can specify the language of the API response.
+The user can specify the language of the API response and whether to include additional details.
 }
 \details{
 This function makes a request to the World Bank API to retrieve metadata for all available indicators.
-It processes the response into a tidy tibble format. If the \code{progress} parameter is \code{TRUE}, messages will be displayed
-during the parsing process.
+It processes the response into a tidy tibble format. If the \code{include_details} parameter is \code{FALSE}, the result
+will only include basic indicator information (ID, name, source note, and organization). If \code{include_details} is \code{TRUE},
+additional metadata such as the indicator's unit, source ID and value, and associated topics will be included.
+
+If the \code{progress} parameter is set to \code{TRUE}, messages will be displayed during the request and parsing process.
 }
 \examples{
 \donttest{

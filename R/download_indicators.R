@@ -8,7 +8,7 @@
 #' @param indicators A character vector specifying one or more World Bank indicators to download (e.g., c("NY.GDP.PCAP.KD", "SP.POP.TOTL")).
 #' @param start_date Optional. The starting date for the data, either as a year (e.g., `2010`) or a specific month (e.g., `"2012M01"`).
 #' @param end_date Optional. The ending date for the data, either as a year (e.g., `2020`) or a specific month (e.g., `"2012M05"`).
-#' @param language A character string specifying the language for the request. Defaults to `"en"`.
+#' @param language A character string specifying the language for the request, see \link{list_supported_languages}. Defaults to `"en"`.
 #' @param per_page An integer specifying the number of results per page for the API. Defaults to 1000.
 #' @param progress A logical value indicating whether to show progress messages during the data download and parsing. Defaults to `TRUE`.
 #'

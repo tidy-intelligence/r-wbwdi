@@ -4,14 +4,7 @@
 #' along with metadata such as region, administrative region, income level, and lending type.
 #' The user can specify the language of the API response.
 #'
-#' @param language A character string specifying the language for the request. Supported values are:
-#' \describe{
-#'   \item{"en"}{English (default)}
-#'   \item{"es"}{Spanish}
-#'   \item{"fr"}{French}
-#'   \item{"ar"}{Arabic}
-#'   \item{"zh"}{Chinese}
-#' }
+#' @param language A character string specifying the language for the request, see \link{list_supported_languages}. Defaults to `"en"`.
 #'
 #' @return A tibble containing country information along with associated metadata. The tibble includes the following columns:
 #' \describe{
