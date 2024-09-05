@@ -2,40 +2,52 @@
 % Please edit documentation in R/list_supported_indicators.R
 \name{list_supported_indicators}
 \alias{list_supported_indicators}
-\title{Download and process indicators data from the World Bank API}
+\title{List all supported World Bank indicators}
 \usage{
-list_supported_indicators(progress = TRUE)
+list_supported_indicators(language = "en", per_page = 32500, progress = TRUE)
 }
 \arguments{
-\item{progress}{A logical value indicating whether to show progress messages during the
-parsing of indicators. Defaults to \code{TRUE}. If set to \code{FALSE}, no progress message is shown.}
+\item{language}{A character string specifying the language for the request. Supported values are:
+\describe{
+\item{"en"}{English (default)}
+\item{"es"}{Spanish}
+\item{"fr"}{French}
+\item{"ar"}{Arabic}
+\item{"zh"}{Chinese}
+}}
+
+\item{per_page}{An integer specifying the number of results per page for the API. Defaults to 32500.}
+
+\item{progress}{A logical value indicating whether to show progress messages during the data parsing process. Defaults to \code{TRUE}.}
 }
 \value{
-A tibble containing processed indicator information. The following columns are included:
+A tibble containing the available indicators and their metadata. The tibble includes the following columns:
 \describe{
-\item{indicator_id}{The ID of the indicator.}
-\item{indicator_name}{The name of the indicator.}
-\item{unit}{The unit of measurement for the indicator.}
-\item{source_id}{The ID of the source that provided the indicator.}
-\item{source_value}{The name of the source that provided the indicator.}
-\item{source_note}{Any additional notes from the source.}
-\item{source_organization}{The organization providing the source.}
-\item{topics}{A nested tibble containing the topics associated with the indicator, which includes topic_id and topic_value}
+\item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
+\item{indicator_name}{The name of the indicator (e.g., "GDP per capita, constant prices").}
+\item{unit}{The unit of measurement for the indicator, if available (e.g., "US Dollars").}
+\item{source_id}{The ID of the data source providing the indicator.}
+\item{source_value}{The name or description of the source of the indicator data.}
+\item{source_note}{Additional notes or descriptions about the data source.}
+\item{source_organization}{The organization responsible for the data source.}
+\item{topics}{A nested tibble containing topics associated with the indicator, with two columns: \code{topic_id} and \code{topic_value}.}
 }
 }
 \description{
-This function retrieves a comprehensive list of indicators from the World Bank API.
-The data is processed to extract and organize relevant fields such as the indicator's
-ID, name, unit, source information, and associated topics. The function supports
-optional progress messages during the parsing of indicators.
+This function retrieves a comprehensive list of all indicators supported by the World Bank API.
+The indicators include metadata such as the indicator ID, name, unit, source, and associated topics.
+The user can specify the language of the API response.
 }
 \details{
-The data is fetched in JSON format from the World Bank API and is processed
-to handle missing or empty fields. Topics related to each indicator are nested in
-a separate tibble within the main dataframe. If there are no topics for an indicator,
-\code{NA} values are used.
+This function makes a request to the World Bank API to retrieve metadata for all available indicators.
+It processes the response into a tidy tibble format. If the \code{progress} parameter is \code{TRUE}, messages will be displayed
+during the parsing process.
 }
 \examples{
-list_supported_indicators()
+# List all supported indicators in English
+list_supported_indicators(language = "en")
+
+# List all supported indicators in Spanish
+list_supported_indicators(language = "es")
 
 }

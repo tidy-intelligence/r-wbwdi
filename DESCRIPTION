@@ -21,6 +21,7 @@ Imports:
     dplyr (>= 1.0.0),
     httr2 (>= 1.0.0),
     purrr (>= 1.0.0),
+    tibble,
     tidyr (>= 1.0.0)
 Suggests:
     testthat (>= 3.2.0)

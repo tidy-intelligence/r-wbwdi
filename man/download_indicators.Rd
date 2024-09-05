@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_indicators.R
 \name{download_indicators}
 \alias{download_indicators}
-\title{Download World Bank indicator data for specific countries}
+\title{Download World Bank indicator data for specific countries and multiple indicators}
 \usage{
 download_indicators(
   countries,
@@ -17,18 +17,20 @@ download_indicators(
 \arguments{
 \item{countries}{A character vector of ISO 2-country codes, or \code{"all"} to retrieve data for all countries.}
 
+\item{indicators}{A character vector specifying one or more World Bank indicators to download (e.g., c("NY.GDP.PCAP.KD", "SP.POP.TOTL")).}
+
 \item{start_date}{Optional. The starting date for the data, either as a year (e.g., \code{2010}) or a specific month (e.g., \code{"2012M01"}).}
 
 \item{end_date}{Optional. The ending date for the data, either as a year (e.g., \code{2020}) or a specific month (e.g., \code{"2012M05"}).}
 
 \item{language}{A character string specifying the language for the request. Defaults to \code{"en"}.}
 
-\item{progress}{A logical value indicating whether to show progress messages during the data download and parsing. Defaults to \code{TRUE}.}
+\item{per_page}{An integer specifying the number of results per page for the API. Defaults to 1000.}
 
-\item{indicator}{A character string specifying the World Bank indicator to download (e.g., "NY.GDP.PCAP.KD").}
+\item{progress}{A logical value indicating whether to show progress messages during the data download and parsing. Defaults to \code{TRUE}.}
 }
 \value{
-A tibble containing the indicator data for the specified countries. The following columns are included:
+A tibble containing the indicator data for the specified countries and indicators. The following columns are included:
 \describe{
 \item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
 \item{country_id}{The ISO 2-country code of the country for which the data was retrieved.}
@@ -37,15 +39,18 @@ A tibble containing the indicator data for the specified countries. The followin
 }
 }
 \description{
-This function retrieves indicator data from the World Bank API for a specified set of countries.
-The user can specify an indicator, date range, and other options to tailor the request. The data
+This function retrieves indicator data from the World Bank API for a specified set of countries and indicators.
+The user can specify one or more indicators, a date range, and other options to tailor the request. The data
 is processed and returned in a tidy format, including country, indicator, date, and value fields.
 }
 \details{
-This function constructs a request URL for the World Bank API, retrieves the relevant data,
-and processes the response into a tidy format. The user can optionally specify a date range, and the
+This function constructs a request URL for the World Bank API, retrieves the relevant data for the given countries
+and indicators, and processes the response into a tidy format. The user can optionally specify a date range, and the
 function will handle requests for multiple pages if necessary. If the \code{progress} parameter is \code{TRUE},
 messages will be displayed during the request and parsing process.
+
+The function supports downloading multiple indicators by sending individual API requests for each indicator and then
+combining the results into a single tidy data frame.
 }
 \examples{
 # Download single indicator for multiple countries

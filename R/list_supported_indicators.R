@@ -12,6 +12,7 @@
 #'   \item{"ar"}{Arabic}
 #'   \item{"zh"}{Chinese}
 #' }
+#' @param per_page An integer specifying the number of results per page for the API. Defaults to 32500.
 #' @param progress A logical value indicating whether to show progress messages during the data parsing process. Defaults to `TRUE`.
 #'
 #' @return A tibble containing the available indicators and their metadata. The tibble includes the following columns:

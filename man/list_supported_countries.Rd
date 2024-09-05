@@ -2,35 +2,51 @@
 % Please edit documentation in R/list_supported_countries.R
 \name{list_supported_countries}
 \alias{list_supported_countries}
-\title{Download and process country data from the World Bank API}
+\title{List all supported countries and regions from the World Bank API}
 \usage{
-list_supported_countries()
+list_supported_countries(language = "en")
+}
+\arguments{
+\item{language}{A character string specifying the language for the request. Supported values are:
+\describe{
+\item{"en"}{English (default)}
+\item{"es"}{Spanish}
+\item{"fr"}{French}
+\item{"ar"}{Arabic}
+\item{"zh"}{Chinese}
+}}
 }
 \value{
-A tibble containing processed country information. The following columns are included:
+A tibble containing country information along with associated metadata. The tibble includes the following columns:
 \describe{
-\item{iso2_code}{ISO 3166-1 alpha-2 country code.}
+\item{id}{The identifier for the country.}
+\item{iso2_code}{The ISO 2-character country code.}
+\item{name}{The full name of the country.}
 \item{capital_city}{The capital city of the country.}
-\item{regions}{A nested tibble with region information.}
-\item{admin_regions}{A nested tibble with administrative region information.}
-\item{income_levels}{A nested tibble with income level information.}
-\item{lending_types}{A nested tibble with lending type information.}
+\item{longitude}{The longitude of the country.}
+\item{latitude}{The latitude of the country.}
+\item{regions}{A nested tibble containing information about the region the country belongs to.}
+\item{admin_regions}{A nested tibble containing information about the administrative region the country belongs to.}
+\item{income_levels}{A nested tibble containing information about the income level classification of the country.}
+\item{lending_types}{A nested tibble containing information about the lending type classification of the country.}
 }
 }
 \description{
-This function retrieves a comprehensive list of country data from the World Bank API.
-The data is processed to extract and organize relevant fields, including region,
-administrative region, income level, lending type, and other country information.
+This function retrieves and processes a list of all countries supported by the World Bank API,
+along with metadata such as region, administrative region, income level, and lending type.
+The user can specify the language of the API response.
 }
 \details{
-The data is returned as a tidy dataframe, where specific attributes such as region,
-administrative region, income level, and lending type are nested within the dataframe.
-
-The data is fetched in JSON format from the World Bank API and is processed
-to replace any empty strings with \code{NA} values. The function ensures the data
-is in a tidy format, and it returns the relevant country details.
+This function sends a request to the World Bank API to retrieve data for all supported countries
+in the specified language. The data is then processed into a tidy format and includes information about the
+country, such as its ISO code, capital city, geographical coordinates, and additional nested metadata about
+regions, income levels, and lending types.
 }
 \examples{
-list_supported_countries()
+# List all supported countries in English
+list_supported_countries(language = "en")
+
+# List all supported countries in Spanish
+list_supported_countries(language = "zh")
 
 }

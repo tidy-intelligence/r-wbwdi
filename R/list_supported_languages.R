@@ -19,7 +19,7 @@
 #' list_supported_languages()
 #'
 list_supported_languages <- function() {
-  tibble::tibble(
+  tibble(
     code = c("en", "es", "fr", "ar", "zh"),
     name = c("English", "Spanish", "French", "Arabic", "Chinese")
   )
