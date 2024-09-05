@@ -45,11 +45,11 @@ The `wdi2` package allows you to retrieve a full list of all supported indicator
 list_supported_indicators()
 ```
 
-You can also get the list of supported indicators in a different language. For example, to retrieve the indicators in Spanish:
+You can also get the list of supported indicators in a different language, or omit the progress bar. For example, to retrieve the indicators in Spanish:
 
 ```{r}
 # Retrieve indicators in Spanish
-list_supported_indicators(language = "es")
+list_supported_indicators(language = "es", progress = FALSE)
 ```
 
 To get the list of supported languages, call: 
