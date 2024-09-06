@@ -4,4 +4,5 @@
 
 This is a resubmission. In this version I have:
 
-- Corrected a typo in the DESCRIPTION file
+* Corrected a typo in the DESCRIPTION file.
+* Added reference to Wickham (2014) in the DESCRIPTION file. 
