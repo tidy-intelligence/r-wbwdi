@@ -3,15 +3,15 @@ Package: wdi2
 Title: Download Indicators from the World Bank Indicators API
 Version: 0.1.0
 Authors@R: c(
-    person("Christoph", "Scheuch", , "christoph.scheuch@gmail.com", role = c("aut", "cre", "cph"),
+    person("Christoph", "Scheuch", , "christoph.scheuch@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0004-0423-6819"))
   )
 Description: The 'wdi2' package provides a modern, flexible interface for accessing the World Bank’s
-  World Development Indicators (WDI). Similar to the 'WDI' package, 'wdi2' allows users to download, 
-  process, and analyze indicator data for multiple countries and years. However, 'wdi2' differs by 
-  relying on 'httr2' for multi-page request and error handling, providing support for downloading 
-  multiple indicators with a single function call, using progress bars to keep users informed about 
-  the data processing, and returning the processed data in a tidy data format.
+  World Development Indicators (WDI). Similar to the existing 'WDI' package, 'wdi2' allows users to 
+  download, process, and analyze indicator data for multiple countries and years. However, 'wdi2' 
+  differs by relying on 'httr2' for multi-page request and error handling, providing support for 
+  downloading multiple indicators with a single function call, using progress bars to keep users 
+  informed about the data processing, and returning the processed data in a tidy data format.
 License: MIT + file LICENSE
 URL: https://github.com/tidy-intelligence/r-wdi2
 BugReports: https://github.com/tidy-intelligence/r-wdi2/issues
