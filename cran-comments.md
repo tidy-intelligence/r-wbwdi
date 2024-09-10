@@ -4,5 +4,5 @@
 
 This is a resubmission. In this version I have:
 
-* Corrected a typo in the DESCRIPTION file.
-* Added reference to Wickham (2014) in the DESCRIPTION file. 
+* Changed beginning of DESCRIPTION as requested.
+* Added a link to the World Bank Development Indicators API in the DESCRIPTION file. 
