@@ -6,8 +6,7 @@ accessing the World Bank’s World Development Indicators (WDI). Similar
 to the ‘WDI’ package, ‘wdi2’ allows users to download, process, and
 analyze indicator data for multiple countries and years. However, ‘wdi2’
 differs by relying on ‘httr2’ for multi-page request and error handling,
-providing support for downloading multiple indicators with a single
-function call, using progress bars to keep users informed about the data
+using progress bars to keep users informed about the data
 processing, and returning the processed data in a tidy data format.
 
 ## Installation
