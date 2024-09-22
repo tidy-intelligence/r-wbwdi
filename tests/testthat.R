@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(wdi2)
+library(wbwdi)
 
-test_check("wdi2")
+test_check("wbwdi")

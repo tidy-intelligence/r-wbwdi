@@ -1,26 +1,26 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-The goal of ‘wdi2’ is to provide a modern, flexible interface for
-accessing the World Bank’s World Development Indicators (WDI). Similar
-to the ‘WDI’ package, ‘wdi2’ allows users to download, process, and
-analyze indicator data for multiple countries and years. However, ‘wdi2’
-differs by relying on ‘httr2’ for multi-page request and error handling
-and using progress bars to keep users informed about the data
-processing.
+The goal of ‘wbwdi’ is to provide a modern, flexible interface for
+accessing the World Bank’s World Development Indicators (WDI). ‘wdi2’
+allows users to download, process, and analyze indicator data for
+multiple countries and years. ‘wdi2’ relies on ‘httr2’ for multi-page
+request and error handling and using progress bars to keep users
+informed about the data processing.
+
+This package is in development status. Please consider using one of the
+packages on CRAN:
+
+- [WDI](https://cran.r-project.org/web/packages/WDI/index.html)
+- [worldbank](https://cran.r-project.org/web/packages/worldbank/index.html)
+- [wbstats](https://cran.r-project.org/web/packages/wbstats/index.html)
 
 ## Installation
 
-You can install the released version of `wdi2` from CRAN via:
+You can install the development version of ‘wbwdi’ like so:
 
 ``` r
-install.packages("wdi2")
-```
-
-You can install the development version of wdi2 like so:
-
-``` r
-pak::pak("tidy-intelligence/r-wdi2")
+pak::pak("tidy-intelligence/r-wbwdi")
 ```
 
 ## Usage
