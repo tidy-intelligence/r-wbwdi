@@ -13,20 +13,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-The goal of 'wdi2' is to provide a modern, flexible interface for accessing the World Bank’s World Development Indicators (WDI). Similar to the 'WDI' package, 'wdi2' allows users to download, process, and analyze indicator data for multiple countries and years. However, 'wdi2' differs by relying on 'httr2' for multi-page request and error handling and using progress bars to keep users informed about the data processing.
+The goal of 'wbwdi' is to provide a modern, flexible interface for accessing the World Bank’s World Development Indicators (WDI). 'wdi2' allows users to download, process, and analyze indicator data for multiple countries and years. 'wdi2' relies on 'httr2' for multi-page request and error handling and using progress bars to keep users informed about the data processing.
 
 ## Installation
 
-You can install the released version of `wdi2` from CRAN via:
-
-```r
-install.packages("wdi2")
-```
-
-You can install the development version of wdi2 like so:
+You can install the development version of 'wbwdi' like so:
 
 ``` r
-pak::pak("tidy-intelligence/r-wdi2")
+pak::pak("tidy-intelligence/r-wbwdi")
 ```
 
 ## Usage
