@@ -8,6 +8,13 @@ multiple countries and years. ‘wdi2’ relies on ‘httr2’ for multi-page
 request and error handling and using progress bars to keep users
 informed about the data processing.
 
+This package is in development status. Please consider using one of the
+packages on CRAN:
+
+- [WDI](https://cran.r-project.org/web/packages/WDI/index.html)
+- [worldbank](https://cran.r-project.org/web/packages/worldbank/index.html)
+- [wbstats](https://cran.r-project.org/web/packages/wbstats/index.html)
+
 ## Installation
 
 You can install the development version of ‘wbwdi’ like so:
