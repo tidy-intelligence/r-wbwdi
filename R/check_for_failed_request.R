@@ -15,6 +15,8 @@
 #' `value` fields from the error message and constructs an error using `cli::cli_abort()`.
 #' The function is intended to ensure failed API requests are handled gracefully.
 #'
+#' @keywords internal
+#'
 check_for_failed_request <- function(body) {
   if (!is.null(body[[1]]$message)) {
 

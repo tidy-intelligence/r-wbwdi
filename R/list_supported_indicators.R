@@ -44,11 +44,7 @@
 #' }
 list_supported_indicators <- function(language = "en", per_page = 32500, include_details = FALSE, progress = TRUE) {
 
-  supported_languages <- list_supported_languages()
-  if (!language %in% supported_languages$code) {
-    supported_languages_str <- paste0(supported_languages$code, collapse = ", ")
-    cli::cli_abort("{.arg language} must be one of: {supported_languages_str}.")
-  }
+  check_for_supported_language(language)
 
   if (!is.numeric(per_page) || per_page %% 1 != 0 || per_page < 1 || per_page > 32500) {
     cli::cli_abort("{.arg per_page} must be an integer between 1 and 32,500.")

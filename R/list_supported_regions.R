@@ -24,6 +24,8 @@
 #'
 list_supported_regions <- function(language = "en") {
 
+  check_for_supported_language(language)
+
   response <- perform_request("region", language)
 
   body <- response |>

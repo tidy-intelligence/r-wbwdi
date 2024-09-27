@@ -25,6 +25,8 @@
 #'
 list_supported_topics <- function(language = "en") {
 
+  check_for_supported_language(language)
+
   response <- perform_request("topics", language)
 
   body <- response |>

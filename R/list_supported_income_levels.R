@@ -25,6 +25,8 @@
 #'
 list_supported_income_levels <- function(language = "en") {
 
+  check_for_supported_language(language)
+
   response <- perform_request("incomeLevels", language)
 
   body <- response |>

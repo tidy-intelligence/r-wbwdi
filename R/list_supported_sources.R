@@ -29,6 +29,8 @@
 #'
 list_supported_sources <- function(language = "en") {
 
+  check_for_supported_language(language)
+
   response <- perform_request("sources", language)
 
   body <- response |>

@@ -38,11 +38,7 @@
 #'
 list_supported_countries <- function(language = "en", per_page = 1000) {
 
-  supported_languages <- list_supported_languages()
-  if (!language %in% supported_languages$code) {
-    supported_languages <- paste0(supported_languages$code, collapse = ", ")
-    cli::cli_abort("Unsupported language. Please choose one of: {supported_languages}")
-  }
+  check_for_supported_language(language)
 
   if (!is.numeric(per_page) || per_page %% 1 != 0 || per_page < 1 || per_page > 32500) {
     cli::cli_abort("{.arg per_page} must be an integer between 1 and 32,500.")

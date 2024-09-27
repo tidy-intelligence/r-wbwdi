@@ -25,6 +25,8 @@
 #'
 list_supported_lending_types <- function(language = "en") {
 
+  check_for_supported_language(language)
+
   response <- perform_request("lendingTypes", language)
 
   body <- response |>
