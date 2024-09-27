@@ -64,7 +64,7 @@ list_supported_countries <- function(language = "en", per_page = 1000) {
   countries_processed <- countries_raw|>
     tidyr::unnest(c(region, adminregion, incomeLevel, lendingType)) |>
     mutate(across(where(is.character), ~ if_else(.x == "", NA, .x))) |>
-    rename(iso2_code = iso2Code,
+    rename(iso2code = iso2Code,
            admin_region = adminregion,
            income_level = incomeLevel,
            lending_type = lendingType,

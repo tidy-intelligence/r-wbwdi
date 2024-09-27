@@ -3,19 +3,23 @@
 \name{list_supported_languages}
 \alias{list_supported_languages}
 \title{List supported languages for the World Bank API}
+\source{
+https://api.worldbank.org/v2/languages
+}
 \usage{
 list_supported_languages()
 }
 \value{
-A tibble with two columns:
+A tibble with three columns:
 \describe{
-\item{language_code}{The ISO 639-1 code of the language (e.g., "en" for English).}
-\item{language_name}{The full name of the language (e.g., "English").}
+\item{code}{The ISO 639-1 code of the language (e.g., "en" for English).}
+\item{name}{The full name of the language (e.g., "English").}
+\item{native_form}{The native form of the language (e.g., "English").}
 }
 }
 \description{
 This function returns a tibble of supported languages for querying the World Bank API.
-The supported languages include English, Spanish, French, Arabic, and Chinese.
+The supported languages include English, Spanish, French, Arabic, and Chinese, etc.
 }
 \details{
 This function provides a simple reference for the supported languages when querying
