@@ -8,9 +8,8 @@ Authors@R: c(
   )
 Description: A modern, flexible interface for accessing the World Bank’s World Development Indicators 
   (WDI) API <https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation>. 
-  'wdi2' allows users to download, process, and analyze 
-  indicator data for multiple countries and years. 'wdi2' relies on 'httr2' 
-  for multi-page request and error handling and using progress bars to keep users informed about 
+  'wbwdi' allows users to download, process, and analyze indicator data for multiple countries and years. 
+  'wbwdi' relies on 'httr2' for multi-page request and error handling and using progress bars to keep users informed about 
   the data processing.
 License: MIT + file LICENSE
 URL: https://github.com/tidy-intelligence/r-wbwdi
