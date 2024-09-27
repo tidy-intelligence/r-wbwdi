@@ -54,21 +54,28 @@ list_supported_countries <- function(language = "en", per_page = 1000) {
 
   check_for_failed_request(body)
 
-  countries_raw <- body[[2]] |>
-    bind_rows()
+  countries_raw <- body[[2]]
 
-  countries_processed <- countries_raw|>
-    tidyr::unnest(c(region, adminregion, incomeLevel, lendingType)) |>
-    mutate(across(where(is.character), ~ if_else(.x == "", NA, .x))) |>
-    rename(iso2code = iso2Code,
-           admin_region = adminregion,
-           income_level = incomeLevel,
-           lending_type = lendingType,
-           capital_city = capitalCity) |>
-    tidyr::nest(regions = region,
-                admin_regions = admin_region,
-                income_levels = income_level,
-                lending_types = lending_type)
+  countries_processed <- map_df(countries_raw, function(x) {
+    tibble(
+      id = x$id,
+      iso2code = x$iso2code,
+      name = x$name,
+      region_id = x$region$id,
+      region_iso2code = x$region$iso2code,
+      region_value = x$region$value,
+      admin_region_id = x$adminregion$id,
+      admin_region_iso2code = x$adminregion$iso2code,
+      admin_region_value = x$adminregion$value,
+      lending_type_id = x$lendingType$id,
+      lending_type_iso2code = x$lendingType$iso2code,
+      lending_type_value = x$lendingType$value,
+      capital_city = x$capitalCity,
+      longitude = x$longitude,
+      latitude = x$latitude
+    )
+  }) |>
+    mutate(across(where(is.character), ~ if_else(.x == "", NA, .x)))
 
   countries_processed
 }
