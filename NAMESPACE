@@ -2,8 +2,13 @@
 
 export(download_indicators)
 export(list_supported_countries)
+export(list_supported_income_levels)
 export(list_supported_indicators)
 export(list_supported_languages)
+export(list_supported_lending_types)
+export(list_supported_regions)
+export(list_supported_sources)
+export(list_supported_topics)
 import(dplyr)
 import(httr2)
 import(tibble)

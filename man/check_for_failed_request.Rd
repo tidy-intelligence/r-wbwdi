@@ -25,3 +25,4 @@ an error message. If a message is found, the function retrieves the \code{id}, \
 \code{value} fields from the error message and constructs an error using \code{cli::cli_abort()}.
 The function is intended to ensure failed API requests are handled gracefully.
 }
+\keyword{internal}

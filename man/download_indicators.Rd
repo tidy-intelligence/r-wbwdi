@@ -69,4 +69,5 @@ download_indicators("all", "NY.GDP.PCAP.KD", progress = FALSE)
 # Download multiple indicators for multiple countries
 download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 }
+
 }

@@ -47,6 +47,7 @@
 #' # Download multiple indicators for multiple countries
 #' download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 #' }
+#'
 download_indicators <- function(
   countries, indicators, start_date = NULL, end_date = NULL, language = "en", per_page = 1000, progress = TRUE
 ) {
