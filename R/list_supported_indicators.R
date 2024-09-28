@@ -25,6 +25,7 @@
 #' @export
 #'
 #' @examples
+#'
 #' # List all supported indicators in English
 #' list_supported_indicators(language = "en")
 #'
@@ -48,13 +49,23 @@ list_supported_indicators <- function(language = "en", per_page = 32500) {
 
   indicators_raw <- body[[2]]
 
+  extract_topics <- function(data) {
+    if (length(unlist(data$topics)) > 0) {
+      tibble(topic_id = as.integer(extract_values(data$topics, "id")),
+             topic_value = trimws(extract_values(data$topics, "value")))
+    } else {
+      tibble(topic_id = NA_integer_, topic_value = NA_character_)
+    }
+  }
+
   indicators_processed <- tibble(
     id =  extract_values(indicators_raw, "id"),
     name = extract_values(indicators_raw, "name"),
     source_id = as.integer(extract_values(indicators_raw, "source$id")),
     source_value = extract_values(indicators_raw, "source$value"),
     source_note = extract_values(indicators_raw, "sourceNote"),
-    source_organization = extract_values(indicators_raw, "sourceOrganization")
+    source_organization = extract_values(indicators_raw, "sourceOrganization"),
+    topics = purrr::map(indicators_raw, extract_topics)
   )
 
   indicators_processed
