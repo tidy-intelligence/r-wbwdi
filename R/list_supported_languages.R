@@ -30,8 +30,7 @@ list_supported_languages <- function() {
     resp_body_json()
 
   languages <- bind_rows(body[[2]]) |>
-    select(code, name, native_form = nativeForm) |>
-    tidyr::drop_na()
+    select(code, name, native_form = nativeForm)
 
   languages
 }

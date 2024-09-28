@@ -4,12 +4,14 @@
 \alias{extract_values}
 \title{Extract values from a list of data using a specified path expression.}
 \usage{
-extract_values(data, path)
+extract_values(data, path, type = "character")
 }
 \arguments{
 \item{data}{A list of data, where each element is typically a named list or data frame.}
 
 \item{path}{A string representing the path expression to extract values from each element of \code{data}.}
+
+\item{type}{A string specifying the return type. Must be one of \code{"character"}, \code{"integer"}, or \code{"numeric"}.}
 }
 \value{
 A character vector of extracted values, corresponding to the evaluated path expression in each element of \code{data}.
