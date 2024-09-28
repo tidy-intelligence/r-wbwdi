@@ -36,6 +36,8 @@ list_supported_sources <- function(language = "en") {
   body <- response |>
     resp_body_json()
 
+  check_for_failed_request(body)
+
   # url and description are always empty, hence omitted
   sources <- bind_rows(body[[2]]) |>
     select(id,

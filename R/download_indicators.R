@@ -156,14 +156,12 @@ download_indicators <- function(
 
       indicator_raw <- body[[2]]
 
-      map_df(indicator_raw, function(x) {
-        tibble(
-          indicator_id = x$indicator$id,
-          country_id = x$country$id,
-          date = x$date,
-          value = x$value
-        )
-      })
+      tibble(
+        indicator_id = extract_values(indicator_raw, "indicator$id"),
+        country_id = extract_values(indicator_raw, "country$id"),
+        date = extract_values(indicator_raw, "date"),
+        value = extract_values(indicator_raw, "value", "numeric")
+      )
     }
 
     if (progress) {

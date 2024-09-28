@@ -2,9 +2,9 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 The goal of ‘wbwdi’ is to provide a modern, flexible interface for
-accessing the World Bank’s World Development Indicators (WDI). ‘wdi2’
+accessing the World Bank’s World Development Indicators (WDI). ‘wbwdi’
 allows users to download, process, and analyze indicator data for
-multiple countries and years. ‘wdi2’ relies on ‘httr2’ for multi-page
+multiple countries and years. ‘wbwdi’ relies on ‘httr2’ for multi-page
 request and error handling and using progress bars to keep users
 informed about the data processing.
 

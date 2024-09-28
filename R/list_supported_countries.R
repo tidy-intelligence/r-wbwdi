@@ -49,25 +49,23 @@ list_supported_countries <- function(language = "en", per_page = 1000) {
 
   countries_raw <- body[[2]]
 
-  countries_processed <- map_df(countries_raw, function(x) {
-    tibble(
-      id = x$id,
-      iso2code = x$iso2code,
-      name = x$name,
-      region_id = x$region$id,
-      region_iso2code = x$region$iso2code,
-      region_value = x$region$value,
-      admin_region_id = x$adminregion$id,
-      admin_region_iso2code = x$adminregion$iso2code,
-      admin_region_value = x$adminregion$value,
-      lending_type_id = x$lendingType$id,
-      lending_type_iso2code = x$lendingType$iso2code,
-      lending_type_value = x$lendingType$value,
-      capital_city = x$capitalCity,
-      longitude = x$longitude,
-      latitude = x$latitude
-    )
-  }) |>
+  countries_processed <- tibble(
+      id =  extract_values(countries_raw, "id"),
+      iso2code =  extract_values(countries_raw, "iso2Code"),
+      name =  extract_values(countries_raw, "name"),
+      region_id =  extract_values(countries_raw, "region$id"),
+      region_iso2code =  extract_values(countries_raw, "region$iso2code"),
+      region_value =  extract_values(countries_raw, "region$value"),
+      admin_region_id =  extract_values(countries_raw, "adminregion$id"),
+      admin_region_iso2code =  extract_values(countries_raw, "adminregion$iso2code"),
+      admin_region_value =  extract_values(countries_raw, "adminregion$value"),
+      lending_type_id =  extract_values(countries_raw, "lendingType$id"),
+      lending_type_iso2code =  extract_values(countries_raw, "lendingType$iso2code"),
+      lending_type_value =  extract_values(countries_raw, "lendingType$value"),
+      capital_city =  extract_values(countries_raw, "capitalCity"),
+      longitude = extract_values(countries_raw, "longitude"),
+      latitude =  extract_values(countries_raw, "latitude")
+    ) |>
     mutate(across(where(is.character), ~ if_else(.x == "", NA, .x)))
 
   countries_processed

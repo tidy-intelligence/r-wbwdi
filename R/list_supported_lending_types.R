@@ -32,6 +32,8 @@ list_supported_lending_types <- function(language = "en") {
   body <- response |>
     resp_body_json()
 
+  check_for_failed_request(body)
+
   lending_types <- bind_rows(body[[2]])
 
   lending_types

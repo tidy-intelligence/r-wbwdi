@@ -31,6 +31,8 @@ list_supported_regions <- function(language = "en") {
   body <- response |>
     resp_body_json()
 
+  check_for_failed_request(body)
+
   # id is non-missing for 7 entries
   regions <- bind_rows(body[[2]]) |>
     mutate(id = as.integer(id))
