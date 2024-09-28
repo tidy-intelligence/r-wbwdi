@@ -29,6 +29,8 @@ list_supported_languages <- function() {
   body <- response |>
     resp_body_json()
 
+  check_for_failed_request(body)
+
   languages <- bind_rows(body[[2]]) |>
     select(code, name, native_form = nativeForm)
 

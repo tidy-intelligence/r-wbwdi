@@ -32,6 +32,8 @@ list_supported_income_levels <- function(language = "en") {
   body <- response |>
     resp_body_json()
 
+  check_for_failed_request(body)
+
   income_levels <- bind_rows(body[[2]])
 
   income_levels
