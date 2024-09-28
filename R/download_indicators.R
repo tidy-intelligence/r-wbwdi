@@ -12,6 +12,7 @@
 #' @param per_page An integer specifying the number of results per page for the API. Defaults to 1000.
 #' @param progress A logical value indicating whether to show progress messages during the data download and parsing. Defaults to `TRUE`.
 #' @param source An integer value specifying the data source, see \link{list_supported_sources}.
+#' @param format A character value specifying whether the data is returned in `"long"` or `"wide"` format. Defaults to `"long"`.
 #'
 #' @return A tibble containing the indicator data for the specified countries and indicators. The following columns are included:
 #' \describe{
@@ -53,6 +54,10 @@
 #' download_indicators("DE", "SG.LAW.INDX", source = 2)
 #' download_indicators("DE", "SG.LAW.INDX", source = 14)
 #'
+#' # Download indicators in wide format
+#' download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD"), format = "wide")
+#' download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"), format = "wide")
+#'
 download_indicators <- function(
   countries,
   indicators,
@@ -61,7 +66,8 @@ download_indicators <- function(
   language = "en",
   per_page = 1000,
   progress = TRUE,
-  source = NULL
+  source = NULL,
+  format = "long"
 ) {
 
   check_for_supported_language(language)
@@ -79,6 +85,10 @@ download_indicators <- function(
     if (!source %in% supported_sources$id) {
       cli::cli_abort("{.arg source} is not supported. Please call {.fun list_supported_sources}.")
     }
+  }
+
+  if (!is.character(format) || !format %in% c("long", "wide")) {
+    cli::cli_abort("{.arg format} must be either 'long' or 'wide'.")
   }
 
   construct_request_indicator <- function(
@@ -165,6 +175,12 @@ download_indicators <- function(
     indicators_processed[[j]] <- map_df(responses, parse_response, .progress = progress_parse)
   }
 
-  bind_rows(indicators_processed)
+  indicators_processed <- bind_rows(indicators_processed)
 
+  if (format == "wide") {
+    indicators_processed <- indicators_processed |>
+      tidyr::pivot_wider(names_from = indicator_id, values_from = value)
+  }
+
+  indicators_processed
 }
