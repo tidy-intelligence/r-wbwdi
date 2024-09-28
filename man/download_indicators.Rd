@@ -11,7 +11,9 @@ download_indicators(
   end_date = NULL,
   language = "en",
   per_page = 1000,
-  progress = TRUE
+  progress = TRUE,
+  source = NULL,
+  format = "long"
 )
 }
 \arguments{
@@ -28,6 +30,10 @@ download_indicators(
 \item{per_page}{An integer specifying the number of results per page for the API. Defaults to 1000.}
 
 \item{progress}{A logical value indicating whether to show progress messages during the data download and parsing. Defaults to \code{TRUE}.}
+
+\item{source}{An integer value specifying the data source, see \link{list_supported_sources}.}
+
+\item{format}{A character value specifying whether the data is returned in \code{"long"} or \code{"wide"} format. Defaults to \code{"long"}.}
 }
 \value{
 A tibble containing the indicator data for the specified countries and indicators. The following columns are included:
@@ -69,5 +75,13 @@ download_indicators("all", "NY.GDP.PCAP.KD", progress = FALSE)
 # Download multiple indicators for multiple countries
 download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 }
+
+# Download indicators for different sources
+download_indicators("DE", "SG.LAW.INDX", source = 2)
+download_indicators("DE", "SG.LAW.INDX", source = 14)
+
+# Download indicators in wide format
+download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD"), format = "wide")
+download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"), format = "wide")
 
 }
