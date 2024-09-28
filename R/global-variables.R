@@ -4,6 +4,7 @@ utils::globalVariables(
     "name", "sourceNote", "sourceOrganization",
     "nativeForm", "lastupdated", "dataavailability", "metadataavailability",
     "concepts", "is_data_available", "is_metadata_available", "update_date", "value",
-    "code"
+    "code",
+    "indicator_id"
     )
 )
