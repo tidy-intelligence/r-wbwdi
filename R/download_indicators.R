@@ -11,6 +11,7 @@
 #' @param language A character string specifying the language for the request, see \link{list_supported_languages}. Defaults to `"en"`.
 #' @param per_page An integer specifying the number of results per page for the API. Defaults to 1000.
 #' @param progress A logical value indicating whether to show progress messages during the data download and parsing. Defaults to `TRUE`.
+#' @param source An integer value specifying the data source, see \link{list_supported_sources}.
 #'
 #' @return A tibble containing the indicator data for the specified countries and indicators. The following columns are included:
 #' \describe{
@@ -48,15 +49,22 @@
 #' download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 #' }
 #'
+#' # Download indicators for different sources
+#' download_indicators("DE", "SG.LAW.INDX", source = 2)
+#' download_indicators("DE", "SG.LAW.INDX", source = 14)
+#'
 download_indicators <- function(
-  countries, indicators, start_date = NULL, end_date = NULL, language = "en", per_page = 1000, progress = TRUE
+  countries,
+  indicators,
+  start_date = NULL,
+  end_date = NULL,
+  language = "en",
+  per_page = 1000,
+  progress = TRUE,
+  source = NULL
 ) {
 
-  supported_languages <- list_supported_languages()
-  if (!language %in% supported_languages$code) {
-    supported_languages_str <- paste0(supported_languages$code, collapse = ", ")
-    cli::cli_abort("{.arg language} must be one of: {supported_languages_str}.")
-  }
+  check_for_supported_language(language)
 
   if (!is.numeric(per_page) || per_page %% 1 != 0 || per_page < 1 || per_page > 32500) {
     cli::cli_abort("{.arg per_page} must be an integer between 1 and 32,500.")
@@ -66,13 +74,21 @@ download_indicators <- function(
     cli::cli_abort("{.arg progress} must be either TRUE or FALSE.")
   }
 
+  if (!is.null(source)) {
+    supported_sources <- list_supported_sources()
+    if (!source %in% supported_sources$id) {
+      cli::cli_abort("{.arg source} is not supported. Please call {.fun list_supported_sources}.")
+    }
+  }
+
   construct_request_indicator <- function(
     countries,
     indicator,
     start_date = NULL,
     end_date = NULL,
     language = "en",
-    per_page = 1000
+    per_page = 1000,
+    source = NULL
   ) {
 
     countries <- paste(countries, collapse = ";")
@@ -89,7 +105,8 @@ download_indicators <- function(
       countries, "/indicator/", indicator,
       "?format=json",
       date,
-      "&per_page=", per_page
+      "&per_page=", per_page,
+      "&source=", source
     )
   }
 
