@@ -70,12 +70,6 @@ download_indicators <- function(
   format = "long"
 ) {
 
-  check_for_supported_language(language)
-
-  if (!is.numeric(per_page) || per_page %% 1 != 0 || per_page < 1 || per_page > 32500) {
-    cli::cli_abort("{.arg per_page} must be an integer between 1 and 32,500.")
-  }
-
   if (!is.logical(progress)) {
     cli::cli_abort("{.arg progress} must be either TRUE or FALSE.")
   }
@@ -91,49 +85,15 @@ download_indicators <- function(
     cli::cli_abort("{.arg format} must be either 'long' or 'wide'.")
   }
 
-  construct_request_indicator <- function(
-    countries,
-    indicator,
-    start_date = NULL,
-    end_date = NULL,
-    language = "en",
-    per_page = 1000,
-    source = NULL
-  ) {
-
-    countries <- paste(countries, collapse = ";")
-
-    if (!is.null(start_date) & !is.null(end_date)) {
-      date <- paste0("&date=", start_date, ":", end_date)
-    } else {
-      date <- NULL
-    }
-
-    paste0(
-      "https://api.worldbank.org/v2/",
-      language, "/country/",
-      countries, "/indicator/", indicator,
-      "?format=json",
-      date,
-      "&per_page=", per_page,
-      "&source=", source
-    )
+  date <- if (!is.null(start_date) & !is.null(end_date)) {
+    paste0(start_date, ":", end_date)
+  } else {
+    NULL
   }
 
   indicators_processed <- list()
 
   for (j in 1:length(indicators)) {
-    url <- construct_request_indicator(countries, indicators[j], start_date, end_date, language, per_page)
-
-    response <- request(url) |>
-      req_perform()
-
-    body <- response |>
-      resp_body_json()
-
-    check_for_failed_request(body)
-
-    pages <- body[[1]]$pages
 
     if (progress) {
       progress_req <- paste0("Sending requests for indicator ", indicators[j])
@@ -141,36 +101,19 @@ download_indicators <- function(
       progress_req <- FALSE
     }
 
-    if (pages > 1) {
-      responses <- request(url) |>
-        req_perform_iterative(next_req = iterate_with_offset("page"),
-                              max_reqs = pages,
-                              progress = progress_req)
-    } else {
-      responses <- list(response)
-    }
+    resource <- paste0("country/", paste(countries, collapse = ";"), "/indicator/", indicators[j])
+    indicators_raw <- perform_request(resource, language, per_page, date, source, progress_req)
 
-    parse_response <- function(response) {
-      body <- response |>
-        resp_body_json()
-
-      indicator_raw <- body[[2]]
-
+    parse_response <- function(x) {
       tibble(
-        indicator_id = extract_values(indicator_raw, "indicator$id"),
-        country_id = extract_values(indicator_raw, "country$id"),
-        date = extract_values(indicator_raw, "date"),
-        value = extract_values(indicator_raw, "value", "numeric")
+        indicator_id = extract_values(x, "indicator$id"),
+        country_id = extract_values(x, "country$id"),
+        date = extract_values(x, "date"),
+        value = extract_values(x, "value", "numeric")
       )
     }
 
-    if (progress) {
-      progress_parse <- paste0("Parsing responses for indicator ", indicators[j])
-    } else {
-      progress_parse <- FALSE
-    }
-
-    indicators_processed[[j]] <- map_df(responses, parse_response, .progress = progress_parse)
+    indicators_processed[[j]] <- parse_response(indicators_raw)
   }
 
   indicators_processed <- bind_rows(indicators_processed)

@@ -34,6 +34,7 @@ This function makes a request to the World Bank API to retrieve metadata for all
 It processes the response into a tidy tibble format.
 }
 \examples{
+
 # List all supported indicators in English
 list_supported_indicators(language = "en")
 

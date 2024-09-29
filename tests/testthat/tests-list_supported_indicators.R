@@ -17,7 +17,7 @@ test_that("Invalid per_page input", {
 })
 
 test_that("Valid output structure", {
-  result <- list_supported_indicators(language = "en", per_page = 10)
+  result <- list_supported_indicators(language = "en")
   expect_true(is.data.frame(result))
   expect_true(all(c("id", "name", "source_id", "source_value", "source_note", "source_organization", "topics") %in% names(result)))
 })

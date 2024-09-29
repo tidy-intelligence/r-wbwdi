@@ -34,20 +34,7 @@
 #'
 list_supported_indicators <- function(language = "en", per_page = 32500) {
 
-  check_for_supported_language(language)
-
-  if (!is.numeric(per_page) || per_page %% 1 != 0 || per_page < 1 || per_page > 32500) {
-    cli::cli_abort("{.arg per_page} must be an integer between 1 and 32,500.")
-  }
-
-  response <- perform_request("indicators", language = language, per_page = per_page)
-
-  body <- response |>
-    resp_body_json()
-
-  check_for_failed_request(body)
-
-  indicators_raw <- body[[2]]
+  indicators_raw <- perform_request("indicators", language = language, per_page = per_page)
 
   extract_topics <- function(data) {
     if (length(unlist(data$topics)) > 0) {

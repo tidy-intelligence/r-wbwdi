@@ -24,18 +24,11 @@
 #'
 list_supported_regions <- function(language = "en") {
 
-  check_for_supported_language(language)
-
-  response <- perform_request("region", language)
-
-  body <- response |>
-    resp_body_json()
-
-  check_for_failed_request(body)
+  regions_raw <- perform_request("region", language)
 
   # id is non-missing for 7 entries
-  regions <- bind_rows(body[[2]]) |>
+  regions_processed <- bind_rows(regions_raw) |>
     mutate(id = as.integer(id))
 
-  regions
+  regions_processed
 }

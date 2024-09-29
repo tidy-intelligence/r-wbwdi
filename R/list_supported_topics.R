@@ -25,18 +25,11 @@
 #'
 list_supported_topics <- function(language = "en") {
 
-  check_for_supported_language(language)
+  topics_raw <- perform_request("topics", language)
 
-  response <- perform_request("topics", language)
-
-  body <- response |>
-    resp_body_json()
-
-  check_for_failed_request(body)
-
-  topics <- bind_rows(body[[2]]) |>
+  topics_processed <- bind_rows(topics_raw) |>
     select(id, value, source_note = sourceNote) |>
     mutate(id = as.integer(id))
 
-  topics
+  topics_processed
 }
