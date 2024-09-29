@@ -25,16 +25,9 @@
 #'
 list_supported_lending_types <- function(language = "en") {
 
-  check_for_supported_language(language)
+  lending_types_raw <- perform_request("lendingTypes", language)
 
-  response <- perform_request("lendingTypes", language)
+  lending_types_processed <- bind_rows(lending_types_raw)
 
-  body <- response |>
-    resp_body_json()
-
-  check_for_failed_request(body)
-
-  lending_types <- bind_rows(body[[2]])
-
-  lending_types
+  lending_types_processed
 }

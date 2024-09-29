@@ -24,15 +24,10 @@
 list_supported_languages <- function() {
 
   # languages resource does not support multiple languages
-  response <- perform_request("languages")
+  languages_raw <- perform_request("languages")
 
-  body <- response |>
-    resp_body_json()
-
-  check_for_failed_request(body)
-
-  languages <- bind_rows(body[[2]]) |>
+  languages_processed <- bind_rows(languages_raw) |>
     select(code, name, native_form = nativeForm)
 
-  languages
+  languages_processed
 }

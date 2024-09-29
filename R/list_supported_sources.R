@@ -29,17 +29,10 @@
 #'
 list_supported_sources <- function(language = "en") {
 
-  check_for_supported_language(language)
-
-  response <- perform_request("sources", language)
-
-  body <- response |>
-    resp_body_json()
-
-  check_for_failed_request(body)
+  sources_raw <- perform_request("sources", language)
 
   # url and description are always empty, hence omitted
-  sources <- bind_rows(body[[2]]) |>
+  sources_processed <- bind_rows(sources_raw) |>
     select(id,
            name,
            update_date = lastupdated,
@@ -50,5 +43,5 @@ list_supported_sources <- function(language = "en") {
            update_date = as.Date(update_date),
            across(c(id, concepts), as.integer))
 
-  sources
+  sources_processed
 }

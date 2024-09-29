@@ -38,16 +38,7 @@
 #'
 list_supported_countries <- function(language = "en", per_page = 1000) {
 
-  check_for_supported_language(language)
-
-  responses <- perform_request("countries/all", language, per_page)
-
-  body <- responses |>
-    resp_body_json()
-
-  check_for_failed_request(body)
-
-  countries_raw <- body[[2]]
+  countries_raw <- perform_request("countries/all", language, per_page)
 
   countries_processed <- tibble(
       id =  extract_values(countries_raw, "id"),

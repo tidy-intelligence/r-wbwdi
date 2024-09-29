@@ -25,16 +25,9 @@
 #'
 list_supported_income_levels <- function(language = "en") {
 
-  check_for_supported_language(language)
+  income_levels_raw <- perform_request("incomeLevels", language)
 
-  response <- perform_request("incomeLevels", language)
+  income_levels_processed <- bind_rows(income_levels_raw)
 
-  body <- response |>
-    resp_body_json()
-
-  check_for_failed_request(body)
-
-  income_levels <- bind_rows(body[[2]])
-
-  income_levels
+  income_levels_processed
 }
