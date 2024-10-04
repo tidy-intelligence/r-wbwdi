@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The goal of 'wbwdi' is to provide a modern, flexible interface for accessing the World Bank’s World Development Indicators (WDI). 'wbwdi' allows users to download, process, and analyze indicator data for multiple countries and years. 'wbwdi' relies on 'httr2' for multi-page request and error handling and using progress bars to keep users informed about the data processing.
+The goal of 'wbwdi' is to provide a modern, flexible interface for accessing the World Bank’s World Development Indicators (WDI). 'wbwdi' allows users to download, process, and analyze indicator data for multiple countries and time periods. 'wbwdi' relies on 'httr2' for multi-page request and error handling and using progress bars to keep users informed about the data processing.
 
 This package is in development status. Please consider using one of the packages on CRAN:
 
@@ -72,4 +72,13 @@ List all supported languages via:
 
 ```r
 list_supported_languages()
+```
+
+List supported regions, sources, topics and lending types, respectively:
+
+```r
+list_supported_regions()
+list_supported_sources()
+list_supported_topics()
+list_supported_lending_types()
 ```
