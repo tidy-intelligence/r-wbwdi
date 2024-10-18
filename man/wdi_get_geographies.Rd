@@ -2,7 +2,7 @@
 % Please edit documentation in R/wdi_get_geographies.R
 \name{wdi_get_geographies}
 \alias{wdi_get_geographies}
-\title{Download all geographies and regions from the World Bank API}
+\title{Download all countries and regions from the World Bank API}
 \usage{
 wdi_get_geographies(language = "en", per_page = 1000)
 }
@@ -18,6 +18,7 @@ A tibble with the following columns:
 \item{geography_id}{Character string representing the geography's unique identifier.}
 \item{geography_iso2code}{Character string for the ISO2 country code.}
 \item{geography_name}{Character string for the name of the geography.}
+\item{geography_type}{Character string for the type of the geography ("country" or "region").}
 \item{region_id}{Character string representing the region's unique identifier.}
 \item{region_iso2code}{Character string for the ISO2 region code.}
 \item{region_name}{Character string for the name of the region.}
@@ -33,7 +34,7 @@ A tibble with the following columns:
 }
 }
 \description{
-This function retrieves information about geographies (countries or regions) from the World Bank API.
+This function retrieves information about geographies (countries and regions) from the World Bank API.
 It returns a tibble containing various details such as the geography's ID, ISO2 code, name, region information,
 lending type, capital city, and coordinates.
 }

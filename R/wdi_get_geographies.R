@@ -1,6 +1,6 @@
-#' Download all geographies and regions from the World Bank API
+#' Download all countries and regions from the World Bank API
 #'
-#' This function retrieves information about geographies (countries or regions) from the World Bank API.
+#' This function retrieves information about geographies (countries and regions) from the World Bank API.
 #' It returns a tibble containing various details such as the geography's ID, ISO2 code, name, region information,
 #' lending type, capital city, and coordinates.
 #'
@@ -13,6 +13,7 @@
 #'   \item{geography_id}{Character string representing the geography's unique identifier.}
 #'   \item{geography_iso2code}{Character string for the ISO2 country code.}
 #'   \item{geography_name}{Character string for the name of the geography.}
+#'   \item{geography_type}{Character string for the type of the geography ("country" or "region").}
 #'   \item{region_id}{Character string representing the region's unique identifier.}
 #'   \item{region_iso2code}{Character string for the ISO2 region code.}
 #'   \item{region_name}{Character string for the name of the region.}
@@ -62,7 +63,9 @@ wdi_get_geographies <- function(language = "en", per_page = 1000) {
       longitude = extract_values(geographies_raw, "longitude"),
       latitude =  extract_values(geographies_raw, "latitude")
     ) |>
-    mutate(across(where(is.character), ~ if_else(.x == "", NA, .x)))
+    mutate(across(where(is.character), ~ if_else(.x == "", NA, .x)),
+           geography_type = if_else(.data$region_name == "Aggregates", "region", "Country")) |>
+    relocate(c("geography_type", "capital_city"), .after = "geography_name")
 
   geographies_processed
 }
