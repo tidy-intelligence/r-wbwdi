@@ -33,15 +33,15 @@ wdi_get_sources <- function(language = "en") {
 
   # url and description are always empty, hence omitted
   sources_processed <- bind_rows(sources_raw) |>
-    select(source_id = id,
-           source_name = name,
-           update_date = lastupdated,
-           is_data_available = dataavailability,
-           is_metadata_available = metadataavailability,
-           concepts) |>
-    mutate(across(c(is_data_available, is_metadata_available), ~ . == "Y"),
-           update_date = as.Date(update_date),
-           across(c(source_id, concepts), as.integer))
+    select(source_id = "id",
+           source_name = "name",
+           update_date = "lastupdated",
+           is_data_available = "dataavailability",
+           is_metadata_available = "metadataavailability",
+           concepts = "concepts") |>
+    mutate(across(c("is_data_available", "is_metadata_available"), ~ . == "Y"),
+           update_date = as.Date(.data$update_date),
+           across(c("source_id", "concepts"), as.integer))
 
   sources_processed
 }

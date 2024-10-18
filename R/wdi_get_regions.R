@@ -28,11 +28,11 @@ wdi_get_regions <- function(language = "en") {
 
   # id is non-missing for 7 entries
   regions_processed <- bind_rows(regions_raw) |>
-    mutate(id = as.integer(id)) |>
-    select(region_id = id,
-           region_code = code,
-           region_iso2code = iso2code,
-           region_name = name)
+    mutate(id = as.integer(.data$id)) |>
+    select(region_id = "id",
+           region_code = "code",
+           region_iso2code = "iso2code",
+           region_name = "name")
 
   regions_processed
 }

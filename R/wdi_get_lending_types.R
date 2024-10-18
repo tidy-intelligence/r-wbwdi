@@ -28,10 +28,10 @@ wdi_get_lending_types <- function(language = "en") {
   lending_types_raw <- perform_request("lendingTypes", language)
 
   lending_types_processed <- bind_rows(lending_types_raw) |>
-    rename(
-      lending_type_id = id,
-      lending_type_iso2code = iso2code,
-      lending_type_name = value
+    select(
+      lending_type_id = "id",
+      lending_type_iso2code = "iso2code",
+      lending_type_name = "value"
     )
 
   lending_types_processed

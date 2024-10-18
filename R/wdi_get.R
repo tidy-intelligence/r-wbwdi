@@ -121,7 +121,7 @@ wdi_get <- function(
 
   if (format == "wide") {
     indicators_processed <- indicators_processed |>
-      tidyr::pivot_wider(names_from = indicator_id, values_from = value)
+      tidyr::pivot_wider(names_from = "indicator_id", values_from = "value")
   }
 
   indicators_processed
