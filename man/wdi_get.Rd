@@ -2,10 +2,10 @@
 % Please edit documentation in R/wdi_get.R
 \name{wdi_get}
 \alias{wdi_get}
-\title{Download World Bank indicator data for specific countries and time periods}
+\title{Download World Bank indicator data for specific geographies and time periods}
 \usage{
 wdi_get(
-  countries,
+  geographies,
   indicators,
   start_date = NULL,
   end_date = NULL,
@@ -17,7 +17,7 @@ wdi_get(
 )
 }
 \arguments{
-\item{countries}{A character vector of ISO 2-country codes, or \code{"all"} to retrieve data for all countries.}
+\item{geographies}{A character vector of ISO 2-country codes, or \code{"all"} to retrieve data for all geographies.}
 
 \item{indicators}{A character vector specifying one or more World Bank indicators to download (e.g., c("NY.GDP.PCAP.KD", "SP.POP.TOTL")).}
 
@@ -36,21 +36,21 @@ wdi_get(
 \item{format}{A character value specifying whether the data is returned in \code{"long"} or \code{"wide"} format. Defaults to \code{"long"}.}
 }
 \value{
-A tibble containing the indicator data for the specified countries and indicators. The following columns are included:
+A tibble containing the indicator data for the specified geographies and indicators. The following columns are included:
 \describe{
 \item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
-\item{country_id}{The ISO 2-country code of the country for which the data was retrieved.}
+\item{geography_id}{The ISO 2-country code of the country for which the data was retrieved.}
 \item{date}{The date of the indicator data (either a year or month depending on the request).}
 \item{value}{The value of the indicator for the given country and date.}
 }
 }
 \description{
-This function retrieves indicator data from the World Bank API for a specified set of countries and indicators.
+This function retrieves indicator data from the World Bank API for a specified set of geographies and indicators.
 The user can specify one or more indicators, a date range, and other options to tailor the request. The data
 is processed and returned in a tidy format, including country, indicator, date, and value fields.
 }
 \details{
-This function constructs a request URL for the World Bank API, retrieves the relevant data for the given countries
+This function constructs a request URL for the World Bank API, retrieves the relevant data for the given geographies
 and indicators, and processes the response into a tidy format. The user can optionally specify a date range, and the
 function will handle requests for multiple pages if necessary. If the \code{progress} parameter is \code{TRUE},
 messages will be displayed during the request and parsing process.
@@ -59,7 +59,7 @@ The function supports downloading multiple indicators by sending individual API 
 combining the results into a single tidy data frame.
 }
 \examples{
-# Download single indicator for multiple countries
+# Download single indicator for multiple geographies
 wdi_get(c("US", "CA", "GB"), "NY.GDP.PCAP.KD")
 
 # Download single indicator for a specific time frame
@@ -69,15 +69,16 @@ wdi_get(c("US", "CA", "GB"), "DPANUSSPB", start_date = 2012, end_date = 2013)
 wdi_get(c("MX", "CA", "US"), "DPANUSSPB", start_date = "2012M01", end_date = "2012M05")
 
 \donttest{
-# Download single indicator for all countries and disable progress bar
+# Download single indicator for all geographies and disable progress bar
 wdi_get("all", "NY.GDP.PCAP.KD", progress = FALSE)
 
-# Download multiple indicators for multiple countries
+# Download multiple indicators for multiple geographies
 wdi_get(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 }
 
 # Download indicators for different sources
 wdi_get("DE", "SG.LAW.INDX", source = 2)
+
 wdi_get("DE", "SG.LAW.INDX", source = 14)
 
 # Download indicators in wide format

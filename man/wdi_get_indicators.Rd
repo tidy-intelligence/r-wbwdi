@@ -15,10 +15,10 @@ Must be a value between 1 and 32,500.}
 \value{
 A tibble containing the available indicators and their metadata:
 \describe{
-\item{id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
-\item{name}{The name of the indicator (e.g., "GDP per capita, constant prices").}
+\item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
+\item{indicator_name}{The name of the indicator (e.g., "GDP per capita, constant prices").}
 \item{source_id}{The ID of the data source providing the indicator.}
-\item{source_value}{The name or description of the source of the indicator data.}
+\item{source_name}{The name or description of the source of the indicator data.}
 \item{source_note}{Additional notes or descriptions about the data source.}
 \item{source_organization}{The organization responsible for the data source.}
 \item{topics}{A nested tibble containing topics associated with the indicator, with two columns: \code{topic_id} and \code{topic_value}.}

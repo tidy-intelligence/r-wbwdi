@@ -27,7 +27,9 @@ wdi_get_languages <- function() {
   languages_raw <- perform_request("languages")
 
   languages_processed <- bind_rows(languages_raw) |>
-    select(code, name, native_form = nativeForm)
+    select(code, name, native_form = nativeForm) |>
+    rename(language_code = code,
+           language_name = name)
 
   languages_processed
 }

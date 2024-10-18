@@ -28,8 +28,8 @@ wdi_get_topics <- function(language = "en") {
   topics_raw <- perform_request("topics", language)
 
   topics_processed <- bind_rows(topics_raw) |>
-    select(id, value, source_note = sourceNote) |>
-    mutate(id = as.integer(id))
+    mutate(id = as.integer(id)) |>
+    select(topic_id = id, topic_name = value, source_note = sourceNote)
 
   topics_processed
 }

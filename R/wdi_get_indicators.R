@@ -10,10 +10,10 @@
 #'
 #' @return A tibble containing the available indicators and their metadata:
 #' \describe{
-#'   \item{id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
-#'   \item{name}{The name of the indicator (e.g., "GDP per capita, constant prices").}
+#'   \item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
+#'   \item{indicator_name}{The name of the indicator (e.g., "GDP per capita, constant prices").}
 #'   \item{source_id}{The ID of the data source providing the indicator.}
-#'   \item{source_value}{The name or description of the source of the indicator data.}
+#'   \item{source_name}{The name or description of the source of the indicator data.}
 #'   \item{source_note}{Additional notes or descriptions about the data source.}
 #'   \item{source_organization}{The organization responsible for the data source.}
 #'   \item{topics}{A nested tibble containing topics associated with the indicator, with two columns: \code{topic_id} and \code{topic_value}.}
@@ -39,17 +39,17 @@ wdi_get_indicators <- function(language = "en", per_page = 32500) {
   extract_topics <- function(data) {
     if (length(unlist(data$topics)) > 0) {
       tibble(topic_id = as.integer(extract_values(data$topics, "id")),
-             topic_value = trimws(extract_values(data$topics, "value")))
+             topic_name = trimws(extract_values(data$topics, "value")))
     } else {
-      tibble(topic_id = NA_integer_, topic_value = NA_character_)
+      tibble(topic_id = NA_integer_, topic_name = NA_character_)
     }
   }
 
   indicators_processed <- tibble(
-    id =  extract_values(indicators_raw, "id"),
-    name = extract_values(indicators_raw, "name"),
+    indicator_id =  extract_values(indicators_raw, "id"),
+    indicator_name = extract_values(indicators_raw, "name"),
     source_id = as.integer(extract_values(indicators_raw, "source$id")),
-    source_value = extract_values(indicators_raw, "source$value"),
+    source_name = extract_values(indicators_raw, "source$value"),
     source_note = extract_values(indicators_raw, "sourceNote"),
     source_organization = extract_values(indicators_raw, "sourceOrganization"),
     topics = purrr::map(indicators_raw, extract_topics)
