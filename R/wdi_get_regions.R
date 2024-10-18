@@ -1,4 +1,4 @@
-#' List supported regions for the World Bank API
+#' Download regions from the World Bank API
 #'
 #' This function returns a tibble of supported regions for querying the World Bank API.
 #' The regions include various geographic areas covered by the World Bank's datasets.
@@ -19,16 +19,20 @@
 #' @export
 #'
 #' @examples
-#' # List all supported regions
-#' list_supported_regions()
+#' # Download all regions
+#' wdi_get_regions()
 #'
-list_supported_regions <- function(language = "en") {
+wdi_get_regions <- function(language = "en") {
 
   regions_raw <- perform_request("region", language)
 
   # id is non-missing for 7 entries
   regions_processed <- bind_rows(regions_raw) |>
-    mutate(id = as.integer(id))
+    mutate(id = as.integer(.data$id)) |>
+    select(region_id = "id",
+           region_code = "code",
+           region_iso2code = "iso2code",
+           region_name = "name")
 
   regions_processed
 }

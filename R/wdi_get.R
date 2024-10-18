@@ -1,28 +1,28 @@
-#' Download World Bank indicator data for specific countries and multiple indicators
+#' Download World Bank indicator data for specific geographies and time periods
 #'
-#' This function retrieves indicator data from the World Bank API for a specified set of countries and indicators.
+#' This function retrieves indicator data from the World Bank API for a specified set of geographies and indicators.
 #' The user can specify one or more indicators, a date range, and other options to tailor the request. The data
 #' is processed and returned in a tidy format, including country, indicator, date, and value fields.
 #'
-#' @param countries A character vector of ISO 2-country codes, or `"all"` to retrieve data for all countries.
+#' @param geographies A character vector of ISO 2-country codes, or `"all"` to retrieve data for all geographies.
 #' @param indicators A character vector specifying one or more World Bank indicators to download (e.g., c("NY.GDP.PCAP.KD", "SP.POP.TOTL")).
 #' @param start_date Optional. The starting date for the data, either as a year (e.g., `2010`) or a specific month (e.g., `"2012M01"`).
 #' @param end_date Optional. The ending date for the data, either as a year (e.g., `2020`) or a specific month (e.g., `"2012M05"`).
-#' @param language A character string specifying the language for the request, see \link{list_supported_languages}. Defaults to `"en"`.
+#' @param language A character string specifying the language for the request, see \link{wdi_get_languages}. Defaults to `"en"`.
 #' @param per_page An integer specifying the number of results per page for the API. Defaults to 1000.
 #' @param progress A logical value indicating whether to show progress messages during the data download and parsing. Defaults to `TRUE`.
-#' @param source An integer value specifying the data source, see \link{list_supported_sources}.
+#' @param source An integer value specifying the data source, see \link{wdi_get_sources}.
 #' @param format A character value specifying whether the data is returned in `"long"` or `"wide"` format. Defaults to `"long"`.
 #'
-#' @return A tibble containing the indicator data for the specified countries and indicators. The following columns are included:
+#' @return A tibble containing the indicator data for the specified geographies and indicators. The following columns are included:
 #' \describe{
 #'   \item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
-#'   \item{country_id}{The ISO 2-country code of the country for which the data was retrieved.}
+#'   \item{geography_id}{The ISO 2-country code of the country for which the data was retrieved.}
 #'   \item{date}{The date of the indicator data (either a year or month depending on the request).}
 #'   \item{value}{The value of the indicator for the given country and date.}
 #' }
 #'
-#' @details This function constructs a request URL for the World Bank API, retrieves the relevant data for the given countries
+#' @details This function constructs a request URL for the World Bank API, retrieves the relevant data for the given geographies
 #' and indicators, and processes the response into a tidy format. The user can optionally specify a date range, and the
 #' function will handle requests for multiple pages if necessary. If the `progress` parameter is `TRUE`,
 #' messages will be displayed during the request and parsing process.
@@ -33,33 +33,34 @@
 #' @export
 #'
 #' @examples
-#' # Download single indicator for multiple countries
-#' download_indicators(c("US", "CA", "GB"), "NY.GDP.PCAP.KD")
+#' # Download single indicator for multiple geographies
+#' wdi_get(c("US", "CA", "GB"), "NY.GDP.PCAP.KD")
 #'
 #' # Download single indicator for a specific time frame
-#' download_indicators(c("US", "CA", "GB"), "DPANUSSPB", start_date = 2012, end_date = 2013)
+#' wdi_get(c("US", "CA", "GB"), "DPANUSSPB", start_date = 2012, end_date = 2013)
 #'
 #' # Download single indicator for different frequency
-#' download_indicators(c("MX", "CA", "US"), "DPANUSSPB", start_date = "2012M01", end_date = "2012M05")
+#' wdi_get(c("MX", "CA", "US"), "DPANUSSPB", start_date = "2012M01", end_date = "2012M05")
 #'
 #' \donttest{
-#' # Download single indicator for all countries and disable progress bar
-#' download_indicators("all", "NY.GDP.PCAP.KD", progress = FALSE)
+#' # Download single indicator for all geographies and disable progress bar
+#' wdi_get("all", "NY.GDP.PCAP.KD", progress = FALSE)
 #'
-#' # Download multiple indicators for multiple countries
-#' download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
+#' # Download multiple indicators for multiple geographies
+#' wdi_get(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 #' }
 #'
 #' # Download indicators for different sources
-#' download_indicators("DE", "SG.LAW.INDX", source = 2)
-#' download_indicators("DE", "SG.LAW.INDX", source = 14)
+#' wdi_get("DE", "SG.LAW.INDX", source = 2)
+#'
+#' wdi_get("DE", "SG.LAW.INDX", source = 14)
 #'
 #' # Download indicators in wide format
-#' download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD"), format = "wide")
-#' download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"), format = "wide")
+#' wdi_get(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD"), format = "wide")
+#' wdi_get(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"), format = "wide")
 #'
-download_indicators <- function(
-  countries,
+wdi_get <- function(
+  geographies,
   indicators,
   start_date = NULL,
   end_date = NULL,
@@ -75,9 +76,9 @@ download_indicators <- function(
   }
 
   if (!is.null(source)) {
-    supported_sources <- list_supported_sources()
-    if (!source %in% supported_sources$id) {
-      cli::cli_abort("{.arg source} is not supported. Please call {.fun list_supported_sources}.")
+    supported_sources <- wdi_get_sources()
+    if (!source %in% supported_sources$source_id) {
+      cli::cli_abort("{.arg source} is not supported. Please call {.fun wdi_get_sources}.")
     }
   }
 
@@ -101,13 +102,13 @@ download_indicators <- function(
       progress_req <- FALSE
     }
 
-    resource <- paste0("country/", paste(countries, collapse = ";"), "/indicator/", indicators[j])
+    resource <- paste0("country/", paste(geographies, collapse = ";"), "/indicator/", indicators[j])
     indicators_raw <- perform_request(resource, language, per_page, date, source, progress_req)
 
     parse_response <- function(x) {
       tibble(
         indicator_id = extract_values(x, "indicator$id"),
-        country_id = extract_values(x, "country$id"),
+        geography_id = extract_values(x, "country$id"),
         date = extract_values(x, "date"),
         value = extract_values(x, "value", "numeric")
       )
@@ -120,7 +121,7 @@ download_indicators <- function(
 
   if (format == "wide") {
     indicators_processed <- indicators_processed |>
-      tidyr::pivot_wider(names_from = indicator_id, values_from = value)
+      tidyr::pivot_wider(names_from = "indicator_id", values_from = "value")
   }
 
   indicators_processed

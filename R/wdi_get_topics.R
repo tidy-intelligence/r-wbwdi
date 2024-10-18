@@ -1,4 +1,4 @@
-#' List supported topics for the World Bank API
+#' Download topics from the World Bank API
 #'
 #' This function returns a tibble of supported topics for querying the World Bank API.
 #' Topics represent the broad subject areas covered by the World Bank's datasets.
@@ -20,16 +20,16 @@
 #' @export
 #'
 #' @examples
-#' # List all supported topics
-#' list_supported_topics()
+#' # Download all topics
+#' wdi_get_topics()
 #'
-list_supported_topics <- function(language = "en") {
+wdi_get_topics <- function(language = "en") {
 
   topics_raw <- perform_request("topics", language)
 
   topics_processed <- bind_rows(topics_raw) |>
-    select(id, value, source_note = sourceNote) |>
-    mutate(id = as.integer(id))
+    mutate(id = as.integer(.data$id)) |>
+    select(topic_id = "id", topic_name = "value", source_note = "sourceNote")
 
   topics_processed
 }

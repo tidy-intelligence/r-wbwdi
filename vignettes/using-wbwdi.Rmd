@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 library(wbwdi)
 ```
 
-The `wbwdi` package provides a modern and flexible interface for accessing the World Bank’s [World Development Indicators (WDI)](https://datatopics.worldbank.org/world-development-indicators/). With `wbwdi`, you can download data for multiple indicators and countries in a single function call, benefit from progress bars, and receive the output in a tidy data format, making it ideal for further analysis.
+The `wbwdi` package provides a modern and flexible interface for accessing the World Bank’s [World Development Indicators (WDI)](https://datatopics.worldbank.org/world-development-indicators/). With `wbwdi`, you can download data for multiple indicators and geographies in a single function call, benefit from progress bars, and receive the output in a tidy data format, making it ideal for further analysis.
 
 ## Installation
 
@@ -34,51 +34,51 @@ pak::pak("tidy-intelligence/r-wbwdi")
 The `wbwdi` package allows you to retrieve a full list of all supported indicators from the World Bank [Indicators API](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation). Each indicator is accompanied by metadata such as its unit of measurement, source, and associated topics.
 
 ```{r}
-list_supported_indicators()
+wdi_get_indicators()
 ```
 
 You can also get the list of supported indicators in a different language. For example, to retrieve the indicators in Spanish:
 
 ```{r}
-list_supported_indicators(language = "es")
+wdi_get_indicators(language = "es")
 ```
 
 To get the list of languages supported by the API, call: 
 
 ```{r}
-list_supported_languages()
+wdi_get_languages()
 ```
 
 Note that not all indicators might be translated into all languages. 
 
-## Listing supported Countries
+## Listing supported geographies
 
-You can retrieve a list of all countries supported by the World Bank API along with metadata such as region, administrative region, income level, and lending type.
+You can retrieve a list of all geographies supported by the World Bank API along with metadata such as region, administrative region, income level, and lending type.
 
 ```{r}
-list_supported_countries()
+wdi_get_geographies()
 ```
 
-This information can also be requested in other languages. For example, to view the supported countries in Chinese:
+This information can also be requested in other languages. For example, to view the supported geographies in Chinese:
 
 ```{r}
-list_supported_countries(language = "zh")
+wdi_get_geographies(language = "zh")
 ```
 
 ### Downloading indicator data
 
-With `wbwdi`, you can download indicator data for multiple countries and indicators in a single function call. The function returns a tidy data frame with country, indicator, date, and value columns.
+With `wbwdi`, you can download indicator data for multiple geographies and indicators in a single function call. The function returns a tidy data frame with country, indicator, date, and value columns.
 
 For example, to download GDP per capita and total population for Mexico, Canada, and the United States:
 
 ```{r}
-download_indicators(countries = c("MX", "CA", "US"), indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
+wdi_get(geographies = c("MX", "CA", "US"), indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 ```
 
-If you need the same indicators for all countries, you can pass `"all"` as the `countries` parameter:
+If you need the same indicators for all geographies, you can pass `"all"` as the `geographies` parameter:
 
 ```{r}
-download_indicators(countries = "all", indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
+wdi_get(geographies = "all", indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 ```
 
 ## Other helper functions
@@ -86,10 +86,10 @@ download_indicators(countries = "all", indicators = c("NY.GDP.PCAP.KD", "SP.POP.
 You can fetch a list of all supported regions, sources, topics and lending types, respectively, using the corresponding helper function:
 
 ```{r, eval = FALSE}
-list_supported_regions()
-list_supported_sources()
-list_supported_topics()
-list_supported_lending_types()
+wdi_get_regions()
+wdi_get_sources()
+wdi_get_topics()
+wdi_get_lending_types()
 ```
 
 ## Conclusion

@@ -1,4 +1,4 @@
-#' List supported data sources for the World Bank API
+#' Download data sources from the World Bank API
 #'
 #' This function returns a tibble of supported data sources for querying the World Bank API.
 #' The data sources include various databases and datasets provided by the World Bank.
@@ -24,24 +24,24 @@
 #' @export
 #'
 #' @examples
-#' # List all supported data sources
-#' list_supported_sources()
+#' # Download all supported data sources
+#' wdi_get_sources()
 #'
-list_supported_sources <- function(language = "en") {
+wdi_get_sources <- function(language = "en") {
 
   sources_raw <- perform_request("sources", language)
 
   # url and description are always empty, hence omitted
   sources_processed <- bind_rows(sources_raw) |>
-    select(id,
-           name,
-           update_date = lastupdated,
-           is_data_available = dataavailability,
-           is_metadata_available = metadataavailability,
-           concepts) |>
-    mutate(across(c(is_data_available, is_metadata_available), ~ . == "Y"),
-           update_date = as.Date(update_date),
-           across(c(id, concepts), as.integer))
+    select(source_id = "id",
+           source_name = "name",
+           update_date = "lastupdated",
+           is_data_available = "dataavailability",
+           is_metadata_available = "metadataavailability",
+           concepts = "concepts") |>
+    mutate(across(c("is_data_available", "is_metadata_available"), ~ . == "Y"),
+           update_date = as.Date(.data$update_date),
+           across(c("source_id", "concepts"), as.integer))
 
   sources_processed
 }

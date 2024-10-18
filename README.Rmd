@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The goal of 'wbwdi' is to provide a modern, flexible interface for accessing the World Bank’s World Development Indicators (WDI). 'wbwdi' allows users to download, process, and analyze indicator data for multiple countries and time periods. 'wbwdi' relies on 'httr2' for multi-page request and error handling and using progress bars to keep users informed about the data processing.
+The goal of 'wbwdi' is to provide a modern, flexible interface for accessing the World Bank’s World Development Indicators (WDI). 'wbwdi' allows users to download, process, and analyze indicator data for multiple geographies and time periods. 'wbwdi' relies on 'httr2' for multi-page request and error handling and using progress bars to keep users informed about the data processing.
 
 This package is in development status. Please consider using one of the packages on CRAN:
 
@@ -34,51 +34,51 @@ pak::pak("tidy-intelligence/r-wbwdi")
 You can get a list of all indicators supported by the WDI API via:
 
 ```r
-list_supported_indicators()
+wdi_get_indicators()
 ```
 
-You can get a list of all supported countries via:
+You can get a list of all supported geographies via:
 
 ```r
-list_supported_countries()
+wdi_get_geographies()
 ```
 
-You can also get the list of supported indicators and countries in another language, but note that not everything seems to be translated into other languages:
+You can also get the list of supported indicators and geographies in another language, but note that not everything seems to be translated into other languages:
 
 ```r
-list_supported_indicators(language = "es")
-list_supported_countries(language = "zh")
+wdi_get_indicators(language = "es")
+wdi_get_geographies(language = "zh")
 ```
 
 Check out the following function for a list of supported languages:
 
 ```r
-list_supported_languages()
+wdi_get_languages()
 ```
 
-You can download specific indicators for a selection of countries via:
+You can download specific indicators for a selection of geographies via:
 
 ```r
-download_indicators(countries = c("MX", "CA", "US"), indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
+wdi_get(geographies = c("MX", "CA", "US"), indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 ```
 
-You can also download these indicators for all countries:
+You can also download these indicators for all geographies:
 
 ```r
-download_indicators(countries = "all", indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
+wdi_get(geographies = "all", indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 ```
 
 List all supported languages via:
 
 ```r
-list_supported_languages()
+wdi_get_languages()
 ```
 
 List supported regions, sources, topics and lending types, respectively:
 
 ```r
-list_supported_regions()
-list_supported_sources()
-list_supported_topics()
-list_supported_lending_types()
+wdi_get_regions()
+wdi_get_sources()
+wdi_get_topics()
+wdi_get_lending_types()
 ```
