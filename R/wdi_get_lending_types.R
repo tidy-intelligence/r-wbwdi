@@ -1,4 +1,4 @@
-#' List supported lending types for the World Bank API
+#' Download lending types from the World Bank API
 #'
 #' This function returns a tibble of supported lending types for querying the World Bank API.
 #' The lending types classify countries based on the financial terms available to them from the World Bank.
@@ -20,10 +20,10 @@
 #' @export
 #'
 #' @examples
-#' # List all supported lending types in English
-#' list_supported_lending_types()
+#' # Download all lending types in English
+#' wdi_get_lending_types()
 #'
-list_supported_lending_types <- function(language = "en") {
+wdi_get_lending_types <- function(language = "en") {
 
   lending_types_raw <- perform_request("lendingTypes", language)
 

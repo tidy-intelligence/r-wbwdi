@@ -1,10 +1,10 @@
-#' List all supported World Bank indicators
+#' Download all available World Bank indicators
 #'
 #' This function retrieves a comprehensive list of all indicators supported by the World Bank API.
 #' The indicators include metadata such as the indicator ID, name, unit, source, and associated topics.
 #' The user can specify the language of the API response and whether to include additional details.
 #'
-#' @param language A character string specifying the language for the request, see \link{list_supported_languages}. Defaults to `"en"`.
+#' @param language A character string specifying the language for the request, see \link{wdi_get_languages}. Defaults to `"en"`.
 #' @param per_page An integer specifying the number of results per page for the API. Defaults to 32,500.
 #' Must be a value between 1 and 32,500.
 #'
@@ -26,13 +26,13 @@
 #'
 #' @examples
 #'
-#' # List all supported indicators in English
-#' list_supported_indicators(language = "en")
+#' # Download all supported indicators in English
+#' wdi_get_indicators(language = "en")
 #'
-#' # List all supported indicators in Spanish
-#' list_supported_indicators(language = "es")
+#' # Download all supported indicators in Spanish
+#' wdi_get_indicators(language = "es")
 #'
-list_supported_indicators <- function(language = "en", per_page = 32500) {
+wdi_get_indicators <- function(language = "en", per_page = 32500) {
 
   indicators_raw <- perform_request("indicators", language = language, per_page = per_page)
 

@@ -1,10 +1,10 @@
-#' List all supported countries and regions from the World Bank API
+#' Download all countries and regions from the World Bank API
 #'
 #' This function retrieves and processes a list of all countries supported by the World Bank API,
 #' along with metadata such as region, administrative region, income level, and lending type.
 #' The user can specify the language of the API response.
 #'
-#' @param language A character string specifying the language for the request, see \link{list_supported_languages}. Defaults to `"en"`.
+#' @param language A character string specifying the language for the request, see \link{wdi_get_languages}. Defaults to `"en"`.
 #' @param per_page An integer specifying the number of results per page for the API. Defaults to 1000.
 #' Must be a value between 1 and 32,500.
 #'
@@ -30,13 +30,13 @@
 #' @export
 #'
 #' @examples
-#' # List all supported countries in English
-#' list_supported_countries(language = "en")
+#' # Download all countries in English
+#' wdi_get_countries(language = "en")
 #'
-#' # List all supported countries in Spanish
-#' list_supported_countries(language = "zh")
+#' # Download all countries in Spanish
+#' wdi_get_countries(language = "zh")
 #'
-list_supported_countries <- function(language = "en", per_page = 1000) {
+wdi_get_countries <- function(language = "en", per_page = 1000) {
 
   countries_raw <- perform_request("countries/all", language, per_page)
 

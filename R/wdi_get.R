@@ -1,4 +1,4 @@
-#' Download World Bank indicator data for specific countries and multiple indicators
+#' Download World Bank indicator data for specific countries and time periods
 #'
 #' This function retrieves indicator data from the World Bank API for a specified set of countries and indicators.
 #' The user can specify one or more indicators, a date range, and other options to tailor the request. The data
@@ -8,10 +8,10 @@
 #' @param indicators A character vector specifying one or more World Bank indicators to download (e.g., c("NY.GDP.PCAP.KD", "SP.POP.TOTL")).
 #' @param start_date Optional. The starting date for the data, either as a year (e.g., `2010`) or a specific month (e.g., `"2012M01"`).
 #' @param end_date Optional. The ending date for the data, either as a year (e.g., `2020`) or a specific month (e.g., `"2012M05"`).
-#' @param language A character string specifying the language for the request, see \link{list_supported_languages}. Defaults to `"en"`.
+#' @param language A character string specifying the language for the request, see \link{wdi_get_languages}. Defaults to `"en"`.
 #' @param per_page An integer specifying the number of results per page for the API. Defaults to 1000.
 #' @param progress A logical value indicating whether to show progress messages during the data download and parsing. Defaults to `TRUE`.
-#' @param source An integer value specifying the data source, see \link{list_supported_sources}.
+#' @param source An integer value specifying the data source, see \link{wdi_get_sources}.
 #' @param format A character value specifying whether the data is returned in `"long"` or `"wide"` format. Defaults to `"long"`.
 #'
 #' @return A tibble containing the indicator data for the specified countries and indicators. The following columns are included:
@@ -34,31 +34,31 @@
 #'
 #' @examples
 #' # Download single indicator for multiple countries
-#' download_indicators(c("US", "CA", "GB"), "NY.GDP.PCAP.KD")
+#' wdi_get(c("US", "CA", "GB"), "NY.GDP.PCAP.KD")
 #'
 #' # Download single indicator for a specific time frame
-#' download_indicators(c("US", "CA", "GB"), "DPANUSSPB", start_date = 2012, end_date = 2013)
+#' wdi_get(c("US", "CA", "GB"), "DPANUSSPB", start_date = 2012, end_date = 2013)
 #'
 #' # Download single indicator for different frequency
-#' download_indicators(c("MX", "CA", "US"), "DPANUSSPB", start_date = "2012M01", end_date = "2012M05")
+#' wdi_get(c("MX", "CA", "US"), "DPANUSSPB", start_date = "2012M01", end_date = "2012M05")
 #'
 #' \donttest{
 #' # Download single indicator for all countries and disable progress bar
-#' download_indicators("all", "NY.GDP.PCAP.KD", progress = FALSE)
+#' wdi_get("all", "NY.GDP.PCAP.KD", progress = FALSE)
 #'
 #' # Download multiple indicators for multiple countries
-#' download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
+#' wdi_get(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 #' }
 #'
 #' # Download indicators for different sources
-#' download_indicators("DE", "SG.LAW.INDX", source = 2)
-#' download_indicators("DE", "SG.LAW.INDX", source = 14)
+#' wdi_get("DE", "SG.LAW.INDX", source = 2)
+#' wdi_get("DE", "SG.LAW.INDX", source = 14)
 #'
 #' # Download indicators in wide format
-#' download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD"), format = "wide")
-#' download_indicators(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"), format = "wide")
+#' wdi_get(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD"), format = "wide")
+#' wdi_get(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"), format = "wide")
 #'
-download_indicators <- function(
+wdi_get <- function(
   countries,
   indicators,
   start_date = NULL,
@@ -75,9 +75,9 @@ download_indicators <- function(
   }
 
   if (!is.null(source)) {
-    supported_sources <- list_supported_sources()
+    supported_sources <- wdi_get_sources()
     if (!source %in% supported_sources$id) {
-      cli::cli_abort("{.arg source} is not supported. Please call {.fun list_supported_sources}.")
+      cli::cli_abort("{.arg source} is not supported. Please call {.fun wdi_get_sources}.")
     }
   }
 

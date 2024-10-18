@@ -1,4 +1,4 @@
-#' List supported data sources for the World Bank API
+#' Download data sources from the World Bank API
 #'
 #' This function returns a tibble of supported data sources for querying the World Bank API.
 #' The data sources include various databases and datasets provided by the World Bank.
@@ -24,10 +24,10 @@
 #' @export
 #'
 #' @examples
-#' # List all supported data sources
-#' list_supported_sources()
+#' # Download all supported data sources
+#' wdi_get_sources()
 #'
-list_supported_sources <- function(language = "en") {
+wdi_get_sources <- function(language = "en") {
 
   sources_raw <- perform_request("sources", language)
 

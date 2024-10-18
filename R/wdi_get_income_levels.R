@@ -1,4 +1,4 @@
-#' List supported income levels for the World Bank API
+#' Download income levels from the World Bank API
 #'
 #' This function returns a tibble of supported income levels for querying the World Bank API.
 #' The income levels categorize countries based on their gross national income per capita.
@@ -20,10 +20,10 @@
 #' @export
 #'
 #' @examples
-#' # List all supported income levels in English
-#' list_supported_income_levels()
+#' # Download all income levels in English
+#' wdi_get_income_levels()
 #'
-list_supported_income_levels <- function(language = "en") {
+wdi_get_income_levels <- function(language = "en") {
 
   income_levels_raw <- perform_request("incomeLevels", language)
 

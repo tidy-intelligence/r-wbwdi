@@ -1,4 +1,4 @@
-#' List supported languages for the World Bank API
+#' Download languages from the World Bank API
 #'
 #' This function returns a tibble of supported languages for querying the World Bank API.
 #' The supported languages include English, Spanish, French, Arabic, and Chinese, etc.
@@ -18,10 +18,10 @@
 #' @export
 #'
 #' @examples
-#' # List all supported languages
-#' list_supported_languages()
+#' # Download all languages
+#' wdi_get_languages()
 #'
-list_supported_languages <- function() {
+wdi_get_languages <- function() {
 
   # languages resource does not support multiple languages
   languages_raw <- perform_request("languages")
