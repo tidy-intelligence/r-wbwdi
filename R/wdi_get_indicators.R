@@ -53,7 +53,8 @@ wdi_get_indicators <- function(language = "en", per_page = 32500) {
     source_note = extract_values(indicators_raw, "sourceNote"),
     source_organization = extract_values(indicators_raw, "sourceOrganization"),
     topics = purrr::map(indicators_raw, extract_topics)
-  )
+  ) |>
+    mutate(across(where(is.character), trimws))
 
   indicators_processed
 }

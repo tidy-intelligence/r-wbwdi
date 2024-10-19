@@ -32,7 +32,8 @@ wdi_get_regions <- function(language = "en") {
     select(region_id = "id",
            region_code = "code",
            region_iso2code = "iso2code",
-           region_name = "name")
+           region_name = "name") |>
+    mutate(across(where(is.character), trimws))
 
   regions_processed
 }

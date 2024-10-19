@@ -41,7 +41,8 @@ wdi_get_sources <- function(language = "en") {
            concepts = "concepts") |>
     mutate(across(c("is_data_available", "is_metadata_available"), ~ . == "Y"),
            update_date = as.Date(.data$update_date),
-           across(c("source_id", "concepts"), as.integer))
+           across(c("source_id", "concepts"), as.integer),
+           across(where(is.character), trimws))
 
   sources_processed
 }
