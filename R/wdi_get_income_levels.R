@@ -32,7 +32,8 @@ wdi_get_income_levels <- function(language = "en") {
       income_level_id = "id",
       income_level_iso2code = "iso2code",
       income_level_name = "value"
-    )
+    ) |>
+    mutate(across(where(is.character), trimws))
 
   income_levels_processed
 }

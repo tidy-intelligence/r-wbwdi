@@ -64,6 +64,7 @@ wdi_get_geographies <- function(language = "en", per_page = 1000) {
       latitude =  extract_values(geographies_raw, "latitude")
     ) |>
     mutate(across(where(is.character), ~ if_else(.x == "", NA, .x)),
+           across(where(is.character), trimws),
            geography_type = if_else(.data$region_name == "Aggregates", "region", "Country")) |>
     relocate(c("geography_type", "capital_city"), .after = "geography_name")
 

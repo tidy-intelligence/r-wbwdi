@@ -29,7 +29,8 @@ wdi_get_languages <- function() {
   languages_processed <- bind_rows(languages_raw) |>
     select(language_code = "code",
            language_name = "name",
-           native_form = "nativeForm")
+           native_form = "nativeForm") |>
+    mutate(across(where(is.character), trimws))
 
   languages_processed
 }

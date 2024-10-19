@@ -32,7 +32,8 @@ wdi_get_lending_types <- function(language = "en") {
       lending_type_id = "id",
       lending_type_iso2code = "iso2code",
       lending_type_name = "value"
-    )
+    ) |>
+    mutate(across(where(is.character), trimws))
 
   lending_types_processed
 }
