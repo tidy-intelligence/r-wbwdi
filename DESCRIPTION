@@ -1,7 +1,7 @@
 Type: Package
 Package: wbwdi
 Title: Download World Development Indicators from the World Bank Development Indicators API
-Version: 0.1.0.9000
+Version: 0.1.0.9001
 Authors@R: c(
     person("Christoph", "Scheuch", , "christoph.scheuch@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0004-0423-6819"))
