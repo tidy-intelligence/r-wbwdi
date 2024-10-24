@@ -10,26 +10,31 @@ https://api.worldbank.org/v2/sources
 wdi_get_sources(language = "en")
 }
 \arguments{
-\item{language}{A character string specifying the language code for the API response (default is "en" for English).}
+\item{language}{A character string specifying the language code for the API
+response (default is "en" for English).}
 }
 \value{
 A tibble with six columns:
 \describe{
 \item{id}{The unique identifier for the data source.}
-\item{name}{The name of the data source (e.g., "World Development Indicators").}
+\item{name}{The name of the data source (e.g., "World Development
+Indicators").}
 \item{update_date}{The last update date of the data source.}
 \item{is_data_available}{A boolean indicating whether data is available.}
-\item{is_metadata_available}{A boolean indicating whether metadata is available.}
+\item{is_metadata_available}{A boolean indicating whether metadata is
+available.}
 \item{concepts}{The number of concepts defined for the data source.}
 }
 }
 \description{
-This function returns a tibble of supported data sources for querying the World Bank API.
-The data sources include various databases and datasets provided by the World Bank.
+This function returns a tibble of supported data sources for querying the
+World Bank API. The data sources include various databases and datasets
+provided by the World Bank.
 }
 \details{
-This function provides a reference for the supported data sources and their metadata when querying
-the World Bank API. The columns \code{is_data_available} and \code{is_metadata_available} are logical values
+This function provides a reference for the supported data sources
+and their metadata when querying the World Bank API. The columns
+\code{is_data_available} and \code{is_metadata_available} are logical values
 derived from the API response, where "Y" indicates availability.
 }
 \examples{

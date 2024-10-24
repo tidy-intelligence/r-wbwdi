@@ -10,7 +10,8 @@ https://api.worldbank.org/v2/topics
 wdi_get_topics(language = "en")
 }
 \arguments{
-\item{language}{A character string specifying the language code for the API response (default is "en" for English).}
+\item{language}{A character string specifying the language code for the API
+response (default is "en" for English).}
 }
 \value{
 A tibble with three columns:
@@ -21,12 +22,14 @@ A tibble with three columns:
 }
 }
 \description{
-This function returns a tibble of supported topics for querying the World Bank API.
-Topics represent the broad subject areas covered by the World Bank's datasets.
+This function returns a tibble of supported topics for querying the World
+Bank API. Topics represent the broad subject areas covered by the World
+Bank's datasets.
 }
 \details{
-This function provides a reference for the supported topics that can be used to refine
-your queries when accessing the World Bank API. Topics represent different areas of focus for data analysis.
+This function provides a reference for the supported topics that can
+be used to refine your queries when accessing the World Bank API. Topics
+represent different areas of focus for data analysis.
 }
 \examples{
 # Download all topics

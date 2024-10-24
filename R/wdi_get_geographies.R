@@ -47,25 +47,27 @@ wdi_get_geographies <- function(language = "en", per_page = 1000) {
   geographies_raw <- perform_request("countries/all", language, per_page)
 
   geographies_processed <- tibble(
-      geography_id =  extract_values(geographies_raw, "id"),
-      geography_iso2code =  extract_values(geographies_raw, "iso2Code"),
-      geography_name =  extract_values(geographies_raw, "name"),
-      region_id =  extract_values(geographies_raw, "region$id"),
-      region_iso2code =  extract_values(geographies_raw, "region$iso2code"),
-      region_name =  extract_values(geographies_raw, "region$value"),
-      admin_region_id =  extract_values(geographies_raw, "adminregion$id"),
-      admin_region_iso2code =  extract_values(geographies_raw, "adminregion$iso2code"),
-      admin_region_name =  extract_values(geographies_raw, "adminregion$value"),
-      lending_type_id =  extract_values(geographies_raw, "lendingType$id"),
-      lending_type_iso2code =  extract_values(geographies_raw, "lendingType$iso2code"),
-      lending_type_name =  extract_values(geographies_raw, "lendingType$value"),
-      capital_city =  extract_values(geographies_raw, "capitalCity"),
-      longitude = extract_values(geographies_raw, "longitude"),
-      latitude =  extract_values(geographies_raw, "latitude")
+    geography_id = extract_values(geographies_raw, "id"),
+    geography_iso2code = extract_values(geographies_raw, "iso2Code"),
+    geography_name = extract_values(geographies_raw, "name"),
+    region_id = extract_values(geographies_raw, "region$id"),
+    region_iso2code = extract_values(geographies_raw, "region$iso2code"),
+    region_name = extract_values(geographies_raw, "region$value"),
+    admin_region_id = extract_values(geographies_raw, "adminregion$id"),
+    admin_region_iso2code = extract_values(geographies_raw, "adminregion$iso2code"),
+    admin_region_name = extract_values(geographies_raw, "adminregion$value"),
+    lending_type_id = extract_values(geographies_raw, "lendingType$id"),
+    lending_type_iso2code = extract_values(geographies_raw, "lendingType$iso2code"),
+    lending_type_name = extract_values(geographies_raw, "lendingType$value"),
+    capital_city = extract_values(geographies_raw, "capitalCity"),
+    longitude = extract_values(geographies_raw, "longitude"),
+    latitude = extract_values(geographies_raw, "latitude")
+  ) |>
+    mutate(
+      across(where(is.character), ~ if_else(.x == "", NA, .x)),
+      across(where(is.character), trimws),
+      geography_type = if_else(.data$region_name == "Aggregates", "Region", "Country")
     ) |>
-    mutate(across(where(is.character), ~ if_else(.x == "", NA, .x)),
-           across(where(is.character), trimws),
-           geography_type = if_else(.data$region_name == "Aggregates", "Region", "Country")) |>
     relocate(c("geography_type", "capital_city"), .after = "geography_name")
 
   geographies_processed

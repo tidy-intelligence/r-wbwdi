@@ -18,12 +18,13 @@ A tibble with three columns:
 }
 }
 \description{
-This function returns a tibble of supported languages for querying the World Bank API.
-The supported languages include English, Spanish, French, Arabic, and Chinese, etc.
+This function returns a tibble of supported languages for querying the World
+Bank API. The supported languages include English, Spanish, French, Arabic,
+and Chinese, etc.
 }
 \details{
-This function provides a simple reference for the supported languages when querying
-the World Bank API.
+This function provides a simple reference for the supported
+languages when querying the World Bank API.
 }
 \examples{
 # Download all languages

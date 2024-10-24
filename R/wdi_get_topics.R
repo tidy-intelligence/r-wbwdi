@@ -1,9 +1,11 @@
 #' Download topics from the World Bank API
 #'
-#' This function returns a tibble of supported topics for querying the World Bank API.
-#' Topics represent the broad subject areas covered by the World Bank's datasets.
+#' This function returns a tibble of supported topics for querying the World
+#' Bank API. Topics represent the broad subject areas covered by the World
+#' Bank's datasets.
 #'
-#' @param language A character string specifying the language code for the API response (default is "en" for English).
+#' @param language A character string specifying the language code for the API
+#'  response (default is "en" for English).
 #'
 #' @return A tibble with three columns:
 #' \describe{
@@ -12,8 +14,9 @@
 #'   \item{source_note}{A brief description or note about the topic.}
 #' }
 #'
-#' @details This function provides a reference for the supported topics that can be used to refine
-#' your queries when accessing the World Bank API. Topics represent different areas of focus for data analysis.
+#' @details This function provides a reference for the supported topics that can
+#' be used to refine your queries when accessing the World Bank API. Topics
+#' represent different areas of focus for data analysis.
 #'
 #' @source https://api.worldbank.org/v2/topics
 #'
