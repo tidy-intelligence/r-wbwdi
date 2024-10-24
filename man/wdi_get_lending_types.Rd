@@ -10,7 +10,8 @@ https://api.worldbank.org/v2/lendingTypes
 wdi_get_lending_types(language = "en")
 }
 \arguments{
-\item{language}{A character string specifying the language code for the API response (default is "en" for English).}
+\item{language}{A character string specifying the language code for the API
+response (default is "en" for English).}
 }
 \value{
 A tibble with columns that typically include:
@@ -20,13 +21,15 @@ A tibble with columns that typically include:
 }
 }
 \description{
-This function returns a tibble of supported lending types for querying the World Bank API.
-The lending types classify countries based on the financial terms available to them from the World Bank.
+This function returns a tibble of supported lending types for querying the
+World Bank API. The lending types classify countries based on the financial
+terms available to them from the World Bank.
 }
 \details{
-This function provides a reference for the supported lending types, which classify countries
-according to the financial terms they are eligible for under World Bank programs. The language parameter
-allows the results to be returned in different languages as supported by the API.
+This function provides a reference for the supported lending types,
+which classify countries according to the financial terms they are eligible
+for under World Bank programs. The language parameter allows the results to
+be returned in different languages as supported by the API.
 }
 \examples{
 # Download all lending types in English

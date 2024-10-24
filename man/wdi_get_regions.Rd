@@ -10,22 +10,29 @@ https://api.worldbank.org/v2/region
 wdi_get_regions(language = "en")
 }
 \arguments{
-\item{language}{A character string specifying the language code for the API response (default is "en" for English).}
+\item{language}{A character string specifying the language code for the API
+response (default is "en" for English).}
 }
 \value{
-A tibble with several columns, including:
+A tibble with the following columns:
 \describe{
-\item{id}{The unique identifier for the region (non-missing for 7 entries).}
-\item{other_columns}{Other columns returned by the API, depending on the structure of the data.}
+\item{region_id}{An integer for the identifier for each region.}
+\item{region_code}{Character string representing the region code.}
+\item{region_iso2code}{Character string representing the ISO2 code for the
+region.}
+\item{region_name}{Character string representing the name of the region,
+in the specified language.}
 }
 }
 \description{
-This function returns a tibble of supported regions for querying the World Bank API.
-The regions include various geographic areas covered by the World Bank's datasets.
+This function returns a tibble of supported regions for querying the World
+Bank API.The regions include various geographic areas covered by the World
+Bank's datasets.
 }
 \details{
-This function provides a reference for the supported regions, which are important for refining
-queries related to geographic data in the World Bank's datasets. The \code{id} column is unique for seven key regions.
+This function provides a reference for the supported regions, which
+are important for refining queries related to geographic data in the World
+Bank's datasets. The \code{id} column is unique for seven key regions.
 }
 \examples{
 # Download all regions
