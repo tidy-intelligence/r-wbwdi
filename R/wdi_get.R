@@ -91,62 +91,15 @@ wdi_get <- function(
   format = "long"
 ) {
 
-  if (!is.logical(progress)) {
-    cli::cli_abort("{.arg progress} must be either TRUE or FALSE.")
-  }
-
-  if (!is.null(source)) {
-    supported_sources <- wdi_get_sources()
-    if (!source %in% supported_sources$source_id) {
-      cli::cli_abort(
-        "{.arg source} is not supported. Please call {.fun wdi_get_sources}."
-      )
-    }
-  }
-
-  if (!is.character(format) || !format %in% c("long", "wide")) {
-    cli::cli_abort("{.arg format} must be either 'long' or 'wide'.")
-  }
-
-  date <- if (!is.null(start_date) & !is.null(end_date)) {
-    paste0(start_date, ":", end_date)
-  } else {
-    NULL
-  }
-
-  get_indicator <- function(
-    indicator, geographies, date, language, per_page, progress, source
-  ) {
-    if (progress) {
-      progress_req <- paste0("Sending requests for indicator ", indicator)
-    } else {
-      progress_req <- FALSE
-    }
-
-    resource <- paste0(
-      "country/", paste(geographies, collapse = ";"),
-      "/indicator/", indicator
-    )
-    indicator_raw <- perform_request(
-      resource, language, per_page, date, source, progress_req
-    )
-
-    parse_response <- function(x) {
-      tibble(
-        indicator_id = extract_values(x, "indicator$id"),
-        geography_id = extract_values(x, "country$id"),
-        date = extract_values(x, "date"),
-        value = extract_values(x, "value", "numeric")
-      )
-    }
-
-    parse_response(indicator_raw)
-  }
+  validate_progress(progress)
+  validate_source(source)
+  validate_format(format)
 
   indicators_processed <- indicators |>
     map_df(
       ~ get_indicator(
-        ., geographies, date, language, per_page, progress, source
+        ., geographies, start_date, end_date,
+        language, per_page, progress, source
       )
     )
 
@@ -156,4 +109,65 @@ wdi_get <- function(
   }
 
   indicators_processed
+}
+
+validate_progress <- function(progress) {
+  if (!is.logical(progress)) {
+    cli::cli_abort("{.arg progress} must be either TRUE or FALSE.")
+  }
+}
+
+validate_source <- function(source) {
+  if (!is.null(source)) {
+    supported_sources <- wdi_get_sources()
+    if (!source %in% supported_sources$source_id) {
+      cli::cli_abort(
+        "{.arg source} is not supported. Please call {.fun wdi_get_sources}."
+      )
+    }
+  }
+}
+
+validate_format <- function(format) {
+  if (!is.character(format) || !format %in% c("long", "wide")) {
+    cli::cli_abort("{.arg format} must be either 'long' or 'wide'.")
+  }
+}
+
+create_date <- function(start_date, end_date) {
+  if (!is.null(start_date) && !is.null(end_date)) {
+    paste0(start_date, ":", end_date)
+  }
+}
+
+get_indicator <- function(
+  indicator, geographies, start_date, end_date,
+  language, per_page, progress, source
+) {
+  if (progress) {
+    progress_req <- paste0("Sending requests for indicator ", indicator)
+  } else {
+    progress_req <- FALSE
+  }
+
+  date <- create_date(start_date, end_date)
+
+  resource <- paste0(
+    "country/", paste(geographies, collapse = ";"),
+    "/indicator/", indicator
+  )
+  indicator_raw <- perform_request(
+    resource, language, per_page, date, source, progress_req
+  )
+
+  parse_response <- function(x) {
+    tibble(
+      indicator_id = extract_values(x, "indicator$id"),
+      geography_id = extract_values(x, "country$id"),
+      date = extract_values(x, "date"),
+      value = extract_values(x, "value", "numeric")
+    )
+  }
+
+  parse_response(indicator_raw)
 }

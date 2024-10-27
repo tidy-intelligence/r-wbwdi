@@ -72,13 +72,19 @@ With `wbwdi`, you can download indicator data for multiple geographies and indic
 For example, to download GDP per capita and total population for Mexico, Canada, and the United States:
 
 ```{r}
-wdi_get(geographies = c("MX", "CA", "US"), indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
+wdi_get(
+  geographies = c("MX", "CA", "US"),
+  indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL")
+)
 ```
 
 If you need the same indicators for all geographies, you can pass `"all"` as the `geographies` parameter:
 
 ```{r}
-wdi_get(geographies = "all", indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
+wdi_get(
+  geographies = "all",
+  indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL")
+)
 ```
 
 ## Other helper functions

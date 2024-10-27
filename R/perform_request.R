@@ -38,52 +38,25 @@
 #' @keywords internal
 #'
 perform_request <- function(
-    resource,
-    language = NULL,
-    per_page = 1000,
-    date = NULL,
-    source = NULL,
-    progress = FALSE,
-    base_url = "https://api.worldbank.org/v2/"
-  ) {
+  resource,
+  language = NULL,
+  per_page = 1000,
+  date = NULL,
+  source = NULL,
+  progress = FALSE,
+  base_url = "https://api.worldbank.org/v2/"
+) {
 
-  if (!is.numeric(per_page) || per_page %% 1L != 0 || per_page < 1L || per_page > 32500L) {
-    cli::cli_abort("{.arg per_page} must be an integer between 1 and 32,500.")
-  }
+  validate_per_page(per_page)
 
-  is_request_error <- function(resp) {
-    status <- resp_status(resp)
-    if (status >= 400L) {
-      return(TRUE)
-    }
-    body <- resp_body_json(resp)
-    if (length(body) == 1L && length(body[[1L]]$message) == 1L) {
-      return(TRUE)
-    }
-    FALSE
-  }
-
-  check_for_body_error <- function(resp) {
-    content_type <- resp_content_type(resp)
-    if (identical(content_type, "application/json")) {
-      body <- resp_body_json(resp)
-      message_id <- body[[1]]$message[[1]]$id
-      message_value <- body[[1]]$message[[1]]$value
-      error_code <- paste("Error code:", message_id)
-      docs <- "Read more at <https://datahelpdesk.worldbank.org/knowledgebase/articles/898620-api-error-codes>"
-      c(error_code, message_value, docs)
-    }
-  }
-
-  req <- request(base_url) |>
-    req_url_path_append(language, resource) |>
-    req_url_query(format = "json", per_page = per_page, date = date, source = source) |>
-    req_user_agent("wbwdi R package (https://github.com/tidy-intelligence/r-wbwdi)")
+  req <- create_request(
+    base_url, resource, language, per_page, date, source
+  )
 
   resp <- req_perform(req)
 
   if (is_request_error(resp)) {
-    error_body <- check_for_body_error(resp)
+    handle_request_error(resp)
   }
 
   body <- resp_body_json(resp)
@@ -98,8 +71,60 @@ perform_request <- function(
                             max_reqs = pages,
                             progress = progress)
     out <- resps |>
-      purrr::map(function(x) {resp_body_json(x)[[2]]})
+      purrr::map(function(x) resp_body_json(x)[[2]])
     out <- unlist(out, recursive = FALSE)
   }
   out
+}
+
+validate_per_page <- function(per_page) {
+  if (!is.numeric(per_page) || per_page %% 1L != 0 ||
+        per_page < 1L || per_page > 32500L) {
+    cli::cli_abort("{.arg per_page} must be an integer between 1 and 32,500.")
+  }
+}
+
+create_request <- function(
+  base_url, resource, language, per_page, date, source
+) {
+  request(base_url) |>
+    req_url_path_append(language, resource) |>
+    req_url_query(
+      format = "json", per_page = per_page, date = date, source = source
+    ) |>
+    req_user_agent(
+      "wbwdi R package (https://github.com/tidy-intelligence/r-wbwdi)"
+    )
+}
+
+is_request_error <- function(resp) {
+  status <- resp_status(resp)
+  if (status >= 400L) {
+    return(TRUE)
+  }
+  body <- resp_body_json(resp)
+  if (length(body) == 1L && length(body[[1L]]$message) == 1L) {
+    return(TRUE)
+  }
+  FALSE
+}
+
+check_for_body_error <- function(resp) {
+  content_type <- httr2::resp_content_type(resp)
+  if (identical(content_type, "application/json")) {
+    body <- httr2::resp_body_json(resp)
+    message_id <- body[[1]]$message[[1]]$id
+    message_value <- body[[1]]$message[[1]]$value
+    error_code <- paste("Error code:", message_id)
+    docs <- paste0(
+      "Read more at <https://datahelpdesk.worldbank.org/",
+      "knowledgebase/articles/898620-api-error-codes>"
+    )
+    c(error_code, message_value, docs)
+  }
+}
+
+handle_request_error <- function(resp) {
+  error_body <- check_for_body_error(resp)
+  cli::cli_alert_danger(paste(error_body, collapse = "\n"))
 }
