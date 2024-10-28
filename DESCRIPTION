@@ -1,16 +1,15 @@
 Type: Package
 Package: wbwdi
-Title: Download World Development Indicators from the World Bank Development Indicators API
+Title: Work seamlessly with World Bank World Development Indicators (WDI)
 Version: 0.1.0.9001
 Authors@R: c(
-    person("Christoph", "Scheuch", , "christoph.scheuch@gmail.com", role = c("aut", "cre"),
+    person("Christoph", "Scheuch", , "christoph.scheuch@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0004-0423-6819"))
   )
 Description: A modern, flexible interface for accessing the World Bank’s World Development Indicators 
   (WDI) API <https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation>. 
-  'wbwdi' allows users to download, process, and analyze indicator data for multiple countries and years. 
-  'wbwdi' relies on 'httr2' for multi-page request and error handling and using progress bars to keep users informed about 
-  the data processing.
+  'wbwdi' allows users to download, process, and analyze WDI indicators for multiple geographies and specific time periods. 
+  The package is designed to work seamlessly with International Debt Statistics (IDS) provided through the 'wbids' package.
 License: MIT + file LICENSE
 URL: https://github.com/tidy-intelligence/r-wbwdi
 BugReports: https://github.com/tidy-intelligence/r-wbwdi/issues
