@@ -126,5 +126,5 @@ check_for_body_error <- function(resp) {
 
 handle_request_error <- function(resp) {
   error_body <- check_for_body_error(resp)
-  cli::cli_alert_danger(paste(error_body, collapse = "\n"))
+  cli::cli_abort(paste(error_body, collapse = "\n"))
 }
