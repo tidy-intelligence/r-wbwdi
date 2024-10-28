@@ -9,6 +9,10 @@ for multiple geographies and specific time periods. The package is
 designed to work seamlessly with International Debt Statistics (IDS)
 provided through the ‘wbids’ package.
 
+This package is a product of Christoph Scheuch and not sponsored by or
+affiliated with the World Bank in any way, except for the use of the
+World Bank WDI API.
+
 This package is in development status. Please consider using one of the
 packages on CRAN:
 
@@ -82,4 +86,17 @@ wdi_get_regions()
 wdi_get_sources()
 wdi_get_topics()
 wdi_get_lending_types()
+```
+
+If you want to search for specific keywords among indicators or other
+data sources, you can use the RStudio or Positron data explorer.
+Alternatively, this package comes with a helper function:
+
+``` r
+indicators <- wdi_get_indicators()
+wdi_search(
+  indicators,
+  keywords = c("inequality", "gender"),
+  columns = c("indicator_name")
+)
 ```

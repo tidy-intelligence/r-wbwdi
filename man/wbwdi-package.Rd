@@ -4,9 +4,9 @@
 \name{wbwdi-package}
 \alias{wbwdi}
 \alias{wbwdi-package}
-\title{wbwdi: Download World Development Indicators from the World Bank Development Indicators API}
+\title{wbwdi: Work seamlessly with World Bank World Development Indicators (WDI)}
 \description{
-A modern, flexible interface for accessing the World Bank’s World Development Indicators (WDI) API \url{https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation}. 'wbwdi' allows users to download, process, and analyze indicator data for multiple countries and years. 'wbwdi' relies on 'httr2' for multi-page request and error handling and using progress bars to keep users informed about the data processing.
+A modern, flexible interface for accessing the World Bank’s World Development Indicators (WDI) API \url{https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation}. 'wbwdi' allows users to download, process, and analyze WDI indicators for multiple geographies and specific time periods. The package is designed to work seamlessly with International Debt Statistics (IDS) provided through the 'wbids' package.
 }
 \seealso{
 Useful links:
@@ -17,7 +17,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Christoph Scheuch \email{christoph.scheuch@gmail.com} (\href{https://orcid.org/0009-0004-0423-6819}{ORCID})
+\strong{Maintainer}: Christoph Scheuch \email{christoph.scheuch@gmail.com} (\href{https://orcid.org/0009-0004-0423-6819}{ORCID}) [copyright holder]
 
 }
 \keyword{internal}
