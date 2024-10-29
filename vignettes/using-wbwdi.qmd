@@ -1,24 +1,17 @@
 ---
 title: "Using `wbwdi` to access World Development Indicators"
-output: rmarkdown::html_vignette
+format: html
 vignette: >
   %\VignetteIndexEntry{Using `wbwdi` to access World Development Indicators}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{quarto::html}
   %\VignetteEncoding{UTF-8}
 ---
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
 
 ```{r setup}
 library(wbwdi)
 ```
 
-The `wbwdi` package provides a modern and flexible interface for accessing the World Bank’s [World Development Indicators (WDI)](https://datatopics.worldbank.org/world-development-indicators/). With `wbwdi`, you can download data for multiple indicators and geographies in a single function call, benefit from progress bars, and receive the output in a tidy data format, making it ideal for further analysis.
+The `wbwdi` package provides a modern and flexible interface for accessing the World Bank’s [World Development Indicators (WDI)](https://datatopics.worldbank.org/worlded-development-indicators/). With `wbwdi`, you can download data for multiple indicators and geographies in a single function call, benefit from progress bars, and receive the output in a tidy data format, making it ideal for further analysis.
 
 ## Installation
 
@@ -102,6 +95,7 @@ If you want to search for specific keywords among indicators or other data sourc
 
 ```{r}
 indicators <- wdi_get_indicators()
+
 wdi_search(
   indicators,
   keywords = c("inequality", "gender"),
