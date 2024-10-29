@@ -7,10 +7,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup}
-library(wbwdi)
-```
-
 The `wbwdi` package provides a modern and flexible interface for accessing the World Bank’s [World Development Indicators (WDI)](https://datatopics.worldbank.org/worlded-development-indicators/). With `wbwdi`, you can download data for multiple indicators and geographies in a single function call, benefit from progress bars, and receive the output in a tidy data format, making it ideal for further analysis.
 
 ## Installation
@@ -20,6 +16,12 @@ To install the development version of `wbwdi`, use:
 ```{r}
 #| eval: false
 pak::pak("tidy-intelligence/r-wbwdi")
+```
+
+Load the package via:
+
+```{r}
+library(wbwdi)
 ```
 
 ## Listing supported indicators
