@@ -14,7 +14,7 @@ The `wbwdi` package provides a modern and flexible interface for accessing the W
 To install the development version of `wbwdi`, use:
 
 ```{r}
-#| eval: false
+#| output: false
 pak::pak("tidy-intelligence/r-wbwdi")
 ```
 
