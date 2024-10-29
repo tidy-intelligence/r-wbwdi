@@ -1,7 +1,7 @@
 Type: Package
 Package: wbwdi
 Title: Work seamlessly with World Bank World Development Indicators (WDI)
-Version: 0.1.0.9001
+Version: 0.9.0
 Authors@R: c(
     person("Christoph", "Scheuch", , "christoph.scheuch@gmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0004-0423-6819"))
@@ -25,6 +25,7 @@ Imports:
     rlang (>= 1.0.0)
 Suggests:
     knitr,
+    quarto,
     rmarkdown,
     testthat (>= 3.2.0)
 Config/testthat/edition: 3
@@ -32,7 +33,7 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-VignetteBuilder: knitr
+VignetteBuilder: quarto
 Remotes:  
     r-lib/devtools,
     r-lib/lintr,
