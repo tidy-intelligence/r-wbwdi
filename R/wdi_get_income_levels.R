@@ -23,7 +23,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf curl::has_internet()
 #' # Download all income levels in English
 #' wdi_get_income_levels()
 #'

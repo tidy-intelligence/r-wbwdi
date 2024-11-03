@@ -22,8 +22,8 @@
 #'
 #' @export
 #'
-#' @examples
-#' # Download all topics
+#' @examplesIf curl::has_internet()
+#' # Download all available topics in English
 #' wdi_get_topics()
 #'
 wdi_get_topics <- function(language = "en") {

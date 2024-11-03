@@ -48,7 +48,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf curl::has_internet()
 #' # Download single indicator for multiple geographies
 #' wdi_get(c("US", "CA", "GB"), "NY.GDP.PCAP.KD")
 #'

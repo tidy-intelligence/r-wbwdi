@@ -38,7 +38,8 @@ and their metadata when querying the World Bank API. The columns
 derived from the API response, where "Y" indicates availability.
 }
 \examples{
-# Download all supported data sources
+\dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Download all available data sources in English
 wdi_get_sources()
-
+\dontshow{\}) # examplesIf}
 }

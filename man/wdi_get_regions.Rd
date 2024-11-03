@@ -35,7 +35,8 @@ are important for refining queries related to geographic data in the World
 Bank's datasets. The \code{id} column is unique for seven key regions.
 }
 \examples{
+\dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Download all regions
 wdi_get_regions()
-
+\dontshow{\}) # examplesIf}
 }

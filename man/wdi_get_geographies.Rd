@@ -58,10 +58,11 @@ such as its ISO code, capital city, geographical coordinates, and additional
 metadata about regions, income levels, and lending types.
 }
 \examples{
+\dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Download all geographies in English
-wdi_get_geographies(language = "en")
+wdi_get_geographies()
 
 # Download all geographies in Spanish
 wdi_get_geographies(language = "zh")
-
+\dontshow{\}) # examplesIf}
 }

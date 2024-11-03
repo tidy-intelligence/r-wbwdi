@@ -25,7 +25,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf curl::has_internet()
 #' # Download all regions
 #' wdi_get_regions()
 #'

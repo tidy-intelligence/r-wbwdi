@@ -32,10 +32,9 @@
 #'
 #' @export
 #'
-#' @examples
-#'
+#' @examplesIf curl::has_internet()
 #' # Download all supported indicators in English
-#' wdi_get_indicators(language = "en")
+#' wdi_get_indicators()
 #'
 #' # Download all supported indicators in Spanish
 #' wdi_get_indicators(language = "es")

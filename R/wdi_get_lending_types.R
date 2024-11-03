@@ -22,7 +22,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf curl::has_internet()
 #' # Download all lending types in English
 #' wdi_get_lending_types()
 #'

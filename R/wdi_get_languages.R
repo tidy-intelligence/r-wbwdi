@@ -18,7 +18,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf curl::has_internet()
 #' # Download all languages
 #' wdi_get_languages()
 #'

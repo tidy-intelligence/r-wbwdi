@@ -28,8 +28,8 @@
 #'
 #' @export
 #'
-#' @examples
-#' # Download all supported data sources
+#' @examplesIf curl::has_internet()
+#' # Download all available data sources in English
 #' wdi_get_sources()
 #'
 wdi_get_sources <- function(language = "en") {
