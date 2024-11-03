@@ -1,9 +1,9 @@
 Type: Package
 Package: wbwdi
 Title: Work seamlessly with World Bank World Development Indicators (WDI)
-Version: 0.1.0.9001
+Version: 0.1.0
 Authors@R: c(
-    person("Christoph", "Scheuch", , "christoph.scheuch@gmail.com", role = c("aut", "cre", "cph"),
+    person("Christoph", "Scheuch", , "christophh@tidy-intelligence.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0004-0423-6819"))
   )
 Description: A modern, flexible interface for accessing the World Bank’s World Development Indicators 
