@@ -19,7 +19,7 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf curl::has_internet()
 #' # Download indicators
 #' indicators <- wdi_get_indicators()
 #'

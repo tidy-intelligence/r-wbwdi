@@ -42,11 +42,11 @@ metadata for all available indicators. It processes the response into a tidy
 tibble format.
 }
 \examples{
-
+\dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Download all supported indicators in English
-wdi_get_indicators(language = "en")
+wdi_get_indicators()
 
 # Download all supported indicators in Spanish
 wdi_get_indicators(language = "es")
-
+\dontshow{\}) # examplesIf}
 }

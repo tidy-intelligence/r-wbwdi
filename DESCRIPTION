@@ -24,6 +24,7 @@ Imports:
     tidyr (>= 1.0.0),
     rlang (>= 1.0.0)
 Suggests:
+    curl,
     knitr,
     rmarkdown,
     testthat (>= 3.2.0)

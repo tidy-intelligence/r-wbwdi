@@ -48,9 +48,9 @@
 #'
 #' @export
 #'
-#' @examples
+#' @examplesIf curl::has_internet()
 #' # Download all geographies in English
-#' wdi_get_geographies(language = "en")
+#' wdi_get_geographies()
 #'
 #' # Download all geographies in Spanish
 #' wdi_get_geographies(language = "zh")

@@ -75,6 +75,7 @@ API requests for each indicator and then combining the results into a single
 tidy data frame.
 }
 \examples{
+\dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Download single indicator for multiple geographies
 wdi_get(c("US", "CA", "GB"), "NY.GDP.PCAP.KD")
 
@@ -104,5 +105,5 @@ wdi_get(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD"),
         format = "wide")
 wdi_get(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
         format = "wide")
-
+\dontshow{\}) # examplesIf}
 }

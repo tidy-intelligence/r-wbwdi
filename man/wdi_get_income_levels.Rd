@@ -33,7 +33,8 @@ World Bank. The language parameter allows the results to be returned in
 different languages as supported by the API.
 }
 \examples{
+\dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Download all income levels in English
 wdi_get_income_levels()
-
+\dontshow{\}) # examplesIf}
 }
