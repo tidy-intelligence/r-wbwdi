@@ -15,62 +15,64 @@ The diagram below shows the data model of the `wbwdi` package. In our design, we
 knitr::include_graphics("images/data-model.png")
 ```
 
-<!-- ```{mermaid} -->
-<!-- erDiagram -->
-<!--   GEOGRAPHIES ||--o{ WORLD_DEVELOPMENT_INDICATORS : has -->
-<!--   GEOGRAPHIES { -->
-<!--     string geography_id PK -->
-<!--     string geography_name -->
-<!--     string geography_iso2code -->
-<!--     string geography_type -->
-<!--     string capital_city -->
-<!--     string region_id -->
-<!--     string region_name -->
-<!--     string region_iso2code -->
-<!--     string admin_region_id -->
-<!--     string admin_region_name -->
-<!--     string admin_region_iso2code -->
-<!--     string income_level_id -->
-<!--     string income_level_name -->
-<!--     string income_level_iso2code -->
-<!--     string lending_type_id -->
-<!--     string lending_type_name -->
-<!--     string lending_type_iso2code -->
-<!--     float longitude -->
-<!--     float latitude -->
-<!--   } -->
-<!--   INDICATORS ||--o{ WORLD_DEVELOPMENT_INDICATORS : has -->
-<!--   INDICATORS { -->
-<!--     string indicator_id PK -->
-<!--     string indicator_name -->
-<!--     int source_id FK -->
-<!--     string source_name -->
-<!--     string source_note -->
-<!--     string source_organization -->
-<!--     list topics -->
-<!--   } -->
-<!--   TOPICS ||--o{ INDICATORS : has -->
-<!--   TOPICS { -->
-<!--     int topic_id PK -->
-<!--     string topic_name -->
-<!--     string topic_note -->
-<!--   } -->
-<!--   SOURCES ||--o{ INDICATORS : has -->
-<!--   SOURCES { -->
-<!--     int source_id PK -->
-<!--     string source_name -->
-<!--     date update_date -->
-<!--     logical is_data_available -->
-<!--     logical is_metadata_available -->
-<!--     int concepts -->
-<!--   } -->
-<!--   WORLD_DEVELOPMENT_INDICATORS { -->
-<!--     string indicator_id FK -->
-<!--     string geography_id FK -->
-<!--     string date -->
-<!--     float value -->
-<!--   } -->
-<!-- ``` -->
+```{mermaid}
+erDiagram
+  GEOGRAPHIES ||--o{ WORLD_DEVELOPMENT_INDICATORS : has
+  GEOGRAPHIES {
+    string geography_id PK
+    string geography_name
+    string geography_iso2code
+    string geography_type
+    string capital_city
+    string region_id
+    string region_name
+    string region_iso2code
+    string admin_region_id
+    string admin_region_name
+    string admin_region_iso2code
+    string income_level_id
+    string income_level_name
+    string income_level_iso2code
+    string lending_type_id
+    string lending_type_name
+    string lending_type_iso2code
+    float longitude
+    float latitude
+  }
+  INDICATORS ||--o{ WORLD_DEVELOPMENT_INDICATORS : has
+  INDICATORS {
+    string indicator_id PK
+    string indicator_name
+    int source_id FK
+    string source_name
+    string source_note
+    string source_organization
+    list topics
+  }
+  TOPICS ||--o{ INDICATORS : has
+  TOPICS {
+    int topic_id PK
+    string topic_name
+    string topic_note
+  }
+  SOURCES ||--o{ INDICATORS : has
+  SOURCES {
+    int source_id PK
+    string source_name
+    date update_date
+    logical is_data_available
+    logical is_metadata_available
+    int concepts
+  }
+  WORLD_DEVELOPMENT_INDICATORS {
+    string indicator_id FK
+    string geography_id FK
+    int year
+    int quarter
+    int month
+    float value
+  }
+```
 
 ## Table details
 
@@ -135,5 +137,7 @@ knitr::include_graphics("images/data-model.png")
 |--------------|------------------------------|----------------|
 | indicator_id | Identifier for the indicator | DT.DOD.DPPG.CD |
 | geography_id | Identifier for the geography | ZMB            |
-| date         | Date of the data point       | 2020           |
+| year         | Year of the data point       | 2020           |
+| quarter      | Quarter of the data point (if quarterly data is requested and available).      | 3           |
+| year         | Month of the data point (if monthly data is requested and available).    | 2020         1  |
 | value        | Value of the data point      | 4298957000     |

@@ -34,7 +34,7 @@ test_that("Valid output structure for single indicator", {
     start_date = 2010, end_date = 2020,
     language = "en", per_page = 10, progress = FALSE
   )
-  expected_names <- c("indicator_id", "geography_id", "date", "value")
+  expected_names <- c("indicator_id", "geography_id", "year", "value")
   expect_true(is.data.frame(result))
   expect_true(all(expected_names %in% names(result)))
   expect_equal(nrow(result), 11)
@@ -47,7 +47,7 @@ test_that("Valid output structure for multiple indicators", {
     start_date = 2010, end_date = 2020,
     language = "en", per_page = 10, progress = FALSE
   )
-  expected_names <- c("indicator_id", "geography_id", "date", "value")
+  expected_names <- c("indicator_id", "geography_id", "year", "value")
   expect_true(is.data.frame(result))
   expect_true(all(expected_names %in% names(result)))
   expect_true(any(result$indicator_id == "NY.GDP.MKTP.CD"))

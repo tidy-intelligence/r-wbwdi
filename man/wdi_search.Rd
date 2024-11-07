@@ -30,6 +30,7 @@ provides the option to limit the search to specific columns.
 }
 \examples{
 \dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 # Download indicators
 indicators <- wdi_get_indicators()
 
@@ -45,5 +46,6 @@ wdi_search(
   keywords = c("inequality", "gender"),
   columns = c("indicator_name")
 )
+}
 \dontshow{\}) # examplesIf}
 }

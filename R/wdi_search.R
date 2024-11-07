@@ -20,6 +20,7 @@
 #' @export
 #'
 #' @examplesIf curl::has_internet()
+#' \dontrun{
 #' # Download indicators
 #' indicators <- wdi_get_indicators()
 #'
@@ -35,7 +36,7 @@
 #'   keywords = c("inequality", "gender"),
 #'   columns = c("indicator_name")
 #' )
-#'
+#'}
 wdi_search <- function(data, keywords, columns = NULL) {
 
   if (is.null(columns)) {

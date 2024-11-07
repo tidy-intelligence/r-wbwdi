@@ -9,6 +9,7 @@ wdi_get(
   indicators,
   start_date = NULL,
   end_date = NULL,
+  frequency = "annual",
   language = "en",
   per_page = 1000,
   progress = TRUE,
@@ -23,11 +24,12 @@ retrieve data for all geographies.}
 \item{indicators}{A character vector specifying one or more World Bank
 indicators to download (e.g., c("NY.GDP.PCAP.KD", "SP.POP.TOTL")).}
 
-\item{start_date}{Optional. The starting date for the data, either as a year
-(e.g., \code{2010}) or a specific month (e.g., \code{"2012M01"}).}
+\item{start_date}{Optional integer. The starting date for the data as a year.}
 
-\item{end_date}{Optional. The ending date for the data, either as a year
-(e.g., \code{2020}) or a specific month (e.g., \code{"2012M05"}).}
+\item{end_date}{Optional integer. The ending date for the data as a year.}
+
+\item{frequency}{A character string specifying the frequency of the data
+("annual", "quarter", "month"). Defaults to "annual".}
 
 \item{language}{A character string specifying the language for the request,
 see \link{wdi_get_languages}. Defaults to \code{"en"}.}
@@ -50,8 +52,9 @@ A tibble with the following columns:
 \item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
 \item{geography_id}{The ISO 2-country code of the country for which the
 data was retrieved.}
-\item{date}{The date of the indicator data (either a year or month
-depending on the request).}
+\item{year}{The year of the indicator data.}
+\item{quarter}{Optional. The quarter of the indicator data as integer.}
+\item{month}{Optional. The month of the indicator data as integer.}
 \item{value}{The value of the indicator for the given country and date.}
 }
 }
@@ -83,9 +86,13 @@ wdi_get(c("US", "CA", "GB"), "NY.GDP.PCAP.KD")
 wdi_get(c("US", "CA", "GB"), "DPANUSSPB",
         start_date = 2012, end_date = 2013)
 
-# Download single indicator for different frequency
-wdi_get(c("MX", "CA", "US"), "DPANUSSPB",
-        start_date = "2012M01", end_date = "2012M05")
+# Download single indicator for monthly frequency
+wdi_get("AT", "DPANUSSPB",
+        start_date = 2012, end_date = 2015, frequency = "month")
+
+# Download single indicator for quarterly frequency
+wdi_get("NG", "DT.DOD.DECT.CD.TL.US",
+        start_date = 2012, end_date = 2015, frequency = "quarter")
 
 \donttest{
 # Download single indicator for all geographies and disable progress bar
@@ -97,7 +104,6 @@ wdi_get(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 
 # Download indicators for different sources
 wdi_get("DE", "SG.LAW.INDX", source = 2)
-
 wdi_get("DE", "SG.LAW.INDX", source = 14)
 
 # Download indicators in wide format

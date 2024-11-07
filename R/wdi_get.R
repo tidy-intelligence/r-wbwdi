@@ -10,10 +10,10 @@
 #'  retrieve data for all geographies.
 #' @param indicators A character vector specifying one or more World Bank
 #'  indicators to download (e.g., c("NY.GDP.PCAP.KD", "SP.POP.TOTL")).
-#' @param start_date Optional. The starting date for the data, either as a year
-#'  (e.g., `2010`) or a specific month (e.g., `"2012M01"`).
-#' @param end_date Optional. The ending date for the data, either as a year
-#'  (e.g., `2020`) or a specific month (e.g., `"2012M05"`).
+#' @param start_date Optional integer. The starting date for the data as a year.
+#' @param end_date Optional integer. The ending date for the data as a year.
+#' @param frequency A character string specifying the frequency of the data
+#'  ("annual", "quarter", "month"). Defaults to "annual".
 #' @param language A character string specifying the language for the request,
 #'  see \link{wdi_get_languages}. Defaults to `"en"`.
 #' @param per_page An integer specifying the number of results per page for the
@@ -30,8 +30,9 @@
 #'   \item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
 #'   \item{geography_id}{The ISO 2-country code of the country for which the
 #'                       data was retrieved.}
-#'   \item{date}{The date of the indicator data (either a year or month
-#'               depending on the request).}
+#'   \item{year}{The year of the indicator data.}
+#'   \item{quarter}{Optional. The quarter of the indicator data as integer.}
+#'   \item{month}{Optional. The month of the indicator data as integer.}
 #'   \item{value}{The value of the indicator for the given country and date.}
 #' }
 #'
@@ -56,9 +57,13 @@
 #' wdi_get(c("US", "CA", "GB"), "DPANUSSPB",
 #'         start_date = 2012, end_date = 2013)
 #'
-#' # Download single indicator for different frequency
-#' wdi_get(c("MX", "CA", "US"), "DPANUSSPB",
-#'         start_date = "2012M01", end_date = "2012M05")
+#' # Download single indicator for monthly frequency
+#' wdi_get("AT", "DPANUSSPB",
+#'         start_date = 2012, end_date = 2015, frequency = "month")
+#'
+#' # Download single indicator for quarterly frequency
+#' wdi_get("NG", "DT.DOD.DECT.CD.TL.US",
+#'         start_date = 2012, end_date = 2015, frequency = "quarter")
 #'
 #' \donttest{
 #' # Download single indicator for all geographies and disable progress bar
@@ -70,7 +75,6 @@
 #'
 #' # Download indicators for different sources
 #' wdi_get("DE", "SG.LAW.INDX", source = 2)
-#'
 #' wdi_get("DE", "SG.LAW.INDX", source = 14)
 #'
 #' # Download indicators in wide format
@@ -84,6 +88,7 @@ wdi_get <- function(
   indicators,
   start_date = NULL,
   end_date = NULL,
+  frequency = "annual",
   language = "en",
   per_page = 1000,
   progress = TRUE,
@@ -91,15 +96,29 @@ wdi_get <- function(
   format = "long"
 ) {
 
+  validate_frequency(frequency)
   validate_progress(progress)
   validate_source(source)
   validate_format(format)
+
+  if (frequency == "annual") {
+    start_date <- as.character(start_date)
+    end_date <- as.character(end_date)
+  }
+  if (frequency == "quarter") {
+    start_date <- paste0(start_date, "Q1")
+    end_date <- paste0(end_date, "Q4")
+  }
+  if (frequency == "month") {
+    start_date <- paste0(start_date, "M01")
+    end_date <- paste0(end_date, "M12")
+  }
 
   indicators_processed <- indicators |>
     map_df(
       ~ get_indicator(
         ., geographies, start_date, end_date,
-        language, per_page, progress, source
+        frequency, language, per_page, progress, source
       )
     )
 
@@ -109,6 +128,15 @@ wdi_get <- function(
   }
 
   indicators_processed
+}
+
+validate_frequency <- function(frequency) {
+  valid_frequencies <- c("annual", "quarter", "month")
+  if (!frequency %in% valid_frequencies) {
+    cli::cli_abort(
+      "{.arg frequency} must be either 'annual', 'quarter', or 'month'."
+    )
+  }
 }
 
 validate_progress <- function(progress) {
@@ -142,7 +170,7 @@ create_date <- function(start_date, end_date) {
 
 get_indicator <- function(
   indicator, geographies, start_date, end_date,
-  language, per_page, progress, source
+  frequency, language, per_page, progress, source
 ) {
   if (progress) {
     progress_req <- paste0("Sending requests for indicator ", indicator)
@@ -169,5 +197,29 @@ get_indicator <- function(
     )
   }
 
-  parse_response(indicator_raw)
+  indicator_parsed <- parse_response(indicator_raw)
+
+  if (grepl("Q", indicator_parsed$date[1], fixed = TRUE)) {
+    indicator <- indicator_parsed |>
+      mutate(year = as.integer(substr(.data$date, 1, 4)),
+             quarter = as.integer(substr(.data$date, 6, 6))) |>
+      select(-"date") |>
+      arrange(.data$year, .data$quarter)
+  } else if (grepl("M", indicator_parsed$date[1], fixed = TRUE)) {
+    indicator <- indicator_parsed |>
+      mutate(year = as.integer(substr(.data$date, 1, 4)),
+             month = as.integer(substr(.data$date, 6, 7))) |>
+      select(-"date") |>
+      arrange(.data$year, .data$month)
+  } else {
+    indicator <- indicator_parsed |>
+      mutate(year = as.integer(.data$date)) |>
+      select(-"date") |>
+      arrange(.data$year)
+  }
+
+  indicator <- indicator |>
+    relocate("value", .after = last_col())
+
+  indicator
 }
