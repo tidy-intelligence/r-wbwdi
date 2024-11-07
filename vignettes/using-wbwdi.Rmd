@@ -1,12 +1,20 @@
 ---
 title: "Using `wbwdi` to access World Development Indicators"
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Using `wbwdi` to access World Development Indicators}
-  %\VignetteEngine{quarto::html}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r}
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
 library(wbwdi)
 ```
 
@@ -16,8 +24,7 @@ The `wbwdi` package provides a modern and flexible interface for accessing the W
 
 To install the development version of `wbwdi`, use:
 
-```{r}
-#| eval: false
+```{r eval=FALSE}
 pak::pak("tidy-intelligence/r-wbwdi")
 ```
 
@@ -83,8 +90,7 @@ wdi_get(
 
 You can fetch a list of all supported regions, sources, topics and lending types, respectively, using the corresponding helper function:
 
-```{r}
-#| eval: false
+```{r eval=FALSE}
 wdi_get_regions()
 wdi_get_sources()
 wdi_get_topics()
