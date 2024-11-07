@@ -9,17 +9,17 @@
 #'
 #' @return A tibble with the following columns:
 #' \describe{
-#'   \item{region_id}{An integer for the identifier for each region.}
-#'   \item{region_code}{Character string representing the region code.}
-#'   \item{region_iso2code}{Character string representing the ISO2 code for the
-#'                          region.}
-#'   \item{region_name}{Character string representing the name of the region,
+#'   \item{region_id}{An integer identifier for each region.}
+#'   \item{region_code}{A character string representing the region code.}
+#'   \item{region_iso2code}{A character string representing the ISO2 code for
+#'                          the region.}
+#'   \item{region_name}{A character string representing the name of the region,
 #'                      in the specified language.}
 #' }
 #'
 #' @details This function provides a reference for the supported regions, which
 #'  are important for refining queries related to geographic data in the World
-#'  Bank's datasets. The `id` column is unique for seven key regions.
+#'  Bank's datasets. The `region_id` column is unique for seven key regions.
 #'
 #' @source https://api.worldbank.org/v2/region
 #'
