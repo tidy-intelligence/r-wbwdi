@@ -15,26 +15,32 @@
 #' \describe{
 #'   \item{geography_id}{Character string representing the geography's unique
 #'                       identifier.}
-#'   \item{geography_iso2code}{Character string for the ISO2 country code.}
 #'   \item{geography_name}{Character string for the name of the geography.}
+#'   \item{geography_iso2code}{Character string for the ISO2 country code.}
 #'   \item{geography_type}{Character string for the type of the geography
 #'                         ("country" or "region").}
 #'   \item{region_id}{Character string representing the region's unique
 #'                    identifier.}
-#'   \item{region_iso2code}{Character string for the ISO2 region code.}
 #'   \item{region_name}{Character string for the name of the region.}
+#'   \item{region_iso2code}{Character string for the ISO2 region code.}
 #'   \item{admin_region_id}{Character string representing the administrative
 #'                          region's unique identifier.}
-#'   \item{admin_region_iso2code}{Character string for the ISO2 code of the
-#'                                administrative region.}
 #'   \item{admin_region_name}{Character string for the name of the
 #'                            administrative region.}
+#'   \item{admin_region_iso2code}{Character string for the ISO2 code of the
+#'                                administrative region.}
+#'   \item{income_level_id}{Character string representing the geography's
+#'                          income level.}
+#'   \item{income_level_name}{Character string for the name of the
+#'                            income level.}
+#'   \item{income_level_iso2code}{Character string for the ISO2 code of the
+#'                                income level.}
 #'   \item{lending_type_id}{Character string representing the lending type's
 #'                          unique identifier.}
-#'   \item{lending_type_iso2code}{Character string for the ISO2 code of the
-#'                                lending type.}
 #'   \item{lending_type_name}{Character string for the name of the lending
 #'                            type.}
+#'   \item{lending_type_iso2code}{Character string for the ISO2 code of the
+#'                                lending type.}
 #'   \item{capital_city}{Character string for the name of the capital city.}
 #'   \item{longitude}{Numeric value for the longitude of the geography.}
 #'   \item{latitude}{Numeric value for the latitude of the geography.}
@@ -61,22 +67,26 @@ wdi_get_geographies <- function(language = "en", per_page = 1000) {
 
   geographies_processed <- tibble(
     geography_id = extract_values(geographies_raw, "id"),
-    geography_iso2code = extract_values(geographies_raw, "iso2Code"),
     geography_name = extract_values(geographies_raw, "name"),
+    geography_iso2code = extract_values(geographies_raw, "iso2Code"),
     region_id = extract_values(geographies_raw, "region$id"),
-    region_iso2code = extract_values(geographies_raw, "region$iso2code"),
     region_name = extract_values(geographies_raw, "region$value"),
+    region_iso2code = extract_values(geographies_raw, "region$iso2code"),
     admin_region_id = extract_values(geographies_raw, "adminregion$id"),
+    admin_region_name = extract_values(geographies_raw, "adminregion$value"),
     admin_region_iso2code = extract_values(geographies_raw,
                                            "adminregion$iso2code"),
-    admin_region_name = extract_values(geographies_raw, "adminregion$value"),
+    income_level_id = extract_values(geographies_raw, "incomeLevel$id"),
+    income_level_name = extract_values(geographies_raw, "incomeLevel$value"),
+    income_level_iso2code = extract_values(geographies_raw,
+                                           "incomeLevel$iso2code"),
     lending_type_id = extract_values(geographies_raw, "lendingType$id"),
+    lending_type_name = extract_values(geographies_raw, "lendingType$value"),
     lending_type_iso2code = extract_values(geographies_raw,
                                            "lendingType$iso2code"),
-    lending_type_name = extract_values(geographies_raw, "lendingType$value"),
     capital_city = extract_values(geographies_raw, "capitalCity"),
-    longitude = extract_values(geographies_raw, "longitude"),
-    latitude = extract_values(geographies_raw, "latitude")
+    longitude = as.numeric(extract_values(geographies_raw, "longitude")),
+    latitude = as.numeric(extract_values(geographies_raw, "latitude"))
   ) |>
     mutate(
       across(where(is.character), ~ if_else(.x == "", NA, .x)),
@@ -85,7 +95,7 @@ wdi_get_geographies <- function(language = "en", per_page = 1000) {
         .data$region_name == "Aggregates", "Region", "Country"
       )
     ) |>
-    relocate(c("geography_type", "capital_city"), .after = "geography_name")
+    relocate(c("geography_type", "capital_city"), .after = "geography_iso2code")
 
   geographies_processed
 }
