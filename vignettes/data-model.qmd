@@ -1,9 +1,12 @@
 ---
 title: "`wbwdi` Data Model"
-output: rmarkdown::html_vignette
+format:
+  html:
+    mermaid:
+      theme: neutral
 vignette: >
   %\VignetteIndexEntry{`wbwdi` Data Model}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{quarto::html}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -48,16 +51,20 @@ erDiagram
         list topics
     }
     TOPICS ||--o{ INDICATORS : has
+    TOPICS {
         int topic_id PK
         string topic_name
         string topic_note
+    }
     SOURCES ||--o{ INDICATORS : has
+    SOURCES {
         int source_id PK
         string source_name
         date update_date
         logical is_data_available
         logical is_metadata_available
         int concepts
+    }
     WORLD_DEVELOPMENT_INDICATORS {
         string indicator_id FK
         string geography_id FK
@@ -126,7 +133,7 @@ erDiagram
 ### World Development Indicators
 
 | Column name | Description | Example value  |
-|----------------|-------------------------------|----------------|
+|-----------------|-------------------------------------|-----------------|
 | indicator_id   | Identifier for the indicator  | DT.DOD.DPPG.CD |
 | geography_id   | Identifier for the geography  | ZMB            |
 | date           | Date of the data point        | 2020           |
