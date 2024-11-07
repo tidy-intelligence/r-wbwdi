@@ -33,12 +33,13 @@
 #' @export
 #'
 #' @examplesIf curl::has_internet()
+#' \dontrun{
 #' # Download all supported indicators in English
 #' wdi_get_indicators()
 #'
 #' # Download all supported indicators in Spanish
 #' wdi_get_indicators(language = "es")
-#'
+#'}
 wdi_get_indicators <- function(language = "en", per_page = 32500) {
 
   indicators_raw <- perform_request(
