@@ -18,14 +18,13 @@ knitr::opts_chunk$set(
 library(wbwdi)
 ```
 
-The `wbwdi` package provides a modern and flexible interface for accessing the World Bank’s [World Development Indicators (WDI)](https://datatopics.worldbank.org/world-development-indicators/). With `wbwdi`, you can download data for multiple indicators and geographies in a single function call, benefit from progress bars, and receive the output in a tidy data format, making it ideal for further analysis.
+The `wbwdi` package provides a modern and flexible interface for accessing the World Bank’s [World Development Indicators (WDI)](https://datatopics.worldbank.org/world-development-indicators/). With `wbwdi`, you can download data for multiple indicators and geographies in a single function call, benefit from progress bars, and receive the output in a tidy data format, making it ideal for further analysis with other data sources.
 
 ## Installation
 
 To install the development version of `wbwdi`, use:
 
-```{r}
-#| eval: false
+```{r eval=FALSE}
 pak::pak("tidy-intelligence/r-wbwdi")
 ```
 
@@ -91,7 +90,7 @@ wdi_get(
 
 You can fetch a list of all supported regions, sources, topics and lending types, respectively, using the corresponding helper function:
 
-```{r, eval = FALSE}
+```{r eval=FALSE}
 wdi_get_regions()
 wdi_get_sources()
 wdi_get_topics()
@@ -111,6 +110,6 @@ wdi_search(
 
 ## Conclusion
 
-The `wbwdi` package is designed to simplify the process of accessing and analyzing World Bank data. By offering features like multi-indicator downloads, progress bars, and flexible language support, `wbwdi` is a robust tool for users who need access to World Development Indicators in a tidy format.
+The `wbwdi` package is designed to simplify the process of accessing and analyzing World Bank data and combining it with other data sources. By offering features like multi-indicator downloads, progress bars, and flexible language support, `wbwdi` is a robust tool for users who need access to World Development Indicators in a tidy format.
 
 If you encounter any errors or have suggestions for improvements, please consider opening an issue in the package repository on [GitHub](https://github.com/tidy-intelligence/r-wbwdi/issues).

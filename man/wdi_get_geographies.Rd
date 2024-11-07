@@ -19,26 +19,32 @@ A tibble with the following columns:
 \describe{
 \item{geography_id}{Character string representing the geography's unique
 identifier.}
-\item{geography_iso2code}{Character string for the ISO2 country code.}
 \item{geography_name}{Character string for the name of the geography.}
+\item{geography_iso2code}{Character string for the ISO2 country code.}
 \item{geography_type}{Character string for the type of the geography
 ("country" or "region").}
 \item{region_id}{Character string representing the region's unique
 identifier.}
-\item{region_iso2code}{Character string for the ISO2 region code.}
 \item{region_name}{Character string for the name of the region.}
+\item{region_iso2code}{Character string for the ISO2 region code.}
 \item{admin_region_id}{Character string representing the administrative
 region's unique identifier.}
-\item{admin_region_iso2code}{Character string for the ISO2 code of the
-administrative region.}
 \item{admin_region_name}{Character string for the name of the
 administrative region.}
+\item{admin_region_iso2code}{Character string for the ISO2 code of the
+administrative region.}
+\item{income_level_id}{Character string representing the geography's
+income level.}
+\item{income_level_name}{Character string for the name of the
+income level.}
+\item{income_level_iso2code}{Character string for the ISO2 code of the
+income level.}
 \item{lending_type_id}{Character string representing the lending type's
 unique identifier.}
-\item{lending_type_iso2code}{Character string for the ISO2 code of the
-lending type.}
 \item{lending_type_name}{Character string for the name of the lending
 type.}
+\item{lending_type_iso2code}{Character string for the ISO2 code of the
+lending type.}
 \item{capital_city}{Character string for the name of the capital city.}
 \item{longitude}{Numeric value for the longitude of the geography.}
 \item{latitude}{Numeric value for the latitude of the geography.}

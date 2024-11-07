@@ -11,3 +11,4 @@
 ^Meta$
 ^\.github$
 ^.lintr$
+^vignettes/*_files$

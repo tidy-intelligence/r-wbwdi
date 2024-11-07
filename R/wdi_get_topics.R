@@ -33,7 +33,7 @@ wdi_get_topics <- function(language = "en") {
   topics_processed <- bind_rows(topics_raw) |>
     mutate(id = as.integer(.data$id)) |>
     mutate(across(where(is.character), trimws)) |>
-    select(topic_id = "id", topic_name = "value", source_note = "sourceNote")
+    select(topic_id = "id", topic_name = "value", topic_note = "sourceNote")
 
   topics_processed
 }
