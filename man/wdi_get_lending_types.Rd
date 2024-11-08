@@ -16,8 +16,11 @@ response (default is "en" for English).}
 \value{
 A tibble with columns that typically include:
 \describe{
-\item{id}{The unique identifier for the lending type.}
-\item{value}{The description of the lending type (e.g., "IBRD", "IDA").}
+\item{lending_type_id}{An integer for the lending type.}
+\item{lending_type_iso2code}{A character string for the ISO2 code of the
+lending type.}
+\item{lending_type_name}{A description of the lending type (e.g., "IBRD",
+"IDA").}
 }
 }
 \description{

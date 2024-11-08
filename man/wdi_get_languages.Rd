@@ -12,9 +12,12 @@ wdi_get_languages()
 \value{
 A tibble with three columns:
 \describe{
-\item{code}{The ISO 639-1 code of the language (e.g., "en" for English).}
-\item{name}{The full name of the language (e.g., "English").}
-\item{native_form}{The native form of the language (e.g., "English").}
+\item{language_code}{A character string representing the language code
+(e.g., "en" for English).}
+\item{language_name}{A character string representing the description of the
+language (e.g., "English").}
+\item{native_form}{A character string representing the native form of the
+language (e.g., "English").}
 }
 }
 \description{
