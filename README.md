@@ -1,7 +1,9 @@
 wbwdi
 ================
 
-<!-- badges: start --> ![R CMD
+<!-- badges: start -->
+
+![R CMD
 Check](https://github.com/tidy-intelligence/r-wbwdi/actions/workflows/R-CMD-check.yaml/badge.svg)
 ![Lint](https://github.com/tidy-intelligence/r-wbwdi/actions/workflows/lint.yaml/badge.svg)
 [![Codecov test
