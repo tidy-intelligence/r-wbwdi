@@ -37,6 +37,7 @@
 #'   columns = c("indicator_name")
 #' )
 #'}
+#'
 wdi_search <- function(data, keywords, columns = NULL) {
 
   if (is.null(columns)) {

@@ -16,18 +16,21 @@ API. Defaults to 32,500. Must be a value between 1 and 32,500.}
 \value{
 A tibble containing the available indicators and their metadata:
 \describe{
-\item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
-\item{indicator_name}{The name of the indicator (e.g., "GDP per capita,
-constant prices").}
-\item{source_id}{The ID of the data source providing the indicator.}
-\item{source_name}{The name or description of the source of the indicator
-data.}
-\item{source_note}{Additional notes or descriptions about the data source.}
-\item{source_organization}{The organization responsible for the data
-source.}
-\item{topics}{A nested tibble containing topics associated with the
-indicator, with two columns: \code{topic_id} and
-\code{topic_value}.}
+\item{indicator_id}{A character string for the ID of the indicator (e.g.,
+"NY.GDP.PCAP.KD").}
+\item{indicator_name}{A character string for the name of the indicator
+(e.g., "GDP per capita, constant prices").}
+\item{source_id}{An integer identifying the data source providing the
+indicator.}
+\item{source_name}{A character string describing the source of the
+indicator data.}
+\item{source_note}{A character string providing additional notes about the
+data source.}
+\item{source_organization}{A character string denoting the organization
+responsible for the data source.}
+\item{topics}{A nested tibble containing (possibly multiple) topics
+associated with the indicator, with two columns: an integer
+\code{topic_id} and a character \code{topic_name}.}
 }
 }
 \description{

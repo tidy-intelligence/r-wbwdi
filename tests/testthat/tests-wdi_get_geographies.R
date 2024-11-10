@@ -1,10 +1,10 @@
-test_that("Invalid language input", {
+test_that("wdi_get_geographies handles invalid language input", {
   expect_error(
     wdi_get_geographies(language = "xx")
   )
 })
 
-test_that("Invalid per_page input", {
+test_that("wdi_get_geographies handles invalid per_page input", {
   expect_error(
     wdi_get_geographies(per_page = -1),
   )
@@ -14,4 +14,77 @@ test_that("Invalid per_page input", {
   expect_error(
     wdi_get_geographies(per_page = "500")
   )
+})
+
+test_that("wdi_get_geographies returns a tibble", {
+  result <- wdi_get_geographies()
+  expect_s3_class(result, "tbl_df")
+})
+
+test_that("wdi_get_geographies has correct columns", {
+  result <- wdi_get_geographies()
+  expected_colnames <- c(
+    "geography_id", "geography_name", "geography_iso2code", "geography_type",
+    "region_id", "region_name", "region_iso2code", "admin_region_id",
+    "admin_region_name", "admin_region_iso2code", "income_level_id",
+    "income_level_name", "income_level_iso2code", "lending_type_id",
+    "lending_type_name", "lending_type_iso2code", "capital_city",
+    "longitude", "latitude"
+  )
+  expect_true(all(expected_colnames %in% colnames(result)))
+})
+
+test_that("wdi_get_geographies handles type conversions and missing values", {
+  mock_data <- tibble(
+    id = "ABW",
+    iso2Code = "AW",
+    name = "Aruba",
+    region = list(tibble(id = "LCN",
+                         iso2code = "ZJ",
+                         value = "Latin America & Caribbean")),
+    adminregion = list(tibble(id = NA_character_,
+                              iso2code = NA_character_,
+                              value = NA_character_)),
+    incomeLevel = list(tibble(id = "HIC",
+                              iso2code = "XD",
+                              value = "High income")),
+    lendingType = list(tibble(id = "IBD",
+                              iso2code = "XF",
+                              value = "IBRD")),
+    capitalCity = "Oranjestad",
+    longitude = "70.0167",
+    latitude = "12.5167"
+  )
+
+  with_mocked_bindings(
+    perform_request = function(...) mock_data,
+    {
+      result <- wdi_get_geographies()
+      expect_equal(result$geography_id, "ABW")
+      expect_equal(result$geography_iso2code, "AW")
+      expect_equal(result$geography_name, "Aruba")
+      expect_equal(result$region_id, "LCN")
+      expect_equal(result$region_name, "Latin America & Caribbean")
+      expect_equal(result$income_level_id, "HIC")
+      expect_equal(result$lending_type_name, "IBRD")
+      expect_equal(result$capital_city, "Oranjestad")
+      expect_equal(result$longitude, 70.0167)
+      expect_equal(result$latitude, 12.5167)
+      expect_true(all(c("longitude", "latitude") %in% colnames(result)))
+    }
+  )
+})
+
+test_that("wdi_get_geographies handles different language inputs", {
+  result <- wdi_get_geographies(language = "fr")
+
+  expected_colnames <- c(
+    "geography_id", "geography_name", "geography_iso2code", "geography_type",
+    "region_id", "region_name", "region_iso2code", "admin_region_id",
+    "admin_region_name", "admin_region_iso2code", "income_level_id",
+    "income_level_name", "income_level_iso2code", "lending_type_id",
+    "lending_type_name", "lending_type_iso2code", "capital_city",
+    "longitude", "latitude"
+  )
+  expect_true(all(expected_colnames %in% colnames(result)))
 })

@@ -28,9 +28,9 @@
 #' @return A tibble with the following columns:
 #' \describe{
 #'   \item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
-#'   \item{geography_id}{The ISO 2-country code of the country for which the
-#'                       data was retrieved.}
-#'   \item{year}{The year of the indicator data.}
+#'   \item{geography_id}{The ISO 2-country code of the country or region for
+#'                       which the data was retrieved.}
+#'   \item{year}{The year of the indicator data as an integer.}
 #'   \item{quarter}{Optional. The quarter of the indicator data as integer.}
 #'   \item{month}{Optional. The month of the indicator data as integer.}
 #'   \item{value}{The value of the indicator for the given country and date.}
@@ -118,7 +118,7 @@ wdi_get <- function(
     map_df(
       ~ get_indicator(
         ., geographies, start_date, end_date,
-        frequency, language, per_page, progress, source
+        language, per_page, progress, source
       )
     )
 
@@ -150,7 +150,7 @@ validate_source <- function(source) {
     supported_sources <- wdi_get_sources()
     if (!source %in% supported_sources$source_id) {
       cli::cli_abort(
-        "{.arg source} is not supported. Please call {.fun wdi_get_sources}."
+        "{.arg source} is not supported. Please call {.fun wdi_get_sources()}."
       )
     }
   }
@@ -170,7 +170,7 @@ create_date <- function(start_date, end_date) {
 
 get_indicator <- function(
   indicator, geographies, start_date, end_date,
-  frequency, language, per_page, progress, source
+  language, per_page, progress, source
 ) {
   if (progress) {
     progress_req <- paste0("Sending requests for indicator ", indicator)

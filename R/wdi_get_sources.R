@@ -9,9 +9,10 @@
 #'
 #' @return A tibble with six columns:
 #' \describe{
-#'   \item{id}{The unique identifier for the data source.}
-#'   \item{name}{The name of the data source (e.g., "World Development
-#'               Indicators").}
+#'   \item{source_id}{An integer identifier for the data source.}
+#'   \item{source_code}{A character string for the source code.}
+#'   \item{source_name}{The name of the data source (e.g., "World Development
+#'                      Indicators").}
 #'   \item{update_date}{The last update date of the data source.}
 #'   \item{is_data_available}{A boolean indicating whether data is available.}
 #'   \item{is_metadata_available}{A boolean indicating whether metadata is
@@ -39,6 +40,7 @@ wdi_get_sources <- function(language = "en") {
   # url and description are always empty, hence omitted
   sources_processed <- as_tibble(sources_raw) |>
     select(source_id = "id",
+           source_code = "code",
            source_name = "name",
            update_date = "lastupdated",
            is_data_available = "dataavailability",

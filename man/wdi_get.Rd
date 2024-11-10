@@ -50,9 +50,9 @@ during the data download and parsing. Defaults to \code{TRUE}.}
 A tibble with the following columns:
 \describe{
 \item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
-\item{geography_id}{The ISO 2-country code of the country for which the
-data was retrieved.}
-\item{year}{The year of the indicator data.}
+\item{geography_id}{The ISO 2-country code of the country or region for
+which the data was retrieved.}
+\item{year}{The year of the indicator data as an integer.}
 \item{quarter}{Optional. The quarter of the indicator data as integer.}
 \item{month}{Optional. The month of the indicator data as integer.}
 \item{value}{The value of the indicator for the given country and date.}
