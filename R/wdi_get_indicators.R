@@ -49,25 +49,36 @@ wdi_get_indicators <- function(language = "en", per_page = 32500) {
     "indicators", language = language, per_page = per_page
   )
 
-  extract_topics <- function(data) {
-    if (length(unlist(data$topics)) > 0) {
-      tibble(topic_id = as.integer(extract_values(data$topics, "id")),
-             topic_name = trimws(extract_values(data$topics, "value")))
-    } else {
-      tibble(topic_id = NA_integer_, topic_name = NA_character_)
-    }
-  }
+  indicators_processed <- as_tibble(indicators_raw) |>
+    rename(indicator_id = "id", indicator_name = "name") |>
+    unnest_wider("source") |>
+    rename(
+      source_id = "id",
+      source_name = "value",
+      source_note = "sourceNote",
+      source_organization = "sourceOrganization"
+    ) |>
+    select(-"unit") |>
+    mutate(
+      source_id = as.integer(.data$source_id),
+      source_note = na_if(.data$source_note, ""),
+      source_organization = na_if(.data$source_organization, "")
+    )
 
-  indicators_processed <- tibble(
-    indicator_id =  extract_values(indicators_raw, "id"),
-    indicator_name = extract_values(indicators_raw, "name"),
-    source_id = as.integer(extract_values(indicators_raw, "source$id")),
-    source_name = extract_values(indicators_raw, "source$value"),
-    source_note = extract_values(indicators_raw, "sourceNote"),
-    source_organization = extract_values(indicators_raw, "sourceOrganization"),
-    topics = purrr::map(indicators_raw, extract_topics)
-  ) |>
-    mutate(across(where(is.character), trimws))
+  topics <- indicators_processed |>
+    select("indicator_id", "topics") |>
+    unnest_longer("topics") |>
+    unnest_wider("topics") |>
+    rename(topic_id = "id", topic_name = "value") |>
+    mutate(
+      topic_id = as.integer(.data$topic_id),
+      topic_name = trimws(.data$topic_name)
+    ) |>
+    nest(topics = c("topic_id", "topic_name"))
+
+  indicators_processed <- indicators_processed |>
+    select(-"topics") |>
+    left_join(topics, join_by("indicator_id"))
 
   indicators_processed
 }

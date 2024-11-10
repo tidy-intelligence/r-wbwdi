@@ -38,7 +38,7 @@ wdi_get_sources <- function(language = "en") {
   sources_raw <- perform_request("sources", language)
 
   # url and description are always empty, hence omitted
-  sources_processed <- bind_rows(sources_raw) |>
+  sources_processed <- as_tibble(sources_raw) |>
     select(source_id = "id",
            source_code = "code",
            source_name = "name",

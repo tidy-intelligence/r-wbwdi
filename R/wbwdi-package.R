@@ -5,8 +5,8 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @importFrom purrr map_df
-#' @importFrom tidyr unnest nest pivot_wider
+#' @importFrom purrr map map_df reduce
+#' @importFrom tidyr unnest nest pivot_wider unnest_wider unnest_longer
 #' @importFrom rlang parse_expr eval_tidy .data
 ## usethis namespace: end
 NULL
