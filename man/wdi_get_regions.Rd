@@ -16,11 +16,11 @@ response (default is "en" for English).}
 \value{
 A tibble with the following columns:
 \describe{
-\item{region_id}{An integer for the identifier for each region.}
-\item{region_code}{Character string representing the region code.}
-\item{region_iso2code}{Character string representing the ISO2 code for the
-region.}
-\item{region_name}{Character string representing the name of the region,
+\item{region_id}{An integer identifier for each region.}
+\item{region_code}{A character string representing the region code.}
+\item{region_iso2code}{A character string representing the ISO2 code for
+the region.}
+\item{region_name}{A character string representing the name of the region,
 in the specified language.}
 }
 }
@@ -32,7 +32,7 @@ Bank's datasets.
 \details{
 This function provides a reference for the supported regions, which
 are important for refining queries related to geographic data in the World
-Bank's datasets. The \code{id} column is unique for seven key regions.
+Bank's datasets. The \code{region_id} column is unique for seven key regions.
 }
 \examples{
 \dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

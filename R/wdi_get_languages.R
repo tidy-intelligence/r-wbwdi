@@ -27,7 +27,7 @@ wdi_get_languages <- function() {
   # languages resource does not support multiple languages
   languages_raw <- perform_request("languages")
 
-  languages_processed <- bind_rows(languages_raw) |>
+  languages_processed <- as_tibble(languages_raw) |>
     select(language_code = "code",
            language_name = "name",
            native_form = "nativeForm") |>
