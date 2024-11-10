@@ -184,20 +184,22 @@ get_indicator <- function(
     "country/", paste(geographies, collapse = ";"),
     "/indicator/", indicator
   )
+
   indicator_raw <- perform_request(
     resource, language, per_page, date, source, progress_req
   )
 
-  parse_response <- function(x) {
-    tibble(
-      indicator_id = extract_values(x, "indicator$id"),
-      geography_id = extract_values(x, "country$id"),
-      date = extract_values(x, "date"),
-      value = extract_values(x, "value", "numeric")
-    )
-  }
-
-  indicator_parsed <- parse_response(indicator_raw)
+  indicator_parsed <- as_tibble(indicator_raw) |>
+    rename(.value = "value") |>
+    unnest_wider("indicator") |>
+    rename(indicator_id = "id") |>
+    select(-"value") |>
+    unnest_wider("country") |>
+    rename(geography_id = "id") |>
+    select(-"value") |>
+    select("indicator_id", "geography_id", "date", ".value") |>
+    rename(value = ".value") |>
+    mutate(value = as.numeric(.data$value))
 
   if (grepl("Q", indicator_parsed$date[1], fixed = TRUE)) {
     indicator <- indicator_parsed |>

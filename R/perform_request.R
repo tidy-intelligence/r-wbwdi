@@ -59,7 +59,7 @@ perform_request <- function(
     handle_request_error(resp)
   }
 
-  body <- resp_body_json(resp)
+  body <- resp_body_json(resp, simplifyVector = TRUE)
 
   pages <- body[[1L]]$pages
 
@@ -71,10 +71,12 @@ perform_request <- function(
                             max_reqs = pages,
                             progress = progress)
     out <- resps |>
-      purrr::map(function(x) resp_body_json(x)[[2]])
-    out <- unlist(out, recursive = FALSE)
+      purrr::map(function(x) resp_body_json(x, simplifyVector = TRUE)[[2]]) |>
+      purrr::reduce(union)
   }
+
   out
+
 }
 
 validate_per_page <- function(per_page) {

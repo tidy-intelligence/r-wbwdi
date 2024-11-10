@@ -16,9 +16,11 @@ response (default is "en" for English).}
 \value{
 A tibble with columns that typically include:
 \describe{
-\item{id}{The unique identifier for the income level.}
-\item{value}{The description of the income level (e.g., "Low income",
-"High income").}
+\item{income_level_id}{An integer identifier for the income level.}
+\item{income_level_iso2code}{A character string representing the ISO2 code
+for the income level.}
+\item{income_level_name}{The description of the income level (e.g.,
+"Low income", "High income").}
 }
 }
 \description{

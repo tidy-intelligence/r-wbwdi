@@ -34,7 +34,7 @@ wdi_get_regions <- function(language = "en") {
   regions_raw <- perform_request("region", language)
 
   # id is non-missing for 7 entries
-  regions_processed <- bind_rows(regions_raw) |>
+  regions_processed <- as_tibble(regions_raw) |>
     mutate(id = as.integer(.data$id)) |>
     select(region_id = "id",
            region_code = "code",
