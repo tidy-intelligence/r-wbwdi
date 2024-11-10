@@ -1,11 +1,10 @@
 wbwdi
 ================
 
-<!-- badges: start --> ![R CMD
-Check](https://github.com/tidy-intelligence/r-wbwdi/actions/workflows/R-CMD-check.yaml/badge.svg)
+<!-- badges: start --> 
+![R CMD Check](https://github.com/tidy-intelligence/r-wbwdi/actions/workflows/R-CMD-check.yaml/badge.svg)
 ![Lint](https://github.com/tidy-intelligence/r-wbwdi/actions/workflows/lint.yaml/badge.svg)
-[![Codecov test
-coverage](https://codecov.io/gh/tidy-intelligence/r-wbwdi/graph/badge.svg)](https://app.codecov.io/gh/tidy-intelligence/r-wbwdi)
+[![Codecov test coverage](https://codecov.io/gh/tidy-intelligence/r-wbwdi/graph/badge.svg)](https://app.codecov.io/gh/tidy-intelligence/r-wbwdi)
 <!-- badges: end -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
