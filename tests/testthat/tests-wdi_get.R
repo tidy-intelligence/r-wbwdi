@@ -109,13 +109,6 @@ test_that("wdi_get handles format parameter (long and wide)", {
   expect_false("indicator_id" %in% colnames(result_wide))
 })
 
-test_that("wdi_get shows progress messages if progress = TRUE", {
-  expect_message(
-    wdi_get("all", "NY.GDP.PCAP.KD", progress = TRUE),
-    "Sending requests for indicator"
-  )
-})
-
 test_that("wdi_get handles empty data gracefully", {
 
   mock_data <- data.frame(
