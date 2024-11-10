@@ -5,7 +5,10 @@ test_that("wdi_get_income_levels returns a tibble", {
 
 test_that("wdi_get_income_levels has correct columns", {
   result <- wdi_get_income_levels()
-  expect_true(all(c("income_level_id", "income_level_iso2code", "income_level_name") %in% colnames(result)))
+  expected_colnames <- c(
+    "income_level_id", "income_level_iso2code", "income_level_name"
+  )
+  expect_true(all(expected_colnames %in% colnames(result)))
 })
 
 test_that("wdi_get_income_levels trims whitespace in character columns", {
@@ -28,8 +31,10 @@ test_that("wdi_get_income_levels trims whitespace in character columns", {
 
 test_that("wdi_get_income_levels handles different language inputs", {
   result <- wdi_get_income_levels(language = "es")
-  # Assumes a successful response from the API, and the structure remains the same.
-  expect_true(all(c("income_level_id", "income_level_iso2code", "income_level_name") %in% colnames(result)))
+  expected_colnames <- c(
+    "income_level_id", "income_level_iso2code", "income_level_name"
+  )
+  expect_true(all(expected_colnames %in% colnames(result)))
 })
 
 test_that("wdi_get_income_levels handles empty data gracefully", {
