@@ -12,3 +12,6 @@
 ^\.github$
 ^.lintr$
 ^vignettes/*_files$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

@@ -11,7 +11,7 @@ vignette: >
 
 The diagram below shows the data model of the `wbwdi` package. In our design, we primarily have R users in mind, particularly those who rely heavily on the popular data manipulation packages `dplyr` and `data.table`. For these users, having consistent and descriptive primary key column names across different tables (e.g., `geography_id`, `series_id`) simplifies writing joins across tables, reduces the risk of column name conflicts, and avoids ambiguity.
 
-```{r, out.width = "100%", echo=FALSE}
+```{r, out.width = "100%", echo=FALSE, fig.alt = "A visual representation of the data model behind the 'wbwdi' R package."}
 knitr::include_graphics("images/data-model.png")
 ```
 
