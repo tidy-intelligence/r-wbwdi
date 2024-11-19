@@ -6,12 +6,13 @@
 \alias{wbwdi-package}
 \title{wbwdi: Work seamlessly with World Bank World Development Indicators (WDI)}
 \description{
-A modern, flexible interface for accessing the World Bank’s World Development Indicators (WDI) API \url{https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation}. 'wbwdi' allows users to download, process, and analyze WDI indicators for multiple geographies and specific time periods. The package is designed to work seamlessly with International Debt Statistics (IDS) provided through the 'wbids' package.
+Access and analyze the World Bank’s World Development Indicators (WDI) using the corresponding API \url{https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation}. WDI provides more than 24,000 country or region-level indicators for various contexts. 'wbwdi' enables users to download, process and work with WDI series across multiple geographies and time periods.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/tidy-intelligence/r-wbwdi}
+  \item \url{https://tidy-intelligence.github.io/r-wbwdi/}
   \item Report bugs at \url{https://github.com/tidy-intelligence/r-wbwdi/issues}
 }
 

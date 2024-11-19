@@ -1,27 +1,27 @@
 test_that("wdi_get_handles invalid language input", {
   expect_error(
     wdi_get(
-      geographies = "US", indicators = "NY.GDP.MKTP.CD", language = "xx"
+      geographies = "USA", indicators = "NY.GDP.MKTP.CD", language = "xx"
     )
   )
 })
 
 test_that("wdi_get checks invalid parameter values", {
-  expect_error(wdi_get("US", "NY.GDP.PCAP.KD", frequency = "weekly"),
+  expect_error(wdi_get("USA", "NY.GDP.PCAP.KD", frequency = "weekly"),
                "must be either 'annual', 'quarter', or 'month'")
-  expect_error(wdi_get("US", "NY.GDP.PCAP.KD", format = "tall"),
+  expect_error(wdi_get("USA", "NY.GDP.PCAP.KD", format = "tall"),
                "must be either 'long' or 'wide'")
 })
 
 test_that("wdi_get handles invalid per_page input", {
   expect_error(
     wdi_get(
-      geographies = "US", indicators = "NY.GDP.MKTP.CD", per_page = -1
+      geographies = "USA", indicators = "NY.GDP.MKTP.CD", per_page = -1
     )
   )
   expect_error(
     wdi_get(
-      geographies = "US", indicators = "NY.GDP.MKTP.CD", per_page = "1000"
+      geographies = "USA", indicators = "NY.GDP.MKTP.CD", per_page = "1000"
     )
   )
 })
@@ -29,14 +29,14 @@ test_that("wdi_get handles invalid per_page input", {
 test_that("wdi_get handels invalid progress input", {
   expect_error(
     wdi_get(
-      geographies = "US", indicators = "NY.GDP.MKTP.CD", progress = "yes"
+      geographies = "USA", indicators = "NY.GDP.MKTP.CD", progress = "yes"
     )
   )
 })
 
 test_that("wdi_get creates valid output structure for single indicator", {
   result <- wdi_get(
-    geographies = "US",
+    geographies = "USA",
     indicators = "NY.GDP.MKTP.CD",
     start_date = 2010, end_date = 2020,
     language = "en", per_page = 10, progress = FALSE
@@ -49,7 +49,7 @@ test_that("wdi_get creates valid output structure for single indicator", {
 
 test_that("wdi_get_creates valid output structure for multiple indicators", {
   result <- wdi_get(
-    geographies = "US",
+    geographies = "USA",
     indicators = c("NY.GDP.MKTP.CD", "SP.POP.TOTL"),
     start_date = 2010, end_date = 2020,
     language = "en", per_page = 10, progress = FALSE
@@ -62,37 +62,37 @@ test_that("wdi_get_creates valid output structure for multiple indicators", {
 })
 
 test_that("wdi_get returns a tibble", {
-  result <- wdi_get("US", "NY.GDP.PCAP.KD")
+  result <- wdi_get("USA", "NY.GDP.PCAP.KD")
   expect_s3_class(result, "tbl_df")
 })
 
 test_that("wdi_get handles single indicator, geography & default parameters", {
-  result <- wdi_get("US", "NY.GDP.PCAP.KD")
+  result <- wdi_get("USA", "NY.GDP.PCAP.KD")
   expected_colnames <- c("indicator_id", "geography_id", "year", "value")
   expect_true(all(expected_colnames %in% colnames(result)))
-  expect_equal(unique(result$geography_id), "US")
+  expect_equal(unique(result$geography_id), "USA")
   expect_equal(unique(result$indicator_id), "NY.GDP.PCAP.KD")
 })
 
 test_that("wdi_get handles multiple indicators and multiple geographies", {
-  result <- wdi_get(c("US", "CA"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
+  result <- wdi_get(c("USA", "CAN"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
   expected_colnames <- c("indicator_id", "geography_id", "year", "value")
   expect_true(all(expected_colnames %in% colnames(result)))
-  expect_true(all(result$geography_id %in% c("US", "CA")))
+  expect_true(all(result$geography_id %in% c("USA", "CAN")))
   expect_true(all(result$indicator_id %in% c("NY.GDP.PCAP.KD", "SP.POP.TOTL")))
 })
 
 test_that("wdi_get handles different date ranges and frequencies", {
   result_annual <- wdi_get(
-    "US", "NY.GDP.PCAP.KD",
+    "USA", "NY.GDP.PCAP.KD",
     start_date = 2010, end_date = 2015, frequency = "annual"
   )
   result_quarter <- wdi_get(
-    "NG", "DT.DOD.DECT.CD.TL.US",
+    "NGA", "DT.DOD.DECT.CD.TL.US",
     start_date = 2010, end_date = 2015, frequency = "quarter"
   )
   result_month <- wdi_get(
-    "US", "DPANUSSPB",
+    "USA", "DPANUSSPB",
     start_date = 2010, end_date = 2015, frequency = "month"
   )
 
@@ -102,8 +102,8 @@ test_that("wdi_get handles different date ranges and frequencies", {
 })
 
 test_that("wdi_get handles format parameter (long and wide)", {
-  result_long <- wdi_get("US", "NY.GDP.PCAP.KD", format = "long")
-  result_wide <- wdi_get("US", "NY.GDP.PCAP.KD", format = "wide")
+  result_long <- wdi_get("USA", "NY.GDP.PCAP.KD", format = "long")
+  result_wide <- wdi_get("USA", "NY.GDP.PCAP.KD", format = "wide")
 
   expect_true("indicator_id" %in% colnames(result_long))
   expect_false("indicator_id" %in% colnames(result_wide))
@@ -131,7 +131,7 @@ test_that("wdi_get handles empty data gracefully", {
   with_mocked_bindings(
     perform_request = function(...) mock_data,
     {
-      result <- wdi_get("US", "NY.GDP.PCAP.KD")
+      result <- wdi_get("USA", "NY.GDP.PCAP.KD")
       expect_equal(nrow(result), 0)
     }
   )
