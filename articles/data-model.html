@@ -128,8 +128,8 @@ conflicts, and avoids ambiguity.</p>
 <!--     int concepts -->
 <!--   } -->
 <!--   WORLD_DEVELOPMENT_INDICATORS { -->
-<!--     string indicator_id FK -->
 <!--     string geography_id FK -->
+<!--     string indicator_id FK -->
 <!--     int year -->
 <!--     int quarter -->
 <!--     int month -->
@@ -416,14 +416,14 @@ the UN’s Food and Agriculture Organization.</td>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td>geography_id</td>
+<td>Identifier for the geography</td>
+<td>USA</td>
+</tr>
+<tr class="even">
 <td>indicator_id</td>
 <td>Identifier for the indicator</td>
 <td>DT.DOD.DPPG.CD</td>
-</tr>
-<tr class="even">
-<td>geography_id</td>
-<td>Identifier for the geography</td>
-<td>ZMB</td>
 </tr>
 <tr class="odd">
 <td>year</td>
@@ -437,7 +437,7 @@ available).</td>
 <td>3</td>
 </tr>
 <tr class="odd">
-<td>year</td>
+<td>month</td>
 <td>Month of the data point (if monthly data is requested and
 available).</td>
 <td>2020 1</td>
