@@ -6,8 +6,8 @@
 #' is processed and returned in a tidy format, including country, indicator,
 #' date, and value fields.
 #'
-#' @param geographies A character vector of ISO 2-country codes, or `"all"` to
-#'  retrieve data for all geographies.
+#' @param geographies A character vector of ISO 2 or ISO 3-country codes, or
+#'  `"all"` to retrieve data for all geographies.
 #' @param indicators A character vector specifying one or more World Bank
 #'  indicators to download (e.g., c("NY.GDP.PCAP.KD", "SP.POP.TOTL")).
 #' @param start_date Optional integer. The starting date for the data as a year.
@@ -27,9 +27,9 @@
 #'
 #' @return A tibble with the following columns:
 #' \describe{
-#'   \item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
-#'   \item{geography_id}{The ISO 2-country code of the country or region for
+#'   \item{geography_id}{The ISO 3-country code of the country or region for
 #'                       which the data was retrieved.}
+#'   \item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
 #'   \item{year}{The year of the indicator data as an integer.}
 #'   \item{quarter}{Optional. The quarter of the indicator data as integer.}
 #'   \item{month}{Optional. The month of the indicator data as integer.}
@@ -51,18 +51,18 @@
 #'
 #' @examplesIf curl::has_internet()
 #' # Download single indicator for multiple geographies
-#' wdi_get(c("US", "CA", "GB"), "NY.GDP.PCAP.KD")
+#' wdi_get(c("USA", "CAN", "GBR"), "NY.GDP.PCAP.KD")
 #'
 #' # Download single indicator for a specific time frame
-#' wdi_get(c("US", "CA", "GB"), "DPANUSSPB",
+#' wdi_get(c("USA", "CAN", "GBR"), "DPANUSSPB",
 #'         start_date = 2012, end_date = 2013)
 #'
 #' # Download single indicator for monthly frequency
-#' wdi_get("AT", "DPANUSSPB",
+#' wdi_get("AUT", "DPANUSSPB",
 #'         start_date = 2012, end_date = 2015, frequency = "month")
 #'
 #' # Download single indicator for quarterly frequency
-#' wdi_get("NG", "DT.DOD.DECT.CD.TL.US",
+#' wdi_get("NGA", "DT.DOD.DECT.CD.TL.US",
 #'         start_date = 2012, end_date = 2015, frequency = "quarter")
 #'
 #' \donttest{
@@ -70,17 +70,17 @@
 #' wdi_get("all", "NY.GDP.PCAP.KD", progress = FALSE)
 #'
 #' # Download multiple indicators for multiple geographies
-#' wdi_get(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
+#' wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 #' }
 #'
 #' # Download indicators for different sources
-#' wdi_get("DE", "SG.LAW.INDX", source = 2)
-#' wdi_get("DE", "SG.LAW.INDX", source = 14)
+#' wdi_get("DEU", "SG.LAW.INDX", source = 2)
+#' wdi_get("DEU", "SG.LAW.INDX", source = 14)
 #'
 #' # Download indicators in wide format
-#' wdi_get(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD"),
+#' wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD"),
 #'         format = "wide")
-#' wdi_get(c("US", "CA", "GB"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
+#' wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
 #'         format = "wide")
 #'
 wdi_get <- function(
@@ -126,6 +126,24 @@ wdi_get <- function(
     indicators_processed <- indicators_processed |>
       tidyr::pivot_wider(names_from = "indicator_id", values_from = "value")
   }
+
+  # The ISO3 field is not always populated and sometimes the id already is ISO3
+  if (nrow(indicators_processed) > 0 &&
+        nchar(indicators_processed$geography_id[1]) == 2) {
+    geographies <- wdi_get_geographies()
+
+    indicators_processed <- indicators_processed |>
+      rename(geography_iso2code = "geography_id") |>
+      left_join(
+        geographies |>
+          select("geography_id", "geography_iso2code"),
+        join_by("geography_iso2code")
+      ) |>
+      select(-"geography_iso2code")
+  }
+
+  indicators_processed <- indicators_processed |>
+    select("geography_id", everything())
 
   indicators_processed
 }

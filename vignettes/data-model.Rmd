@@ -65,8 +65,8 @@ knitr::include_graphics("images/data-model.png")
 <!--     int concepts -->
 <!--   } -->
 <!--   WORLD_DEVELOPMENT_INDICATORS { -->
-<!--     string indicator_id FK -->
 <!--     string geography_id FK -->
+<!--     string indicator_id FK -->
 <!--     int year -->
 <!--     int quarter -->
 <!--     int month -->
@@ -135,9 +135,9 @@ knitr::include_graphics("images/data-model.png")
 
 | Column name  | Description                  | Example value  |
 |--------------|------------------------------|----------------|
+| geography_id | Identifier for the geography | USA            |
 | indicator_id | Identifier for the indicator | DT.DOD.DPPG.CD |
-| geography_id | Identifier for the geography | ZMB            |
 | year         | Year of the data point       | 2020           |
 | quarter      | Quarter of the data point (if quarterly data is requested and available).      | 3           |
-| year         | Month of the data point (if monthly data is requested and available).    | 2020         1  |
+| month         | Month of the data point (if monthly data is requested and available).    | 2020         1  |
 | value        | Value of the data point      | 4298957000     |
