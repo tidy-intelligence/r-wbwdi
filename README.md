@@ -22,8 +22,8 @@ with WDI series across multiple geographies and time periods.
 The package is designed to work seamlessly with International Debt
 Statistics (IDS) provided through the
 [`wbids`](https://github.com/Teal-Insights/r-wbids) package and shares
-its syntax with the Python library
-[‘py-wbwdi’](https://github.com/tidy-intelligence/py-wbwdi).
+its syntax with its sibling Python library
+[`wbwdi`](https://github.com/tidy-intelligence/py-wbwdi).
 
 This package is a product of Christoph Scheuch and not sponsored by or
 affiliated with the World Bank in any way, except for the use of the
@@ -110,23 +110,25 @@ wdi_search(
 )
 ```
 
-## Relation to existing packages
+## Relation to Existing R Packages
 
-The most important difference to existing packages is that `wbwdi` is
+The most important differences to existing packages are that `wbwdi` is
 designed to (i) have a narrow focus on World Bank Development
 Indicators, (ii) have a consistent interface with other R packages
-(e.g., `wbids`), and (iii) have a shared interface with Python libraries
-(e.g. [‘py-wbwdi’](https://github.com/tidy-intelligence/py-wbwdi)).
-`wbwdi` also refrains from using cached data because this approach
-frequently leads to problems for users to to outdated caches and uses
-`httr2` to manage API requests.
+(e.g., [`wbids`](https://github.com/Teal-Insights/r-wbids)), and (iii)
+have a shared interface with Python libraries (e.g.,
+[`wbwdi`](https://github.com/tidy-intelligence/py-wbwdi)). `wbwdi` also
+refrains from using cached data because this approach frequently leads
+to problems for users due to outdated caches and it uses `httr2` to
+manage API requests and parse responses.
 
-The relation to the most popular existing R packages are:
+More specifically, the differences of existing CRAN releases (apart from
+interface design) are:
 
 - [`WDI`](https://cran.r-project.org/web/packages/WDI/index.html): uses
   cached data by default, does not allow downloading meta data from the
-  WDI API (e.g., languages, sources, topics), does neither use ‘httr’
-  nor `httr2`.
+  WDI API (e.g., languages, sources, topics), and does neither use
+  `httr` nor `httr2` for requests.
 - [`worldbank`](https://cran.r-project.org/web/packages/worldbank/index.html):
   only allows the download of a single indicator with each function call
   and does not have a narrow focus because it includes the Poverty and
