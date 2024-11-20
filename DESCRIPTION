@@ -28,9 +28,12 @@ Imports:
     rlang (>= 1.0.0)
 Suggests:
     curl,
+    forcats,
+    ggplot2,
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    wbids
 Config/testthat/edition: 3
 URL: https://github.com/tidy-intelligence/r-wbwdi, https://tidy-intelligence.github.io/r-wbwdi/
 BugReports: https://github.com/tidy-intelligence/r-wbwdi/issues
