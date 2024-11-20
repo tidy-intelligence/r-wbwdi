@@ -36,6 +36,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="articles/data-model.html">`wbwdi` Data Model</a></li>
+    <li><a class="dropdown-item" href="articles/using-wbwdi-with-wbids.html">Using `wbwdi` with `wbids`</a></li>
     <li><a class="dropdown-item" href="articles/using-wbwdi.html">Using `wbwdi` to access World Development Indicators</a></li>
   </ul>
 </li>
@@ -60,7 +61,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <p><code>wbwdi</code> is an R package to access and analyze the World Bank’s World Development Indicators (WDI) using the corresponding <a href="https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation" class="external-link">API</a>. WDI provides more than 24,000 country or region-level indicators for various contexts. <code>wbwdi</code> enables users to download, process and work with WDI series across multiple geographies and time periods.</p>
-<p>The package is designed to work seamlessly with International Debt Statistics (IDS) provided through the <a href="https://github.com/Teal-Insights/r-wbids" class="external-link"><code>wbids</code></a> package and shares its syntax with the Python library <a href="https://github.com/tidy-intelligence/py-wbwdi" class="external-link">‘py-wbwdi’</a>.</p>
+<p>The package is designed to work seamlessly with International Debt Statistics (IDS) provided through the <a href="https://github.com/Teal-Insights/r-wbids" class="external-link"><code>wbids</code></a> package and shares its syntax with its sibling Python library <a href="https://github.com/tidy-intelligence/py-wbwdi" class="external-link"><code>wbwdi</code></a>.</p>
 <p>This package is a product of Christoph Scheuch and not sponsored by or affiliated with the World Bank in any way, except for the use of the World Bank WDI API.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -114,13 +115,13 @@
 <span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="relation-to-existing-packages">Relation to existing packages<a class="anchor" aria-label="anchor" href="#relation-to-existing-packages"></a>
+<h2 id="relation-to-existing-r-packages">Relation to Existing R Packages<a class="anchor" aria-label="anchor" href="#relation-to-existing-r-packages"></a>
 </h2>
-<p>The most important difference to existing packages is that <code>wbwdi</code> is designed to (i) have a narrow focus on World Bank Development Indicators, (ii) have a consistent interface with other R packages (e.g., <code>wbids</code>), and (iii) have a shared interface with Python libraries (e.g. <a href="https://github.com/tidy-intelligence/py-wbwdi" class="external-link">‘py-wbwdi’</a>). <code>wbwdi</code> also refrains from using cached data because this approach frequently leads to problems for users to to outdated caches and uses <code>httr2</code> to manage API requests.</p>
-<p>The relation to the most popular existing R packages are:</p>
+<p>The most important differences to existing packages are that <code>wbwdi</code> is designed to (i) have a narrow focus on World Bank Development Indicators, (ii) have a consistent interface with other R packages (e.g., <a href="https://github.com/Teal-Insights/r-wbids" class="external-link"><code>wbids</code></a>), and (iii) have a shared interface with Python libraries (e.g., <a href="https://github.com/tidy-intelligence/py-wbwdi" class="external-link"><code>wbwdi</code></a>). <code>wbwdi</code> also refrains from using cached data because this approach frequently leads to problems for users due to outdated caches and it uses <code>httr2</code> to manage API requests and parse responses.</p>
+<p>More specifically, the differences of existing CRAN releases (apart from interface design) are:</p>
 <ul>
 <li>
-<a href="https://cran.r-project.org/web/packages/WDI/index.html" class="external-link"><code>WDI</code></a>: uses cached data by default, does not allow downloading meta data from the WDI API (e.g., languages, sources, topics), does neither use ‘httr’ nor <code>httr2</code>.</li>
+<a href="https://cran.r-project.org/web/packages/WDI/index.html" class="external-link"><code>WDI</code></a>: uses cached data by default, does not allow downloading meta data from the WDI API (e.g., languages, sources, topics), and does neither use <code>httr</code> nor <code>httr2</code> for requests.</li>
 <li>
 <a href="https://cran.r-project.org/web/packages/worldbank/index.html" class="external-link"><code>worldbank</code></a>: only allows the download of a single indicator with each function call and does not have a narrow focus because it includes the Poverty and Inequality Platform and Finances One API.</li>
 <li>
