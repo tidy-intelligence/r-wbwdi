@@ -43,7 +43,8 @@
 #' # Download all supported indicators in Spanish
 #' wdi_get_indicators(language = "es")
 #'}
-wdi_get_indicators <- function(language = "en", per_page = 32500) {
+#'
+wdi_get_indicators <- function(language = "en", per_page = 32500L) {
 
   indicators_raw <- perform_request(
     "indicators", language = language, per_page = per_page

@@ -17,7 +17,7 @@
 #' @param language A character string specifying the language for the request,
 #'  see \link{wdi_get_languages}. Defaults to `"en"`.
 #' @param per_page An integer specifying the number of results per page for the
-#'  API. Defaults to 1000.
+#'  API. Defaults to 10,000.
 #' @param progress A logical value indicating whether to show progress messages
 #'  during the data download and parsing. Defaults to `TRUE`.
 #' @param source An integer value specifying the data source, see
@@ -90,7 +90,7 @@ wdi_get <- function(
   end_date = NULL,
   frequency = "annual",
   language = "en",
-  per_page = 1000,
+  per_page = 10000L,
   progress = TRUE,
   source = NULL,
   format = "long"

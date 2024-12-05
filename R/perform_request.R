@@ -10,7 +10,7 @@
 #' @param language A character string specifying the language code for the API
 #'  response. Defaults to NULL.
 #' @param per_page An integer specifying the number of results per page for the
-#'  API. Defaults to 1000.
+#'  API. Defaults to 10,000.
 #' Must be a value between 1 and 32,500.
 #' @param date A character string specifying the date range of the data to be
 #'  retrieved (e.g., "2000:2020"). If NULL (default), no date filtering is
@@ -22,6 +22,8 @@
 #'  for paginated requests. Defaults to FALSE.
 #' @param base_url A character string specifying the base URL of the World Bank
 #'  API (default is "https://api.worldbank.org/v2").
+#' @param max_tries An integer specifying the number of attempts for the API
+#'  request.
 #'
 #' @return A list containing the parsed JSON response from the API. If the
 #'  response contains multiple pages, the results are combined into a single
@@ -40,18 +42,21 @@
 perform_request <- function(
   resource,
   language = NULL,
-  per_page = 1000,
+  per_page = 10000L,
   date = NULL,
   source = NULL,
   progress = FALSE,
-  base_url = "https://api.worldbank.org/v2/"
+  base_url = "https://api.worldbank.org/v2/",
+  max_tries = 10L
 ) {
 
   validate_per_page(per_page)
+  validate_max_tries(max_tries)
 
   req <- create_request(
     base_url, resource, language, per_page, date, source
-  )
+  ) |>
+    req_retry(max_tries = max_tries)
 
   resp <- req_perform(req)
 
@@ -83,6 +88,12 @@ validate_per_page <- function(per_page) {
   if (!is.numeric(per_page) || per_page %% 1L != 0 ||
         per_page < 1L || per_page > 32500L) {
     cli::cli_abort("{.arg per_page} must be an integer between 1 and 32,500.")
+  }
+}
+
+validate_max_tries <- function(max_tries) {
+  if (!is.numeric(max_tries) || max_tries %% 1L != 0 || max_tries < 2L) {
+    cli::cli_abort("{.arg max_tries} must be an integer larger than 1.")
   }
 }
 

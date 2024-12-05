@@ -11,7 +11,7 @@ wdi_get(
   end_date = NULL,
   frequency = "annual",
   language = "en",
-  per_page = 1000,
+  per_page = 10000L,
   progress = TRUE,
   source = NULL,
   format = "long"
@@ -35,7 +35,7 @@ indicators to download (e.g., c("NY.GDP.PCAP.KD", "SP.POP.TOTL")).}
 see \link{wdi_get_languages}. Defaults to \code{"en"}.}
 
 \item{per_page}{An integer specifying the number of results per page for the
-API. Defaults to 1000.}
+API. Defaults to 10,000.}
 
 \item{progress}{A logical value indicating whether to show progress messages
 during the data download and parsing. Defaults to \code{TRUE}.}
