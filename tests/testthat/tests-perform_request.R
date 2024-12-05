@@ -89,4 +89,3 @@ test_that("perform_request handles API errors gracefully", {
   mock_resp <- structure(list(status_code = 404), class = "httr2_response")
   expect_error(perform_request("nonexistent"), "HTTP 404 Not Found.")
 })
-
