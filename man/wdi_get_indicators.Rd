@@ -4,7 +4,7 @@
 \alias{wdi_get_indicators}
 \title{Download all available World Bank indicators}
 \usage{
-wdi_get_indicators(language = "en", per_page = 32500)
+wdi_get_indicators(language = "en", per_page = 32500L)
 }
 \arguments{
 \item{language}{A character string specifying the language for the request,

@@ -7,11 +7,12 @@
 perform_request(
   resource,
   language = NULL,
-  per_page = 1000,
+  per_page = 10000L,
   date = NULL,
   source = NULL,
   progress = FALSE,
-  base_url = "https://api.worldbank.org/v2/"
+  base_url = "https://api.worldbank.org/v2/",
+  max_tries = 10L
 )
 }
 \arguments{
@@ -22,7 +23,7 @@ World Bank API (e.g., "incomeLevels", "lendingTypes").}
 response. Defaults to NULL.}
 
 \item{per_page}{An integer specifying the number of results per page for the
-API. Defaults to 1000.
+API. Defaults to 10,000.
 Must be a value between 1 and 32,500.}
 
 \item{date}{A character string specifying the date range of the data to be
@@ -38,6 +39,9 @@ for paginated requests. Defaults to FALSE.}
 
 \item{base_url}{A character string specifying the base URL of the World Bank
 API (default is "https://api.worldbank.org/v2").}
+
+\item{max_tries}{An integer specifying the number of attempts for the API
+request.}
 }
 \value{
 A list containing the parsed JSON response from the API. If the
