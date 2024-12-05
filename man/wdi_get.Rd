@@ -11,7 +11,7 @@ wdi_get(
   end_date = NULL,
   frequency = "annual",
   language = "en",
-  per_page = 10000,
+  per_page = 10000L,
   progress = TRUE,
   source = NULL,
   format = "long"
