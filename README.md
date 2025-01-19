@@ -47,7 +47,7 @@ WDI series for multiple geographies and specific date ranges.
 wdi_get(
   geographies = c("MX", "CA", "US"), 
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
-  start_date = 2020, end_date = 2024
+  start_year = 2020, end_year = 2024
 )
 ```
 
@@ -67,7 +67,7 @@ Some indicators are also available on a monthly basis, e.g.:
 wdi_get(
   geographies = "AUT", 
   indicators = "DPANUSSPB",         
-  start_date = 2012, end_date = 2015, 
+  start_year = 2012, end_year = 2015, 
   frequency = "month"
 )
 ```
@@ -79,7 +79,7 @@ frequency, e.g.:
 wdi_get(
   geographies = "NGA", 
   indicators =  "DT.DOD.DECT.CD.TL.US",
-  start_date = 2012, end_date = 2015, 
+  start_year = 2012, end_year = 2015, 
   frequency = "quarter"
 )
 ```

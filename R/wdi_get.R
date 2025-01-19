@@ -10,8 +10,8 @@
 #'  `"all"` to retrieve data for all geographies.
 #' @param indicators A character vector specifying one or more World Bank
 #'  indicators to download (e.g., c("NY.GDP.PCAP.KD", "SP.POP.TOTL")).
-#' @param start_date Optional integer. The starting date for the data as a year.
-#' @param end_date Optional integer. The ending date for the data as a year.
+#' @param start_year Optional integer. The starting date for the data as a year.
+#' @param end_year Optional integer. The ending date for the data as a year.
 #' @param frequency A character string specifying the frequency of the data
 #'  ("annual", "quarter", "month"). Defaults to "annual".
 #' @param language A character string specifying the language for the request,
@@ -55,15 +55,15 @@
 #'
 #' # Download single indicator for a specific time frame
 #' wdi_get(c("USA", "CAN", "GBR"), "DPANUSSPB",
-#'         start_date = 2012, end_date = 2013)
+#'         start_year = 2012, end_year = 2013)
 #'
 #' # Download single indicator for monthly frequency
 #' wdi_get("AUT", "DPANUSSPB",
-#'         start_date = 2012, end_date = 2015, frequency = "month")
+#'         start_year = 2012, end_year = 2015, frequency = "month")
 #'
 #' # Download single indicator for quarterly frequency
 #' wdi_get("NGA", "DT.DOD.DECT.CD.TL.US",
-#'         start_date = 2012, end_date = 2015, frequency = "quarter")
+#'         start_year = 2012, end_year = 2015, frequency = "quarter")
 #'
 #' \donttest{
 #' # Download single indicator for all geographies and disable progress bar
@@ -86,8 +86,8 @@
 wdi_get <- function(
   geographies,
   indicators,
-  start_date = NULL,
-  end_date = NULL,
+  start_year = NULL,
+  end_year = NULL,
   frequency = "annual",
   language = "en",
   per_page = 10000L,
@@ -102,22 +102,22 @@ wdi_get <- function(
   validate_format(format)
 
   if (frequency == "annual") {
-    start_date <- as.character(start_date)
-    end_date <- as.character(end_date)
+    start_year <- as.character(start_year)
+    end_year <- as.character(end_year)
   }
   if (frequency == "quarter") {
-    start_date <- paste0(start_date, "Q1")
-    end_date <- paste0(end_date, "Q4")
+    start_year <- paste0(start_year, "Q1")
+    end_year <- paste0(end_year, "Q4")
   }
   if (frequency == "month") {
-    start_date <- paste0(start_date, "M01")
-    end_date <- paste0(end_date, "M12")
+    start_year <- paste0(start_year, "M01")
+    end_year <- paste0(end_year, "M12")
   }
 
   indicators_processed <- indicators |>
     map_df(
       ~ get_indicator(
-        ., geographies, start_date, end_date,
+        ., geographies, start_year, end_year,
         language, per_page, progress, source
       )
     )
@@ -180,14 +180,14 @@ validate_format <- function(format) {
   }
 }
 
-create_date <- function(start_date, end_date) {
-  if (!is.null(start_date) && !is.null(end_date)) {
-    paste0(start_date, ":", end_date)
+create_date <- function(start_year, end_year) {
+  if (!is.null(start_year) && !is.null(end_year)) {
+    paste0(start_year, ":", end_year)
   }
 }
 
 get_indicator <- function(
-  indicator, geographies, start_date, end_date,
+  indicator, geographies, start_year, end_year,
   language, per_page, progress, source
 ) {
   if (progress) {
@@ -196,7 +196,7 @@ get_indicator <- function(
     progress_req <- FALSE
   }
 
-  date <- create_date(start_date, end_date)
+  date <- create_date(start_year, end_year)
 
   resource <- paste0(
     "country/", paste(geographies, collapse = ";"),
