@@ -30,13 +30,13 @@ In the following examples, we'll focus on Zambia (ISO-3 country code "ZMB"). Let
 
 ```{r, warnings=FALSE, fig.dim=c(7, 4)}
 # Set range to 10 years
-start_date <- 2013
-end_date <- 2022
+start_year <- 2013
+end_year <- 2022
 
 # Fetch total government in USD via GDP
 government_debt <- wdi_get(
   "ZMB", c("NY.GDP.MKTP.CD", "GC.DOD.TOTL.GD.ZS"),
-  start_date, end_date, format = "wide"
+  start_year, end_year, format = "wide"
 )
 
 government_debt <- government_debt |>
@@ -49,7 +49,7 @@ government_debt <- government_debt |>
 # Fetch total external debt in USD
 external_debt <- ids_get(
   "ZMB", "DT.DOD.DPPG.CD", "all",
-  start_date, end_date
+  start_year, end_year
 )
 
 # Counterpart "WLD" indicates whole world

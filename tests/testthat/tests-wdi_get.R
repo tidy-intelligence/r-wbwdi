@@ -40,7 +40,7 @@ test_that("wdi_get creates valid output structure for single indicator", {
   result <- wdi_get(
     geographies = "USA",
     indicators = "NY.GDP.MKTP.CD",
-    start_date = 2010, end_date = 2020,
+    start_year = 2010, end_year = 2020,
     language = "en", per_page = 10, progress = FALSE
   )
   expected_names <- c("indicator_id", "geography_id", "year", "value")
@@ -55,7 +55,7 @@ test_that("wdi_get_creates valid output structure for multiple indicators", {
   result <- wdi_get(
     geographies = "USA",
     indicators = c("NY.GDP.MKTP.CD", "SP.POP.TOTL"),
-    start_date = 2010, end_date = 2020,
+    start_year = 2010, end_year = 2020,
     language = "en", per_page = 10, progress = FALSE
   )
   expected_names <- c("indicator_id", "geography_id", "year", "value")
@@ -97,15 +97,15 @@ test_that("wdi_get handles different date ranges and frequencies", {
 
   result_annual <- wdi_get(
     "USA", "NY.GDP.PCAP.KD",
-    start_date = 2010, end_date = 2015, frequency = "annual"
+    start_year = 2010, end_year = 2015, frequency = "annual"
   )
   result_quarter <- wdi_get(
     "NGA", "DT.DOD.DECT.CD.TL.US",
-    start_date = 2010, end_date = 2015, frequency = "quarter"
+    start_year = 2010, end_year = 2015, frequency = "quarter"
   )
   result_month <- wdi_get(
     "USA", "DPANUSSPB",
-    start_date = 2010, end_date = 2015, frequency = "month"
+    start_year = 2010, end_year = 2015, frequency = "month"
   )
 
   expect_equal(range(result_annual$year), c(2010, 2015))
