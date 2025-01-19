@@ -60,6 +60,17 @@ wdi_get(
 )
 ```
 
+Some indicators are also available on a monthly basis, e.g.:
+
+``` r
+wdi_get(
+  geographies = "AUT", 
+  indicators = "DPANUSSPB",         
+  start_date = 2012, end_date = 2015, 
+  frequency = "month"
+)
+```
+
 You can get a list of all indicators supported by the WDI API via:
 
 ``` r
