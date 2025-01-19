@@ -15,7 +15,7 @@ date, and value fields."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">wbwdi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,8 +60,8 @@ date, and value fields.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wdi_get</span><span class="op">(</span></span>
 <span>  <span class="va">geographies</span>,</span>
 <span>  <span class="va">indicators</span>,</span>
-<span>  start_date <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  end_date <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  start_year <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  end_year <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  frequency <span class="op">=</span> <span class="st">"annual"</span>,</span>
 <span>  language <span class="op">=</span> <span class="st">"en"</span>,</span>
 <span>  per_page <span class="op">=</span> <span class="fl">10000L</span>,</span>
@@ -85,11 +85,11 @@ date, and value fields.</p>
 indicators to download (e.g., c("NY.GDP.PCAP.KD", "SP.POP.TOTL")).</p></dd>
 
 
-<dt id="arg-start-date">start_date<a class="anchor" aria-label="anchor" href="#arg-start-date"></a></dt>
+<dt id="arg-start-year">start_year<a class="anchor" aria-label="anchor" href="#arg-start-year"></a></dt>
 <dd><p>Optional integer. The starting date for the data as a year.</p></dd>
 
 
-<dt id="arg-end-date">end_date<a class="anchor" aria-label="anchor" href="#arg-end-date"></a></dt>
+<dt id="arg-end-year">end_year<a class="anchor" aria-label="anchor" href="#arg-end-year"></a></dt>
 <dd><p>Optional integer. The ending date for the data as a year.</p></dd>
 
 
@@ -180,7 +180,7 @@ tidy data frame.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Download single indicator for a specific time frame</span></span></span>
 <span class="r-in"><span><span class="fu">wdi_get</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"USA"</span>, <span class="st">"CAN"</span>, <span class="st">"GBR"</span><span class="op">)</span>, <span class="st">"DPANUSSPB"</span>,</span></span>
-<span class="r-in"><span>        start_date <span class="op">=</span> <span class="fl">2012</span>, end_date <span class="op">=</span> <span class="fl">2013</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        start_year <span class="op">=</span> <span class="fl">2012</span>, end_year <span class="op">=</span> <span class="fl">2013</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   geography_id indicator_id  year value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -193,7 +193,7 @@ tidy data frame.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Download single indicator for monthly frequency</span></span></span>
 <span class="r-in"><span><span class="fu">wdi_get</span><span class="op">(</span><span class="st">"AUT"</span>, <span class="st">"DPANUSSPB"</span>,</span></span>
-<span class="r-in"><span>        start_date <span class="op">=</span> <span class="fl">2012</span>, end_date <span class="op">=</span> <span class="fl">2015</span>, frequency <span class="op">=</span> <span class="st">"month"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        start_year <span class="op">=</span> <span class="fl">2012</span>, end_year <span class="op">=</span> <span class="fl">2015</span>, frequency <span class="op">=</span> <span class="st">"month"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 48 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    geography_id indicator_id  year month value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -211,7 +211,7 @@ tidy data frame.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Download single indicator for quarterly frequency</span></span></span>
 <span class="r-in"><span><span class="fu">wdi_get</span><span class="op">(</span><span class="st">"NGA"</span>, <span class="st">"DT.DOD.DECT.CD.TL.US"</span>,</span></span>
-<span class="r-in"><span>        start_date <span class="op">=</span> <span class="fl">2012</span>, end_date <span class="op">=</span> <span class="fl">2015</span>, frequency <span class="op">=</span> <span class="st">"quarter"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        start_year <span class="op">=</span> <span class="fl">2012</span>, end_year <span class="op">=</span> <span class="fl">2015</span>, frequency <span class="op">=</span> <span class="st">"quarter"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 16 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    geography_id indicator_id          year quarter        value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>

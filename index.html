@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">wbwdi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,7 +78,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get.html">wdi_get</a></span><span class="op">(</span></span>
 <span>  geographies <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MX"</span>, <span class="st">"CA"</span>, <span class="st">"US"</span><span class="op">)</span>, </span>
 <span>  indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NY.GDP.PCAP.KD"</span>, <span class="st">"SP.POP.TOTL"</span><span class="op">)</span>,</span>
-<span>  start_date <span class="op">=</span> <span class="fl">2020</span>, end_date <span class="op">=</span> <span class="fl">2024</span></span>
+<span>  start_year <span class="op">=</span> <span class="fl">2020</span>, end_year <span class="op">=</span> <span class="fl">2024</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>You can also download these indicators for all geographies and available dates:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -91,7 +91,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get.html">wdi_get</a></span><span class="op">(</span></span>
 <span>  geographies <span class="op">=</span> <span class="st">"AUT"</span>, </span>
 <span>  indicators <span class="op">=</span> <span class="st">"DPANUSSPB"</span>,         </span>
-<span>  start_date <span class="op">=</span> <span class="fl">2012</span>, end_date <span class="op">=</span> <span class="fl">2015</span>, </span>
+<span>  start_year <span class="op">=</span> <span class="fl">2012</span>, end_year <span class="op">=</span> <span class="fl">2015</span>, </span>
 <span>  frequency <span class="op">=</span> <span class="st">"month"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Similarly, there are also some indicators available on a quarterly frequency, e.g.:</p>
@@ -99,7 +99,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get.html">wdi_get</a></span><span class="op">(</span></span>
 <span>  geographies <span class="op">=</span> <span class="st">"NGA"</span>, </span>
 <span>  indicators <span class="op">=</span>  <span class="st">"DT.DOD.DECT.CD.TL.US"</span>,</span>
-<span>  start_date <span class="op">=</span> <span class="fl">2012</span>, end_date <span class="op">=</span> <span class="fl">2015</span>, </span>
+<span>  start_year <span class="op">=</span> <span class="fl">2012</span>, end_year <span class="op">=</span> <span class="fl">2015</span>, </span>
 <span>  frequency <span class="op">=</span> <span class="st">"quarter"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>You can get a list of all indicators supported by the WDI API via:</p>
