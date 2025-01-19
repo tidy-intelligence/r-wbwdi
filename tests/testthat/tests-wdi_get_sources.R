@@ -4,13 +4,11 @@ test_that("wdi_get_sources handles invalid language input", {
   )
 })
 
-test_that("wdi_get_sources returns a tibble", {
+test_that("wdi_get_sources returns a tibble with correct column names", {
+  skip_if_offline()
+
   result <- wdi_get_sources()
   expect_s3_class(result, "tbl_df")
-})
-
-test_that("wdi_get_sources has correct columns", {
-  result <- wdi_get_sources()
   expected_colnames <- c(
     "source_id", "source_code", "source_name", "update_date",
     "is_data_available", "is_metadata_available", "concepts"
@@ -91,6 +89,8 @@ test_that("wdi_get_sources handles empty data gracefully", {
 })
 
 test_that("wdi_get_sources handles different language inputs", {
+  skip_if_offline()
+
   result <- wdi_get_sources(language = "es")
   expected_colnames <- c(
     "source_id", "source_code", "source_name", "update_date",

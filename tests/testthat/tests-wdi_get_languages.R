@@ -1,10 +1,8 @@
-test_that("wdi_get_languages returns a tibble", {
+test_that("wdi_get_languages returns a tibble with correct column names", {
+  skip_if_offline()
+
   result <- wdi_get_languages()
   expect_s3_class(result, "tbl_df")
-})
-
-test_that("wdi_get_languages has correct columns", {
-  result <- wdi_get_languages()
   expected_columns <- c("language_code", "language_name", "native_form")
   expect_true(all(expected_columns %in% colnames(result)))
 })

@@ -4,13 +4,11 @@ test_that("wdi_get_regions handles invalid language input", {
   )
 })
 
-test_that("wdi_get_regions returns a tibble", {
+test_that("wdi_get_regions returns a tibble with correct column names", {
+  skip_if_offline()
+
   result <- wdi_get_regions()
   expect_s3_class(result, "tbl_df")
-})
-
-test_that("wdi_get_regions has correct columns", {
-  result <- wdi_get_regions()
   expected_colnames <- c(
     "region_id", "region_code", "region_iso2code", "region_name"
   )
@@ -74,6 +72,8 @@ test_that("wdi_get_regions handles empty data gracefully", {
 })
 
 test_that("wdi_get_regions handles different language inputs", {
+  skip_if_offline()
+
   result <- wdi_get_regions(language = "fr")
   expected_columns <- c(
     "region_id", "region_code", "region_iso2code", "region_name"

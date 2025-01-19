@@ -1,5 +1,4 @@
 test_that("wdi_search returns rows with specified keywords in any column", {
-  # Sample data frame with both plain and nested columns
   data <- data.frame(
     id = 1:3,
     text = c("apple pie", "banana split", "cherry tart"),

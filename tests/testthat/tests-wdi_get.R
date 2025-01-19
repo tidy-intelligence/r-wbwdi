@@ -35,6 +35,8 @@ test_that("wdi_get handels invalid progress input", {
 })
 
 test_that("wdi_get creates valid output structure for single indicator", {
+  skip_if_offline()
+
   result <- wdi_get(
     geographies = "USA",
     indicators = "NY.GDP.MKTP.CD",
@@ -48,6 +50,8 @@ test_that("wdi_get creates valid output structure for single indicator", {
 })
 
 test_that("wdi_get_creates valid output structure for multiple indicators", {
+  skip_if_offline()
+
   result <- wdi_get(
     geographies = "USA",
     indicators = c("NY.GDP.MKTP.CD", "SP.POP.TOTL"),
@@ -62,11 +66,15 @@ test_that("wdi_get_creates valid output structure for multiple indicators", {
 })
 
 test_that("wdi_get returns a tibble", {
+  skip_if_offline()
+
   result <- wdi_get("USA", "NY.GDP.PCAP.KD")
   expect_s3_class(result, "tbl_df")
 })
 
 test_that("wdi_get handles single indicator, geography & default parameters", {
+  skip_if_offline()
+
   result <- wdi_get("USA", "NY.GDP.PCAP.KD")
   expected_colnames <- c("indicator_id", "geography_id", "year", "value")
   expect_true(all(expected_colnames %in% colnames(result)))
@@ -75,6 +83,8 @@ test_that("wdi_get handles single indicator, geography & default parameters", {
 })
 
 test_that("wdi_get handles multiple indicators and multiple geographies", {
+  skip_if_offline()
+
   result <- wdi_get(c("USA", "CAN"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
   expected_colnames <- c("indicator_id", "geography_id", "year", "value")
   expect_true(all(expected_colnames %in% colnames(result)))
@@ -83,6 +93,8 @@ test_that("wdi_get handles multiple indicators and multiple geographies", {
 })
 
 test_that("wdi_get handles different date ranges and frequencies", {
+  skip_if_offline()
+
   result_annual <- wdi_get(
     "USA", "NY.GDP.PCAP.KD",
     start_date = 2010, end_date = 2015, frequency = "annual"
@@ -102,6 +114,8 @@ test_that("wdi_get handles different date ranges and frequencies", {
 })
 
 test_that("wdi_get handles format parameter (long and wide)", {
+  skip_if_offline()
+
   result_long <- wdi_get("USA", "NY.GDP.PCAP.KD", format = "long")
   result_wide <- wdi_get("USA", "NY.GDP.PCAP.KD", format = "wide")
 

@@ -16,13 +16,11 @@ test_that("wdi_get_geographies handles invalid per_page input", {
   )
 })
 
-test_that("wdi_get_geographies returns a tibble", {
+test_that("wdi_get_geographies returns a tibble with correct column names", {
+  skip_if_offline()
+
   result <- wdi_get_geographies()
   expect_s3_class(result, "tbl_df")
-})
-
-test_that("wdi_get_geographies has correct columns", {
-  result <- wdi_get_geographies()
   expected_colnames <- c(
     "geography_id", "geography_name", "geography_iso2code", "geography_type",
     "region_id", "region_name", "region_iso2code", "admin_region_id",
@@ -76,6 +74,8 @@ test_that("wdi_get_geographies handles type conversions and missing values", {
 })
 
 test_that("wdi_get_geographies handles different language inputs", {
+  skip_if_offline()
+
   result <- wdi_get_geographies(language = "fr")
 
   expected_colnames <- c(
