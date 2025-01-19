@@ -23,7 +23,8 @@ The package is designed to work seamlessly with International Debt
 Statistics (IDS) provided through the
 [`wbids`](https://github.com/Teal-Insights/r-wbids) package and shares
 its syntax with its sibling Python library
-[`wbwdi`](https://github.com/tidy-intelligence/py-wbwdi).
+[`wbwdi`](https://github.com/tidy-intelligence/py-wbwdi). It follows the
+principles of the [econdataverse](https://www.econdataverse.org/).
 
 This package is a product of Christoph Scheuch and not sponsored by or
 affiliated with the World Bank in any way, except for the use of the
@@ -57,6 +58,29 @@ dates:
 wdi_get(
   geographies = "all", 
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL")
+)
+```
+
+Some indicators are also available on a monthly basis, e.g.:
+
+``` r
+wdi_get(
+  geographies = "AUT", 
+  indicators = "DPANUSSPB",         
+  start_date = 2012, end_date = 2015, 
+  frequency = "month"
+)
+```
+
+Similarly, there are also some indicators available on a quarterly
+frequency, e.g.:
+
+``` r
+wdi_get(
+  geographies = "NGA", 
+  indicators =  "DT.DOD.DECT.CD.TL.US",
+  start_date = 2012, end_date = 2015, 
+  frequency = "quarter"
 )
 ```
 
@@ -115,20 +139,20 @@ wdi_search(
 The most important differences to existing packages are that `wbwdi` is
 designed to (i) have a narrow focus on World Bank Development
 Indicators, (ii) have a consistent interface with other R packages
-(e.g., [`wbids`](https://github.com/Teal-Insights/r-wbids)), and (iii)
-have a shared interface with Python libraries (e.g.,
-[`wbwdi`](https://github.com/tidy-intelligence/py-wbwdi)). `wbwdi` also
-refrains from using cached data because this approach frequently leads
-to problems for users due to outdated caches and it uses `httr2` to
-manage API requests and parse responses.
+(e.g., [`wbids`](https://github.com/Teal-Insights/r-wbids)), (iii) have
+an MIT license, and (iv) have a shared interface with Python libraries
+(e.g., [`wbwdi`](https://github.com/tidy-intelligence/py-wbwdi)).
+`wbwdi` also refrains from using cached data because this approach
+frequently leads to problems for users due to outdated caches and it
+uses `httr2` to manage API requests and parse responses.
 
 More specifically, the differences of existing CRAN releases (apart from
 interface design) are:
 
 - [`WDI`](https://cran.r-project.org/web/packages/WDI/index.html): uses
   cached data by default, does not allow downloading meta data from the
-  WDI API (e.g., languages, sources, topics), and does neither use
-  `httr` nor `httr2` for requests.
+  WDI API (e.g., languages, sources, topics), has a GPL-3 license, and
+  does neither use `httr` nor `httr2` for requests.
 - [`worldbank`](https://cran.r-project.org/web/packages/worldbank/index.html):
   only allows the download of a single indicator with each function call
   and does not have a narrow focus because it includes the Poverty and
