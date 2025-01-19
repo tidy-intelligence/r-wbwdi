@@ -1,10 +1,8 @@
-test_that("wdi_get_income_levels returns a tibble", {
+test_that("wdi_get_income_levels returns a tibble with correct column names", {
+  skip_if_offline()
+
   result <- wdi_get_income_levels()
   expect_s3_class(result, "tbl_df")
-})
-
-test_that("wdi_get_income_levels has correct columns", {
-  result <- wdi_get_income_levels()
   expected_colnames <- c(
     "income_level_id", "income_level_iso2code", "income_level_name"
   )
@@ -30,6 +28,8 @@ test_that("wdi_get_income_levels trims whitespace in character columns", {
 })
 
 test_that("wdi_get_income_levels handles different language inputs", {
+  skip_if_offline()
+
   result <- wdi_get_income_levels(language = "es")
   expected_colnames <- c(
     "income_level_id", "income_level_iso2code", "income_level_name"

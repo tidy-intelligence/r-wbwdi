@@ -4,13 +4,11 @@ test_that("wdi_get_topics handles invalid language input", {
   )
 })
 
-test_that("wdi_get_topics returns a tibble", {
+test_that("wdi_get_topics returns a tibble with correct column names", {
+  skip_if_offline()
+
   result <- wdi_get_topics()
   expect_s3_class(result, "tbl_df")
-})
-
-test_that("wdi_get_topics has correct columns", {
-  result <- wdi_get_topics()
   expected_colnames <- c("topic_id", "topic_name", "topic_note")
   expect_true(all(expected_colnames %in% colnames(result)))
 })
@@ -68,6 +66,8 @@ test_that("wdi_get_topics handles empty data gracefully", {
 })
 
 test_that("wdi_get_topics handles different language inputs", {
+  skip_if_offline()
+
   result <- wdi_get_topics(language = "fr")
   expected_colnames <- c("topic_id", "topic_name", "topic_note")
   expect_true(all(expected_colnames %in% colnames(result)))

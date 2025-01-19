@@ -4,13 +4,11 @@ test_that("wdi_get_lending_types handles invalid language input", {
   )
 })
 
-test_that("wdi_get_lending_types returns a tibble", {
+test_that("wdi_get_lending_types returns a tibble with correct column names", {
+  skip_if_offline()
+
   result <- wdi_get_lending_types()
   expect_s3_class(result, "tbl_df")
-})
-
-test_that("wdi_get_lending_types has correct columns", {
-  result <- wdi_get_lending_types()
   expected_colnames <- c(
     "lending_type_id", "lending_type_iso2code", "lending_type_name"
   )
@@ -55,6 +53,8 @@ test_that("wdi_get_lending_types handles empty data gracefully", {
 })
 
 test_that("wdi_get_lending_types handles different language inputs", {
+  skip_if_offline()
+
   result <- wdi_get_lending_types(language = "es")
   expected_colnames <- c(
     "lending_type_id", "lending_type_iso2code", "lending_type_name"

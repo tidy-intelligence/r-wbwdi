@@ -16,13 +16,12 @@ test_that("wdi_get_indicators handles invalid per_page input", {
   )
 })
 
-test_that("wdi_get_indicators returns a tibble", {
+test_that("wdi_get_indicators returns a tibble with correct column names", {
+  skip_if_offline()
+
   result <- wdi_get_indicators()
   expect_s3_class(result, "tbl_df")
-})
 
-test_that("wdi_get_indicators has correct columns", {
-  result <- wdi_get_indicators()
   expected_colnames <- c(
     "indicator_id", "indicator_name", "source_id", "source_name",
     "source_note", "source_organization", "topics"
@@ -60,6 +59,8 @@ test_that("wdi_get_indicators handles type conversions and missing values", {
 })
 
 test_that("wdi_get_indicators handles different language inputs", {
+  skip_if_offline()
+
   result <- wdi_get_indicators(language = "es")
   expected_colnames <- c(
     "indicator_id", "indicator_name", "source_id", "source_name",

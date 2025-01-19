@@ -21,16 +21,21 @@ test_that("perform_request handles error responses", {
 })
 
 test_that("perform_request validates per_page parameter", {
+  skip_if_offline()
+
   expect_error(perform_request("countries", per_page = 50000))
   expect_silent(perform_request("countries", per_page = 1000))
 })
 
 test_that("perform_request validates max_tries parameter", {
+  skip_if_offline()
+
   expect_error(perform_request("countries", max_tries = -100))
   expect_silent(perform_request("countries", max_tries = 2))
 })
 
 test_that("validate_per_page handles valid per_page values", {
+  expect_error(validate_per_page(-1000))
   expect_silent(validate_per_page(1000))
   expect_silent(validate_per_page(1))
   expect_silent(validate_per_page(32500))
@@ -83,9 +88,7 @@ test_that("is_request_error identifies error responses correctly", {
 })
 
 test_that("perform_request handles API errors gracefully", {
-  mock_req <- create_request(
-    "https://api.worldbank.org/v2", "nonexistent", NULL, 1000, NULL, NULL
-  )
-  mock_resp <- structure(list(status_code = 404), class = "httr2_response")
+  skip_if_offline()
+
   expect_error(perform_request("nonexistent"), "HTTP 404 Not Found.")
 })
