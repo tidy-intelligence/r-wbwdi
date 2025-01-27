@@ -154,8 +154,7 @@ interface design) are:
   WDI API (e.g., languages, sources, topics), has a GPL-3 license, and
   does neither use `httr` nor `httr2` for requests.
 - [`worldbank`](https://cran.r-project.org/web/packages/worldbank/index.html):
-  only allows the download of a single indicator with each function call
-  and does not have a narrow focus because it includes the Poverty and
+  does not have a narrow focus because it includes the Poverty and
   Inequality Platform and Finances One API.
 - [`wbstats`](https://cran.r-project.org/web/packages/wbstats/index.html):
   uses cached data by default, does not use `httr2`.
