@@ -44,6 +44,7 @@ perform_request <- function(
   language = NULL,
   per_page = 10000L,
   date = NULL,
+  most_recent_only = NULL,
   source = NULL,
   progress = FALSE,
   base_url = "https://api.worldbank.org/v2/",
@@ -54,7 +55,7 @@ perform_request <- function(
   validate_max_tries(max_tries)
 
   req <- create_request(
-    base_url, resource, language, per_page, date, source
+    base_url, resource, language, per_page, date, most_recent_only, source
   ) |>
     req_retry(max_tries = max_tries)
 
@@ -98,12 +99,13 @@ validate_max_tries <- function(max_tries) {
 }
 
 create_request <- function(
-  base_url, resource, language, per_page, date, source
+  base_url, resource, language, per_page, date, most_recent_only, source
 ) {
   request(base_url) |>
     req_url_path_append(language, resource) |>
     req_url_query(
-      format = "json", per_page = per_page, date = date, source = source
+      format = "json", per_page = per_page, date = date, source = source,
+      mrv = if (isTRUE(most_recent_only)) 1L else NULL
     ) |>
     req_user_agent(
       "wbwdi R package (https://github.com/tidy-intelligence/r-wbwdi)"
