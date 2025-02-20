@@ -22,6 +22,7 @@ Imports:
     cli,
     dplyr (>= 1.0.0),
     httr2 (>= 1.0.0),
+    jsonlite (>= 1.0.0),
     purrr (>= 1.0.0),
     tibble,
     tidyr (>= 1.0.0),
