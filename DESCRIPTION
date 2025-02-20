@@ -1,7 +1,7 @@
 Type: Package
 Package: wbwdi
 Title: Work seamlessly with World Bank World Development Indicators (WDI)
-Version: 0.2.0
+Version: 0.2.0.9000
 Authors@R: c(
     person("Christoph", "Scheuch", , "christophh@tidy-intelligence.com", 
             role = c("aut", "cre", "cph"),
@@ -22,6 +22,7 @@ Imports:
     cli,
     dplyr (>= 1.0.0),
     httr2 (>= 1.0.0),
+    jsonlite (>= 1.0.0),
     purrr (>= 1.0.0),
     tibble,
     tidyr (>= 1.0.0),

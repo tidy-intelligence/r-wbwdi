@@ -9,6 +9,7 @@ wdi_get(
   indicators,
   start_year = NULL,
   end_year = NULL,
+  most_recent_only = FALSE,
   frequency = "annual",
   language = "en",
   per_page = 10000L,
@@ -27,6 +28,10 @@ indicators to download (e.g., c("NY.GDP.PCAP.KD", "SP.POP.TOTL")).}
 \item{start_year}{Optional integer. The starting date for the data as a year.}
 
 \item{end_year}{Optional integer. The ending date for the data as a year.}
+
+\item{most_recent_only}{A logical value indicating whether to download only
+the most recent value. In case of \code{TRUE}, it overrides \code{start_year} and
+\code{end_year}. Defaults to \code{FALSE}.}
 
 \item{frequency}{A character string specifying the frequency of the data
 ("annual", "quarter", "month"). Defaults to "annual".}
@@ -111,5 +116,8 @@ wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD"),
         format = "wide")
 wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
         format = "wide")
+
+# Download most recent value only
+wdi_get("USA", "SP.POP.TOTL", most_recent_only = TRUE)
 \dontshow{\}) # examplesIf}
 }

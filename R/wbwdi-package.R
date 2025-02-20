@@ -2,6 +2,7 @@
 #' @import httr2
 #' @import dplyr
 #' @import tibble
+#' @import jsonlite
 "_PACKAGE"
 
 ## usethis namespace: start

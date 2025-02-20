@@ -9,6 +9,7 @@ perform_request(
   language = NULL,
   per_page = 10000L,
   date = NULL,
+  most_recent_only = NULL,
   source = NULL,
   progress = FALSE,
   base_url = "https://api.worldbank.org/v2/",

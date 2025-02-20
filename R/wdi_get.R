@@ -12,6 +12,9 @@
 #'  indicators to download (e.g., c("NY.GDP.PCAP.KD", "SP.POP.TOTL")).
 #' @param start_year Optional integer. The starting date for the data as a year.
 #' @param end_year Optional integer. The ending date for the data as a year.
+#' @param most_recent_only A logical value indicating whether to download only
+#'  the most recent value. In case of `TRUE`, it overrides `start_year` and
+#'  `end_year`. Defaults to `FALSE`.
 #' @param frequency A character string specifying the frequency of the data
 #'  ("annual", "quarter", "month"). Defaults to "annual".
 #' @param language A character string specifying the language for the request,
@@ -83,11 +86,15 @@
 #' wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
 #'         format = "wide")
 #'
+#' # Download most recent value only
+#' wdi_get("USA", "SP.POP.TOTL", most_recent_only = TRUE)
+#'
 wdi_get <- function(
   geographies,
   indicators,
   start_year = NULL,
   end_year = NULL,
+  most_recent_only = FALSE,
   frequency = "annual",
   language = "en",
   per_page = 10000L,
@@ -96,28 +103,31 @@ wdi_get <- function(
   format = "long"
 ) {
 
+  validate_most_recent_only(most_recent_only)
   validate_frequency(frequency)
   validate_progress(progress)
   validate_source(source)
   validate_format(format)
 
-  if (frequency == "annual") {
-    start_year <- as.character(start_year)
-    end_year <- as.character(end_year)
-  }
-  if (frequency == "quarter") {
-    start_year <- paste0(start_year, "Q1")
-    end_year <- paste0(end_year, "Q4")
-  }
-  if (frequency == "month") {
-    start_year <- paste0(start_year, "M01")
-    end_year <- paste0(end_year, "M12")
+  if (!most_recent_only) {
+    if (frequency == "annual") {
+      start_year <- as.character(start_year)
+      end_year <- as.character(end_year)
+    }
+    if (frequency == "quarter") {
+      start_year <- paste0(start_year, "Q1")
+      end_year <- paste0(end_year, "Q4")
+    }
+    if (frequency == "month") {
+      start_year <- paste0(start_year, "M01")
+      end_year <- paste0(end_year, "M12")
+    }
   }
 
   indicators_processed <- indicators |>
     map_df(
       ~ get_indicator(
-        ., geographies, start_year, end_year,
+        ., geographies, start_year, end_year, most_recent_only,
         language, per_page, progress, source
       )
     )
@@ -146,6 +156,12 @@ wdi_get <- function(
     select("geography_id", everything())
 
   indicators_processed
+}
+
+validate_most_recent_only <- function(most_recent_only) {
+  if (!is.logical(most_recent_only)) {
+    cli::cli_abort("{.arg most_recent_only} must be either TRUE or FALSE.")
+  }
 }
 
 validate_frequency <- function(frequency) {
@@ -187,7 +203,7 @@ create_date <- function(start_year, end_year) {
 }
 
 get_indicator <- function(
-  indicator, geographies, start_year, end_year,
+  indicator, geographies, start_year, end_year, most_recent_only,
   language, per_page, progress, source
 ) {
   if (progress) {
@@ -204,7 +220,7 @@ get_indicator <- function(
   )
 
   indicator_raw <- perform_request(
-    resource, language, per_page, date, source, progress_req
+    resource, language, per_page, date, most_recent_only, source, progress_req
   )
 
   indicator_parsed <- as_tibble(indicator_raw) |>

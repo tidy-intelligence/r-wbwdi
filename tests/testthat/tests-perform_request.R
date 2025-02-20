@@ -63,7 +63,8 @@ test_that("validate_max_tries throws an error for invalid max_tries values", {
 
 test_that("create_request constructs a request with default parameters", {
   req <- create_request(
-    "https://api.worldbank.org/v2", "incomeLevels", NULL, 1000, NULL, NULL
+    "https://api.worldbank.org/v2", "incomeLevels",
+    NULL, 1000, NULL, FALSE, NULL
   )
   expect_equal(
     req$url,
@@ -73,7 +74,8 @@ test_that("create_request constructs a request with default parameters", {
 
 test_that("create_request constructs a request with parameters", {
   req <- create_request(
-    "https://api.worldbank.org/v2", "lendingTypes", "en", 500, "2000:2020", "2"
+    "https://api.worldbank.org/v2", "lendingTypes",
+    "en", 500, "2000:2020", FALSE, "2"
   )
   expect_equal(
     req$url,

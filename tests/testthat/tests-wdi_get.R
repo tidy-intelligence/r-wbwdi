@@ -26,6 +26,15 @@ test_that("wdi_get handles invalid per_page input", {
   )
 })
 
+test_that("wdi_get handels invalid most_recent_only input", {
+  expect_error(
+    wdi_get(
+      geographies = "USA", indicators = "NY.GDP.MKTP.CD",
+      most_recent_only = "yes"
+    )
+  )
+})
+
 test_that("wdi_get handels invalid progress input", {
   expect_error(
     wdi_get(
