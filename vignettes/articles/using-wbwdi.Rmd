@@ -14,6 +14,11 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r, include=FALSE}
+library(httptest)
+start_vignette("using-wbwdi")
+```
+
 ```{r setup}
 library(wbwdi)
 ```
@@ -23,6 +28,10 @@ The `wbwdi` package provides a modern and flexible interface for accessing the W
 ## Listing Supported Indicators
 
 The `wbwdi` package allows you to retrieve a full list of all supported indicators from the World Bank [Indicators API](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation). Each indicator is accompanied by metadata such as its unit of measurement, source, and associated topics.
+
+```{r, include=FALSE}
+change_state()
+```
 
 ```{r}
 wdi_get_indicators()
@@ -115,3 +124,7 @@ wdi_search(
 The `wbwdi` package is designed to simplify the process of accessing and analyzing World Bank data and combining it with other data sources. By offering features like multi-indicator downloads, progress bars, and flexible language support, `wbwdi` is a robust tool for users who need access to World Development Indicators in a tidy format.
 
 If you encounter any errors or have suggestions for improvements, please consider opening an issue in the package repository on [GitHub](https://github.com/tidy-intelligence/r-wbwdi/issues).
+
+```{r, include=FALSE}
+end_vignette()
+```
