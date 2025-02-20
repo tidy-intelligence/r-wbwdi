@@ -14,11 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, include=FALSE}
-library(httptest)
-start_vignette("using-wbwdi-with-wbids")
-```
-
 ```{r setup, warnings=FALSE, message=FALSE}
 library(wbwdi)
 library(wbids)
@@ -97,7 +92,3 @@ debt_breakdown |>
 ```
 
 For more applications and insights into international debt, see [Teal Insights' Guide to Working with the World Bank International Debt Statistics](https://teal-insights.github.io/teal-insights-guide-to-wbids/).
-
-```{r, include=FALSE}
-end_vignette()
-```

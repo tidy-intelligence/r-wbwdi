@@ -14,11 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, include=FALSE}
-library(httptest)
-start_vignette("using-wbwdi")
-```
-
 ```{r setup}
 library(wbwdi)
 ```
@@ -124,7 +119,3 @@ wdi_search(
 The `wbwdi` package is designed to simplify the process of accessing and analyzing World Bank data and combining it with other data sources. By offering features like multi-indicator downloads, progress bars, and flexible language support, `wbwdi` is a robust tool for users who need access to World Development Indicators in a tidy format.
 
 If you encounter any errors or have suggestions for improvements, please consider opening an issue in the package repository on [GitHub](https://github.com/tidy-intelligence/r-wbwdi/issues).
-
-```{r, include=FALSE}
-end_vignette()
-```
