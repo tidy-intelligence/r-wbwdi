@@ -1,13 +1,13 @@
-#' Download World Bank indicator data for specific geographies and time periods
+#' Download World Bank indicator data for specific entities and time periods
 #'
 #' This function retrieves indicator data from the World Bank API for a
-#' specified set of geographies and indicators. The user can specify one or more
+#' specified set of entities and indicators. The user can specify one or more
 #' indicators, a date range, and other options to tailor the request. The data
 #' is processed and returned in a tidy format, including country, indicator,
 #' date, and value fields.
 #'
-#' @param geographies A character vector of ISO 2 or ISO 3-country codes, or
-#'  `"all"` to retrieve data for all geographies.
+#' @param entities A character vector of ISO 2 or ISO 3-country codes, or
+#'  `"all"` to retrieve data for all entities.
 #' @param indicators A character vector specifying one or more World Bank
 #'  indicators to download (e.g., c("NY.GDP.PCAP.KD", "SP.POP.TOTL")).
 #' @param start_year Optional integer. The starting date for the data as a year.
@@ -30,8 +30,8 @@
 #'
 #' @return A tibble with the following columns:
 #' \describe{
-#'   \item{geography_id}{The ISO 3-country code of the country or region for
-#'                       which the data was retrieved.}
+#'   \item{entity_id}{The ISO 3-country code of the country or aggregate for
+#'                    which the data was retrieved.}
 #'   \item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
 #'   \item{year}{The year of the indicator data as an integer.}
 #'   \item{quarter}{Optional. The quarter of the indicator data as integer.}
@@ -40,7 +40,7 @@
 #' }
 #'
 #' @details This function constructs a request URL for the World Bank API,
-#' retrieves the relevant data for the given geographies and indicators, and
+#' retrieves the relevant data for the given entities and indicators, and
 #' processes the response into a tidy format. The user can optionally specify a
 #' date range, and the function will handle requests for multiple pages if
 #' necessary. If the `progress` parameter is `TRUE`, messages will be displayed
@@ -53,7 +53,7 @@
 #' @export
 #'
 #' @examplesIf curl::has_internet()
-#' # Download single indicator for multiple geographies
+#' # Download single indicator for multiple entities
 #' wdi_get(c("USA", "CAN", "GBR"), "NY.GDP.PCAP.KD")
 #'
 #' # Download single indicator for a specific time frame
@@ -69,10 +69,10 @@
 #'         start_year = 2012, end_year = 2015, frequency = "quarter")
 #'
 #' \donttest{
-#' # Download single indicator for all geographies and disable progress bar
+#' # Download single indicator for all entities and disable progress bar
 #' wdi_get("all", "NY.GDP.PCAP.KD", progress = FALSE)
 #'
-#' # Download multiple indicators for multiple geographies
+#' # Download multiple indicators for multiple entities
 #' wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 #' }
 #'
@@ -90,7 +90,7 @@
 #' wdi_get("USA", "SP.POP.TOTL", most_recent_only = TRUE)
 #'
 wdi_get <- function(
-  geographies,
+  entities,
   indicators,
   start_year = NULL,
   end_year = NULL,
@@ -127,7 +127,7 @@ wdi_get <- function(
   indicators_processed <- indicators |>
     map_df(
       ~ get_indicator(
-        ., geographies, start_year, end_year, most_recent_only,
+        ., entities, start_year, end_year, most_recent_only,
         language, per_page, progress, source
       )
     )
@@ -139,21 +139,21 @@ wdi_get <- function(
 
   # The ISO3 field is not always populated and sometimes the id already is ISO3
   if (nrow(indicators_processed) > 0 &&
-        nchar(indicators_processed$geography_id[1]) == 2) {
-    geographies <- wdi_get_geographies()
+        nchar(indicators_processed$entity_id[1]) == 2) {
+    entities <- wdi_get_entities()
 
     indicators_processed <- indicators_processed |>
-      rename(geography_iso2code = "geography_id") |>
+      rename(entity_iso2code = "entity_id") |>
       left_join(
-        geographies |>
-          select("geography_id", "geography_iso2code"),
-        join_by("geography_iso2code")
+        entities |>
+          select("entity_id", "entity_iso2code"),
+        join_by("entity_iso2code")
       ) |>
-      select(-"geography_iso2code")
+      select(-"entity_iso2code")
   }
 
   indicators_processed <- indicators_processed |>
-    select("geography_id", everything())
+    select("entity_id", everything())
 
   indicators_processed
 }
@@ -203,7 +203,7 @@ create_date <- function(start_year, end_year) {
 }
 
 get_indicator <- function(
-  indicator, geographies, start_year, end_year, most_recent_only,
+  indicator, entities, start_year, end_year, most_recent_only,
   language, per_page, progress, source
 ) {
   if (progress) {
@@ -215,7 +215,7 @@ get_indicator <- function(
   date <- create_date(start_year, end_year)
 
   resource <- paste0(
-    "country/", paste(geographies, collapse = ";"),
+    "country/", paste(entities, collapse = ";"),
     "/indicator/", indicator
   )
 
@@ -229,9 +229,9 @@ get_indicator <- function(
     rename(indicator_id = "id") |>
     select(-"value") |>
     unnest_wider("country") |>
-    rename(geography_id = "id") |>
+    rename(entity_id = "id") |>
     select(-"value") |>
-    select("indicator_id", "geography_id", "date", ".value") |>
+    select("indicator_id", "entity_id", "date", ".value") |>
     rename(value = ".value") |>
     mutate(value = as.numeric(.data$value))
 

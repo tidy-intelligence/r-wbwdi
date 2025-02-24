@@ -1,7 +1,7 @@
 test_that("wdi_get_handles invalid language input", {
   expect_error(
     wdi_get(
-      geographies = "USA", indicators = "NY.GDP.MKTP.CD", language = "xx"
+      entities = "USA", indicators = "NY.GDP.MKTP.CD", language = "xx"
     )
   )
 })
@@ -16,12 +16,12 @@ test_that("wdi_get checks invalid parameter values", {
 test_that("wdi_get handles invalid per_page input", {
   expect_error(
     wdi_get(
-      geographies = "USA", indicators = "NY.GDP.MKTP.CD", per_page = -1
+      entities = "USA", indicators = "NY.GDP.MKTP.CD", per_page = -1
     )
   )
   expect_error(
     wdi_get(
-      geographies = "USA", indicators = "NY.GDP.MKTP.CD", per_page = "1000"
+      entities = "USA", indicators = "NY.GDP.MKTP.CD", per_page = "1000"
     )
   )
 })
@@ -29,7 +29,7 @@ test_that("wdi_get handles invalid per_page input", {
 test_that("wdi_get handels invalid most_recent_only input", {
   expect_error(
     wdi_get(
-      geographies = "USA", indicators = "NY.GDP.MKTP.CD",
+      entities = "USA", indicators = "NY.GDP.MKTP.CD",
       most_recent_only = "yes"
     )
   )
@@ -38,7 +38,7 @@ test_that("wdi_get handels invalid most_recent_only input", {
 test_that("wdi_get handels invalid progress input", {
   expect_error(
     wdi_get(
-      geographies = "USA", indicators = "NY.GDP.MKTP.CD", progress = "yes"
+      entities = "USA", indicators = "NY.GDP.MKTP.CD", progress = "yes"
     )
   )
 })
@@ -47,12 +47,12 @@ test_that("wdi_get creates valid output structure for single indicator", {
   skip_if_offline()
 
   result <- wdi_get(
-    geographies = "USA",
+    entities = "USA",
     indicators = "NY.GDP.MKTP.CD",
     start_year = 2010, end_year = 2020,
     language = "en", per_page = 10, progress = FALSE
   )
-  expected_names <- c("indicator_id", "geography_id", "year", "value")
+  expected_names <- c("indicator_id", "entity_id", "year", "value")
   expect_true(is.data.frame(result))
   expect_true(all(expected_names %in% names(result)))
   expect_equal(nrow(result), 11)
@@ -62,12 +62,12 @@ test_that("wdi_get_creates valid output structure for multiple indicators", {
   skip_if_offline()
 
   result <- wdi_get(
-    geographies = "USA",
+    entities = "USA",
     indicators = c("NY.GDP.MKTP.CD", "SP.POP.TOTL"),
     start_year = 2010, end_year = 2020,
     language = "en", per_page = 10, progress = FALSE
   )
-  expected_names <- c("indicator_id", "geography_id", "year", "value")
+  expected_names <- c("indicator_id", "entity_id", "year", "value")
   expect_true(is.data.frame(result))
   expect_true(all(expected_names %in% names(result)))
   expect_true(any(result$indicator_id == "NY.GDP.MKTP.CD"))
@@ -81,23 +81,23 @@ test_that("wdi_get returns a tibble", {
   expect_s3_class(result, "tbl_df")
 })
 
-test_that("wdi_get handles single indicator, geography & default parameters", {
+test_that("wdi_get handles single indicator, entity & default parameters", {
   skip_if_offline()
 
   result <- wdi_get("USA", "NY.GDP.PCAP.KD")
-  expected_colnames <- c("indicator_id", "geography_id", "year", "value")
+  expected_colnames <- c("indicator_id", "entity_id", "year", "value")
   expect_true(all(expected_colnames %in% colnames(result)))
-  expect_equal(unique(result$geography_id), "USA")
+  expect_equal(unique(result$entity_id), "USA")
   expect_equal(unique(result$indicator_id), "NY.GDP.PCAP.KD")
 })
 
-test_that("wdi_get handles multiple indicators and multiple geographies", {
+test_that("wdi_get handles multiple indicators and multiple entities", {
   skip_if_offline()
 
   result <- wdi_get(c("USA", "CAN"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
-  expected_colnames <- c("indicator_id", "geography_id", "year", "value")
+  expected_colnames <- c("indicator_id", "entity_id", "year", "value")
   expect_true(all(expected_colnames %in% colnames(result)))
-  expect_true(all(result$geography_id %in% c("USA", "CAN")))
+  expect_true(all(result$entity_id %in% c("USA", "CAN")))
   expect_true(all(result$indicator_id %in% c("NY.GDP.PCAP.KD", "SP.POP.TOTL")))
 })
 

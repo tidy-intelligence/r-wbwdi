@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 library(wbwdi)
 ```
 
-The `wbwdi` package provides a modern and flexible interface for accessing the World Bank’s [World Development Indicators (WDI)](https://datatopics.worldbank.org/world-development-indicators/). With `wbwdi`, you can download data for multiple indicators and geographies in a single function call, benefit from progress bars, and receive the output in a tidy data format, making it ideal for further analysis with other data sources.
+The `wbwdi` package provides a modern and flexible interface for accessing the World Bank’s [World Development Indicators (WDI)](https://datatopics.worldbank.org/world-development-indicators/). With `wbwdi`, you can download data for multiple indicators and Entities in a single function call, benefit from progress bars, and receive the output in a tidy data format, making it ideal for further analysis with other data sources.
 
 ## Listing Supported Indicators
 
@@ -42,38 +42,38 @@ wdi_get_languages()
 
 Note that not all indicators and their columns might be translated into all languages. 
 
-## Listing Supported Geographies
+## Listing Supported Entities
 
-You can retrieve a list of all geographies supported by the World Bank API along with metadata such as region, administrative region, income level, and lending type. Note that a geography might be a country or a region, hence the more general table name.
+You can retrieve a list of all Entities supported by the World Bank API along with metadata such as region, administrative region, income level, and lending type. Note that a entity might be a country or a aggregate, hence the more general table name.
 
 ```{r}
-wdi_get_geographies()
+wdi_get_Entities()
 ```
 
-This information can also be requested in other languages. For example, to view the supported geographies in Chinese:
+This information can also be requested in other languages. For example, to view the supported Entities in Chinese:
 
 ```{r}
-wdi_get_geographies(language = "zh")
+wdi_get_Entities(language = "zh")
 ```
 
 ### Downloading Indicator Data
 
-With `wbwdi`, you can download indicator data for multiple geographies and indicators in a single function call. The function returns a tidy data frame with country, indicator, date, and value columns.
+With `wbwdi`, you can download indicator data for multiple Entities and indicators in a single function call. The function returns a tidy data frame with country, indicator, date, and value columns.
 
 For example, to download GDP per capita and total population for Mexico, Canada, and the United States:
 
 ```{r}
 wdi_get(
-  geographies = c("MX", "CA", "US"),
+  Entities = c("MX", "CA", "US"),
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL")
 )
 ```
 
-If you need the same indicators for all geographies, you can pass `"all"` as the `geographies` parameter:
+If you need the same indicators for all Entities, you can pass `"all"` as the `Entities` parameter:
 
 ```{r}
 wdi_get(
-  geographies = "all",
+  Entities = "all",
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL")
 )
 ```
@@ -82,7 +82,7 @@ If you want to retrieve the indicators in a wide format, you can use the corresp
 
 ```{r}
 wdi_get(
-  geographies = "US",
+  Entities = "US",
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
   format = "wide"
 )

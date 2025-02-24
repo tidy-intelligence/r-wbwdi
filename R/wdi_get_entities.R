@@ -1,8 +1,8 @@
 #' Download all countries and regions from the World Bank API
 #'
-#' This function retrieves information about geographies (countries and regions)
+#' This function retrieves information about entities (countries and regions)
 #' from the World Bank API. It returns a tibble containing various details such
-#' as the geography's ID, ISO2 code, name, region information, lending type,
+#' as the entity's ID, ISO2 code, name, region information, lending type,
 #' capital city, and coordinates.
 #'
 #' @param language A character string specifying the language for the API
@@ -13,11 +13,11 @@
 #'
 #' @return A tibble with the following columns:
 #' \describe{
-#'   \item{geography_id}{A character string representing the geography's unique
+#'   \item{entity_id}{A character string representing the entity's unique
 #'                       identifier.}
-#'   \item{geography_name}{A character string for the name of the geography.}
-#'   \item{geography_iso2code}{A character string for the ISO2 country code.}
-#'   \item{geography_type}{A character string for the type of the geography
+#'   \item{entity_name}{A character string for the name of the entity.}
+#'   \item{entity_iso2code}{A character string for the ISO2 country code.}
+#'   \item{entity_type}{A character string for the type of the entity
 #'                         ("country" or "region").}
 #'   \item{region_id}{A character string representing the region's unique
 #'                    identifier.}
@@ -29,7 +29,7 @@
 #'                            administrative region.}
 #'   \item{admin_region_iso2code}{A character string for the ISO2 code of the
 #'                                administrative region.}
-#'   \item{income_level_id}{A character string representing the geography's
+#'   \item{income_level_id}{A character string representing the entity's
 #'                          income level.}
 #'   \item{income_level_name}{A character string for the name of the
 #'                            income level.}
@@ -42,12 +42,12 @@
 #'   \item{lending_type_iso2code}{A character string for the ISO2 code of the
 #'                                lending type.}
 #'   \item{capital_city}{A character string for the name of the capital city.}
-#'   \item{longitude}{A numeric value for the longitude of the geography.}
-#'   \item{latitude}{A numeric value for the latitude of the geography.}
+#'   \item{longitude}{A numeric value for the longitude of the entity.}
+#'   \item{latitude}{A numeric value for the latitude of the entity.}
 #' }
 #'
 #' @details This function sends a request to the World Bank API to retrieve data
-#' for all supported geographies in the specified language. The data is then
+#' for all supported entities in the specified language. The data is then
 #' processed into a tidy format and includes information about the country,
 #' such as its ISO code, capital city, geographical coordinates, and additional
 #' metadata about regions, income levels, and lending types.
@@ -55,22 +55,22 @@
 #' @export
 #'
 #' @examplesIf curl::has_internet()
-#' # Download all geographies in English
-#' wdi_get_geographies()
+#' # Download all entities in English
+#' wdi_get_entities()
 #'
-#' # Download all geographies in Spanish
-#' wdi_get_geographies(language = "zh")
+#' # Download all entities in Spanish
+#' wdi_get_entities(language = "zh")
 #'
-wdi_get_geographies <- function(language = "en", per_page = 1000) {
+wdi_get_entities <- function(language = "en", per_page = 1000) {
 
-  geographies_raw <- perform_request("countries/all", language, per_page)
+  entities_raw <- perform_request("countries/all", language, per_page)
 
-  geographies_processed <- geographies_raw |>
+  entities_processed <- entities_raw |>
     as_tibble() |>
     rename(
-      geography_id = "id",
-      geography_iso2code = "iso2Code",
-      geography_name = "name"
+      entity_id = "id",
+      entity_iso2code = "iso2Code",
+      entity_name = "name"
     ) |>
     unnest_wider("region") |>
     rename(
@@ -104,13 +104,13 @@ wdi_get_geographies <- function(language = "en", per_page = 1000) {
       latitude = if_else(
         .data$latitude == "", NA_real_, as.numeric(.data$latitude)
       ),
-      geography_type = if_else(
+      entity_type = if_else(
         .data$region_name == "Aggregates", "aggregates", "country"
       ),
       across(where(is.character), ~ if_else(.x == "", NA, .x)),
       across(where(is.character), trimws)
     ) |>
-    relocate(c("geography_type", "capital_city"), .after = "geography_iso2code")
+    relocate(c("entity_type", "capital_city"), .after = "entity_iso2code")
 
-  geographies_processed
+  entities_processed
 }
