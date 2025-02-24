@@ -149,12 +149,12 @@ uses `httr2` to manage API requests and parse responses.
 More specifically, the differences of existing CRAN releases (apart from
 interface design) are:
 
-- [`WDI`](https://cran.r-project.org/web/packages/WDI/index.html): uses
-  cached data by default, does not allow downloading meta data from the
-  WDI API (e.g., languages, sources, topics), has a GPL-3 license, and
-  does neither use `httr` nor `httr2` for requests.
-- [`worldbank`](https://cran.r-project.org/web/packages/worldbank/index.html):
-  does not have a narrow focus because it includes the Poverty and
-  Inequality Platform and Finances One API.
-- [`wbstats`](https://cran.r-project.org/web/packages/wbstats/index.html):
-  uses cached data by default, does not use `httr2`.
+- [`WDI`](https://CRAN.R-project.org/package=WDI): uses cached data by
+  default, does not allow downloading meta data from the WDI API (e.g.,
+  languages, sources, topics), has a GPL-3 license, and does neither use
+  `httr` nor `httr2` for requests.
+- [`worldbank`](https://CRAN.R-project.org/package=worldbank): does not
+  have a narrow focus because it includes the Poverty and Inequality
+  Platform and Finances One API.
+- [`wbstats`](https://CRAN.R-project.org/package=wbstats): uses cached
+  data by default, does not use `httr2`.
