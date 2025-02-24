@@ -84,6 +84,7 @@ tidy data frame.
 }
 \examples{
 \dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\donttest{
 # Download single indicator for multiple entities
 wdi_get(c("USA", "CAN", "GBR"), "NY.GDP.PCAP.KD")
 
@@ -99,13 +100,11 @@ wdi_get("AUT", "DPANUSSPB",
 wdi_get("NGA", "DT.DOD.DECT.CD.TL.US",
         start_year = 2012, end_year = 2015, frequency = "quarter")
 
-\donttest{
 # Download single indicator for all entities and disable progress bar
 wdi_get("all", "NY.GDP.PCAP.KD", progress = FALSE)
 
 # Download multiple indicators for multiple entities
 wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
-}
 
 # Download indicators for different sources
 wdi_get("DEU", "SG.LAW.INDX", source = 2)
@@ -119,5 +118,6 @@ wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
 
 # Download most recent value only
 wdi_get("USA", "SP.POP.TOTL", most_recent_only = TRUE)
+}
 \dontshow{\}) # examplesIf}
 }

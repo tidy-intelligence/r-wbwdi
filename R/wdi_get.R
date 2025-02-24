@@ -74,7 +74,6 @@
 #'
 #' # Download multiple indicators for multiple entities
 #' wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
-#' }
 #'
 #' # Download indicators for different sources
 #' wdi_get("DEU", "SG.LAW.INDX", source = 2)
@@ -158,12 +157,16 @@ wdi_get <- function(
   indicators_processed
 }
 
+#' @keywords internal
+#' @noRd
 validate_most_recent_only <- function(most_recent_only) {
   if (!is.logical(most_recent_only)) {
     cli::cli_abort("{.arg most_recent_only} must be either TRUE or FALSE.")
   }
 }
 
+#' @keywords internal
+#' @noRd
 validate_frequency <- function(frequency) {
   valid_frequencies <- c("annual", "quarter", "month")
   if (!frequency %in% valid_frequencies) {
@@ -173,12 +176,16 @@ validate_frequency <- function(frequency) {
   }
 }
 
+#' @keywords internal
+#' @noRd
 validate_progress <- function(progress) {
   if (!is.logical(progress)) {
     cli::cli_abort("{.arg progress} must be either TRUE or FALSE.")
   }
 }
 
+#' @keywords internal
+#' @noRd
 validate_source <- function(source) {
   if (!is.null(source)) {
     supported_sources <- wdi_get_sources()
@@ -190,18 +197,24 @@ validate_source <- function(source) {
   }
 }
 
+#' @keywords internal
+#' @noRd
 validate_format <- function(format) {
   if (!is.character(format) || !format %in% c("long", "wide")) {
     cli::cli_abort("{.arg format} must be either 'long' or 'wide'.")
   }
 }
 
+#' @keywords internal
+#' @noRd
 create_date <- function(start_year, end_year) {
   if (!is.null(start_year) && !is.null(end_year)) {
     paste0(start_year, ":", end_year)
   }
 }
 
+#' @keywords internal
+#' @noRd
 get_indicator <- function(
   indicator, entities, start_year, end_year, most_recent_only,
   language, per_page, progress, source
