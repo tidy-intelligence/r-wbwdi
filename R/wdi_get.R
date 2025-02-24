@@ -53,6 +53,7 @@
 #' @export
 #'
 #' @examplesIf curl::has_internet()
+#' \donttest{
 #' # Download single indicator for multiple entities
 #' wdi_get(c("USA", "CAN", "GBR"), "NY.GDP.PCAP.KD")
 #'
@@ -68,7 +69,6 @@
 #' wdi_get("NGA", "DT.DOD.DECT.CD.TL.US",
 #'         start_year = 2012, end_year = 2015, frequency = "quarter")
 #'
-#' \donttest{
 #' # Download single indicator for all entities and disable progress bar
 #' wdi_get("all", "NY.GDP.PCAP.KD", progress = FALSE)
 #'
@@ -88,7 +88,7 @@
 #'
 #' # Download most recent value only
 #' wdi_get("USA", "SP.POP.TOTL", most_recent_only = TRUE)
-#'
+#' }
 wdi_get <- function(
   entities,
   indicators,

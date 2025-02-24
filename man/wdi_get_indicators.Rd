@@ -46,7 +46,7 @@ tibble format.
 }
 \examples{
 \dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-\dontrun{
+\donttest{
 # Download all supported indicators in English
 wdi_get_indicators()
 
