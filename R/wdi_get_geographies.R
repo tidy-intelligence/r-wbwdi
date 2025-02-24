@@ -105,7 +105,7 @@ wdi_get_geographies <- function(language = "en", per_page = 1000) {
         .data$latitude == "", NA_real_, as.numeric(.data$latitude)
       ),
       geography_type = if_else(
-        .data$region_name == "Aggregates", "Region", "Country"
+        .data$region_name == "Aggregates", "aggregates", "country"
       ),
       across(where(is.character), ~ if_else(.x == "", NA, .x)),
       across(where(is.character), trimws)
