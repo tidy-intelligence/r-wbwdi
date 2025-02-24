@@ -28,9 +28,15 @@ This package is a product of Christoph Scheuch and not sponsored by or affiliate
 
 ## Installation
 
+You can install `wbwdi` from CRAN via:
+
+```r
+install.packages("wbwdi")
+```
+
 You can install the development version of `wbwdi` like this:
 
-``` r
+```r
 pak::pak("tidy-intelligence/r-wbwdi")
 ```
 

@@ -32,6 +32,12 @@ World Bank WDI API.
 
 ## Installation
 
+You can install `wbwdi` from CRAN via:
+
+``` r
+install.packages("wbwdi")
+```
+
 You can install the development version of `wbwdi` like this:
 
 ``` r
