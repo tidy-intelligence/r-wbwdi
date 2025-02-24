@@ -9,7 +9,7 @@ vignette: >
 
 ## Overview
 
-The diagram below shows the data model of the `wbwdi` package. In our design, we primarily have R users in mind, particularly those who rely heavily on the popular data manipulation packages `dplyr` and `data.table`. For these users, having consistent and descriptive primary key column names across different tables (e.g., `geography_id`, `series_id`) simplifies writing joins across tables, reduces the risk of column name conflicts, and avoids ambiguity.
+The diagram below shows the data model of the `wbwdi` package. In our design, we primarily have R users in mind, particularly those who rely heavily on the popular data manipulation packages `dplyr` and `data.table`. For these users, having consistent and descriptive primary key column names across different tables (e.g., `entity_id`, `series_id`) simplifies writing joins across tables, reduces the risk of column name conflicts, and avoids ambiguity. For more information on the design philosophy, we refer to [econdataverse.org](https://www.econdataverse.org/).
 
 ```{r, out.width = "100%", echo=FALSE, fig.alt = "A visual representation of the data model behind the 'wbwdi' R package."}
 knitr::include_graphics("images/data-model.png")
@@ -17,12 +17,12 @@ knitr::include_graphics("images/data-model.png")
 
 <!-- ```{mermaid} -->
 <!-- erDiagram -->
-<!--   GEOGRAPHIES ||--o{ WORLD_DEVELOPMENT_INDICATORS : has -->
-<!--   GEOGRAPHIES { -->
-<!--     string geography_id PK -->
-<!--     string geography_name -->
-<!--     string geography_iso2code -->
-<!--     string geography_type -->
+<!--   ENTITIES ||--o{ WORLD_DEVELOPMENT_INDICATORS : has -->
+<!--   ENTITIES { -->
+<!--     string entity_id PK -->
+<!--     string entity_name -->
+<!--     string entity_iso2code -->
+<!--     string entity_type -->
 <!--     string capital_city -->
 <!--     string region_id -->
 <!--     string region_name -->
@@ -65,7 +65,7 @@ knitr::include_graphics("images/data-model.png")
 <!--     int concepts -->
 <!--   } -->
 <!--   WORLD_DEVELOPMENT_INDICATORS { -->
-<!--     string geography_id FK -->
+<!--     string entity_id FK -->
 <!--     string indicator_id FK -->
 <!--     int year -->
 <!--     int quarter -->
@@ -76,15 +76,15 @@ knitr::include_graphics("images/data-model.png")
 
 ## Table details
 
-### Geographies
+### entities
 
 | Column name | Description | Example value |
 |------------------|------------------------------------|------------------|
-| geography_id | Unique identifier for the geography | ZMB |
-| geography_name | Standardized name of the geography | Zambia |
-| geography_iso2code | ISO 3166-1 alpha-2 code of the geography | ZM |
-| geography_type | Type of geography (e.g., country, region) | Country |
-| capital_city | Capital city of the geography | Lusaka |
+| entity_id | Unique identifier for the entity | ZMB |
+| entity_name | Standardized name of the entity | Zambia |
+| entity_iso2code | ISO 3166-1 alpha-2 code of the entity | ZM |
+| entity_type | Type of entity (country, aggregate) | country |
+| capital_city | Capital city of the entity | Lusaka |
 | region_id | Unique identifier for the region | SSF |
 | region_name | Name of the region | Sub-Saharan Africa |
 | region_iso2code | ISO 3166-1 alpha-2 code of the region | ZG |
@@ -97,8 +97,8 @@ knitr::include_graphics("images/data-model.png")
 | lending_type_id | Unique identifier for the lending type | IDX |
 | lending_type_name | Name of the lending type | IDA |
 | lending_type_iso2code | ISO code of the lending type | XI |
-| longitude | Longitude of the geography | 28.2937 |
-| latitude | Latitude of the geography | -15.3982 |
+| longitude | Longitude of the entity | 28.2937 |
+| latitude | Latitude of the entity | -15.3982 |
 
 ### Indicators
 
@@ -135,7 +135,7 @@ knitr::include_graphics("images/data-model.png")
 
 | Column name  | Description                  | Example value  |
 |--------------|------------------------------|----------------|
-| geography_id | Identifier for the geography | USA            |
+| entity_id | Identifier for the entity | USA            |
 | indicator_id | Identifier for the indicator | DT.DOD.DPPG.CD |
 | year         | Year of the data point       | 2020           |
 | quarter      | Quarter of the data point (if quarterly data is requested and available).      | 3           |

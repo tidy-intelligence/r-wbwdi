@@ -31,14 +31,14 @@
     },
     "cli": {
       "Package": "cli",
-      "Version": "3.6.3",
+      "Version": "3.6.4",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "utils"
       ],
-      "Hash": "b21916dd77a27642b447374a5d30ecf3"
+      "Hash": "491c34d3d9dd0d2fe13d9f278bb90795"
     },
     "cpp11": {
       "Package": "cpp11",
@@ -52,13 +52,13 @@
     },
     "curl": {
       "Package": "curl",
-      "Version": "6.0.1",
+      "Version": "6.2.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R"
       ],
-      "Hash": "e8ba62486230951fcd2b881c5be23f96"
+      "Hash": "d65efa2a203bb99faa78690eee928f30"
     },
     "dplyr": {
       "Package": "dplyr",
@@ -119,9 +119,9 @@
     },
     "httr2": {
       "Package": "httr2",
-      "Version": "1.0.6",
+      "Version": "1.1.0",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "R6",
@@ -136,7 +136,17 @@
         "vctrs",
         "withr"
       ],
-      "Hash": "3ef5d07ec78803475a94367d71b40c41"
+      "Hash": "0f14199bbd820a9fca398f2df40994f1"
+    },
+    "jsonlite": {
+      "Package": "jsonlite",
+      "Version": "1.9.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "methods"
+      ],
+      "Hash": "a61860f091bd20d8dd6c3fd8ac7f6e90"
     },
     "lifecycle": {
       "Package": "lifecycle",
@@ -200,7 +210,7 @@
     },
     "purrr": {
       "Package": "purrr",
-      "Version": "1.0.2",
+      "Version": "1.0.4",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -211,7 +221,7 @@
         "rlang",
         "vctrs"
       ],
-      "Hash": "1cba04a4e9414bdefc9dcaa99649a8dc"
+      "Hash": "cc8b5d43f90551fa6df0a6be5d640a4f"
     },
     "rappdirs": {
       "Package": "rappdirs",
@@ -235,14 +245,14 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.1.4",
+      "Version": "1.1.5",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "utils"
       ],
-      "Hash": "3eec01f8b1dee337674b2e34ab1f9bc1"
+      "Hash": "724dcc1490cd7071ee75ca2994a5446e"
     },
     "stringi": {
       "Package": "stringi",

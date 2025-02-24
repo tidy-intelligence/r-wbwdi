@@ -4,9 +4,9 @@
 \name{wbwdi-package}
 \alias{wbwdi}
 \alias{wbwdi-package}
-\title{wbwdi: Work seamlessly with World Bank World Development Indicators (WDI)}
+\title{wbwdi: Seamless Access to World Bank World Development Indicators (WDI)}
 \description{
-Access and analyze the World Bank’s World Development Indicators (WDI) using the corresponding API \url{https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation}. WDI provides more than 24,000 country or region-level indicators for various contexts. 'wbwdi' enables users to download, process and work with WDI series across multiple geographies and time periods.
+Access and analyze the World Bank’s World Development Indicators (WDI) using the corresponding API \url{https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation}. WDI provides more than 24,000 country or region-level indicators for various contexts. 'wbwdi' enables users to download, process and work with WDI series across multiple countries, aggregates, and time periods.
 }
 \seealso{
 Useful links:

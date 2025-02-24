@@ -30,7 +30,7 @@ provides the option to limit the search to specific columns.
 }
 \examples{
 \dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-\dontrun{
+\donttest{
 # Download indicators
 indicators <- wdi_get_indicators()
 

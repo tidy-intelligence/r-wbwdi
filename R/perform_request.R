@@ -85,6 +85,8 @@ perform_request <- function(
 
 }
 
+#' @keywords internal
+#' @noRd
 validate_per_page <- function(per_page) {
   if (!is.numeric(per_page) || per_page %% 1L != 0 ||
         per_page < 1L || per_page > 32500L) {
@@ -92,12 +94,16 @@ validate_per_page <- function(per_page) {
   }
 }
 
+#' @keywords internal
+#' @noRd
 validate_max_tries <- function(max_tries) {
   if (!is.numeric(max_tries) || max_tries %% 1L != 0 || max_tries < 2L) {
     cli::cli_abort("{.arg max_tries} must be an integer larger than 1.")
   }
 }
 
+#' @keywords internal
+#' @noRd
 create_request <- function(
   base_url, resource, language, per_page, date, most_recent_only, source
 ) {
@@ -112,6 +118,8 @@ create_request <- function(
     )
 }
 
+#' @keywords internal
+#' @noRd
 is_request_error <- function(resp) {
   status <- resp_status(resp)
   if (status >= 400L) {
@@ -124,6 +132,8 @@ is_request_error <- function(resp) {
   FALSE
 }
 
+#' @keywords internal
+#' @noRd
 check_for_body_error <- function(resp) {
   content_type <- httr2::resp_content_type(resp)
   if (identical(content_type, "application/json")) {
@@ -139,6 +149,8 @@ check_for_body_error <- function(resp) {
   }
 }
 
+#' @keywords internal
+#' @noRd
 handle_request_error <- function(resp) {
   error_body <- check_for_body_error(resp)
   cli::cli_abort(paste(error_body, collapse = "\n"))
