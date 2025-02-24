@@ -36,7 +36,7 @@
 #' @export
 #'
 #' @examplesIf curl::has_internet()
-#' \dontrun{
+#' \donttest{
 #' # Download all supported indicators in English
 #' wdi_get_indicators()
 #'

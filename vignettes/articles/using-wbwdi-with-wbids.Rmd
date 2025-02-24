@@ -37,8 +37,7 @@ end_year <- 2022
 government_debt <- wdi_get(
   "ZMB", c("NY.GDP.MKTP.CD", "GC.DOD.TOTL.GD.ZS"),
   start_year, end_year, format = "wide"
-) |>
-  rename(entity_id = geography_id)
+)
 
 government_debt <- government_debt |>
   mutate(
@@ -51,7 +50,8 @@ government_debt <- government_debt |>
 external_debt <- ids_get(
   "ZMB", "DT.DOD.DPPG.CD", "all",
   start_year, end_year
-)
+) |>
+  rename(entity_id = geography_id)
 
 # Counterpart "WLD" indicates whole world
 debt_levels <- external_debt |>
