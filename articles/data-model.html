@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">wbwdi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@
       <h1>`wbwdi` Data Model</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidy-intelligence/r-wbwdi/blob/main/vignettes/data-model.Rmd" class="external-link"><code>vignettes/data-model.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidy-intelligence/r-wbwdi/blob/v1.0.0/vignettes/data-model.Rmd" class="external-link"><code>vignettes/data-model.Rmd</code></a></small>
       <div class="d-none name"><code>data-model.Rmd</code></div>
     </div>
 
@@ -75,18 +75,19 @@ package. In our design, we primarily have R users in mind, particularly
 those who rely heavily on the popular data manipulation packages
 <code>dplyr</code> and <code>data.table</code>. For these users, having
 consistent and descriptive primary key column names across different
-tables (e.g., <code>geography_id</code>, <code>series_id</code>)
-simplifies writing joins across tables, reduces the risk of column name
-conflicts, and avoids ambiguity.</p>
+tables (e.g., <code>entity_id</code>, <code>series_id</code>) simplifies
+writing joins across tables, reduces the risk of column name conflicts,
+and avoids ambiguity. For more information on the design philosophy, we
+refer to <a href="https://www.econdataverse.org/" class="external-link">econdataverse.org</a>.</p>
 <p><img src="images%2Fdata-model.png" alt="A visual representation of the data model behind the 'wbwdi' R package." width="100%"></p>
 <!-- ```{mermaid} -->
 <!-- erDiagram -->
-<!--   GEOGRAPHIES ||--o{ WORLD_DEVELOPMENT_INDICATORS : has -->
-<!--   GEOGRAPHIES { -->
-<!--     string geography_id PK -->
-<!--     string geography_name -->
-<!--     string geography_iso2code -->
-<!--     string geography_type -->
+<!--   ENTITIES ||--o{ WORLD_DEVELOPMENT_INDICATORS : has -->
+<!--   ENTITIES { -->
+<!--     string entity_id PK -->
+<!--     string entity_name -->
+<!--     string entity_iso2code -->
+<!--     string entity_type -->
 <!--     string capital_city -->
 <!--     string region_id -->
 <!--     string region_name -->
@@ -129,7 +130,7 @@ conflicts, and avoids ambiguity.</p>
 <!--     int concepts -->
 <!--   } -->
 <!--   WORLD_DEVELOPMENT_INDICATORS { -->
-<!--     string geography_id FK -->
+<!--     string entity_id FK -->
 <!--     string indicator_id FK -->
 <!--     int year -->
 <!--     int quarter -->
@@ -142,7 +143,7 @@ conflicts, and avoids ambiguity.</p>
 <h2 id="table-details">Table details<a class="anchor" aria-label="anchor" href="#table-details"></a>
 </h2>
 <div class="section level3">
-<h3 id="geographies">Geographies<a class="anchor" aria-label="anchor" href="#geographies"></a>
+<h3 id="entities">entities<a class="anchor" aria-label="anchor" href="#entities"></a>
 </h3>
 <table class="table">
 <colgroup>
@@ -157,28 +158,28 @@ conflicts, and avoids ambiguity.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>geography_id</td>
-<td>Unique identifier for the geography</td>
+<td>entity_id</td>
+<td>Unique identifier for the entity</td>
 <td>ZMB</td>
 </tr>
 <tr class="even">
-<td>geography_name</td>
-<td>Standardized name of the geography</td>
+<td>entity_name</td>
+<td>Standardized name of the entity</td>
 <td>Zambia</td>
 </tr>
 <tr class="odd">
-<td>geography_iso2code</td>
-<td>ISO 3166-1 alpha-2 code of the geography</td>
+<td>entity_iso2code</td>
+<td>ISO 3166-1 alpha-2 code of the entity</td>
 <td>ZM</td>
 </tr>
 <tr class="even">
-<td>geography_type</td>
-<td>Type of geography (e.g., country, region)</td>
-<td>Country</td>
+<td>entity_type</td>
+<td>Type of entity (country, aggregate)</td>
+<td>country</td>
 </tr>
 <tr class="odd">
 <td>capital_city</td>
-<td>Capital city of the geography</td>
+<td>Capital city of the entity</td>
 <td>Lusaka</td>
 </tr>
 <tr class="even">
@@ -243,12 +244,12 @@ conflicts, and avoids ambiguity.</p>
 </tr>
 <tr class="even">
 <td>longitude</td>
-<td>Longitude of the geography</td>
+<td>Longitude of the entity</td>
 <td>28.2937</td>
 </tr>
 <tr class="odd">
 <td>latitude</td>
-<td>Latitude of the geography</td>
+<td>Latitude of the entity</td>
 <td>-15.3982</td>
 </tr>
 </tbody>
@@ -417,8 +418,8 @@ the UN’s Food and Agriculture Organization.</td>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>geography_id</td>
-<td>Identifier for the geography</td>
+<td>entity_id</td>
+<td>Identifier for the entity</td>
 <td>USA</td>
 </tr>
 <tr class="even">

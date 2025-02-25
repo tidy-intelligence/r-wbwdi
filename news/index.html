@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">wbwdi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,18 +35,31 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/tidy-intelligence/r-wbwdi/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/tidy-intelligence/r-wbwdi/blob/v1.0.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="wbwdi-development-version">wbwdi (development version)<a class="anchor" aria-label="anchor" href="#wbwdi-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.0" id="wbwdi-100">wbwdi 1.0.0<a class="anchor" aria-label="anchor" href="#wbwdi-100"></a></h2><p class="text-muted">CRAN release: 2025-02-25</p>
+<div class="section level3">
+<h3 id="major-changes-1-0-0">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-1-0-0"></a></h3>
+<ul><li>Changed wording in functions and parameters from “geography”” to “entity”” in compliance with the upcoming <code>econid</code> release.</li>
+</ul></div>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.2.0" id="wbwdi-020">wbwdi 0.2.0<a class="anchor" aria-label="anchor" href="#wbwdi-020"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.2.1" id="wbwdi-021">wbwdi 0.2.1<a class="anchor" aria-label="anchor" href="#wbwdi-021"></a></h2>
+<div class="section level3">
+<h3 id="minor-improvements-and-bug-fixes-0-2-1">Minor improvements and bug fixes<a class="anchor" aria-label="anchor" href="#minor-improvements-and-bug-fixes-0-2-1"></a></h3>
+<ul><li>Enhanced the <code><a href="../reference/wdi_get.html">wdi_get()</a></code> function to support monthly and quarterly frequencies for specific indicators, allowing for more granular data analysis.</li>
+<li>Ensured a consistent interface with the <code>wbids</code> package, enabling seamless integration when working with both World Development Indicators and International Debt Statistics.</li>
+<li>Addressed problems with API requests to ensure reliable data fetching and handling of responses.</li>
+<li>Provided detailed examples and use cases in the package vignettes to guide users in effectively utilizing the package’s features.</li>
+<li>Improved function documentation to clearly explain parameters, return values, and usage examples.</li>
+<li>Added <code>most_recent_only</code> parameter to <code><a href="../reference/wdi_get.html">wdi_get()</a></code> to support the upcoming <code>econtools</code> package.</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="wbwdi-010">wbwdi 0.1.0<a class="anchor" aria-label="anchor" href="#wbwdi-010"></a></h2>
-<ul><li>Initial release that includes the functions <code><a href="../reference/wdi_get.html">wdi_get()</a></code>, <code><a href="../reference/wdi_get_topics.html">wdi_get_topics()</a></code>, <code><a href="../reference/wdi_get_sources.html">wdi_get_sources()</a></code>, <code><a href="../reference/wdi_get_regions.html">wdi_get_regions()</a></code>, <code><a href="../reference/wdi_get_lending_types.html">wdi_get_lending_types()</a></code>, <code><a href="../reference/wdi_get_languages.html">wdi_get_languages()</a></code>, <code><a href="../reference/wdi_get_indicators.html">wdi_get_indicators()</a></code>, <code><a href="../reference/wdi_get_income_levels.html">wdi_get_income_levels()</a></code>, <code><a href="../reference/wdi_get_geographies.html">wdi_get_geographies()</a></code>
+<ul><li>Initial release that includes the functions <code><a href="../reference/wdi_get.html">wdi_get()</a></code>, <code><a href="../reference/wdi_get_topics.html">wdi_get_topics()</a></code>, <code><a href="../reference/wdi_get_sources.html">wdi_get_sources()</a></code>, <code><a href="../reference/wdi_get_regions.html">wdi_get_regions()</a></code>, <code><a href="../reference/wdi_get_lending_types.html">wdi_get_lending_types()</a></code>, <code><a href="../reference/wdi_get_languages.html">wdi_get_languages()</a></code>, <code><a href="../reference/wdi_get_indicators.html">wdi_get_indicators()</a></code>, <code><a href="../reference/wdi_get_income_levels.html">wdi_get_income_levels()</a></code>, <code>wdi_get_geographies()</code>
 </li>
 </ul></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

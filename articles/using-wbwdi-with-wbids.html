@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">wbwdi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@
       <h1>Using `wbwdi` with `wbids`</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidy-intelligence/r-wbwdi/blob/main/vignettes/articles/using-wbwdi-with-wbids.Rmd" class="external-link"><code>vignettes/articles/using-wbwdi-with-wbids.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidy-intelligence/r-wbwdi/blob/v1.0.0/vignettes/articles/using-wbwdi-with-wbids.Rmd" class="external-link"><code>vignettes/articles/using-wbwdi-with-wbids.Rmd</code></a></small>
       <div class="d-none name"><code>using-wbwdi-with-wbids.Rmd</code></div>
     </div>
 
@@ -77,11 +77,10 @@
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>wbwdi</code> packages focuses on providing access to World
 Bank Development Indicators (WDI), which focus on observations per
-geography and year. The <code>wbids</code> package, on the other hand,
+entity and year. The <code>wbids</code> package, on the other hand,
 provides access to International Debt Statistics (IDS), which are
-available by geography, counterpart, and year. However, both packages
-have a shared design philosophy in order to work seamlessly
-together.</p>
+available by entity, counterpart, and year. However, both packages have
+a shared design philosophy in order to work seamlessly together.</p>
 <p>In the following examples, we’ll focus on Zambia (ISO-3 country code
 “ZMB”). Let us first start by visualizing the total external debt (IDS
 series “DT.DOD.DPPG.CD”) and central government debt of of Zambia over
@@ -104,20 +103,21 @@ with GDP in USD (“NY.GDP.MKTP.CD”).</p>
 <span>    debt <span class="op">=</span> <span class="va">`GC.DOD.TOTL.GD.ZS`</span> <span class="op">/</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">`NY.GDP.MKTP.CD`</span>,</span>
 <span>    type <span class="op">=</span> <span class="st">"Government"</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">geography_id</span>, <span class="va">year</span>, <span class="va">debt</span>, <span class="va">type</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">entity_id</span>, <span class="va">year</span>, <span class="va">debt</span>, <span class="va">type</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Fetch total external debt in USD</span></span>
 <span><span class="va">external_debt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://teal-insights.github.io/r-wbids/reference/ids_get.html" class="external-link">ids_get</a></span><span class="op">(</span></span>
 <span>  <span class="st">"ZMB"</span>, <span class="st">"DT.DOD.DPPG.CD"</span>, <span class="st">"all"</span>,</span>
 <span>  <span class="va">start_year</span>, <span class="va">end_year</span></span>
-<span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>entity_id <span class="op">=</span> <span class="va">geography_id</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Counterpart "WLD" indicates whole world</span></span>
 <span><span class="va">debt_levels</span> <span class="op">&lt;-</span> <span class="va">external_debt</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
 <span>    <span class="va">counterpart_id</span> <span class="op">==</span> <span class="st">"WLD"</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">geography_id</span>, <span class="va">year</span>, debt <span class="op">=</span> <span class="va">value</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">entity_id</span>, <span class="va">year</span>, debt <span class="op">=</span> <span class="va">value</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"External Debt"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">government_debt</span><span class="op">)</span></span>
 <span></span>
