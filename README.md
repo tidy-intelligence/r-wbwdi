@@ -51,7 +51,7 @@ WDI series for multiple entities and specific date ranges.
 
 ``` r
 wdi_get(
-  entities = c("MX", "CA", "US"), 
+  entities = c("MEX", "CAN", "USA"), 
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
   start_year = 2020, end_year = 2024
 )

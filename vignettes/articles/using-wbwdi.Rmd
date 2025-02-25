@@ -64,7 +64,7 @@ For example, to download GDP per capita and total population for Mexico, Canada,
 
 ```{r}
 wdi_get(
-  entities = c("MX", "CA", "US"),
+  entities = c("MEX", "CAN", "USA"),
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL")
 )
 ```
@@ -82,7 +82,7 @@ If you want to retrieve the indicators in a wide format, you can use the corresp
 
 ```{r}
 wdi_get(
-  entities = "US",
+  entities = "USA",
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
   format = "wide"
 )

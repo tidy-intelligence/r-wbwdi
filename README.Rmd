@@ -46,7 +46,7 @@ The main function `wdi_get()` provides an interface to download multiple WDI ser
 
 ```r
 wdi_get(
-  entities = c("MX", "CA", "US"), 
+  entities = c("MEX", "CAN", "USA"), 
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
   start_year = 2020, end_year = 2024
 )
