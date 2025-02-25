@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">wbwdi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@
       <h1>Using `wbwdi` to access World Development Indicators</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidy-intelligence/r-wbwdi/blob/v1.0.0/vignettes/articles/using-wbwdi.Rmd" class="external-link"><code>vignettes/articles/using-wbwdi.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidy-intelligence/r-wbwdi/blob/main/vignettes/articles/using-wbwdi.Rmd" class="external-link"><code>vignettes/articles/using-wbwdi.Rmd</code></a></small>
       <div class="d-none name"><code>using-wbwdi.Rmd</code></div>
     </div>
 
@@ -202,7 +202,7 @@ a tidy data frame with country, indicator, date, and value columns.</p>
 Mexico, Canada, and the United States:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/wdi_get.html">wdi_get</a></span><span class="op">(</span></span>
-<span>  entities <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MX"</span>, <span class="st">"CA"</span>, <span class="st">"US"</span><span class="op">)</span>,</span>
+<span>  entities <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MEX"</span>, <span class="st">"CAN"</span>, <span class="st">"USA"</span><span class="op">)</span>,</span>
 <span>  indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NY.GDP.PCAP.KD"</span>, <span class="st">"SP.POP.TOTL"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 384 × 4</span></span></span>
@@ -244,7 +244,7 @@ Mexico, Canada, and the United States:</p>
 the corresponding parameter.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/wdi_get.html">wdi_get</a></span><span class="op">(</span></span>
-<span>  entities <span class="op">=</span> <span class="st">"US"</span>,</span>
+<span>  entities <span class="op">=</span> <span class="st">"USA"</span>,</span>
 <span>  indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NY.GDP.PCAP.KD"</span>, <span class="st">"SP.POP.TOTL"</span><span class="op">)</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"wide"</span></span>
 <span><span class="op">)</span></span>
