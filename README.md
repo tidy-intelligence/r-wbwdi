@@ -3,11 +3,17 @@ wbwdi
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/wbwdi)](https://cran.r-project.org/package=wbwdi)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/wbwdi)](https://cran.r-project.org/package=wbwdi)
 ![R CMD
 Check](https://github.com/tidy-intelligence/r-wbwdi/actions/workflows/R-CMD-check.yaml/badge.svg)
 ![Lint](https://github.com/tidy-intelligence/r-wbwdi/actions/workflows/lint.yaml/badge.svg)
 [![Codecov test
 coverage](https://codecov.io/gh/tidy-intelligence/r-wbwdi/graph/badge.svg)](https://app.codecov.io/gh/tidy-intelligence/r-wbwdi)
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
