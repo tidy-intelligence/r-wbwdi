@@ -3,11 +3,17 @@ wbwdi
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/wbwdi)](https://cran.r-project.org/package=wbwdi)
+[![CRAN
+downloads](https://cranlogs.r-pkg.org/badges/wbwdi)](https://cran.r-project.org/package=wbwdi)
 ![R CMD
 Check](https://github.com/tidy-intelligence/r-wbwdi/actions/workflows/R-CMD-check.yaml/badge.svg)
 ![Lint](https://github.com/tidy-intelligence/r-wbwdi/actions/workflows/lint.yaml/badge.svg)
 [![Codecov test
 coverage](https://codecov.io/gh/tidy-intelligence/r-wbwdi/graph/badge.svg)](https://app.codecov.io/gh/tidy-intelligence/r-wbwdi)
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -17,7 +23,7 @@ Development Indicators (WDI) using the corresponding
 [API](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation).
 WDI provides more than 24,000 country or region-level indicators for
 various contexts. `wbwdi` enables users to download, process and work
-with WDI series across multiple geographies and time periods.
+with WDI series across multiple entities and time periods.
 
 The package is designed to work seamlessly with International Debt
 Statistics (IDS) provided through the
@@ -32,6 +38,12 @@ World Bank WDI API.
 
 ## Installation
 
+You can install `wbwdi` from CRAN via:
+
+``` r
+install.packages("wbwdi")
+```
+
 You can install the development version of `wbwdi` like this:
 
 ``` r
@@ -41,22 +53,22 @@ pak::pak("tidy-intelligence/r-wbwdi")
 ## Usage
 
 The main function `wdi_get()` provides an interface to download multiple
-WDI series for multiple geographies and specific date ranges.
+WDI series for multiple entities and specific date ranges.
 
 ``` r
 wdi_get(
-  geographies = c("MX", "CA", "US"), 
+  entities = c("MEX", "CAN", "USA"), 
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
   start_year = 2020, end_year = 2024
 )
 ```
 
-You can also download these indicators for all geographies and available
+You can also download these indicators for all entities and available
 dates:
 
 ``` r
 wdi_get(
-  geographies = "all", 
+  entities = "all", 
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL")
 )
 ```
@@ -65,7 +77,7 @@ Some indicators are also available on a monthly basis, e.g.:
 
 ``` r
 wdi_get(
-  geographies = "AUT", 
+  entities = "AUT", 
   indicators = "DPANUSSPB",         
   start_year = 2012, end_year = 2015, 
   frequency = "month"
@@ -77,7 +89,7 @@ frequency, e.g.:
 
 ``` r
 wdi_get(
-  geographies = "NGA", 
+  entities = "NGA", 
   indicators =  "DT.DOD.DECT.CD.TL.US",
   start_year = 2012, end_year = 2015, 
   frequency = "quarter"
@@ -90,19 +102,19 @@ You can get a list of all indicators supported by the WDI API via:
 wdi_get_indicators()
 ```
 
-You can get a list of all supported geographies via:
+You can get a list of all supported entities via:
 
 ``` r
-wdi_get_geographies()
+wdi_get_entities()
 ```
 
-You can also get the list of supported indicators and geographies in
+You can also get the list of supported indicators and entities in
 another language, but note that not everything seems to be translated
 into other languages:
 
 ``` r
 wdi_get_indicators(language = "es")
-wdi_get_geographies(language = "zh")
+wdi_get_entities(language = "zh")
 ```
 
 Check out the following function for a list of supported languages:
@@ -149,12 +161,12 @@ uses `httr2` to manage API requests and parse responses.
 More specifically, the differences of existing CRAN releases (apart from
 interface design) are:
 
-- [`WDI`](https://cran.r-project.org/web/packages/WDI/index.html): uses
-  cached data by default, does not allow downloading meta data from the
-  WDI API (e.g., languages, sources, topics), has a GPL-3 license, and
-  does neither use `httr` nor `httr2` for requests.
-- [`worldbank`](https://cran.r-project.org/web/packages/worldbank/index.html):
-  does not have a narrow focus because it includes the Poverty and
-  Inequality Platform and Finances One API.
-- [`wbstats`](https://cran.r-project.org/web/packages/wbstats/index.html):
-  uses cached data by default, does not use `httr2`.
+- [`WDI`](https://CRAN.R-project.org/package=WDI): uses cached data by
+  default, does not allow downloading meta data from the WDI API (e.g.,
+  languages, sources, topics), has a GPL-3 license, and does neither use
+  `httr` nor `httr2` for requests.
+- [`worldbank`](https://CRAN.R-project.org/package=worldbank): does not
+  have a narrow focus because it includes the Poverty and Inequality
+  Platform and Finances One API.
+- [`wbstats`](https://CRAN.R-project.org/package=wbstats): uses cached
+  data by default, does not use `httr2`.

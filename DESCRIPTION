@@ -1,9 +1,9 @@
 Type: Package
 Package: wbwdi
-Title: Work seamlessly with World Bank World Development Indicators (WDI)
-Version: 0.2.1
+Title: Seamless Access to World Bank World Development Indicators (WDI)
+Version: 1.0.0.9000
 Authors@R: c(
-    person("Christoph", "Scheuch", , "christophh@tidy-intelligence.com", 
+    person("Christoph", "Scheuch", , "christoph@tidy-intelligence.com", 
             role = c("aut", "cre", "cph"),
             comment = c(ORCID = "0009-0004-0423-6819"))
     )
@@ -11,7 +11,7 @@ Description: Access and analyze the World Bank’s World Development Indicators
   (WDI) using the corresponding API <https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation>. 
   WDI provides more than 24,000 country or region-level indicators for various
   contexts. 'wbwdi' enables users to download, process and work with WDI
-  series across multiple geographies and time periods. 
+  series across multiple countries, aggregates, and time periods. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

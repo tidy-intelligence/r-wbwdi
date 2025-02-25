@@ -1,28 +1,28 @@
-test_that("wdi_get_geographies handles invalid language input", {
+test_that("wdi_get_entities handles invalid language input", {
   expect_error(
-    wdi_get_geographies(language = "xx")
+    wdi_get_entities(language = "xx")
   )
 })
 
-test_that("wdi_get_geographies handles invalid per_page input", {
+test_that("wdi_get_entities handles invalid per_page input", {
   expect_error(
-    wdi_get_geographies(per_page = -1),
+    wdi_get_entities(per_page = -1),
   )
   expect_error(
-    wdi_get_geographies(per_page = 50000)
+    wdi_get_entities(per_page = 50000)
   )
   expect_error(
-    wdi_get_geographies(per_page = "500")
+    wdi_get_entities(per_page = "500")
   )
 })
 
-test_that("wdi_get_geographies returns a tibble with correct column names", {
+test_that("wdi_get_entities returns a tibble with correct column names", {
   skip_if_offline()
 
-  result <- wdi_get_geographies()
+  result <- wdi_get_entities()
   expect_s3_class(result, "tbl_df")
   expected_colnames <- c(
-    "geography_id", "geography_name", "geography_iso2code", "geography_type",
+    "entity_id", "entity_name", "entity_iso2code", "entity_type",
     "region_id", "region_name", "region_iso2code", "admin_region_id",
     "admin_region_name", "admin_region_iso2code", "income_level_id",
     "income_level_name", "income_level_iso2code", "lending_type_id",
@@ -32,7 +32,7 @@ test_that("wdi_get_geographies returns a tibble with correct column names", {
   expect_true(all(expected_colnames %in% colnames(result)))
 })
 
-test_that("wdi_get_geographies handles type conversions and missing values", {
+test_that("wdi_get_entities handles type conversions and missing values", {
   mock_data <- tibble(
     id = "ABW",
     iso2Code = "AW",
@@ -57,10 +57,10 @@ test_that("wdi_get_geographies handles type conversions and missing values", {
   with_mocked_bindings(
     perform_request = function(...) mock_data,
     {
-      result <- wdi_get_geographies()
-      expect_equal(result$geography_id, "ABW")
-      expect_equal(result$geography_iso2code, "AW")
-      expect_equal(result$geography_name, "Aruba")
+      result <- wdi_get_entities()
+      expect_equal(result$entity_id, "ABW")
+      expect_equal(result$entity_iso2code, "AW")
+      expect_equal(result$entity_name, "Aruba")
       expect_equal(result$region_id, "LCN")
       expect_equal(result$region_name, "Latin America & Caribbean")
       expect_equal(result$income_level_id, "HIC")
@@ -73,13 +73,13 @@ test_that("wdi_get_geographies handles type conversions and missing values", {
   )
 })
 
-test_that("wdi_get_geographies handles different language inputs", {
+test_that("wdi_get_entities handles different language inputs", {
   skip_if_offline()
 
-  result <- wdi_get_geographies(language = "fr")
+  result <- wdi_get_entities(language = "fr")
 
   expected_colnames <- c(
-    "geography_id", "geography_name", "geography_iso2code", "geography_type",
+    "entity_id", "entity_name", "entity_iso2code", "entity_type",
     "region_id", "region_name", "region_iso2code", "admin_region_id",
     "admin_region_name", "admin_region_iso2code", "income_level_id",
     "income_level_name", "income_level_iso2code", "lending_type_id",

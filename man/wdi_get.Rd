@@ -2,10 +2,10 @@
 % Please edit documentation in R/wdi_get.R
 \name{wdi_get}
 \alias{wdi_get}
-\title{Download World Bank indicator data for specific geographies and time periods}
+\title{Download World Bank indicator data for specific entities and time periods}
 \usage{
 wdi_get(
-  geographies,
+  entities,
   indicators,
   start_year = NULL,
   end_year = NULL,
@@ -19,8 +19,8 @@ wdi_get(
 )
 }
 \arguments{
-\item{geographies}{A character vector of ISO 2 or ISO 3-country codes, or
-\code{"all"} to retrieve data for all geographies.}
+\item{entities}{A character vector of ISO 2 or ISO 3-country codes, or
+\code{"all"} to retrieve data for all entities.}
 
 \item{indicators}{A character vector specifying one or more World Bank
 indicators to download (e.g., c("NY.GDP.PCAP.KD", "SP.POP.TOTL")).}
@@ -54,7 +54,7 @@ during the data download and parsing. Defaults to \code{TRUE}.}
 \value{
 A tibble with the following columns:
 \describe{
-\item{geography_id}{The ISO 3-country code of the country or region for
+\item{entity_id}{The ISO 3-country code of the country or aggregate for
 which the data was retrieved.}
 \item{indicator_id}{The ID of the indicator (e.g., "NY.GDP.PCAP.KD").}
 \item{year}{The year of the indicator data as an integer.}
@@ -65,14 +65,14 @@ which the data was retrieved.}
 }
 \description{
 This function retrieves indicator data from the World Bank API for a
-specified set of geographies and indicators. The user can specify one or more
+specified set of entities and indicators. The user can specify one or more
 indicators, a date range, and other options to tailor the request. The data
 is processed and returned in a tidy format, including country, indicator,
 date, and value fields.
 }
 \details{
 This function constructs a request URL for the World Bank API,
-retrieves the relevant data for the given geographies and indicators, and
+retrieves the relevant data for the given entities and indicators, and
 processes the response into a tidy format. The user can optionally specify a
 date range, and the function will handle requests for multiple pages if
 necessary. If the \code{progress} parameter is \code{TRUE}, messages will be displayed
@@ -84,7 +84,8 @@ tidy data frame.
 }
 \examples{
 \dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# Download single indicator for multiple geographies
+\donttest{
+# Download single indicator for multiple entities
 wdi_get(c("USA", "CAN", "GBR"), "NY.GDP.PCAP.KD")
 
 # Download single indicator for a specific time frame
@@ -99,13 +100,11 @@ wdi_get("AUT", "DPANUSSPB",
 wdi_get("NGA", "DT.DOD.DECT.CD.TL.US",
         start_year = 2012, end_year = 2015, frequency = "quarter")
 
-\donttest{
-# Download single indicator for all geographies and disable progress bar
+# Download single indicator for all entities and disable progress bar
 wdi_get("all", "NY.GDP.PCAP.KD", progress = FALSE)
 
-# Download multiple indicators for multiple geographies
+# Download multiple indicators for multiple entities
 wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
-}
 
 # Download indicators for different sources
 wdi_get("DEU", "SG.LAW.INDX", source = 2)
@@ -119,5 +118,6 @@ wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
 
 # Download most recent value only
 wdi_get("USA", "SP.POP.TOTL", most_recent_only = TRUE)
+}
 \dontshow{\}) # examplesIf}
 }
