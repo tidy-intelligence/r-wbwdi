@@ -49,8 +49,12 @@ wdi_search <- function(data, keywords, columns = NULL) {
     any(purrr::map_lgl(data[columns_to_search], ~ {
       col_value <- .x[[i]]
       if (is.list(col_value) && length(col_value) > 0) {
-        any(purrr::map_lgl(unlist(col_value, recursive = TRUE, use.names = FALSE),
-                           ~ contains_keyword(., keywords) %||% FALSE))
+        any(
+          purrr::map_lgl(
+            unlist(col_value, recursive = TRUE, use.names = FALSE),
+            ~ contains_keyword(., keywords) %||% FALSE
+          )
+        )
       } else if (!is.null(col_value) && length(col_value) > 0) {
         contains_keyword(col_value, keywords) %||% FALSE
       } else {
