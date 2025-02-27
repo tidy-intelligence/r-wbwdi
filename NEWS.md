@@ -1,5 +1,9 @@
 # wbwdi (development version)
 
+## Bug fixes
+
+- Added `rlang::%||%` to imports because of failed CRAN checks for some OS.
+
 # wbwdi 1.0.0
 
 ## Major changes
