@@ -1,7 +1,7 @@
 Type: Package
 Package: wbwdi
 Title: Seamless Access to World Bank World Development Indicators (WDI)
-Version: 1.0.1
+Version: 1.0.1.9000
 Authors@R: c(
     person("Christoph", "Scheuch", , "christoph@tidy-intelligence.com", 
             role = c("aut", "cre", "cph"),
