@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">wbwdi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,46 +78,161 @@
 </h2>
 <p>The main function <code><a href="reference/wdi_get.html">wdi_get()</a></code> provides an interface to download multiple WDI series for multiple entities and specific date ranges.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get.html">wdi_get</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidy-intelligence/r-wbwdi" class="external-link">wbwdi</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/wdi_get.html">wdi_get</a></span><span class="op">(</span></span>
 <span>  entities <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MEX"</span>, <span class="st">"CAN"</span>, <span class="st">"USA"</span><span class="op">)</span>, </span>
 <span>  indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NY.GDP.PCAP.KD"</span>, <span class="st">"SP.POP.TOTL"</span><span class="op">)</span>,</span>
-<span>  start_year <span class="op">=</span> <span class="fl">2020</span>, end_year <span class="op">=</span> <span class="fl">2024</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span>  start_year <span class="op">=</span> <span class="fl">2020</span>, </span>
+<span>  end_year <span class="op">=</span> <span class="fl">2024</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 24 × 4</span></span>
+<span><span class="co">#&gt;    entity_id indicator_id    year  value</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt;  &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 CAN       NY.GDP.PCAP.KD  2020 42366.</span></span>
+<span><span class="co">#&gt;  2 MEX       NY.GDP.PCAP.KD  2020  9235.</span></span>
+<span><span class="co">#&gt;  3 USA       NY.GDP.PCAP.KD  2020 59493.</span></span>
+<span><span class="co">#&gt;  4 CAN       NY.GDP.PCAP.KD  2021 44360.</span></span>
+<span><span class="co">#&gt;  5 MEX       NY.GDP.PCAP.KD  2021  9728.</span></span>
+<span><span class="co">#&gt;  6 USA       NY.GDP.PCAP.KD  2021 62996.</span></span>
+<span><span class="co">#&gt;  7 CAN       NY.GDP.PCAP.KD  2022 45227.</span></span>
+<span><span class="co">#&gt;  8 MEX       NY.GDP.PCAP.KD  2022 10011.</span></span>
+<span><span class="co">#&gt;  9 USA       NY.GDP.PCAP.KD  2022 64342.</span></span>
+<span><span class="co">#&gt; 10 CAN       NY.GDP.PCAP.KD  2023 44469.</span></span>
+<span><span class="co">#&gt; # ℹ 14 more rows</span></span></code></pre></div>
 <p>You can also download these indicators for all entities and available dates:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get.html">wdi_get</a></span><span class="op">(</span></span>
 <span>  entities <span class="op">=</span> <span class="st">"all"</span>, </span>
 <span>  indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NY.GDP.PCAP.KD"</span>, <span class="st">"SP.POP.TOTL"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 34,048 × 4</span></span>
+<span><span class="co">#&gt;    entity_id indicator_id    year value</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 AFE       NY.GDP.PCAP.KD  1960 1172.</span></span>
+<span><span class="co">#&gt;  2 AFW       NY.GDP.PCAP.KD  1960 1111.</span></span>
+<span><span class="co">#&gt;  3 ARB       NY.GDP.PCAP.KD  1960   NA </span></span>
+<span><span class="co">#&gt;  4 CSS       NY.GDP.PCAP.KD  1960 4422.</span></span>
+<span><span class="co">#&gt;  5 CEB       NY.GDP.PCAP.KD  1960   NA </span></span>
+<span><span class="co">#&gt;  6 EAR       NY.GDP.PCAP.KD  1960 1062.</span></span>
+<span><span class="co">#&gt;  7 EAS       NY.GDP.PCAP.KD  1960 1144.</span></span>
+<span><span class="co">#&gt;  8 EAP       NY.GDP.PCAP.KD  1960  323.</span></span>
+<span><span class="co">#&gt;  9 TEA       NY.GDP.PCAP.KD  1960  327.</span></span>
+<span><span class="co">#&gt; 10 EMU       NY.GDP.PCAP.KD  1960 9943.</span></span>
+<span><span class="co">#&gt; # ℹ 34,038 more rows</span></span></code></pre></div>
 <p>Some indicators are also available on a monthly basis, e.g.:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get.html">wdi_get</a></span><span class="op">(</span></span>
 <span>  entities <span class="op">=</span> <span class="st">"AUT"</span>, </span>
 <span>  indicators <span class="op">=</span> <span class="st">"DPANUSSPB"</span>,         </span>
-<span>  start_year <span class="op">=</span> <span class="fl">2012</span>, end_year <span class="op">=</span> <span class="fl">2015</span>, </span>
+<span>  start_year <span class="op">=</span> <span class="fl">2012</span>, </span>
+<span>  end_year <span class="op">=</span> <span class="fl">2015</span>, </span>
 <span>  frequency <span class="op">=</span> <span class="st">"month"</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 48 × 5</span></span>
+<span><span class="co">#&gt;    entity_id indicator_id  year month value</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;        &lt;int&gt; &lt;int&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 AUT       DPANUSSPB     2012     1 0.775</span></span>
+<span><span class="co">#&gt;  2 AUT       DPANUSSPB     2012     2 0.755</span></span>
+<span><span class="co">#&gt;  3 AUT       DPANUSSPB     2012     3 0.757</span></span>
+<span><span class="co">#&gt;  4 AUT       DPANUSSPB     2012     4 0.760</span></span>
+<span><span class="co">#&gt;  5 AUT       DPANUSSPB     2012     5 0.782</span></span>
+<span><span class="co">#&gt;  6 AUT       DPANUSSPB     2012     6 0.797</span></span>
+<span><span class="co">#&gt;  7 AUT       DPANUSSPB     2012     7 0.814</span></span>
+<span><span class="co">#&gt;  8 AUT       DPANUSSPB     2012     8 0.806</span></span>
+<span><span class="co">#&gt;  9 AUT       DPANUSSPB     2012     9 0.777</span></span>
+<span><span class="co">#&gt; 10 AUT       DPANUSSPB     2012    10 0.771</span></span>
+<span><span class="co">#&gt; # ℹ 38 more rows</span></span></code></pre></div>
 <p>Similarly, there are also some indicators available on a quarterly frequency, e.g.:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get.html">wdi_get</a></span><span class="op">(</span></span>
 <span>  entities <span class="op">=</span> <span class="st">"NGA"</span>, </span>
 <span>  indicators <span class="op">=</span>  <span class="st">"DT.DOD.DECT.CD.TL.US"</span>,</span>
-<span>  start_year <span class="op">=</span> <span class="fl">2012</span>, end_year <span class="op">=</span> <span class="fl">2015</span>, </span>
+<span>  start_year <span class="op">=</span> <span class="fl">2012</span>, </span>
+<span>  end_year <span class="op">=</span> <span class="fl">2015</span>, </span>
 <span>  frequency <span class="op">=</span> <span class="st">"quarter"</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 16 × 5</span></span>
+<span><span class="co">#&gt;    entity_id indicator_id          year quarter        value</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;                &lt;int&gt;   &lt;int&gt;        &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 NGA       DT.DOD.DECT.CD.TL.US  2012       1  8235000000 </span></span>
+<span><span class="co">#&gt;  2 NGA       DT.DOD.DECT.CD.TL.US  2012       2  8374010000 </span></span>
+<span><span class="co">#&gt;  3 NGA       DT.DOD.DECT.CD.TL.US  2012       3  8587040000 </span></span>
+<span><span class="co">#&gt;  4 NGA       DT.DOD.DECT.CD.TL.US  2012       4  8883380000 </span></span>
+<span><span class="co">#&gt;  5 NGA       DT.DOD.DECT.CD.TL.US  2013       1  9195080000 </span></span>
+<span><span class="co">#&gt;  6 NGA       DT.DOD.DECT.CD.TL.US  2013       2  9477070000 </span></span>
+<span><span class="co">#&gt;  7 NGA       DT.DOD.DECT.CD.TL.US  2013       3 10817130000 </span></span>
+<span><span class="co">#&gt;  8 NGA       DT.DOD.DECT.CD.TL.US  2013       4 11402000000 </span></span>
+<span><span class="co">#&gt;  9 NGA       DT.DOD.DECT.CD.TL.US  2014       1 11746100000 </span></span>
+<span><span class="co">#&gt; 10 NGA       DT.DOD.DECT.CD.TL.US  2014       2 11957200000 </span></span>
+<span><span class="co">#&gt; 11 NGA       DT.DOD.DECT.CD.TL.US  2014       3 12002828000 </span></span>
+<span><span class="co">#&gt; 12 NGA       DT.DOD.DECT.CD.TL.US  2014       4 12138750000 </span></span>
+<span><span class="co">#&gt; 13 NGA       DT.DOD.DECT.CD.TL.US  2015       1 11781991990.</span></span>
+<span><span class="co">#&gt; 14 NGA       DT.DOD.DECT.CD.TL.US  2015       2 12667757149.</span></span>
+<span><span class="co">#&gt; 15 NGA       DT.DOD.DECT.CD.TL.US  2015       3 12966561500 </span></span>
+<span><span class="co">#&gt; 16 NGA       DT.DOD.DECT.CD.TL.US  2015       4 13040050000</span></span></code></pre></div>
 <p>You can get a list of all indicators supported by the WDI API via:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get_indicators.html">wdi_get_indicators</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get_indicators.html">wdi_get_indicators</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 22,806 × 7</span></span>
+<span><span class="co">#&gt;    indicator_id         indicator_name         source_id source_name source_note</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                &lt;chr&gt;                      &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;      </span></span>
+<span><span class="co">#&gt;  1 1.0.HCount.1.90usd   Poverty Headcount ($1…        37 LAC Equity… "The pover…</span></span>
+<span><span class="co">#&gt;  2 1.0.HCount.2.5usd    Poverty Headcount ($2…        37 LAC Equity… "The pover…</span></span>
+<span><span class="co">#&gt;  3 1.0.HCount.Mid10to50 Middle Class ($10-50 …        37 LAC Equity… "The pover…</span></span>
+<span><span class="co">#&gt;  4 1.0.HCount.Ofcl      Official Moderate Pov…        37 LAC Equity… "The pover…</span></span>
+<span><span class="co">#&gt;  5 1.0.HCount.Poor4uds  Poverty Headcount ($4…        37 LAC Equity… "The pover…</span></span>
+<span><span class="co">#&gt;  6 1.0.HCount.Vul4to10  Vulnerable ($4-10 a d…        37 LAC Equity… "The pover…</span></span>
+<span><span class="co">#&gt;  7 1.0.PGap.1.90usd     Poverty Gap ($1.90 a …        37 LAC Equity… "The pover…</span></span>
+<span><span class="co">#&gt;  8 1.0.PGap.2.5usd      Poverty Gap ($2.50 a …        37 LAC Equity… "The pover…</span></span>
+<span><span class="co">#&gt;  9 1.0.PGap.Poor4uds    Poverty Gap ($4 a day)        37 LAC Equity… "The pover…</span></span>
+<span><span class="co">#&gt; 10 1.0.PSev.1.90usd     Poverty Severity ($1.…        37 LAC Equity… "The pover…</span></span>
+<span><span class="co">#&gt; # ℹ 22,796 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 2 more variables: source_organization &lt;chr&gt;, topics &lt;list&gt;</span></span></code></pre></div>
 <p>You can get a list of all supported entities via:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get_entities.html">wdi_get_entities</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get_entities.html">wdi_get_entities</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 296 × 19</span></span>
+<span><span class="co">#&gt;    entity_id entity_iso2code entity_type capital_city     entity_name  region_id</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;    </span></span>
+<span><span class="co">#&gt;  1 ABW       AW              country     Oranjestad       Aruba        LCN      </span></span>
+<span><span class="co">#&gt;  2 AFE       ZH              aggregates  &lt;NA&gt;             Africa East… NA       </span></span>
+<span><span class="co">#&gt;  3 AFG       AF              country     Kabul            Afghanistan  SAS      </span></span>
+<span><span class="co">#&gt;  4 AFR       A9              aggregates  &lt;NA&gt;             Africa       NA       </span></span>
+<span><span class="co">#&gt;  5 AFW       ZI              aggregates  &lt;NA&gt;             Africa West… NA       </span></span>
+<span><span class="co">#&gt;  6 AGO       AO              country     Luanda           Angola       SSF      </span></span>
+<span><span class="co">#&gt;  7 ALB       AL              country     Tirane           Albania      ECS      </span></span>
+<span><span class="co">#&gt;  8 AND       AD              country     Andorra la Vella Andorra      ECS      </span></span>
+<span><span class="co">#&gt;  9 ARB       1A              aggregates  &lt;NA&gt;             Arab World   NA       </span></span>
+<span><span class="co">#&gt; 10 ARE       AE              country     Abu Dhabi        United Arab… MEA      </span></span>
+<span><span class="co">#&gt; # ℹ 286 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 13 more variables: region_iso2code &lt;chr&gt;, region_name &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   admin_region_id &lt;chr&gt;, admin_region_iso2code &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   admin_region_name &lt;chr&gt;, income_level_id &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   income_level_iso2code &lt;chr&gt;, income_level_name &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   lending_type_id &lt;chr&gt;, lending_type_iso2code &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   lending_type_name &lt;chr&gt;, longitude &lt;dbl&gt;, latitude &lt;dbl&gt;</span></span></code></pre></div>
 <p>You can also get the list of supported indicators and entities in another language, but note that not everything seems to be translated into other languages:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get_indicators.html">wdi_get_indicators</a></span><span class="op">(</span>language <span class="op">=</span> <span class="st">"es"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/wdi_get_entities.html">wdi_get_entities</a></span><span class="op">(</span>language <span class="op">=</span> <span class="st">"zh"</span><span class="op">)</span></span></code></pre></div>
 <p>Check out the following function for a list of supported languages:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get_languages.html">wdi_get_languages</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get_languages.html">wdi_get_languages</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 23 × 3</span></span>
+<span><span class="co">#&gt;    language_code language_name native_form     </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;         &lt;chr&gt;         &lt;chr&gt;           </span></span>
+<span><span class="co">#&gt;  1 en            English       English         </span></span>
+<span><span class="co">#&gt;  2 es            Spanish       Español         </span></span>
+<span><span class="co">#&gt;  3 fr            French        Français        </span></span>
+<span><span class="co">#&gt;  4 ar            Arabic        عربي            </span></span>
+<span><span class="co">#&gt;  5 zh            Chinese       中文            </span></span>
+<span><span class="co">#&gt;  6 bg            Bulgarian     Български       </span></span>
+<span><span class="co">#&gt;  7 de            German        Deutsch         </span></span>
+<span><span class="co">#&gt;  8 hi            Hindi         हिंदी            </span></span>
+<span><span class="co">#&gt;  9 id            Indonesian    Bahasa indonesia</span></span>
+<span><span class="co">#&gt; 10 ja            Japanese      日本語          </span></span>
+<span><span class="co">#&gt; # ℹ 13 more rows</span></span></code></pre></div>
 <p>In addition, you can list supported regions, sources, topics and lending types, respectively:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get_regions.html">wdi_get_regions</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -131,7 +246,22 @@
 <span>  <span class="va">indicators</span>,</span>
 <span>  keywords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"inequality"</span>, <span class="st">"gender"</span><span class="op">)</span>,</span>
 <span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"indicator_name"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 157 × 7</span></span>
+<span><span class="co">#&gt;    indicator_id         indicator_name         source_id source_name source_note</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                &lt;chr&gt;                      &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;      </span></span>
+<span><span class="co">#&gt;  1 2.3_GIR.GPI          "Gender parity index …        34 Global Par… "Ratio of …</span></span>
+<span><span class="co">#&gt;  2 2.6_PCR.GPI          "Gender parity index …        34 Global Par… "Ratio of …</span></span>
+<span><span class="co">#&gt;  3 BI.EMP.PWRK.PB.FE.ZS "Public sector employ…        64 Worldwide …  &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  4 BI.EMP.PWRK.PB.MA.ZS "Public sector employ…        64 Worldwide …  &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  5 BI.EMP.TOTL.PB.FE.ZS "Public sector employ…        64 Worldwide …  &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  6 BI.EMP.TOTL.PB.MA.ZS "Public sector employ…        64 Worldwide …  &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  7 BI.WAG.PREM.PB.FE    "Public sector wage p…        64 Worldwide …  &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  8 BI.WAG.PREM.PB.FM    "P-Value: Public sect…        64 Worldwide …  &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt;  9 BI.WAG.PREM.PB.FM.CA "P-Value: Gender wage…        64 Worldwide …  &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt; 10 BI.WAG.PREM.PB.FM.ED "P-Value: Gender wage…        64 Worldwide …  &lt;NA&gt;      </span></span>
+<span><span class="co">#&gt; # ℹ 147 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 2 more variables: source_organization &lt;chr&gt;, topics &lt;list&gt;</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="relation-to-existing-r-packages">Relation to Existing R Packages<a class="anchor" aria-label="anchor" href="#relation-to-existing-r-packages"></a>

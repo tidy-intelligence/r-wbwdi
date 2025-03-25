@@ -11,7 +11,7 @@ provided by the World Bank."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">wbwdi</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,7 +39,7 @@ provided by the World Bank."></head><body>
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Download data sources from the World Bank API</h1>
-      <small class="dont-index">Source: <a href="https://github.com/tidy-intelligence/r-wbwdi/blob/main/R/wdi_get_sources.R" class="external-link"><code>R/wdi_get_sources.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidy-intelligence/r-wbwdi/blob/v1.0.1/R/wdi_get_sources.R" class="external-link"><code>R/wdi_get_sources.R</code></a></small>
       <div class="d-none name"><code>wdi_get_sources.Rd</code></div>
     </div>
 
@@ -106,20 +106,20 @@ derived from the API response, where "Y" indicates availability.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Download all available data sources in English</span></span></span>
 <span class="r-in"><span><span class="fu">wdi_get_sources</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 69 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 70 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    source_id source_code source_name               update_date is_data_available</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>         1 DBS         Doing Business            2021-08-18  TRUE             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>         2 WDI         World Development Indica… 2025-01-28  TRUE             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>         2 WDI         World Development Indica… 2025-03-24  TRUE             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>         3 WGI         Worldwide Governance Ind… 2024-11-05  TRUE             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>         5 SNM         Subnational Malnutrition… 2016-03-21  TRUE             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>         6 IDS         International Debt Stati… 2024-12-03  TRUE             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>         6 IDS         International Debt Stati… 2025-02-26  TRUE             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>        11 ADI         Africa Development Indic… 2013-02-22  TRUE             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>        12 EDS         Education Statistics      2024-06-25  TRUE             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>        13 ESY         Enterprise Surveys        2022-03-25  TRUE             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>        14 GDS         Gender Statistics         2024-12-17  TRUE             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>        15 GEM         Global Economic Monitor   2025-02-24  TRUE             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 59 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>        14 GDS         Gender Statistics         2025-03-05  TRUE             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>        15 GEM         Global Economic Monitor   2025-03-21  TRUE             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 60 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: is_metadata_available &lt;lgl&gt;, concepts &lt;int&gt;</span></span>
 </code></pre></div>
     </div>
