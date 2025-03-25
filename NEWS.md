@@ -1,8 +1,10 @@
-# wbwdi (development version)
+# wbwdi 1.0.1
 
-## Bug fixes
+## Minor improvements and bug fixes
 
-- Added `rlang::%||%` to imports because of failed CRAN checks for some OS.
+- Added `rlang::%||%` to imports because of failed CRAN checks for r-oldrel.
+- Moved article dependencies to Config/Needs/website.
+- Re-built README with outputs.
 
 # wbwdi 1.0.0
 
