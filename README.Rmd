@@ -33,13 +33,13 @@ This package is a product of Christoph Scheuch and not sponsored by or affiliate
 
 You can install `wbwdi` from CRAN via:
 
-```r
+```{r eval=FALSE}
 install.packages("wbwdi")
 ```
 
 You can install the development version of `wbwdi` like this:
 
-```r
+```{r eval=FALSE}
 pak::pak("tidy-intelligence/r-wbwdi")
 ```
 
@@ -47,17 +47,20 @@ pak::pak("tidy-intelligence/r-wbwdi")
 
 The main function `wdi_get()` provides an interface to download multiple WDI series for multiple entities and specific date ranges. 
 
-```r
+```{r}
+library(wbwdi)
+
 wdi_get(
   entities = c("MEX", "CAN", "USA"), 
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
-  start_year = 2020, end_year = 2024
+  start_year = 2020, 
+  end_year = 2024
 )
 ```
 
 You can also download these indicators for all entities and available dates:
 
-```r
+```{r}
 wdi_get(
   entities = "all", 
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL")
@@ -66,54 +69,56 @@ wdi_get(
 
 Some indicators are also available on a monthly basis, e.g.:
 
-```r 
+```{r}
 wdi_get(
   entities = "AUT", 
   indicators = "DPANUSSPB",         
-  start_year = 2012, end_year = 2015, 
+  start_year = 2012, 
+  end_year = 2015, 
   frequency = "month"
 )
 ```
 
 Similarly, there are also some indicators available on a quarterly frequency, e.g.:
 
-```r
+```{r}
 wdi_get(
   entities = "NGA", 
   indicators =  "DT.DOD.DECT.CD.TL.US",
-  start_year = 2012, end_year = 2015, 
+  start_year = 2012, 
+  end_year = 2015, 
   frequency = "quarter"
 )
 ```
 
 You can get a list of all indicators supported by the WDI API via:
 
-```r
+```{r}
 wdi_get_indicators()
 ```
 
 You can get a list of all supported entities via:
 
-```r
+```{r}
 wdi_get_entities()
 ```
 
 You can also get the list of supported indicators and entities in another language, but note that not everything seems to be translated into other languages:
 
-```r
+```{r, eval=FALSE}
 wdi_get_indicators(language = "es")
 wdi_get_entities(language = "zh")
 ```
 
 Check out the following function for a list of supported languages:
 
-```r
+```{r}
 wdi_get_languages()
 ```
 
 In addition, you can list supported regions, sources, topics and lending types, respectively:
 
-```r
+```{r eval=FALSE}
 wdi_get_regions()
 wdi_get_sources()
 wdi_get_topics()
@@ -122,7 +127,7 @@ wdi_get_lending_types()
 
 If you want to search for specific keywords among indicators or other data sources, you can use the RStudio or Positron data explorer. Alternatively, this package comes with a helper function:
 
-```r
+```{r}
 indicators <- wdi_get_indicators()
 wdi_search(
   indicators,
