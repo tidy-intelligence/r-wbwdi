@@ -14,8 +14,10 @@ test_that("perform_request handles error responses", {
     is_request_error = function(...) TRUE,
     handle_request_error = function(resp) stop("API error: Invalid indicator"),
     {
-      expect_error(perform_request("indicators", language = "en"),
-                   "API error: Invalid indicator")
+      expect_error(
+        perform_request("indicators", language = "en"),
+        "API error: Invalid indicator"
+      )
     }
   )
 })
@@ -42,29 +44,36 @@ test_that("validate_per_page handles valid per_page values", {
 })
 
 test_that("validate_per_page throws an error for invalid per_page values", {
-  expect_error(validate_per_page(0),
-               "must be an integer between 1 and 32,500")
-  expect_error(validate_per_page(32501),
-               "must be an integer between 1 and 32,500")
-  expect_error(validate_per_page("1000"),
-               "must be an integer between 1 and 32,500")
-  expect_error(validate_per_page(1000.5),
-               "must be an integer between 1 and 32,500")
+  expect_error(validate_per_page(0), "must be an integer between 1 and 32,500")
+  expect_error(
+    validate_per_page(32501),
+    "must be an integer between 1 and 32,500"
+  )
+  expect_error(
+    validate_per_page("1000"),
+    "must be an integer between 1 and 32,500"
+  )
+  expect_error(
+    validate_per_page(1000.5),
+    "must be an integer between 1 and 32,500"
+  )
 })
 
 test_that("validate_max_tries throws an error for invalid max_tries values", {
-  expect_error(validate_max_tries(0),
-               "must be an integer larger than 1")
-  expect_error(validate_max_tries(-1),
-               "must be an integer larger than 1")
-  expect_error(validate_max_tries(1000.5),
-               "must be an integer larger than 1")
+  expect_error(validate_max_tries(0), "must be an integer larger than 1")
+  expect_error(validate_max_tries(-1), "must be an integer larger than 1")
+  expect_error(validate_max_tries(1000.5), "must be an integer larger than 1")
 })
 
 test_that("create_request constructs a request with default parameters", {
   req <- create_request(
-    "https://api.worldbank.org/v2", "incomeLevels",
-    NULL, 1000, NULL, FALSE, NULL
+    "https://api.worldbank.org/v2",
+    "incomeLevels",
+    NULL,
+    1000,
+    NULL,
+    FALSE,
+    NULL
   )
   expect_equal(
     req$url,
@@ -74,13 +83,20 @@ test_that("create_request constructs a request with default parameters", {
 
 test_that("create_request constructs a request with parameters", {
   req <- create_request(
-    "https://api.worldbank.org/v2", "lendingTypes",
-    "en", 500, "2000:2020", FALSE, "2"
+    "https://api.worldbank.org/v2",
+    "lendingTypes",
+    "en",
+    500,
+    "2000:2020",
+    FALSE,
+    "2"
   )
   expect_equal(
     req$url,
-    paste0("https://api.worldbank.org/v2/en/lendingTypes",
-           "?format=json&per_page=500&date=2000%3A2020&source=2")
+    paste0(
+      "https://api.worldbank.org/v2/en/lendingTypes",
+      "?format=json&per_page=500&date=2000%3A2020&source=2"
+    )
   )
 })
 

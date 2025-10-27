@@ -27,7 +27,6 @@
 #' wdi_get_topics()
 #'
 wdi_get_topics <- function(language = "en") {
-
   topics_raw <- perform_request("topics", language)
 
   topics_processed <- as_tibble(topics_raw) |>

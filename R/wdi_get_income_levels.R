@@ -30,7 +30,6 @@
 #' wdi_get_income_levels()
 #'
 wdi_get_income_levels <- function(language = "en") {
-
   income_levels_raw <- perform_request("incomeLevels", language)
 
   income_levels_processed <- as_tibble(income_levels_raw) |>

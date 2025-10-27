@@ -30,7 +30,6 @@
 #' wdi_get_lending_types()
 #'
 wdi_get_lending_types <- function(language = "en") {
-
   lending_types_raw <- perform_request("lendingTypes", language)
 
   lending_types_processed <- as_tibble(lending_types_raw) |>

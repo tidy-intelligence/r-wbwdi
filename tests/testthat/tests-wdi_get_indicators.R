@@ -23,8 +23,13 @@ test_that("wdi_get_indicators returns a tibble with correct column names", {
   expect_s3_class(result, "tbl_df")
 
   expected_colnames <- c(
-    "indicator_id", "indicator_name", "source_id", "source_name",
-    "source_note", "source_organization", "topics"
+    "indicator_id",
+    "indicator_name",
+    "source_id",
+    "source_name",
+    "source_note",
+    "source_organization",
+    "topics"
   )
   expect_true(all(expected_colnames %in% colnames(result)))
 })
@@ -33,10 +38,12 @@ test_that("wdi_get_indicators handles type conversions and missing values", {
   mock_data <- tibble(
     id = "NY.GDP.PCAP.KD",
     name = "GDP per capita, constant prices",
-    source = list(tibble(id = "2",
-                         value = "World Development Indicators",
-                         sourceNote = "Some note",
-                         sourceOrganization = "World Bank")),
+    source = list(tibble(
+      id = "2",
+      value = "World Development Indicators",
+      sourceNote = "Some note",
+      sourceOrganization = "World Bank"
+    )),
     unit = c(""),
     topics = list(list(list(id = "1", value = "Economy")))
   )
@@ -63,8 +70,13 @@ test_that("wdi_get_indicators handles different language inputs", {
 
   result <- wdi_get_indicators(language = "es")
   expected_colnames <- c(
-    "indicator_id", "indicator_name", "source_id", "source_name",
-    "source_note", "source_organization", "topics"
+    "indicator_id",
+    "indicator_name",
+    "source_id",
+    "source_name",
+    "source_note",
+    "source_organization",
+    "topics"
   )
   expect_true(all(expected_colnames %in% colnames(result)))
 })

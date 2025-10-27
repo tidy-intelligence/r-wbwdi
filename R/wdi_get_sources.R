@@ -34,22 +34,25 @@
 #' wdi_get_sources()
 #'
 wdi_get_sources <- function(language = "en") {
-
   sources_raw <- perform_request("sources", language)
 
   # url and description are always empty, hence omitted
   sources_processed <- as_tibble(sources_raw) |>
-    select(source_id = "id",
-           source_code = "code",
-           source_name = "name",
-           update_date = "lastupdated",
-           is_data_available = "dataavailability",
-           is_metadata_available = "metadataavailability",
-           concepts = "concepts") |>
-    mutate(across(c("is_data_available", "is_metadata_available"), ~ . == "Y"),
-           update_date = as.Date(.data$update_date),
-           across(c("source_id", "concepts"), as.integer),
-           across(where(is.character), trimws))
+    select(
+      source_id = "id",
+      source_code = "code",
+      source_name = "name",
+      update_date = "lastupdated",
+      is_data_available = "dataavailability",
+      is_metadata_available = "metadataavailability",
+      concepts = "concepts"
+    ) |>
+    mutate(
+      across(c("is_data_available", "is_metadata_available"), ~ . == "Y"),
+      update_date = as.Date(.data$update_date),
+      across(c("source_id", "concepts"), as.integer),
+      across(where(is.character), trimws)
+    )
 
   sources_processed
 }

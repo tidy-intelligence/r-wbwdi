@@ -1,27 +1,37 @@
 test_that("wdi_get_handles invalid language input", {
   expect_error(
     wdi_get(
-      entities = "USA", indicators = "NY.GDP.MKTP.CD", language = "xx"
+      entities = "USA",
+      indicators = "NY.GDP.MKTP.CD",
+      language = "xx"
     )
   )
 })
 
 test_that("wdi_get checks invalid parameter values", {
-  expect_error(wdi_get("USA", "NY.GDP.PCAP.KD", frequency = "weekly"),
-               "must be either 'annual', 'quarter', or 'month'")
-  expect_error(wdi_get("USA", "NY.GDP.PCAP.KD", format = "tall"),
-               "must be either 'long' or 'wide'")
+  expect_error(
+    wdi_get("USA", "NY.GDP.PCAP.KD", frequency = "weekly"),
+    "must be either 'annual', 'quarter', or 'month'"
+  )
+  expect_error(
+    wdi_get("USA", "NY.GDP.PCAP.KD", format = "tall"),
+    "must be either 'long' or 'wide'"
+  )
 })
 
 test_that("wdi_get handles invalid per_page input", {
   expect_error(
     wdi_get(
-      entities = "USA", indicators = "NY.GDP.MKTP.CD", per_page = -1
+      entities = "USA",
+      indicators = "NY.GDP.MKTP.CD",
+      per_page = -1
     )
   )
   expect_error(
     wdi_get(
-      entities = "USA", indicators = "NY.GDP.MKTP.CD", per_page = "1000"
+      entities = "USA",
+      indicators = "NY.GDP.MKTP.CD",
+      per_page = "1000"
     )
   )
 })
@@ -29,7 +39,8 @@ test_that("wdi_get handles invalid per_page input", {
 test_that("wdi_get handels invalid most_recent_only input", {
   expect_error(
     wdi_get(
-      entities = "USA", indicators = "NY.GDP.MKTP.CD",
+      entities = "USA",
+      indicators = "NY.GDP.MKTP.CD",
       most_recent_only = "yes"
     )
   )
@@ -38,7 +49,9 @@ test_that("wdi_get handels invalid most_recent_only input", {
 test_that("wdi_get handels invalid progress input", {
   expect_error(
     wdi_get(
-      entities = "USA", indicators = "NY.GDP.MKTP.CD", progress = "yes"
+      entities = "USA",
+      indicators = "NY.GDP.MKTP.CD",
+      progress = "yes"
     )
   )
 })
@@ -49,8 +62,11 @@ test_that("wdi_get creates valid output structure for single indicator", {
   result <- wdi_get(
     entities = "USA",
     indicators = "NY.GDP.MKTP.CD",
-    start_year = 2010, end_year = 2020,
-    language = "en", per_page = 10, progress = FALSE
+    start_year = 2010,
+    end_year = 2020,
+    language = "en",
+    per_page = 10,
+    progress = FALSE
   )
   expected_names <- c("indicator_id", "entity_id", "year", "value")
   expect_true(is.data.frame(result))
@@ -64,8 +80,11 @@ test_that("wdi_get_creates valid output structure for multiple indicators", {
   result <- wdi_get(
     entities = "USA",
     indicators = c("NY.GDP.MKTP.CD", "SP.POP.TOTL"),
-    start_year = 2010, end_year = 2020,
-    language = "en", per_page = 10, progress = FALSE
+    start_year = 2010,
+    end_year = 2020,
+    language = "en",
+    per_page = 10,
+    progress = FALSE
   )
   expected_names <- c("indicator_id", "entity_id", "year", "value")
   expect_true(is.data.frame(result))
@@ -105,16 +124,25 @@ test_that("wdi_get handles different date ranges and frequencies", {
   skip_if_offline()
 
   result_annual <- wdi_get(
-    "USA", "NY.GDP.PCAP.KD",
-    start_year = 2010, end_year = 2015, frequency = "annual"
+    "USA",
+    "NY.GDP.PCAP.KD",
+    start_year = 2010,
+    end_year = 2015,
+    frequency = "annual"
   )
   result_quarter <- wdi_get(
-    "NGA", "DT.DOD.DECT.CD.TL.US",
-    start_year = 2010, end_year = 2015, frequency = "quarter"
+    "NGA",
+    "DT.DOD.DECT.CD.TL.US",
+    start_year = 2010,
+    end_year = 2015,
+    frequency = "quarter"
   )
   result_month <- wdi_get(
-    "USA", "DPANUSSPB",
-    start_year = 2010, end_year = 2015, frequency = "month"
+    "USA",
+    "DPANUSSPB",
+    start_year = 2010,
+    end_year = 2015,
+    frequency = "month"
   )
 
   expect_equal(range(result_annual$year), c(2010, 2015))
@@ -133,7 +161,6 @@ test_that("wdi_get handles format parameter (long and wide)", {
 })
 
 test_that("wdi_get handles empty data gracefully", {
-
   mock_data <- data.frame(
     indicator = I(data.frame(
       id = character(),
@@ -166,8 +193,10 @@ test_that("create_date constructs date range correctly", {
 })
 
 test_that("validate_frequency checks valid frequencies", {
-  expect_error(validate_frequency("weekly"),
-               "must be either 'annual', 'quarter', or 'month'")
+  expect_error(
+    validate_frequency("weekly"),
+    "must be either 'annual', 'quarter', or 'month'"
+  )
   expect_silent(validate_frequency("annual"))
   expect_silent(validate_frequency("quarter"))
   expect_silent(validate_frequency("month"))

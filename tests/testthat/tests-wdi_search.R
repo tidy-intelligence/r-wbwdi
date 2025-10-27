@@ -19,8 +19,11 @@ test_that("wdi_search returns rows with specified keywords in any column", {
   expect_equal(nrow(result), 1)
 
   # Test 4: Search for keywords in multiple specified columns
-  result <- wdi_search(data, keywords = c("pie"),
-                       columns = c("text", "description"))
+  result <- wdi_search(
+    data,
+    keywords = c("pie"),
+    columns = c("text", "description")
+  )
   expect_equal(nrow(result), 1)
 
   # Test 5: Case-insensitive search
@@ -64,5 +67,4 @@ test_that("wdi_search returns rows with specified keywords in any column", {
   result <- wdi_search(data, keywords = c("banana"))
   expect_equal(nrow(result), 1)
   expect_equal(result$id, 4)
-
 })

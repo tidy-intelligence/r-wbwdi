@@ -101,7 +101,6 @@ wdi_get <- function(
   source = NULL,
   format = "long"
 ) {
-
   validate_most_recent_only(most_recent_only)
   validate_frequency(frequency)
   validate_progress(progress)
@@ -126,8 +125,15 @@ wdi_get <- function(
   indicators_processed <- indicators |>
     map_df(
       ~ get_indicator(
-        ., entities, start_year, end_year, most_recent_only,
-        language, per_page, progress, source
+        .,
+        entities,
+        start_year,
+        end_year,
+        most_recent_only,
+        language,
+        per_page,
+        progress,
+        source
       )
     )
 
@@ -137,8 +143,10 @@ wdi_get <- function(
   }
 
   # The ISO3 field is not always populated and sometimes the id already is ISO3
-  if (nrow(indicators_processed) > 0 &&
-        nchar(indicators_processed$entity_id[1]) == 2) {
+  if (
+    nrow(indicators_processed) > 0 &&
+      nchar(indicators_processed$entity_id[1]) == 2
+  ) {
     entities <- wdi_get_entities()
 
     indicators_processed <- indicators_processed |>
@@ -216,8 +224,15 @@ create_date <- function(start_year, end_year) {
 #' @keywords internal
 #' @noRd
 get_indicator <- function(
-  indicator, entities, start_year, end_year, most_recent_only,
-  language, per_page, progress, source
+  indicator,
+  entities,
+  start_year,
+  end_year,
+  most_recent_only,
+  language,
+  per_page,
+  progress,
+  source
 ) {
   if (progress) {
     progress_req <- paste0("Sending requests for indicator ", indicator)
@@ -228,12 +243,20 @@ get_indicator <- function(
   date <- create_date(start_year, end_year)
 
   resource <- paste0(
-    "country/", paste(entities, collapse = ";"),
-    "/indicator/", indicator
+    "country/",
+    paste(entities, collapse = ";"),
+    "/indicator/",
+    indicator
   )
 
   indicator_raw <- perform_request(
-    resource, language, per_page, date, most_recent_only, source, progress_req
+    resource,
+    language,
+    per_page,
+    date,
+    most_recent_only,
+    source,
+    progress_req
   )
 
   indicator_parsed <- as_tibble(indicator_raw) |>
@@ -250,14 +273,18 @@ get_indicator <- function(
 
   if (grepl("Q", indicator_parsed$date[1], fixed = TRUE)) {
     indicator <- indicator_parsed |>
-      mutate(year = as.integer(substr(.data$date, 1, 4)),
-             quarter = as.integer(substr(.data$date, 6, 6))) |>
+      mutate(
+        year = as.integer(substr(.data$date, 1, 4)),
+        quarter = as.integer(substr(.data$date, 6, 6))
+      ) |>
       select(-"date") |>
       arrange(.data$year, .data$quarter)
   } else if (grepl("M", indicator_parsed$date[1], fixed = TRUE)) {
     indicator <- indicator_parsed |>
-      mutate(year = as.integer(substr(.data$date, 1, 4)),
-             month = as.integer(substr(.data$date, 6, 7))) |>
+      mutate(
+        year = as.integer(substr(.data$date, 1, 4)),
+        month = as.integer(substr(.data$date, 6, 7))
+      ) |>
       select(-"date") |>
       arrange(.data$year, .data$month)
   } else {

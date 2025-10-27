@@ -10,8 +10,13 @@ test_that("wdi_get_sources returns a tibble with correct column names", {
   result <- wdi_get_sources()
   expect_s3_class(result, "tbl_df")
   expected_colnames <- c(
-    "source_id", "source_code", "source_name", "update_date",
-    "is_data_available", "is_metadata_available", "concepts"
+    "source_id",
+    "source_code",
+    "source_name",
+    "update_date",
+    "is_data_available",
+    "is_metadata_available",
+    "concepts"
   )
   expect_true(all(expected_colnames %in% colnames(result)))
 })
@@ -20,8 +25,10 @@ test_that("wdi_get_sources trims whitespace in character columns", {
   mock_data <- tibble(
     id = c(" 1 ", " 2 "),
     code = c(" WDI ", " GFDD "),
-    name = c(" World Development Indicators ",
-             " Global Financial Development "),
+    name = c(
+      " World Development Indicators ",
+      " Global Financial Development "
+    ),
     lastupdated = c(" 2024-10-01 ", " 2024-11-01 "),
     dataavailability = c("Y", "N"),
     metadataavailability = c("Y", "Y"),
@@ -34,8 +41,10 @@ test_that("wdi_get_sources trims whitespace in character columns", {
       result <- wdi_get_sources()
       expect_equal(result$source_id, c(1L, 2L))
       expect_equal(result$source_code, c("WDI", "GFDD"))
-      expect_equal(result$source_name, c("World Development Indicators",
-                                         "Global Financial Development"))
+      expect_equal(
+        result$source_name,
+        c("World Development Indicators", "Global Financial Development")
+      )
       expect_equal(result$update_date, as.Date(c("2024-10-01", "2024-11-01")))
       expect_equal(result$is_data_available, c(TRUE, FALSE))
       expect_equal(result$is_metadata_available, c(TRUE, TRUE))
@@ -93,8 +102,13 @@ test_that("wdi_get_sources handles different language inputs", {
 
   result <- wdi_get_sources(language = "es")
   expected_colnames <- c(
-    "source_id", "source_code", "source_name", "update_date",
-    "is_data_available", "is_metadata_available", "concepts"
+    "source_id",
+    "source_code",
+    "source_name",
+    "update_date",
+    "is_data_available",
+    "is_metadata_available",
+    "concepts"
   )
   expect_true(all(expected_colnames %in% colnames(result)))
 })

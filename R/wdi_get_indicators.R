@@ -45,9 +45,10 @@
 #'}
 #'
 wdi_get_indicators <- function(language = "en", per_page = 32500L) {
-
   indicators_raw <- perform_request(
-    "indicators", language = language, per_page = per_page
+    "indicators",
+    language = language,
+    per_page = per_page
   )
 
   indicators_processed <- as_tibble(indicators_raw) |>

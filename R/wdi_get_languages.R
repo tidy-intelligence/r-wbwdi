@@ -26,14 +26,15 @@
 #' wdi_get_languages()
 #'
 wdi_get_languages <- function() {
-
   # languages resource does not support multiple languages
   languages_raw <- perform_request("languages")
 
   languages_processed <- as_tibble(languages_raw) |>
-    select(language_code = "code",
-           language_name = "name",
-           native_form = "nativeForm") |>
+    select(
+      language_code = "code",
+      language_name = "name",
+      native_form = "nativeForm"
+    ) |>
     mutate(across(where(is.character), trimws))
 
   languages_processed

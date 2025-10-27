@@ -62,7 +62,6 @@
 #' wdi_get_entities(language = "zh")
 #'
 wdi_get_entities <- function(language = "en", per_page = 1000) {
-
   entities_raw <- perform_request("countries/all", language, per_page)
 
   entities_processed <- entities_raw |>
@@ -99,13 +98,19 @@ wdi_get_entities <- function(language = "en", per_page = 1000) {
     ) |>
     mutate(
       longitude = if_else(
-        .data$longitude == "", NA_real_, as.numeric(.data$longitude)
+        .data$longitude == "",
+        NA_real_,
+        as.numeric(.data$longitude)
       ),
       latitude = if_else(
-        .data$latitude == "", NA_real_, as.numeric(.data$latitude)
+        .data$latitude == "",
+        NA_real_,
+        as.numeric(.data$latitude)
       ),
       entity_type = if_else(
-        .data$region_name == "Aggregates", "aggregates", "country"
+        .data$region_name == "Aggregates",
+        "aggregates",
+        "country"
       ),
       across(where(is.character), ~ if_else(.x == "", NA, .x)),
       across(where(is.character), trimws)

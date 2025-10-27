@@ -38,7 +38,6 @@
 #' )
 #'}
 wdi_search <- function(data, keywords, columns = NULL) {
-
   if (is.null(columns)) {
     columns_to_search <- colnames(data)
   } else {
@@ -46,21 +45,24 @@ wdi_search <- function(data, keywords, columns = NULL) {
   }
 
   row_matches <- purrr::map_lgl(seq_len(nrow(data)), function(i) {
-    any(purrr::map_lgl(data[columns_to_search], ~ {
-      col_value <- .x[[i]]
-      if (is.list(col_value) && length(col_value) > 0) {
-        any(
-          purrr::map_lgl(
-            unlist(col_value, recursive = TRUE, use.names = FALSE),
-            ~ contains_keyword(., keywords) %||% FALSE
+    any(purrr::map_lgl(
+      data[columns_to_search],
+      ~ {
+        col_value <- .x[[i]]
+        if (is.list(col_value) && length(col_value) > 0) {
+          any(
+            purrr::map_lgl(
+              unlist(col_value, recursive = TRUE, use.names = FALSE),
+              ~ contains_keyword(., keywords) %||% FALSE
+            )
           )
-        )
-      } else if (!is.null(col_value) && length(col_value) > 0) {
-        contains_keyword(col_value, keywords) %||% FALSE
-      } else {
-        FALSE
+        } else if (!is.null(col_value) && length(col_value) > 0) {
+          contains_keyword(col_value, keywords) %||% FALSE
+        } else {
+          FALSE
+        }
       }
-    }))
+    ))
   })
 
   data[row_matches, , drop = FALSE]
