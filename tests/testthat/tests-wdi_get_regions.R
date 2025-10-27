@@ -10,7 +10,10 @@ test_that("wdi_get_regions returns a tibble with correct column names", {
   result <- wdi_get_regions()
   expect_s3_class(result, "tbl_df")
   expected_colnames <- c(
-    "region_id", "region_code", "region_iso2code", "region_name"
+    "region_id",
+    "region_code",
+    "region_iso2code",
+    "region_name"
   )
   expect_true(all(expected_colnames %in% colnames(result)))
 })
@@ -30,8 +33,10 @@ test_that("wdi_get_regions trims whitespace in character columns", {
       expect_equal(result$region_id, c(1, 2))
       expect_equal(result$region_code, c("EAS", "ECS"))
       expect_equal(result$region_iso2code, c("Z4", "Z7"))
-      expect_equal(result$region_name, c("East Asia & Pacific",
-                                         "Europe & Central Asia"))
+      expect_equal(
+        result$region_name,
+        c("East Asia & Pacific", "Europe & Central Asia")
+      )
     }
   )
 })
@@ -76,7 +81,10 @@ test_that("wdi_get_regions handles different language inputs", {
 
   result <- wdi_get_regions(language = "fr")
   expected_columns <- c(
-    "region_id", "region_code", "region_iso2code", "region_name"
+    "region_id",
+    "region_code",
+    "region_iso2code",
+    "region_name"
   )
   expect_true(all(expected_columns %in% colnames(result)))
 })

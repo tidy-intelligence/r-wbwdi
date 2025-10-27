@@ -30,16 +30,17 @@
 #' wdi_get_lending_types()
 #'
 wdi_get_lending_types <- function(language = "en") {
-
   lending_types_raw <- perform_request("lendingTypes", language)
 
-  lending_types_processed <- as_tibble(lending_types_raw) |>
-    select(
-      lending_type_id = "id",
-      lending_type_iso2code = "iso2code",
-      lending_type_name = "value"
-    ) |>
-    mutate(across(where(is.character), trimws))
+  if (!is.null(lending_types_raw)) {
+    lending_types_processed <- as_tibble(lending_types_raw) |>
+      select(
+        lending_type_id = "id",
+        lending_type_iso2code = "iso2code",
+        lending_type_name = "value"
+      ) |>
+      mutate(across(where(is.character), trimws))
 
-  lending_types_processed
+    lending_types_processed
+  }
 }

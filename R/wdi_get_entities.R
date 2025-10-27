@@ -62,55 +62,62 @@
 #' wdi_get_entities(language = "zh")
 #'
 wdi_get_entities <- function(language = "en", per_page = 1000) {
-
   entities_raw <- perform_request("countries/all", language, per_page)
 
-  entities_processed <- entities_raw |>
-    as_tibble() |>
-    rename(
-      entity_id = "id",
-      entity_iso2code = "iso2Code",
-      entity_name = "name"
-    ) |>
-    unnest_wider("region") |>
-    rename(
-      region_id = "id",
-      region_iso2code = "iso2code",
-      region_name = "value"
-    ) |>
-    unnest_wider("adminregion") |>
-    rename(
-      admin_region_id = "id",
-      admin_region_iso2code = "iso2code",
-      admin_region_name = "value"
-    ) |>
-    unnest_wider("incomeLevel") |>
-    rename(
-      income_level_id = "id",
-      income_level_iso2code = "iso2code",
-      income_level_name = "value"
-    ) |>
-    unnest_wider("lendingType") |>
-    rename(
-      lending_type_id = "id",
-      lending_type_iso2code = "iso2code",
-      lending_type_name = "value",
-      capital_city = "capitalCity"
-    ) |>
-    mutate(
-      longitude = if_else(
-        .data$longitude == "", NA_real_, as.numeric(.data$longitude)
-      ),
-      latitude = if_else(
-        .data$latitude == "", NA_real_, as.numeric(.data$latitude)
-      ),
-      entity_type = if_else(
-        .data$region_name == "Aggregates", "aggregates", "country"
-      ),
-      across(where(is.character), ~ if_else(.x == "", NA, .x)),
-      across(where(is.character), trimws)
-    ) |>
-    relocate(c("entity_type", "capital_city"), .after = "entity_iso2code")
+  if (!is.null(entities_raw)) {
+    entities_processed <- entities_raw |>
+      as_tibble() |>
+      rename(
+        entity_id = "id",
+        entity_iso2code = "iso2Code",
+        entity_name = "name"
+      ) |>
+      unnest_wider("region") |>
+      rename(
+        region_id = "id",
+        region_iso2code = "iso2code",
+        region_name = "value"
+      ) |>
+      unnest_wider("adminregion") |>
+      rename(
+        admin_region_id = "id",
+        admin_region_iso2code = "iso2code",
+        admin_region_name = "value"
+      ) |>
+      unnest_wider("incomeLevel") |>
+      rename(
+        income_level_id = "id",
+        income_level_iso2code = "iso2code",
+        income_level_name = "value"
+      ) |>
+      unnest_wider("lendingType") |>
+      rename(
+        lending_type_id = "id",
+        lending_type_iso2code = "iso2code",
+        lending_type_name = "value",
+        capital_city = "capitalCity"
+      ) |>
+      mutate(
+        longitude = if_else(
+          .data$longitude == "",
+          NA_real_,
+          as.numeric(.data$longitude)
+        ),
+        latitude = if_else(
+          .data$latitude == "",
+          NA_real_,
+          as.numeric(.data$latitude)
+        ),
+        entity_type = if_else(
+          .data$region_name == "Aggregates",
+          "aggregates",
+          "country"
+        ),
+        across(where(is.character), ~ if_else(.x == "", NA, .x)),
+        across(where(is.character), trimws)
+      ) |>
+      relocate(c("entity_type", "capital_city"), .after = "entity_iso2code")
 
-  entities_processed
+    entities_processed
+  }
 }

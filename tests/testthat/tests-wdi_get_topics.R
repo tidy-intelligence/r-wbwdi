@@ -26,8 +26,10 @@ test_that("wdi_get_topics trims whitespace in character columns", {
       result <- wdi_get_topics()
       expect_equal(result$topic_id, c(1, 2))
       expect_equal(result$topic_name, c("Education", "Health"))
-      expect_equal(result$topic_note, c("Covers educational data",
-                                        "Health indicators"))
+      expect_equal(
+        result$topic_note,
+        c("Covers educational data", "Health indicators")
+      )
     }
   )
 })
