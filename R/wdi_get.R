@@ -200,7 +200,10 @@ validate_source <- function(source) {
     if (!is.null(supported_sources)) {
       if (!source %in% supported_sources$source_id) {
         cli::cli_abort(
-          "{.arg source} is not supported. Please call {.fun wdi_get_sources()}."
+          paste(
+            "{.arg source} is not supported.",
+            "Please call {.fun wdi_get_sources()}."
+          )
         )
       }
     } else {

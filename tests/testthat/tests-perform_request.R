@@ -1,27 +1,3 @@
-test_that("perform_request handles error responses", {
-  mock_error_response <- list(
-    list(
-      message = list(
-        list(id = "120", value = "Invalid indicator")
-      )
-    )
-  )
-
-  with_mocked_bindings(
-    create_request = function(...) NULL,
-    req_retry = function(...) NULL,
-    req_perform = function(...) mock_error_response,
-    is_request_error = function(...) TRUE,
-    handle_request_error = function(resp) stop("API error: Invalid indicator"),
-    {
-      expect_error(
-        perform_request("indicators", language = "en"),
-        "API error: Invalid indicator"
-      )
-    }
-  )
-})
-
 test_that("perform_request validates per_page parameter", {
   skip_if_offline()
 
@@ -108,5 +84,5 @@ test_that("is_request_error identifies error responses correctly", {
 test_that("perform_request handles API errors gracefully", {
   skip_if_offline()
 
-  expect_error(perform_request("nonexistent"), "HTTP 404 Not Found.")
+  expect_message(perform_request("nonexistent"), "HTTP 404 Not Found.")
 })

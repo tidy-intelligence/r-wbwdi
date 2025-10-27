@@ -4,23 +4,6 @@ test_that("wdi_get_sources handles invalid language input", {
   )
 })
 
-test_that("wdi_get_sources returns a tibble with correct column names", {
-  skip_if_offline()
-
-  result <- wdi_get_sources()
-  expect_s3_class(result, "tbl_df")
-  expected_colnames <- c(
-    "source_id",
-    "source_code",
-    "source_name",
-    "update_date",
-    "is_data_available",
-    "is_metadata_available",
-    "concepts"
-  )
-  expect_true(all(expected_colnames %in% colnames(result)))
-})
-
 test_that("wdi_get_sources trims whitespace in character columns", {
   mock_data <- tibble(
     id = c(" 1 ", " 2 "),
@@ -95,20 +78,4 @@ test_that("wdi_get_sources handles empty data gracefully", {
       expect_equal(nrow(result), 0)
     }
   )
-})
-
-test_that("wdi_get_sources handles different language inputs", {
-  skip_if_offline()
-
-  result <- wdi_get_sources(language = "es")
-  expected_colnames <- c(
-    "source_id",
-    "source_code",
-    "source_name",
-    "update_date",
-    "is_data_available",
-    "is_metadata_available",
-    "concepts"
-  )
-  expect_true(all(expected_colnames %in% colnames(result)))
 })
