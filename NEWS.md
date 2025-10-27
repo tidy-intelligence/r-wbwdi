@@ -1,5 +1,9 @@
 # wbwdi (development version)
 
+## Minor improvements and bug fixes
+
+- Remove `renv`
+
 # wbwdi 1.0.1
 
 ## Minor improvements and bug fixes
