@@ -74,7 +74,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://forcats.tidyverse.org/" class="external-link">forcats</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>wbwdi</code> packages focuses on providing access to World
 Bank Development Indicators (WDI), which focus on observations per
 entity and year. The <code>wbids</code> package, on the other hand,
@@ -94,8 +94,11 @@ with GDP in USD (“NY.GDP.MKTP.CD”).</p>
 <span></span>
 <span><span class="co"># Fetch total government in USD via GDP</span></span>
 <span><span class="va">government_debt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wdi_get.html">wdi_get</a></span><span class="op">(</span></span>
-<span>  <span class="st">"ZMB"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NY.GDP.MKTP.CD"</span>, <span class="st">"GC.DOD.TOTL.GD.ZS"</span><span class="op">)</span>,</span>
-<span>  <span class="va">start_year</span>, <span class="va">end_year</span>, format <span class="op">=</span> <span class="st">"wide"</span></span>
+<span>  <span class="st">"ZMB"</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NY.GDP.MKTP.CD"</span>, <span class="st">"GC.DOD.TOTL.GD.ZS"</span><span class="op">)</span>,</span>
+<span>  <span class="va">start_year</span>,</span>
+<span>  <span class="va">end_year</span>,</span>
+<span>  format <span class="op">=</span> <span class="st">"wide"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">government_debt</span> <span class="op">&lt;-</span> <span class="va">government_debt</span> <span class="op">|&gt;</span></span>
@@ -107,10 +110,12 @@ with GDP in USD (“NY.GDP.MKTP.CD”).</p>
 <span></span>
 <span><span class="co"># Fetch total external debt in USD</span></span>
 <span><span class="va">external_debt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://teal-insights.github.io/r-wbids/reference/ids_get.html" class="external-link">ids_get</a></span><span class="op">(</span></span>
-<span>  <span class="st">"ZMB"</span>, <span class="st">"DT.DOD.DPPG.CD"</span>, <span class="st">"all"</span>,</span>
-<span>  <span class="va">start_year</span>, <span class="va">end_year</span></span>
-<span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>entity_id <span class="op">=</span> <span class="va">geography_id</span><span class="op">)</span></span>
+<span>  <span class="st">"ZMB"</span>,</span>
+<span>  <span class="st">"DT.DOD.DPPG.CD"</span>,</span>
+<span>  <span class="st">"all"</span>,</span>
+<span>  <span class="va">start_year</span>,</span>
+<span>  <span class="va">end_year</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Counterpart "WLD" indicates whole world</span></span>
 <span><span class="va">debt_levels</span> <span class="op">&lt;-</span> <span class="va">external_debt</span> <span class="op">|&gt;</span></span>
@@ -125,8 +130,12 @@ with GDP in USD (“NY.GDP.MKTP.CD”).</p>
 <span><span class="va">debt_levels</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">debt</span> <span class="op">/</span> <span class="fl">1e9</span>, color <span class="op">=</span> <span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"Debt Stock (in billion USD)"</span>, color <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>       title <span class="op">=</span> <span class="st">"Total Government and External Debt in Zambia"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Debt Stock (in billion USD)"</span>,</span>
+<span>    color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    title <span class="op">=</span> <span class="st">"Total Government and External Debt in Zambia"</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: Removed 1 row containing missing values or values outside the scale range</span></span>
 <span><span class="co">#&gt; (`geom_line()`).</span></span></code></pre></div>
 <p><img src="using-wbwdi-with-wbids_files/figure-html/unnamed-chunk-2-1.png" width="672"></p>
@@ -139,7 +148,8 @@ debt by creditor, as the next figure shows.</p>
 <span>    <span class="va">counterpart_id</span> <span class="op">!=</span> <span class="st">"WLD"</span> <span class="op">&amp;</span> <span class="va">year</span> <span class="op">==</span> <span class="fl">2022</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://teal-insights.github.io/r-wbids/reference/ids_list_counterparts.html" class="external-link">ids_list_counterparts</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">counterpart_id</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://teal-insights.github.io/r-wbids/reference/ids_list_counterparts.html" class="external-link">ids_list_counterparts</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">counterpart_id</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="va">debt_breakdown</span> <span class="op">|&gt;</span></span>
@@ -147,9 +157,12 @@ debt by creditor, as the next figure shows.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">value</span> <span class="op">/</span> <span class="fl">1e9</span>, y <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html" class="external-link">fct_reorder</a></span><span class="op">(</span><span class="va">counterpart_name</span>, <span class="va">value</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"External debt (in billion USD)"</span>, y <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>       title <span class="op">=</span> <span class="st">"Top 5 creditors of Zambia in 2022"</span>,</span>
-<span>       subtitle <span class="op">=</span> <span class="st">"External debt stocks, public and publicly guaranteed"</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"External debt (in billion USD)"</span>,</span>
+<span>    y <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    title <span class="op">=</span> <span class="st">"Top 5 creditors of Zambia in 2022"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"External debt stocks, public and publicly guaranteed"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="using-wbwdi-with-wbids_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
 <p>For more applications and insights into international debt, see <a href="https://teal-insights.github.io/teal-insights-guide-to-wbids/" class="external-link">Teal
 Insights’ Guide to Working with the World Bank International Debt
@@ -164,7 +177,7 @@ Statistics</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

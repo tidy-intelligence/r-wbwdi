@@ -81,52 +81,52 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidy-intelligence/r-wbwdi" class="external-link">wbwdi</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/wdi_get.html">wdi_get</a></span><span class="op">(</span></span>
-<span>  entities <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MEX"</span>, <span class="st">"CAN"</span>, <span class="st">"USA"</span><span class="op">)</span>, </span>
+<span>  entities <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MEX"</span>, <span class="st">"CAN"</span>, <span class="st">"USA"</span><span class="op">)</span>,</span>
 <span>  indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NY.GDP.PCAP.KD"</span>, <span class="st">"SP.POP.TOTL"</span><span class="op">)</span>,</span>
-<span>  start_year <span class="op">=</span> <span class="fl">2020</span>, </span>
+<span>  start_year <span class="op">=</span> <span class="fl">2020</span>,</span>
 <span>  end_year <span class="op">=</span> <span class="fl">2024</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 24 × 4</span></span>
+<span><span class="co">#&gt; # A tibble: 30 × 4</span></span>
 <span><span class="co">#&gt;    entity_id indicator_id    year  value</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt;  &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt;  1 CAN       NY.GDP.PCAP.KD  2020 42366.</span></span>
 <span><span class="co">#&gt;  2 MEX       NY.GDP.PCAP.KD  2020  9235.</span></span>
-<span><span class="co">#&gt;  3 USA       NY.GDP.PCAP.KD  2020 59493.</span></span>
-<span><span class="co">#&gt;  4 CAN       NY.GDP.PCAP.KD  2021 44360.</span></span>
+<span><span class="co">#&gt;  3 USA       NY.GDP.PCAP.KD  2020 59484.</span></span>
+<span><span class="co">#&gt;  4 CAN       NY.GDP.PCAP.KD  2021 44639.</span></span>
 <span><span class="co">#&gt;  5 MEX       NY.GDP.PCAP.KD  2021  9728.</span></span>
-<span><span class="co">#&gt;  6 USA       NY.GDP.PCAP.KD  2021 62996.</span></span>
-<span><span class="co">#&gt;  7 CAN       NY.GDP.PCAP.KD  2022 45227.</span></span>
-<span><span class="co">#&gt;  8 MEX       NY.GDP.PCAP.KD  2022 10011.</span></span>
-<span><span class="co">#&gt;  9 USA       NY.GDP.PCAP.KD  2022 64342.</span></span>
-<span><span class="co">#&gt; 10 CAN       NY.GDP.PCAP.KD  2023 44469.</span></span>
-<span><span class="co">#&gt; # ℹ 14 more rows</span></span></code></pre></div>
+<span><span class="co">#&gt;  6 USA       NY.GDP.PCAP.KD  2021 62987.</span></span>
+<span><span class="co">#&gt;  7 CAN       NY.GDP.PCAP.KD  2022 45678.</span></span>
+<span><span class="co">#&gt;  8 MEX       NY.GDP.PCAP.KD  2022 10013.</span></span>
+<span><span class="co">#&gt;  9 USA       NY.GDP.PCAP.KD  2022 64198.</span></span>
+<span><span class="co">#&gt; 10 CAN       NY.GDP.PCAP.KD  2023 45048.</span></span>
+<span><span class="co">#&gt; # ℹ 20 more rows</span></span></code></pre></div>
 <p>You can also download these indicators for all entities and available dates:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get.html">wdi_get</a></span><span class="op">(</span></span>
-<span>  entities <span class="op">=</span> <span class="st">"all"</span>, </span>
+<span>  entities <span class="op">=</span> <span class="st">"all"</span>,</span>
 <span>  indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NY.GDP.PCAP.KD"</span>, <span class="st">"SP.POP.TOTL"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 34,048 × 4</span></span>
+<span><span class="co">#&gt; # A tibble: 34,580 × 4</span></span>
 <span><span class="co">#&gt;    entity_id indicator_id    year value</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt; &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt;  1 AFE       NY.GDP.PCAP.KD  1960 1172.</span></span>
-<span><span class="co">#&gt;  2 AFW       NY.GDP.PCAP.KD  1960 1111.</span></span>
+<span><span class="co">#&gt;  2 AFW       NY.GDP.PCAP.KD  1960 1122.</span></span>
 <span><span class="co">#&gt;  3 ARB       NY.GDP.PCAP.KD  1960   NA </span></span>
-<span><span class="co">#&gt;  4 CSS       NY.GDP.PCAP.KD  1960 4422.</span></span>
+<span><span class="co">#&gt;  4 CSS       NY.GDP.PCAP.KD  1960 4377.</span></span>
 <span><span class="co">#&gt;  5 CEB       NY.GDP.PCAP.KD  1960   NA </span></span>
 <span><span class="co">#&gt;  6 EAR       NY.GDP.PCAP.KD  1960 1062.</span></span>
-<span><span class="co">#&gt;  7 EAS       NY.GDP.PCAP.KD  1960 1144.</span></span>
-<span><span class="co">#&gt;  8 EAP       NY.GDP.PCAP.KD  1960  323.</span></span>
-<span><span class="co">#&gt;  9 TEA       NY.GDP.PCAP.KD  1960  327.</span></span>
+<span><span class="co">#&gt;  7 EAS       NY.GDP.PCAP.KD  1960 1146.</span></span>
+<span><span class="co">#&gt;  8 EAP       NY.GDP.PCAP.KD  1960  325.</span></span>
+<span><span class="co">#&gt;  9 TEA       NY.GDP.PCAP.KD  1960  330.</span></span>
 <span><span class="co">#&gt; 10 EMU       NY.GDP.PCAP.KD  1960 9943.</span></span>
-<span><span class="co">#&gt; # ℹ 34,038 more rows</span></span></code></pre></div>
+<span><span class="co">#&gt; # ℹ 34,570 more rows</span></span></code></pre></div>
 <p>Some indicators are also available on a monthly basis, e.g.:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get.html">wdi_get</a></span><span class="op">(</span></span>
-<span>  entities <span class="op">=</span> <span class="st">"AUT"</span>, </span>
-<span>  indicators <span class="op">=</span> <span class="st">"DPANUSSPB"</span>,         </span>
-<span>  start_year <span class="op">=</span> <span class="fl">2012</span>, </span>
-<span>  end_year <span class="op">=</span> <span class="fl">2015</span>, </span>
+<span>  entities <span class="op">=</span> <span class="st">"AUT"</span>,</span>
+<span>  indicators <span class="op">=</span> <span class="st">"DPANUSSPB"</span>,</span>
+<span>  start_year <span class="op">=</span> <span class="fl">2012</span>,</span>
+<span>  end_year <span class="op">=</span> <span class="fl">2015</span>,</span>
 <span>  frequency <span class="op">=</span> <span class="st">"month"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 48 × 5</span></span>
@@ -146,10 +146,10 @@
 <p>Similarly, there are also some indicators available on a quarterly frequency, e.g.:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get.html">wdi_get</a></span><span class="op">(</span></span>
-<span>  entities <span class="op">=</span> <span class="st">"NGA"</span>, </span>
-<span>  indicators <span class="op">=</span>  <span class="st">"DT.DOD.DECT.CD.TL.US"</span>,</span>
-<span>  start_year <span class="op">=</span> <span class="fl">2012</span>, </span>
-<span>  end_year <span class="op">=</span> <span class="fl">2015</span>, </span>
+<span>  entities <span class="op">=</span> <span class="st">"NGA"</span>,</span>
+<span>  indicators <span class="op">=</span> <span class="st">"DT.DOD.DECT.CD.TL.US"</span>,</span>
+<span>  start_year <span class="op">=</span> <span class="fl">2012</span>,</span>
+<span>  end_year <span class="op">=</span> <span class="fl">2015</span>,</span>
 <span>  frequency <span class="op">=</span> <span class="st">"quarter"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 16 × 5</span></span>
@@ -174,7 +174,7 @@
 <p>You can get a list of all indicators supported by the WDI API via:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/wdi_get_indicators.html">wdi_get_indicators</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 22,806 × 7</span></span>
+<span><span class="co">#&gt; # A tibble: 29,244 × 7</span></span>
 <span><span class="co">#&gt;    indicator_id         indicator_name         source_id source_name source_note</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;                &lt;chr&gt;                      &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;      </span></span>
 <span><span class="co">#&gt;  1 1.0.HCount.1.90usd   Poverty Headcount ($1…        37 LAC Equity… "The pover…</span></span>
@@ -187,7 +187,7 @@
 <span><span class="co">#&gt;  8 1.0.PGap.2.5usd      Poverty Gap ($2.50 a …        37 LAC Equity… "The pover…</span></span>
 <span><span class="co">#&gt;  9 1.0.PGap.Poor4uds    Poverty Gap ($4 a day)        37 LAC Equity… "The pover…</span></span>
 <span><span class="co">#&gt; 10 1.0.PSev.1.90usd     Poverty Severity ($1.…        37 LAC Equity… "The pover…</span></span>
-<span><span class="co">#&gt; # ℹ 22,796 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 29,234 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 2 more variables: source_organization &lt;chr&gt;, topics &lt;list&gt;</span></span></code></pre></div>
 <p>You can get a list of all supported entities via:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -197,7 +197,7 @@
 <span><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;    </span></span>
 <span><span class="co">#&gt;  1 ABW       AW              country     Oranjestad       Aruba        LCN      </span></span>
 <span><span class="co">#&gt;  2 AFE       ZH              aggregates  &lt;NA&gt;             Africa East… NA       </span></span>
-<span><span class="co">#&gt;  3 AFG       AF              country     Kabul            Afghanistan  SAS      </span></span>
+<span><span class="co">#&gt;  3 AFG       AF              country     Kabul            Afghanistan  MEA      </span></span>
 <span><span class="co">#&gt;  4 AFR       A9              aggregates  &lt;NA&gt;             Africa       NA       </span></span>
 <span><span class="co">#&gt;  5 AFW       ZI              aggregates  &lt;NA&gt;             Africa West… NA       </span></span>
 <span><span class="co">#&gt;  6 AGO       AO              country     Luanda           Angola       SSF      </span></span>
@@ -247,7 +247,7 @@
 <span>  keywords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"inequality"</span>, <span class="st">"gender"</span><span class="op">)</span>,</span>
 <span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"indicator_name"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 157 × 7</span></span>
+<span><span class="co">#&gt; # A tibble: 466 × 7</span></span>
 <span><span class="co">#&gt;    indicator_id         indicator_name         source_id source_name source_note</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;                &lt;chr&gt;                      &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;      </span></span>
 <span><span class="co">#&gt;  1 2.3_GIR.GPI          "Gender parity index …        34 Global Par… "Ratio of …</span></span>
@@ -260,7 +260,7 @@
 <span><span class="co">#&gt;  8 BI.WAG.PREM.PB.FM    "P-Value: Public sect…        64 Worldwide …  &lt;NA&gt;      </span></span>
 <span><span class="co">#&gt;  9 BI.WAG.PREM.PB.FM.CA "P-Value: Gender wage…        64 Worldwide …  &lt;NA&gt;      </span></span>
 <span><span class="co">#&gt; 10 BI.WAG.PREM.PB.FM.ED "P-Value: Gender wage…        64 Worldwide …  &lt;NA&gt;      </span></span>
-<span><span class="co">#&gt; # ℹ 147 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 456 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 2 more variables: source_organization &lt;chr&gt;, topics &lt;list&gt;</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -306,7 +306,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Christoph Scheuch <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0009-0004-0423-6819" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Christoph Scheuch <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0009-0004-0423-6819" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 
@@ -329,7 +329,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

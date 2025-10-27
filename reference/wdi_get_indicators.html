@@ -116,7 +116,7 @@ tibble format.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Download all supported indicators in English</span></span></span>
 <span class="r-in"><span><span class="fu">wdi_get_indicators</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 22,806 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 29,244 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    indicator_id         indicator_name         source_id source_name source_note</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1.0.HCount.1.90usd   Poverty Headcount ($1…        37 LAC Equity… <span style="color: #949494;">"</span>The pover…</span>
@@ -129,12 +129,12 @@ tibble format.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1.0.PGap.2.5usd      Poverty Gap ($2.50 a …        37 LAC Equity… <span style="color: #949494;">"</span>The pover…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1.0.PGap.Poor4uds    Poverty Gap ($4 a day)        37 LAC Equity… <span style="color: #949494;">"</span>The pover…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1.0.PSev.1.90usd     Poverty Severity ($1.…        37 LAC Equity… <span style="color: #949494;">"</span>The pover…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 22,796 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 29,234 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: source_organization &lt;chr&gt;, topics &lt;list&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Download all supported indicators in Spanish</span></span></span>
 <span class="r-in"><span><span class="fu">wdi_get_indicators</span><span class="op">(</span>language <span class="op">=</span> <span class="st">"es"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 22,806 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 29,244 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    indicator_id         indicator_name         source_id source_name source_note</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1.0.HCount.1.90usd   <span style="color: #949494;">"</span>Tasa de Incidencia d…        37 <span style="color: #949494;">""</span>          <span style="color: #949494;">"</span>Tasa de I…</span>
@@ -147,7 +147,7 @@ tibble format.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1.0.PGap.2.5usd      <span style="color: #949494;">"</span>Brecha de Pobreza ($…        37 <span style="color: #949494;">""</span>          <span style="color: #949494;">"</span>La Brecha…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1.0.PGap.Poor4uds    <span style="color: #949494;">"</span>Brecha de Pobreza ($…        37 <span style="color: #949494;">""</span>          <span style="color: #949494;">"</span>La Brecha…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1.0.PSev.1.90usd     <span style="color: #949494;">"</span>Severidad de la Pobr…        37 <span style="color: #949494;">""</span>          <span style="color: #949494;">"</span>El índice…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 22,796 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 29,234 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: source_organization &lt;chr&gt;, topics &lt;list&gt;</span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
@@ -161,7 +161,7 @@ tibble format.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

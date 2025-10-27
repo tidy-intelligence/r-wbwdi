@@ -85,7 +85,7 @@ API</a>. Each indicator is accompanied by metadata such as its unit of
 measurement, source, and associated topics.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/wdi_get_indicators.html">wdi_get_indicators</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 22,806 × 7</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 29,244 × 7</span></span></span>
 <span><span class="co">#&gt;    indicator_id         indicator_name         source_id source_name source_note</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1.0.HCount.1.90usd   Poverty Headcount ($1…        37 LAC Equity… <span style="color: #949494;">"</span>The pover…</span></span>
@@ -98,13 +98,13 @@ measurement, source, and associated topics.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1.0.PGap.2.5usd      Poverty Gap ($2.50 a …        37 LAC Equity… <span style="color: #949494;">"</span>The pover…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1.0.PGap.Poor4uds    Poverty Gap ($4 a day)        37 LAC Equity… <span style="color: #949494;">"</span>The pover…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1.0.PSev.1.90usd     Poverty Severity ($1.…        37 LAC Equity… <span style="color: #949494;">"</span>The pover…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22,796 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 29,234 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: source_organization &lt;chr&gt;, topics &lt;list&gt;</span></span></span></code></pre></div>
 <p>You can also get the list of supported indicators in a different
 language. For example, to retrieve the indicators in Spanish:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/wdi_get_indicators.html">wdi_get_indicators</a></span><span class="op">(</span>language <span class="op">=</span> <span class="st">"es"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 22,806 × 7</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 29,244 × 7</span></span></span>
 <span><span class="co">#&gt;    indicator_id         indicator_name         source_id source_name source_note</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1.0.HCount.1.90usd   <span style="color: #949494;">"</span>Tasa de Incidencia d…        37 <span style="color: #949494;">""</span>          <span style="color: #949494;">"</span>Tasa de I…</span></span>
@@ -117,7 +117,7 @@ language. For example, to retrieve the indicators in Spanish:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1.0.PGap.2.5usd      <span style="color: #949494;">"</span>Brecha de Pobreza ($…        37 <span style="color: #949494;">""</span>          <span style="color: #949494;">"</span>La Brecha…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1.0.PGap.Poor4uds    <span style="color: #949494;">"</span>Brecha de Pobreza ($…        37 <span style="color: #949494;">""</span>          <span style="color: #949494;">"</span>La Brecha…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1.0.PSev.1.90usd     <span style="color: #949494;">"</span>Severidad de la Pobr…        37 <span style="color: #949494;">""</span>          <span style="color: #949494;">"</span>El índice…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22,796 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 29,234 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: source_organization &lt;chr&gt;, topics &lt;list&gt;</span></span></span></code></pre></div>
 <p>To get the list of languages supported by the API, call:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -153,7 +153,7 @@ aggregate, hence the more general table name.</p>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> ABW       AW              country     Oranjestad       Aruba        LCN      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> AFE       ZH              aggregates  <span style="color: #BB0000;">NA</span>               Africa East… NA       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> AFG       AF              country     Kabul            Afghanistan  SAS      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> AFG       AF              country     Kabul            Afghanistan  MEA      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> AFR       A9              aggregates  <span style="color: #BB0000;">NA</span>               Africa       NA       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> AFW       ZI              aggregates  <span style="color: #BB0000;">NA</span>               Africa West… NA       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> AGO       AO              country     Luanda           Angola       SSF      </span></span>
@@ -177,7 +177,7 @@ example, to view the supported entities in Chinese:</p>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> ABW       AW              country     奥拉涅斯塔德 阿鲁巴           LCN      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> AFE       ZH              country     <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>               NA       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> AFG       AF              country     喀布尔       阿富汗           SAS      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> AFG       AF              country     喀布尔       阿富汗           MEA      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> AFR       A9              country     <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>               NA       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> AFW       ZI              country     <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>               NA       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> AGO       AO              country     罗安达       安哥拉           SSF      </span></span>
@@ -205,20 +205,20 @@ Mexico, Canada, and the United States:</p>
 <span>  entities <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MEX"</span>, <span class="st">"CAN"</span>, <span class="st">"USA"</span><span class="op">)</span>,</span>
 <span>  indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NY.GDP.PCAP.KD"</span>, <span class="st">"SP.POP.TOTL"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 384 × 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 390 × 4</span></span></span>
 <span><span class="co">#&gt;    entity_id indicator_id    year  value</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> CAN       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960 <span style="text-decoration: underline;">15</span>432.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> MEX       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960  <span style="text-decoration: underline;">4</span>146.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> USA       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960 <span style="text-decoration: underline;">18</span>992.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> USA       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960 <span style="text-decoration: underline;">18</span>854.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> CAN       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>961 <span style="text-decoration: underline;">15</span>606.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> MEX       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>961  <span style="text-decoration: underline;">4</span>219.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> USA       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>961 <span style="text-decoration: underline;">19</span>109.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> USA       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>961 <span style="text-decoration: underline;">19</span>019.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> CAN       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>962 <span style="text-decoration: underline;">16</span>456.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> MEX       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>962  <span style="text-decoration: underline;">4</span>276.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> USA       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>962 <span style="text-decoration: underline;">19</span>965.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> USA       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>962 <span style="text-decoration: underline;">19</span>877.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> CAN       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>963 <span style="text-decoration: underline;">17</span>008.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 374 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 380 more rows</span></span></span></code></pre></div>
 <p>If you need the same indicators for all entities, you can pass
 <code>"all"</code> as the <code>entities</code> parameter:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -226,20 +226,20 @@ Mexico, Canada, and the United States:</p>
 <span>  entities <span class="op">=</span> <span class="st">"all"</span>,</span>
 <span>  indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NY.GDP.PCAP.KD"</span>, <span class="st">"SP.POP.TOTL"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 34,048 × 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 34,580 × 4</span></span></span>
 <span><span class="co">#&gt;    entity_id indicator_id    year value</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> AFE       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960 <span style="text-decoration: underline;">1</span>172.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> AFW       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960 <span style="text-decoration: underline;">1</span>111.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> AFW       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960 <span style="text-decoration: underline;">1</span>122.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> ARB       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960   <span style="color: #BB0000;">NA</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> CSS       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960 <span style="text-decoration: underline;">4</span>422.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> CSS       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960 <span style="text-decoration: underline;">4</span>377.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> CEB       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960   <span style="color: #BB0000;">NA</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> EAR       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960 <span style="text-decoration: underline;">1</span>062.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> EAS       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960 <span style="text-decoration: underline;">1</span>144.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> EAP       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960  323.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> TEA       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960  327.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> EAS       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960 <span style="text-decoration: underline;">1</span>146.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> EAP       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960  325.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> TEA       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960  330.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> EMU       NY.GDP.PCAP.KD  <span style="text-decoration: underline;">1</span>960 <span style="text-decoration: underline;">9</span>943.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 34,038 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 34,570 more rows</span></span></span></code></pre></div>
 <p>If you want to retrieve the indicators in a wide format, you can use
 the corresponding parameter.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -248,20 +248,20 @@ the corresponding parameter.</p>
 <span>  indicators <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NY.GDP.PCAP.KD"</span>, <span class="st">"SP.POP.TOTL"</span><span class="op">)</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"wide"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 64 × 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 65 × 4</span></span></span>
 <span><span class="co">#&gt;    entity_id  year NY.GDP.PCAP.KD SP.POP.TOTL</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> USA        <span style="text-decoration: underline;">1</span>960         <span style="text-decoration: underline;">18</span>992.   180<span style="text-decoration: underline;">671</span>000</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> USA        <span style="text-decoration: underline;">1</span>961         <span style="text-decoration: underline;">19</span>109.   183<span style="text-decoration: underline;">691</span>000</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> USA        <span style="text-decoration: underline;">1</span>962         <span style="text-decoration: underline;">19</span>965.   186<span style="text-decoration: underline;">538</span>000</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> USA        <span style="text-decoration: underline;">1</span>963         <span style="text-decoration: underline;">20</span>546.   189<span style="text-decoration: underline;">242</span>000</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> USA        <span style="text-decoration: underline;">1</span>964         <span style="text-decoration: underline;">21</span>438.   191<span style="text-decoration: underline;">889</span>000</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> USA        <span style="text-decoration: underline;">1</span>965         <span style="text-decoration: underline;">22</span>526.   194<span style="text-decoration: underline;">303</span>000</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> USA        <span style="text-decoration: underline;">1</span>966         <span style="text-decoration: underline;">23</span>715.   196<span style="text-decoration: underline;">560</span>000</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> USA        <span style="text-decoration: underline;">1</span>967         <span style="text-decoration: underline;">24</span>045.   198<span style="text-decoration: underline;">712</span>000</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> USA        <span style="text-decoration: underline;">1</span>968         <span style="text-decoration: underline;">24</span>948.   200<span style="text-decoration: underline;">706</span>000</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> USA        <span style="text-decoration: underline;">1</span>969         <span style="text-decoration: underline;">25</span>472.   202<span style="text-decoration: underline;">677</span>000</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 54 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> USA        <span style="text-decoration: underline;">1</span>960         <span style="text-decoration: underline;">18</span>854.   180<span style="text-decoration: underline;">671</span>000</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> USA        <span style="text-decoration: underline;">1</span>961         <span style="text-decoration: underline;">19</span>019.   183<span style="text-decoration: underline;">691</span>000</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> USA        <span style="text-decoration: underline;">1</span>962         <span style="text-decoration: underline;">19</span>877.   186<span style="text-decoration: underline;">538</span>000</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> USA        <span style="text-decoration: underline;">1</span>963         <span style="text-decoration: underline;">20</span>447.   189<span style="text-decoration: underline;">242</span>000</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> USA        <span style="text-decoration: underline;">1</span>964         <span style="text-decoration: underline;">21</span>327.   191<span style="text-decoration: underline;">889</span>000</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> USA        <span style="text-decoration: underline;">1</span>965         <span style="text-decoration: underline;">22</span>431.   194<span style="text-decoration: underline;">303</span>000</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> USA        <span style="text-decoration: underline;">1</span>966         <span style="text-decoration: underline;">23</span>635.   196<span style="text-decoration: underline;">560</span>000</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> USA        <span style="text-decoration: underline;">1</span>967         <span style="text-decoration: underline;">24</span>021.   198<span style="text-decoration: underline;">712</span>000</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> USA        <span style="text-decoration: underline;">1</span>968         <span style="text-decoration: underline;">24</span>951.   200<span style="text-decoration: underline;">706</span>000</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> USA        <span style="text-decoration: underline;">1</span>969         <span style="text-decoration: underline;">25</span>480.   202<span style="text-decoration: underline;">677</span>000</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 55 more rows</span></span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -287,7 +287,7 @@ function:</p>
 <span>  keywords <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"inequality"</span>, <span class="st">"gender"</span><span class="op">)</span>,</span>
 <span>  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"indicator_name"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 157 × 7</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 466 × 7</span></span></span>
 <span><span class="co">#&gt;    indicator_id         indicator_name         source_id source_name source_note</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2.3_GIR.GPI          <span style="color: #949494;">"</span>Gender parity index …        34 Global Par… <span style="color: #949494;">"</span>Ratio of …</span></span>
@@ -300,7 +300,7 @@ function:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> BI.WAG.PREM.PB.FM    <span style="color: #949494;">"</span>P-Value: Public sect…        64 Worldwide …  <span style="color: #BB0000;">NA</span>        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> BI.WAG.PREM.PB.FM.CA <span style="color: #949494;">"</span>P-Value: Gender wage…        64 Worldwide …  <span style="color: #BB0000;">NA</span>        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> BI.WAG.PREM.PB.FM.ED <span style="color: #949494;">"</span>P-Value: Gender wage…        64 Worldwide …  <span style="color: #BB0000;">NA</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 147 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 456 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: source_organization &lt;chr&gt;, topics &lt;list&gt;</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -326,7 +326,7 @@ please consider opening an issue in the package repository on <a href="https://g
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
