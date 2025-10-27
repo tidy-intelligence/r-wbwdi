@@ -29,10 +29,12 @@
 wdi_get_topics <- function(language = "en") {
   topics_raw <- perform_request("topics", language)
 
-  topics_processed <- as_tibble(topics_raw) |>
-    mutate(id = as.integer(.data$id)) |>
-    mutate(across(where(is.character), trimws)) |>
-    select(topic_id = "id", topic_name = "value", topic_note = "sourceNote")
+  if (!is.null(topics_raw)) {
+    topics_processed <- as_tibble(topics_raw) |>
+      mutate(id = as.integer(.data$id)) |>
+      mutate(across(where(is.character), trimws)) |>
+      select(topic_id = "id", topic_name = "value", topic_note = "sourceNote")
 
-  topics_processed
+    topics_processed
+  }
 }

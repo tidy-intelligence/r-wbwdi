@@ -50,46 +50,76 @@ perform_request <- function(
   base_url = "https://api.worldbank.org/v2/",
   max_tries = 10L
 ) {
-
   validate_per_page(per_page)
   validate_max_tries(max_tries)
 
   req <- create_request(
-    base_url, resource, language, per_page, date, most_recent_only, source
+    base_url,
+    resource,
+    language,
+    per_page,
+    date,
+    most_recent_only,
+    source
   ) |>
     req_retry(max_tries = max_tries)
 
-  resp <- req_perform(req)
+  resp <- tryCatch(
+    {
+      resp <- req |>
+        httr2::req_perform()
+    },
+    error = function(e) {
+      cli::cli_alert_warning(
+        paste(
+          "Failed to retrieve data from the World Bank API",
+          "for request {req_get_url(req)}.",
+          "Error message: {conditionMessage(e)}"
+        ),
+        wrap = TRUE
+      )
+      invisible(NULL)
+    }
+  )
 
-  if (is_request_error(resp)) {
-    handle_request_error(resp)
-  }
+  if (!is.null(resp)) {
+    if (is_request_error(resp)) {
+      handle_request_error(resp)
+    }
 
-  body <- resp_body_json(resp, simplifyVector = TRUE)
+    body <- resp_body_json(resp, simplifyVector = TRUE)
 
-  pages <- body[[1L]]$pages
+    pages <- body[[1L]]$pages
 
-  if (pages == 1L) {
-    out <- body[[2L]]
+    if (pages == 1L) {
+      out <- body[[2L]]
+    } else {
+      resps <- req |>
+        req_perform_iterative(
+          next_req = iterate_with_offset("page"),
+          max_reqs = pages,
+          progress = progress
+        )
+      out <- resps |>
+        purrr::map(function(x) resp_body_json(x, simplifyVector = TRUE)[[2]]) |>
+        purrr::reduce(union)
+    }
+
+    out
   } else {
-    resps <- req |>
-      req_perform_iterative(next_req = iterate_with_offset("page"),
-                            max_reqs = pages,
-                            progress = progress)
-    out <- resps |>
-      purrr::map(function(x) resp_body_json(x, simplifyVector = TRUE)[[2]]) |>
-      purrr::reduce(union)
+    resp
   }
-
-  out
-
 }
 
 #' @keywords internal
 #' @noRd
 validate_per_page <- function(per_page) {
-  if (!is.numeric(per_page) || per_page %% 1L != 0 ||
-        per_page < 1L || per_page > 32500L) {
+  if (
+    !is.numeric(per_page) ||
+      per_page %% 1L != 0 ||
+      per_page < 1L ||
+      per_page > 32500L
+  ) {
     cli::cli_abort("{.arg per_page} must be an integer between 1 and 32,500.")
   }
 }
@@ -105,12 +135,21 @@ validate_max_tries <- function(max_tries) {
 #' @keywords internal
 #' @noRd
 create_request <- function(
-  base_url, resource, language, per_page, date, most_recent_only, source
+  base_url,
+  resource,
+  language,
+  per_page,
+  date,
+  most_recent_only,
+  source
 ) {
   request(base_url) |>
     req_url_path_append(language, resource) |>
     req_url_query(
-      format = "json", per_page = per_page, date = date, source = source,
+      format = "json",
+      per_page = per_page,
+      date = date,
+      source = source,
       mrv = if (isTRUE(most_recent_only)) 1L else NULL
     ) |>
     req_user_agent(

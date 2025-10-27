@@ -197,9 +197,15 @@ validate_progress <- function(progress) {
 validate_source <- function(source) {
   if (!is.null(source)) {
     supported_sources <- wdi_get_sources()
-    if (!source %in% supported_sources$source_id) {
-      cli::cli_abort(
-        "{.arg source} is not supported. Please call {.fun wdi_get_sources()}."
+    if (!is.null(supported_sources)) {
+      if (!source %in% supported_sources$source_id) {
+        cli::cli_abort(
+          "{.arg source} is not supported. Please call {.fun wdi_get_sources()}."
+        )
+      }
+    } else {
+      cli::cli_alert_warning(
+        "The provided {.arg source} could not be verified. "
       )
     }
   }
@@ -259,43 +265,45 @@ get_indicator <- function(
     progress_req
   )
 
-  indicator_parsed <- as_tibble(indicator_raw) |>
-    rename(.value = "value") |>
-    unnest_wider("indicator") |>
-    rename(indicator_id = "id") |>
-    select(-"value") |>
-    unnest_wider("country") |>
-    rename(entity_id = "id") |>
-    select(-"value") |>
-    select("indicator_id", "entity_id", "date", ".value") |>
-    rename(value = ".value") |>
-    mutate(value = as.numeric(.data$value))
+  if (!is.null(indicator_raw)) {
+    indicator_parsed <- as_tibble(indicator_raw) |>
+      rename(.value = "value") |>
+      unnest_wider("indicator") |>
+      rename(indicator_id = "id") |>
+      select(-"value") |>
+      unnest_wider("country") |>
+      rename(entity_id = "id") |>
+      select(-"value") |>
+      select("indicator_id", "entity_id", "date", ".value") |>
+      rename(value = ".value") |>
+      mutate(value = as.numeric(.data$value))
 
-  if (grepl("Q", indicator_parsed$date[1], fixed = TRUE)) {
-    indicator <- indicator_parsed |>
-      mutate(
-        year = as.integer(substr(.data$date, 1, 4)),
-        quarter = as.integer(substr(.data$date, 6, 6))
-      ) |>
-      select(-"date") |>
-      arrange(.data$year, .data$quarter)
-  } else if (grepl("M", indicator_parsed$date[1], fixed = TRUE)) {
-    indicator <- indicator_parsed |>
-      mutate(
-        year = as.integer(substr(.data$date, 1, 4)),
-        month = as.integer(substr(.data$date, 6, 7))
-      ) |>
-      select(-"date") |>
-      arrange(.data$year, .data$month)
-  } else {
-    indicator <- indicator_parsed |>
-      mutate(year = as.integer(.data$date)) |>
-      select(-"date") |>
-      arrange(.data$year)
+    if (grepl("Q", indicator_parsed$date[1], fixed = TRUE)) {
+      indicator <- indicator_parsed |>
+        mutate(
+          year = as.integer(substr(.data$date, 1, 4)),
+          quarter = as.integer(substr(.data$date, 6, 6))
+        ) |>
+        select(-"date") |>
+        arrange(.data$year, .data$quarter)
+    } else if (grepl("M", indicator_parsed$date[1], fixed = TRUE)) {
+      indicator <- indicator_parsed |>
+        mutate(
+          year = as.integer(substr(.data$date, 1, 4)),
+          month = as.integer(substr(.data$date, 6, 7))
+        ) |>
+        select(-"date") |>
+        arrange(.data$year, .data$month)
+    } else {
+      indicator <- indicator_parsed |>
+        mutate(year = as.integer(.data$date)) |>
+        select(-"date") |>
+        arrange(.data$year)
+    }
+
+    indicator <- indicator |>
+      relocate("value", .after = last_col())
+
+    indicator
   }
-
-  indicator <- indicator |>
-    relocate("value", .after = last_col())
-
-  indicator
 }

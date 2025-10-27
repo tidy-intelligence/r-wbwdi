@@ -51,36 +51,38 @@ wdi_get_indicators <- function(language = "en", per_page = 32500L) {
     per_page = per_page
   )
 
-  indicators_processed <- as_tibble(indicators_raw) |>
-    rename(indicator_id = "id", indicator_name = "name") |>
-    unnest_wider("source") |>
-    rename(
-      source_id = "id",
-      source_name = "value",
-      source_note = "sourceNote",
-      source_organization = "sourceOrganization"
-    ) |>
-    select(-"unit") |>
-    mutate(
-      source_id = as.integer(.data$source_id),
-      source_note = na_if(.data$source_note, ""),
-      source_organization = na_if(.data$source_organization, "")
-    )
+  if (!is.null(indicators_raw)) {
+    indicators_processed <- as_tibble(indicators_raw) |>
+      rename(indicator_id = "id", indicator_name = "name") |>
+      unnest_wider("source") |>
+      rename(
+        source_id = "id",
+        source_name = "value",
+        source_note = "sourceNote",
+        source_organization = "sourceOrganization"
+      ) |>
+      select(-"unit") |>
+      mutate(
+        source_id = as.integer(.data$source_id),
+        source_note = na_if(.data$source_note, ""),
+        source_organization = na_if(.data$source_organization, "")
+      )
 
-  topics <- indicators_processed |>
-    select("indicator_id", "topics") |>
-    unnest_longer("topics") |>
-    unnest_wider("topics") |>
-    rename(topic_id = "id", topic_name = "value") |>
-    mutate(
-      topic_id = as.integer(.data$topic_id),
-      topic_name = trimws(.data$topic_name)
-    ) |>
-    nest(topics = c("topic_id", "topic_name"))
+    topics <- indicators_processed |>
+      select("indicator_id", "topics") |>
+      unnest_longer("topics") |>
+      unnest_wider("topics") |>
+      rename(topic_id = "id", topic_name = "value") |>
+      mutate(
+        topic_id = as.integer(.data$topic_id),
+        topic_name = trimws(.data$topic_name)
+      ) |>
+      nest(topics = c("topic_id", "topic_name"))
 
-  indicators_processed <- indicators_processed |>
-    select(-"topics") |>
-    left_join(topics, join_by("indicator_id"))
+    indicators_processed <- indicators_processed |>
+      select(-"topics") |>
+      left_join(topics, join_by("indicator_id"))
 
-  indicators_processed
+    indicators_processed
+  }
 }
