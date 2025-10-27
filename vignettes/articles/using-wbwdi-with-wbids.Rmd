@@ -35,8 +35,11 @@ end_year <- 2022
 
 # Fetch total government in USD via GDP
 government_debt <- wdi_get(
-  "ZMB", c("NY.GDP.MKTP.CD", "GC.DOD.TOTL.GD.ZS"),
-  start_year, end_year, format = "wide"
+  "ZMB",
+  c("NY.GDP.MKTP.CD", "GC.DOD.TOTL.GD.ZS"),
+  start_year,
+  end_year,
+  format = "wide"
 )
 
 government_debt <- government_debt |>
@@ -48,10 +51,12 @@ government_debt <- government_debt |>
 
 # Fetch total external debt in USD
 external_debt <- ids_get(
-  "ZMB", "DT.DOD.DPPG.CD", "all",
-  start_year, end_year
-) |>
-  rename(entity_id = geography_id)
+  "ZMB",
+  "DT.DOD.DPPG.CD",
+  "all",
+  start_year,
+  end_year
+)
 
 # Counterpart "WLD" indicates whole world
 debt_levels <- external_debt |>
@@ -66,8 +71,12 @@ debt_levels <- external_debt |>
 debt_levels |>
   ggplot(aes(x = year, y = debt / 1e9, color = type)) +
   geom_line() +
-  labs(x = NULL, y = "Debt Stock (in billion USD)", color = NULL,
-       title = "Total Government and External Debt in Zambia")
+  labs(
+    x = NULL,
+    y = "Debt Stock (in billion USD)",
+    color = NULL,
+    title = "Total Government and External Debt in Zambia"
+  )
 ```
 
 The great thing about IDS is that it allows for breakdown of external debt by creditor, as the next figure shows.
@@ -79,7 +88,8 @@ debt_breakdown <- external_debt |>
     counterpart_id != "WLD" & year == 2022
   ) |>
   left_join(
-    ids_list_counterparts(), join_by(counterpart_id)
+    ids_list_counterparts(),
+    join_by(counterpart_id)
   )
 
 debt_breakdown |>
@@ -87,9 +97,12 @@ debt_breakdown |>
   slice(1:5) |>
   ggplot(aes(x = value / 1e9, y = fct_reorder(counterpart_name, value))) +
   geom_col() +
-  labs(x = "External debt (in billion USD)", y = NULL,
-       title = "Top 5 creditors of Zambia in 2022",
-       subtitle = "External debt stocks, public and publicly guaranteed")
+  labs(
+    x = "External debt (in billion USD)",
+    y = NULL,
+    title = "Top 5 creditors of Zambia in 2022",
+    subtitle = "External debt stocks, public and publicly guaranteed"
+  )
 ```
 
 For more applications and insights into international debt, see [Teal Insights' Guide to Working with the World Bank International Debt Statistics](https://teal-insights.github.io/teal-insights-guide-to-wbids/).
