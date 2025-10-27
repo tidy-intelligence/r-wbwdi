@@ -224,3 +224,15 @@ test_that("validate_format checks valid formats", {
   expect_silent(validate_format("long"))
   expect_silent(validate_format("wide"))
 })
+
+test_that("prints a CLI warning when sources cannot be verified (NULL)", {
+  with_mocked_bindings(
+    wdi_get_sources = function() NULL,
+    {
+      expect_message(
+        validate_source("anything"),
+        regexp = "could not be verified"
+      )
+    }
+  )
+})
