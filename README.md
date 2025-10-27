@@ -59,9 +59,9 @@ WDI series for multiple entities and specific date ranges.
 library(wbwdi)
 
 wdi_get(
-  entities = c("MEX", "CAN", "USA"), 
+  entities = c("MEX", "CAN", "USA"),
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
-  start_year = 2020, 
+  start_year = 2020,
   end_year = 2024
 )
 #> # A tibble: 30 × 4
@@ -85,7 +85,7 @@ dates:
 
 ``` r
 wdi_get(
-  entities = "all", 
+  entities = "all",
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL")
 )
 #> # A tibble: 34,580 × 4
@@ -108,10 +108,10 @@ Some indicators are also available on a monthly basis, e.g.:
 
 ``` r
 wdi_get(
-  entities = "AUT", 
-  indicators = "DPANUSSPB",         
-  start_year = 2012, 
-  end_year = 2015, 
+  entities = "AUT",
+  indicators = "DPANUSSPB",
+  start_year = 2012,
+  end_year = 2015,
   frequency = "month"
 )
 #> # A tibble: 48 × 5
@@ -135,10 +135,10 @@ frequency, e.g.:
 
 ``` r
 wdi_get(
-  entities = "NGA", 
-  indicators =  "DT.DOD.DECT.CD.TL.US",
-  start_year = 2012, 
-  end_year = 2015, 
+  entities = "NGA",
+  indicators = "DT.DOD.DECT.CD.TL.US",
+  start_year = 2012,
+  end_year = 2015,
   frequency = "quarter"
 )
 #> # A tibble: 16 × 5
