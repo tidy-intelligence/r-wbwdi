@@ -1,8 +1,11 @@
-# wbwdi (development version)
+# wbwdi 1.0.2
 
 ## Minor improvements and bug fixes
 
-- Remove `renv`
+- Remove `renv`.
+- Add graceful handling of API errors.
+- Apply Air formatting.
+- Update `wbids` usage in article to new version. 
 
 # wbwdi 1.0.1
 
