@@ -7,7 +7,7 @@ Authors@R: c(
             role = c("aut", "cre", "cph"),
             comment = c(ORCID = "0009-0004-0423-6819"))
     )
-Description: Access and analyze the World Bank’s World Development Indicators 
+Description: Access and analyze the World Bank's World Development Indicators 
   (WDI) using the corresponding API <https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation>. 
   WDI provides more than 24,000 country or region-level indicators for various
   contexts. 'wbwdi' enables users to download, process and work with WDI
@@ -15,7 +15,7 @@ Description: Access and analyze the World Bank’s World Development Indicators
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Depends: 
     R (>= 4.1)
 Imports:

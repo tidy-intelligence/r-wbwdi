@@ -83,7 +83,7 @@ API requests for each indicator and then combining the results into a single
 tidy data frame.
 }
 \examples{
-\dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 \donttest{
 # Download single indicator for multiple entities
 wdi_get(c("USA", "CAN", "GBR"), "NY.GDP.PCAP.KD")

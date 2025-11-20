@@ -137,26 +137,28 @@ wdi_get <- function(
       )
     )
 
-  if (format == "wide") {
-    indicators_processed <- indicators_processed |>
-      tidyr::pivot_wider(names_from = "indicator_id", values_from = "value")
-  }
+  if (nrow(indicators_processed) > 0) {
+    if (format == "wide") {
+      indicators_processed <- indicators_processed |>
+        tidyr::pivot_wider(names_from = "indicator_id", values_from = "value")
+    }
 
-  # The ISO3 field is not always populated and sometimes the id already is ISO3
-  if (
-    nrow(indicators_processed) > 0 &&
-      nchar(indicators_processed$entity_id[1]) == 2
-  ) {
-    entities <- wdi_get_entities()
+    # The ISO3 field is not always populated and sometimes the id already is ISO3
+    if (
+      nrow(indicators_processed) > 0 &&
+        nchar(indicators_processed$entity_id[1]) == 2
+    ) {
+      entities <- wdi_get_entities()
 
-    indicators_processed <- indicators_processed |>
-      rename(entity_iso2code = "entity_id") |>
-      left_join(
-        entities |>
-          select("entity_id", "entity_iso2code"),
-        join_by("entity_iso2code")
-      ) |>
-      select(-"entity_iso2code")
+      indicators_processed <- indicators_processed |>
+        rename(entity_iso2code = "entity_id") |>
+        left_join(
+          entities |>
+            select("entity_id", "entity_iso2code"),
+          join_by("entity_iso2code")
+        ) |>
+        select(-"entity_iso2code")
+    }
   }
 
   indicators_processed <- indicators_processed |>
@@ -308,5 +310,12 @@ get_indicator <- function(
       relocate("value", .after = last_col())
 
     indicator
+  } else {
+    tibble(
+      entity_id = character(),
+      indicator_id = character(),
+      year = integer(),
+      value = numeric()
+    )
   }
 }

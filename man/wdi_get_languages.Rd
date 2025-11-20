@@ -30,7 +30,7 @@ This function provides a simple reference for the supported
 languages when querying the World Bank API.
 }
 \examples{
-\dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 # Download all languages
 wdi_get_languages()
 \dontshow{\}) # examplesIf}

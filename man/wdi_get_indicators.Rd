@@ -45,7 +45,7 @@ metadata for all available indicators. It processes the response into a tidy
 tibble format.
 }
 \examples{
-\dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 \donttest{
 # Download all supported indicators in English
 wdi_get_indicators()

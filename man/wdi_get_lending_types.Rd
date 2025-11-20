@@ -35,7 +35,7 @@ for under World Bank programs. The language parameter allows the results to
 be returned in different languages as supported by the API.
 }
 \examples{
-\dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 # Download all lending types in English
 wdi_get_lending_types()
 \dontshow{\}) # examplesIf}
