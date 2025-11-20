@@ -236,3 +236,30 @@ test_that("prints a CLI warning when sources cannot be verified (NULL)", {
     }
   )
 })
+
+test_that("get_indicator returns empty tibble when indicator_raw is NULL", {
+  result <- with_mocked_bindings(
+    get_indicator(
+      indicator = "NY.GDP.MKTP.CD",
+      entities = "USA",
+      start_year = 2020,
+      end_year = 2021,
+      most_recent_only = FALSE,
+      language = "en",
+      per_page = 100,
+      progress = FALSE,
+      source = NULL
+    ),
+    perform_request = function(...) NULL
+  )
+
+  expect_s3_class(result, "tbl_df")
+  expect_equal(nrow(result), 0)
+  expect_equal(ncol(result), 4)
+  expect_named(result, c("entity_id", "indicator_id", "year", "value"))
+
+  expect_type(result$entity_id, "character")
+  expect_type(result$indicator_id, "character")
+  expect_type(result$year, "integer")
+  expect_type(result$value, "double")
+})

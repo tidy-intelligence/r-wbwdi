@@ -32,7 +32,7 @@ be used to refine your queries when accessing the World Bank API. Topics
 represent different areas of focus for data analysis.
 }
 \examples{
-\dontshow{if (curl::has_internet()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (curl::has_internet()) withAutoprint(\{ # examplesIf}
 # Download all available topics in English
 wdi_get_topics()
 \dontshow{\}) # examplesIf}
