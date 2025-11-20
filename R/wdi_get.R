@@ -143,7 +143,7 @@ wdi_get <- function(
         tidyr::pivot_wider(names_from = "indicator_id", values_from = "value")
     }
 
-    # The ISO3 field is not always populated and sometimes the id already is ISO3
+    # ISO3 field is not always populated and sometimes the id already is ISO3
     if (
       nrow(indicators_processed) > 0 &&
         nchar(indicators_processed$entity_id[1]) == 2
