@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-`wbwdi` is an R package to access and analyze the World Bank’s World Development Indicators (WDI) using the corresponding [API](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation). WDI provides more than 24,000 country or region-level indicators for various contexts. `wbwdi` enables users to download, process and work with WDI series across multiple entities and time periods. 
+`wbwdi` is an R package to access and analyze the World Bank's World Development Indicators (WDI) using the corresponding [API](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation). WDI provides more than 24,000 country or region-level indicators for various contexts. `wbwdi` enables users to download, process and work with WDI series across multiple entities and time periods. 
 
 The package is designed to work seamlessly with International Debt Statistics (IDS) provided through the [`wbids`](https://github.com/Teal-Insights/r-wbids) package and shares its syntax with its sibling Python library [`wbwdi`](https://github.com/tidy-intelligence/py-wbwdi). It follows the principles of the [econdataverse](https://www.econdataverse.org/).
 
@@ -31,7 +31,7 @@ This package is a product of Christoph Scheuch and not sponsored by or affiliate
 
 ## Installation
 
-You can install `wbwdi` from CRAN via:
+You can install `wbwdi` [from CRAN](https://CRAN.R-project.org/package=wbwdi) via:
 
 ```{r eval=FALSE}
 install.packages("wbwdi")
@@ -145,3 +145,14 @@ More specifically, the differences of existing CRAN releases (apart from interfa
 - [`WDI`](https://CRAN.R-project.org/package=WDI): uses cached data by default, does not allow downloading meta data from the WDI API (e.g., languages, sources, topics), has a GPL-3 license, and does neither use `httr` nor `httr2` for requests.
 - [`worldbank`](https://CRAN.R-project.org/package=worldbank): does not have a narrow focus because it includes the Poverty and Inequality Platform and Finances One API.
 - [`wbstats`](https://CRAN.R-project.org/package=wbstats): uses cached data by default, does not use `httr2`.
+
+## Contributing
+
+Contributions to `econdatasets` are welcome! If you'd like to contribute, please follow these steps:
+
+1. **Create an issue**: Before making changes, create an issue describing the bug or feature you're addressing.
+2. **Fork the repository**: After receiving supportive feedback from the package authors, fork the repository to your GitHub account.
+3. **Create a branch**: Create a branch for your changes with a descriptive name.
+4. **Make your changes**: Implement your bug fix or feature.
+5. **Test your changes**: Run tests to ensure your changes don't break existing functionality.
+6. **Submit a pull request**: Push your changes to your fork and submit a pull request to the main repository.
