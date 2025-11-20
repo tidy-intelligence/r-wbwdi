@@ -1,4 +1,6 @@
-# wbwdi (development version)
+# wbwdi 1.0.3
+
+## Minor improvements and bug fixes
 
 - Fix edge case where `wdi_get()` in case of empty result of `get_indicator()`.
 
