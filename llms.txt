@@ -20,7 +20,8 @@ World Bank WDI API.
 
 ## Installation
 
-You can install `wbwdi` from CRAN via:
+You can install `wbwdi` [from
+CRAN](https://CRAN.R-project.org/package=wbwdi) via:
 
 ``` r
 install.packages("wbwdi")
@@ -150,7 +151,7 @@ You can get a list of all indicators supported by the WDI API via:
 
 ``` r
 wdi_get_indicators()
-#> # A tibble: 29,244 × 7
+#> # A tibble: 29,299 × 7
 #>    indicator_id         indicator_name         source_id source_name source_note
 #>    <chr>                <chr>                      <int> <chr>       <chr>      
 #>  1 1.0.HCount.1.90usd   Poverty Headcount ($1…        37 LAC Equity… "The pover…
@@ -163,7 +164,7 @@ wdi_get_indicators()
 #>  8 1.0.PGap.2.5usd      Poverty Gap ($2.50 a …        37 LAC Equity… "The pover…
 #>  9 1.0.PGap.Poor4uds    Poverty Gap ($4 a day)        37 LAC Equity… "The pover…
 #> 10 1.0.PSev.1.90usd     Poverty Severity ($1.…        37 LAC Equity… "The pover…
-#> # ℹ 29,234 more rows
+#> # ℹ 29,289 more rows
 #> # ℹ 2 more variables: source_organization <chr>, topics <list>
 ```
 
@@ -284,6 +285,23 @@ interface design) are:
   Platform and Finances One API.
 - [`wbstats`](https://CRAN.R-project.org/package=wbstats): uses cached
   data by default, does not use `httr2`.
+
+## Contributing
+
+Contributions to `econdatasets` are welcome! If you’d like to
+contribute, please follow these steps:
+
+1.  **Create an issue**: Before making changes, create an issue
+    describing the bug or feature you’re addressing.
+2.  **Fork the repository**: After receiving supportive feedback from
+    the package authors, fork the repository to your GitHub account.
+3.  **Create a branch**: Create a branch for your changes with a
+    descriptive name.
+4.  **Make your changes**: Implement your bug fix or feature.
+5.  **Test your changes**: Run tests to ensure your changes don’t break
+    existing functionality.
+6.  **Submit a pull request**: Push your changes to your fork and submit
+    a pull request to the main repository.
 
 # Package index
 

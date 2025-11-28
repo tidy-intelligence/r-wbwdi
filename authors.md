@@ -8,16 +8,16 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/tidy-intelligence/r-wbwdi/blob/v1.0.2.9000/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/tidy-intelligence/r-wbwdi/blob/v1.0.3/DESCRIPTION)
 
 Scheuch C (2025). *wbwdi: Seamless Access to World Bank World
-Development Indicators (WDI)*. R package version 1.0.2.9000,
+Development Indicators (WDI)*. R package version 1.0.3,
 <https://github.com/tidy-intelligence/r-wbwdi>.
 
     @Manual{,
       title = {wbwdi: Seamless Access to World Bank World Development Indicators (WDI)},
       author = {Christoph Scheuch},
       year = {2025},
-      note = {R package version 1.0.2.9000},
+      note = {R package version 1.0.3},
       url = {https://github.com/tidy-intelligence/r-wbwdi},
     }

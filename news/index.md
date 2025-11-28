@@ -1,6 +1,10 @@
 # Changelog
 
-## wbwdi (development version)
+## wbwdi 1.0.3
+
+CRAN release: 2025-11-20
+
+### Minor improvements and bug fixes
 
 - Fix edge case where
   [`wdi_get()`](https://tidy-intelligence.github.io/r-wbwdi/reference/wdi_get.md)

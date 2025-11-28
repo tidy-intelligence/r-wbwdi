@@ -1,6 +1,6 @@
 # wbwdi: Seamless Access to World Bank World Development Indicators (WDI)
 
-Access and analyze the World Bank’s World Development Indicators (WDI)
+Access and analyze the World Bank's World Development Indicators (WDI)
 using the corresponding API
 <https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation>.
 WDI provides more than 24,000 country or region-level indicators for
