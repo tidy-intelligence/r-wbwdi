@@ -187,6 +187,29 @@ test_that("wdi_get handles empty data gracefully", {
   )
 })
 
+test_that("wdi_get handles NULL from wdi_get_entities during ISO2 enrichment", {
+  mock_data <- data.frame(
+    indicator = I(data.frame(id = "NY.GDP.MKTP.CD", value = "GDP")),
+    country = I(data.frame(id = "US", value = "United States")),
+    countryiso3code = "USA",
+    date = "2020",
+    value = 21000000000000,
+    unit = "",
+    obs_status = "",
+    decimal = 0L
+  )
+
+  with_mocked_bindings(
+    perform_request = function(...) mock_data,
+    wdi_get_entities = function(...) NULL,
+    {
+      result <- wdi_get("US", "NY.GDP.MKTP.CD", progress = FALSE)
+      expect_s3_class(result, "tbl_df")
+      expect_true(nrow(result) > 0)
+    }
+  )
+})
+
 test_that("create_date constructs date range correctly", {
   expect_equal(create_date(2010, 2015), "2010:2015")
   expect_null(create_date(NULL, NULL))

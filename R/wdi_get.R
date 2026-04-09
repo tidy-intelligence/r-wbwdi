@@ -150,14 +150,16 @@ wdi_get <- function(
     ) {
       entities <- wdi_get_entities()
 
-      indicators_processed <- indicators_processed |>
-        rename(entity_iso2code = "entity_id") |>
-        left_join(
-          entities |>
-            select("entity_id", "entity_iso2code"),
-          join_by("entity_iso2code")
-        ) |>
-        select(-"entity_iso2code")
+      if (!is.null(entities)) {
+        indicators_processed <- indicators_processed |>
+          rename(entity_iso2code = "entity_id") |>
+          left_join(
+            entities |>
+              select("entity_id", "entity_iso2code"),
+            join_by("entity_iso2code")
+          ) |>
+          select(-"entity_iso2code")
+      }
     }
   }
 

@@ -25,6 +25,16 @@ test_that("wdi_get_languages trims whitespace in character columns", {
   )
 })
 
+test_that("wdi_get_languages returns NULL when API is unavailable", {
+  with_mocked_bindings(
+    perform_request = function(...) NULL,
+    {
+      result <- wdi_get_languages()
+      expect_null(result)
+    }
+  )
+})
+
 test_that("wdi_get_languages handles empty data gracefully", {
   mock_data <- tibble(
     code = character(),
