@@ -243,7 +243,7 @@ test_that("perform_request handles API errors gracefully", {
   expect_message(perform_request("nonexistent"), "HTTP 404 Not Found.")
 })
 
-test_that("perform_request returns NULL with warning when body contains API error", {
+test_that("perform_request returns NULL w/ warning when body contains error", {
   mock_resp <- structure(list(status_code = 200L), class = "httr2_response")
   mock_req <- structure(list(), class = "httr2_request")
 

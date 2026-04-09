@@ -104,7 +104,9 @@ perform_request <- function(
               progress = progress
             )
           resps |>
-            purrr::map(function(x) resp_body_json(x, simplifyVector = TRUE)[[2]]) |>
+            purrr::map(function(x) {
+              resp_body_json(x, simplifyVector = TRUE)[[2]]
+            }) |>
             purrr::reduce(union)
         },
         error = function(e) {
