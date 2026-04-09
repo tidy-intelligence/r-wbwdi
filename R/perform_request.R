@@ -84,7 +84,8 @@ perform_request <- function(
 
   if (!is.null(resp)) {
     if (is_request_error(resp)) {
-      handle_request_error(resp)
+      handle_request_error(resp, req)
+      return(invisible(NULL))
     }
 
     body <- resp_body_json(resp, simplifyVector = TRUE)
@@ -94,15 +95,30 @@ perform_request <- function(
     if (pages == 1L) {
       out <- body[[2L]]
     } else {
-      resps <- req |>
-        req_perform_iterative(
-          next_req = iterate_with_offset("page"),
-          max_reqs = pages,
-          progress = progress
-        )
-      out <- resps |>
-        purrr::map(function(x) resp_body_json(x, simplifyVector = TRUE)[[2]]) |>
-        purrr::reduce(union)
+      out <- tryCatch(
+        {
+          resps <- req |>
+            req_perform_iterative(
+              next_req = iterate_with_offset("page"),
+              max_reqs = pages,
+              progress = progress
+            )
+          resps |>
+            purrr::map(function(x) resp_body_json(x, simplifyVector = TRUE)[[2]]) |>
+            purrr::reduce(union)
+        },
+        error = function(e) {
+          cli::cli_alert_warning(
+            paste(
+              "Failed to retrieve data from the World Bank API",
+              "for request {req_get_url(req)}.",
+              "Error message: {conditionMessage(e)}"
+            ),
+            wrap = TRUE
+          )
+          invisible(NULL)
+        }
+      )
     }
 
     out
@@ -190,7 +206,18 @@ check_for_body_error <- function(resp) {
 
 #' @keywords internal
 #' @noRd
-handle_request_error <- function(resp) {
+handle_request_error <- function(resp, req) {
   error_body <- check_for_body_error(resp)
-  cli::cli_abort(paste(error_body, collapse = "\n"))
+  if (!is.null(error_body)) {
+    cli::cli_alert_warning(paste(error_body, collapse = "\n"))
+  } else {
+    cli::cli_alert_warning(
+      paste(
+        "Failed to retrieve data from the World Bank API",
+        "for request {req_get_url(req)}.",
+        "HTTP status: {resp_status(resp)}"
+      ),
+      wrap = TRUE
+    )
+  }
 }

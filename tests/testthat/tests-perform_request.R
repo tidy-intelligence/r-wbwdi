@@ -242,3 +242,45 @@ test_that("perform_request handles API errors gracefully", {
 
   expect_message(perform_request("nonexistent"), "HTTP 404 Not Found.")
 })
+
+test_that("perform_request returns NULL with warning when body contains API error", {
+  mock_resp <- structure(list(status_code = 200L), class = "httr2_response")
+  mock_req <- structure(list(), class = "httr2_request")
+
+  with_mocked_bindings(
+    req_retry = function(req, ...) mock_req,
+    req_perform = function(req, ...) mock_resp,
+    req_get_url = function(req) "https://api.worldbank.org/v2/test",
+    is_request_error = function(resp) TRUE,
+    check_for_body_error = function(resp) c("Error code: 120", "Invalid value"),
+    {
+      result <- perform_request("test", max_tries = 2L)
+      expect_null(result)
+    }
+  )
+})
+
+test_that("perform_request returns NULL with warning on pagination error", {
+  mock_resp <- structure(list(status_code = 200L), class = "httr2_response")
+  mock_req <- structure(list(), class = "httr2_request")
+  mock_body <- list(
+    list(pages = 2L),
+    list(list(value = 1))
+  )
+
+  with_mocked_bindings(
+    req_retry = function(req, ...) mock_req,
+    req_perform = function(req, ...) mock_resp,
+    req_get_url = function(req) "https://api.worldbank.org/v2/test",
+    is_request_error = function(resp) FALSE,
+    resp_body_json = function(resp, ...) mock_body,
+    req_perform_iterative = function(...) stop("HTTP 502 Bad Gateway"),
+    {
+      result <- expect_message(
+        perform_request("test", max_tries = 2L),
+        "Failed to retrieve data"
+      )
+      expect_null(result)
+    }
+  )
+})
