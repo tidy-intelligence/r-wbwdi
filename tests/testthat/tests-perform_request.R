@@ -290,3 +290,39 @@ test_that("perform_request returns NULL with warning on pagination error", {
     }
   )
 })
+
+test_that("perform_request warns and returns NULL when req_perform fails", {
+  # Stub req_perform to simulate a network/transport failure
+  local_mocked_bindings(
+    req_perform = function(req, ...) {
+      stop("Could not resolve host: api.worldbank.org")
+    },
+    .package = "httr2"
+  )
+
+  expect_message(
+    result <- perform_request(resource = "country", max_tries = 2L),
+    regexp = "Failed to retrieve data from the World Bank API"
+  )
+
+  expect_null(result)
+})
+
+test_that("perform_request warning includes the request URL and error message", {
+  local_mocked_bindings(
+    req_perform = function(req, ...) {
+      stop("Timeout was reached")
+    },
+    .package = "httr2"
+  )
+
+  expect_message(
+    perform_request(resource = "country", max_tries = 2L),
+    regexp = "Timeout was reached"
+  )
+
+  expect_message(
+    perform_request(resource = "country", max_tries = 2L),
+    regexp = "api\\.worldbank\\.org"
+  )
+})
