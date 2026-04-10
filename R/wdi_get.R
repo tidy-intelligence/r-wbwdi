@@ -76,7 +76,7 @@
 #' wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 #'
 #' # Download indicators for different sources
-#' wdi_get("DEU", "SG.LAW.INDX", source = 2)
+#' wdi_get("DEU", "NY.GDP.PCAP.KD", source = 2)
 #' wdi_get("DEU", "SG.LAW.INDX", source = 14)
 #'
 #' # Download indicators in wide format

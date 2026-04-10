@@ -1,11 +1,15 @@
-test_that("wdi_get_handles invalid language input", {
-  expect_error(
-    wdi_get(
+test_that("wdi_get handles invalid language input gracefully", {
+  skip_if_offline()
+
+  expect_message(
+    result <- wdi_get(
       entities = "USA",
       indicators = "NY.GDP.MKTP.CD",
-      language = "xx"
+      language = "xx",
+      progress = FALSE
     )
   )
+  expect_equal(nrow(result), 0)
 })
 
 test_that("wdi_get checks invalid parameter values", {

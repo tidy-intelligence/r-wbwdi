@@ -85,6 +85,7 @@ perform_request <- function(
   if (!is.null(resp)) {
     if (is_request_error(resp)) {
       handle_request_error(resp)
+      return(invisible(NULL))
     }
 
     body <- resp_body_json(resp, simplifyVector = TRUE)
@@ -209,5 +210,5 @@ check_for_body_error <- function(resp) {
 #' @noRd
 handle_request_error <- function(resp) {
   error_body <- check_for_body_error(resp)
-  cli::cli_abort(paste(error_body, collapse = "\n"))
+  cli::cli_alert_warning(paste(error_body, collapse = "\n"))
 }

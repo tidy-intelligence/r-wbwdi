@@ -1,7 +1,8 @@
-test_that("wdi_get_indicators handles ivalid language input", {
-  expect_error(
-    wdi_get_indicators(language = "xx")
-  )
+test_that("wdi_get_indicators handles invalid language input gracefully", {
+  skip_if_offline()
+
+  expect_message(result <- wdi_get_indicators(language = "xx"))
+  expect_null(result)
 })
 
 test_that("wdi_get_indicators handles invalid per_page input", {
