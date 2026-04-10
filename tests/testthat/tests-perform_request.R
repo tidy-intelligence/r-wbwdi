@@ -308,7 +308,7 @@ test_that("perform_request warns and returns NULL when req_perform fails", {
   expect_null(result)
 })
 
-test_that("perform_request warning includes the request URL and error message", {
+test_that("perform_request warning includes request URL and error message", {
   local_mocked_bindings(
     req_perform = function(req, ...) {
       stop("Timeout was reached")
