@@ -89,8 +89,6 @@ wdi_get(
   entities = "all",
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL")
 )
-#> Sending requests for indicator NY.GDP.PCAP.KD ■■■■■■■■■■■■■■■■                 …
-#> Sending requests for indicator NY.GDP.PCAP.KD ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  …
 #> # A tibble: 35,112 × 4
 #>    entity_id indicator_id    year value
 #>    <chr>     <chr>          <int> <dbl>
