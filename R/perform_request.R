@@ -95,32 +95,17 @@ perform_request <- function(
     if (pages == 1L) {
       out <- body[[2L]]
     } else {
-      out <- tryCatch(
-        {
-          resps <- req |>
-            req_perform_iterative(
-              next_req = iterate_with_offset("page"),
-              max_reqs = pages,
-              progress = progress
-            )
-          resps |>
-            purrr::map(function(x) {
-              resp_body_json(x, simplifyVector = TRUE)[[2]]
-            }) |>
-            purrr::reduce(union)
-        },
-        error = function(e) {
-          cli::cli_alert_warning(
-            paste(
-              "Failed to retrieve data from the World Bank API",
-              "for request {req_get_url(req)}.",
-              "Error message: {conditionMessage(e)}"
-            ),
-            wrap = TRUE
-          )
-          invisible(NULL)
-        }
-      )
+      resps <- req |>
+        req_perform_iterative(
+          next_req = iterate_with_offset("page"),
+          max_reqs = pages,
+          progress = progress
+        )
+      out <- resps |>
+        purrr::map(function(x) {
+          resp_body_json(x, simplifyVector = TRUE)[[2]]
+        }) |>
+        purrr::reduce(union)
     }
 
     out

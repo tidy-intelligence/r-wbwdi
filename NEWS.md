@@ -1,5 +1,11 @@
 # wbwdi (development version)
 
+# wbwdi 1.0.4
+
+## Minor improvements and bug fixes
+
+- Fix edge cases where tests didn't fail gracefully because of API errors. 
+
 # wbwdi 1.0.3
 
 ## Minor improvements and bug fixes
