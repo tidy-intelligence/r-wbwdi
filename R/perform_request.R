@@ -84,8 +84,7 @@ perform_request <- function(
 
   if (!is.null(resp)) {
     if (is_request_error(resp)) {
-      handle_request_error(resp, req)
-      return(invisible(NULL))
+      handle_request_error(resp)
     }
 
     body <- resp_body_json(resp, simplifyVector = TRUE)
@@ -208,18 +207,7 @@ check_for_body_error <- function(resp) {
 
 #' @keywords internal
 #' @noRd
-handle_request_error <- function(resp, req) {
+handle_request_error <- function(resp) {
   error_body <- check_for_body_error(resp)
-  if (!is.null(error_body)) {
-    cli::cli_alert_warning(paste(error_body, collapse = "\n"))
-  } else {
-    cli::cli_alert_warning(
-      paste(
-        "Failed to retrieve data from the World Bank API",
-        "for request {req_get_url(req)}.",
-        "HTTP status: {resp_status(resp)}"
-      ),
-      wrap = TRUE
-    )
-  }
+  cli::cli_abort(paste(error_body, collapse = "\n"))
 }

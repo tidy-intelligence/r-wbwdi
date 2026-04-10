@@ -243,7 +243,7 @@ test_that("perform_request handles API errors gracefully", {
   expect_message(perform_request("nonexistent"), "HTTP 404 Not Found.")
 })
 
-test_that("perform_request returns NULL w/ warning when body contains error", {
+test_that("perform_request aborts with error when body contains API error", {
   mock_resp <- structure(list(status_code = 200L), class = "httr2_response")
   mock_req <- structure(list(), class = "httr2_request")
 
@@ -254,8 +254,7 @@ test_that("perform_request returns NULL w/ warning when body contains error", {
     is_request_error = function(resp) TRUE,
     check_for_body_error = function(resp) c("Error code: 120", "Invalid value"),
     {
-      result <- perform_request("test", max_tries = 2L)
-      expect_null(result)
+      expect_error(perform_request("test", max_tries = 2L))
     }
   )
 })
@@ -276,8 +275,8 @@ test_that("perform_request returns NULL with warning on pagination error", {
     resp_body_json = function(resp, ...) mock_body,
     req_perform_iterative = function(...) stop("HTTP 502 Bad Gateway"),
     {
-      result <- expect_message(
-        perform_request("test", max_tries = 2L),
+      expect_message(
+        result <- perform_request("test", max_tries = 2L),
         "Failed to retrieve data"
       )
       expect_null(result)
