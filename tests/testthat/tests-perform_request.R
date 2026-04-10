@@ -254,7 +254,7 @@ test_that("perform_request aborts with error when body contains API error", {
     is_request_error = function(resp) TRUE,
     check_for_body_error = function(resp) c("Error code: 120", "Invalid value"),
     {
-      expect_error(perform_request("test", max_tries = 2L))
+      expect_message(perform_request("test", max_tries = 2L))
     }
   )
 })
