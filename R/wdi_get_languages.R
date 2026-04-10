@@ -37,6 +37,7 @@ wdi_get_languages <- function() {
         native_form = "nativeForm"
       ) |>
       mutate(across(where(is.character), trimws))
+
+    languages_processed
   }
-  languages_processed
 }

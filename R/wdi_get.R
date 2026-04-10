@@ -76,7 +76,7 @@
 #' wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
 #'
 #' # Download indicators for different sources
-#' wdi_get("DEU", "SG.LAW.INDX", source = 2)
+#' wdi_get("DEU", "NY.GDP.PCAP.KD", source = 2)
 #' wdi_get("DEU", "SG.LAW.INDX", source = 14)
 #'
 #' # Download indicators in wide format
@@ -150,14 +150,16 @@ wdi_get <- function(
     ) {
       entities <- wdi_get_entities()
 
-      indicators_processed <- indicators_processed |>
-        rename(entity_iso2code = "entity_id") |>
-        left_join(
-          entities |>
-            select("entity_id", "entity_iso2code"),
-          join_by("entity_iso2code")
-        ) |>
-        select(-"entity_iso2code")
+      if (!is.null(entities)) {
+        indicators_processed <- indicators_processed |>
+          rename(entity_iso2code = "entity_id") |>
+          left_join(
+            entities |>
+              select("entity_id", "entity_iso2code"),
+            join_by("entity_iso2code")
+          ) |>
+          select(-"entity_iso2code")
+      }
     }
   }
 

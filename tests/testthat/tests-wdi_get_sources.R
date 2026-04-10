@@ -1,7 +1,8 @@
-test_that("wdi_get_sources handles invalid language input", {
-  expect_error(
-    wdi_get_sources(language = "xx")
-  )
+test_that("wdi_get_sources handles invalid language input gracefully", {
+  skip_if_offline()
+
+  expect_message(result <- wdi_get_sources(language = "xx"))
+  expect_null(result)
 })
 
 test_that("wdi_get_sources trims whitespace in character columns", {

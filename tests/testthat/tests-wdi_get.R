@@ -1,11 +1,15 @@
-test_that("wdi_get_handles invalid language input", {
-  expect_error(
-    wdi_get(
+test_that("wdi_get handles invalid language input gracefully", {
+  skip_if_offline()
+
+  expect_message(
+    result <- wdi_get(
       entities = "USA",
       indicators = "NY.GDP.MKTP.CD",
-      language = "xx"
+      language = "xx",
+      progress = FALSE
     )
   )
+  expect_equal(nrow(result), 0)
 })
 
 test_that("wdi_get checks invalid parameter values", {
@@ -183,6 +187,29 @@ test_that("wdi_get handles empty data gracefully", {
     {
       result <- wdi_get("USA", "NY.GDP.PCAP.KD")
       expect_equal(nrow(result), 0)
+    }
+  )
+})
+
+test_that("wdi_get handles NULL from wdi_get_entities during ISO2 enrichment", {
+  mock_data <- data.frame(
+    indicator = I(data.frame(id = "NY.GDP.MKTP.CD", value = "GDP")),
+    country = I(data.frame(id = "US", value = "United States")),
+    countryiso3code = "USA",
+    date = "2020",
+    value = 21000000000000,
+    unit = "",
+    obs_status = "",
+    decimal = 0L
+  )
+
+  with_mocked_bindings(
+    perform_request = function(...) mock_data,
+    wdi_get_entities = function(...) NULL,
+    {
+      result <- wdi_get("US", "NY.GDP.MKTP.CD", progress = FALSE)
+      expect_s3_class(result, "tbl_df")
+      expect_true(nrow(result) > 0)
     }
   )
 })

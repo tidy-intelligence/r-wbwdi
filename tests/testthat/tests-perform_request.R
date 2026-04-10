@@ -168,10 +168,12 @@ test_that("perform_request uses custom base_url", {
 })
 
 test_that("perform_request returns NULL on connection failure", {
-  result <- perform_request(
-    resource = "countries",
-    base_url = "https://localhost:9999/",
-    max_tries = 2
+  expect_message(
+    result <- perform_request(
+      resource = "countries",
+      base_url = "https://localhost:9999/",
+      max_tries = 2
+    )
   )
 
   expect_null(result)
@@ -210,10 +212,12 @@ test_that("perform_request handles NULL optional parameters", {
 test_that("perform_request max_tries parameter works", {
   start_time <- Sys.time()
 
-  result <- perform_request(
-    resource = "countries",
-    base_url = "https://localhost:9999/",
-    max_tries = 2
+  expect_message(
+    result <- perform_request(
+      resource = "countries",
+      base_url = "https://localhost:9999/",
+      max_tries = 2
+    )
   )
 
   end_time <- Sys.time()
@@ -241,4 +245,84 @@ test_that("perform_request handles API errors gracefully", {
   skip_if_offline()
 
   expect_message(perform_request("nonexistent"), "HTTP 404 Not Found.")
+})
+
+test_that("perform_request returns NULL w/ warning when body contains error", {
+  mock_resp <- structure(list(status_code = 200L), class = "httr2_response")
+  mock_req <- structure(list(), class = "httr2_request")
+
+  with_mocked_bindings(
+    req_retry = function(req, ...) mock_req,
+    req_perform = function(req, ...) mock_resp,
+    req_get_url = function(req) "https://api.worldbank.org/v2/test",
+    is_request_error = function(resp) TRUE,
+    check_for_body_error = function(resp) c("Error code: 120", "Invalid value"),
+    {
+      expect_message(
+        result <- perform_request("test", max_tries = 2L)
+      )
+      expect_null(result)
+    }
+  )
+})
+
+test_that("perform_request returns NULL with warning on pagination error", {
+  mock_resp <- structure(list(status_code = 200L), class = "httr2_response")
+  mock_req <- structure(list(), class = "httr2_request")
+  mock_body <- list(
+    list(pages = 2L),
+    list(list(value = 1))
+  )
+
+  with_mocked_bindings(
+    req_retry = function(req, ...) mock_req,
+    req_perform = function(req, ...) mock_resp,
+    req_get_url = function(req) "https://api.worldbank.org/v2/test",
+    is_request_error = function(resp) FALSE,
+    resp_body_json = function(resp, ...) mock_body,
+    req_perform_iterative = function(...) stop("HTTP 502 Bad Gateway"),
+    {
+      expect_message(
+        result <- perform_request("test", max_tries = 2L),
+        "Failed to retrieve data"
+      )
+      expect_null(result)
+    }
+  )
+})
+
+test_that("perform_request warns and returns NULL when req_perform fails", {
+  # Stub req_perform to simulate a network/transport failure
+  local_mocked_bindings(
+    req_perform = function(req, ...) {
+      stop("Could not resolve host: api.worldbank.org")
+    },
+    .package = "httr2"
+  )
+
+  expect_message(
+    result <- perform_request(resource = "country", max_tries = 2L),
+    regexp = "Failed to retrieve data from the World Bank API"
+  )
+
+  expect_null(result)
+})
+
+test_that("perform_request warning includes request URL and error message", {
+  local_mocked_bindings(
+    req_perform = function(req, ...) {
+      stop("Timeout was reached")
+    },
+    .package = "httr2"
+  )
+
+  expect_message(
+    perform_request(resource = "country", max_tries = 2L),
+    regexp = "Timeout was reached"
+  )
+
+  expect_message(
+    perform_request(resource = "country", max_tries = 2L),
+    regexp = "api\\.worldbank\\.org"
+  )
 })

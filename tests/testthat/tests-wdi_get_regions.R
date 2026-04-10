@@ -1,7 +1,8 @@
-test_that("wdi_get_regions handles invalid language input", {
-  expect_error(
-    wdi_get_regions(language = "xx")
-  )
+test_that("wdi_get_regions handles invalid language input gracefully", {
+  skip_if_offline()
+
+  expect_message(result <- wdi_get_regions(language = "xx"))
+  expect_null(result)
 })
 
 test_that("wdi_get_regions returns a tibble with correct column names", {
