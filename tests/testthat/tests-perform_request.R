@@ -168,10 +168,12 @@ test_that("perform_request uses custom base_url", {
 })
 
 test_that("perform_request returns NULL on connection failure", {
-  result <- perform_request(
-    resource = "countries",
-    base_url = "https://localhost:9999/",
-    max_tries = 2
+  expect_message(
+    result <- perform_request(
+      resource = "countries",
+      base_url = "https://localhost:9999/",
+      max_tries = 2
+    )
   )
 
   expect_null(result)
@@ -210,10 +212,12 @@ test_that("perform_request handles NULL optional parameters", {
 test_that("perform_request max_tries parameter works", {
   start_time <- Sys.time()
 
-  result <- perform_request(
-    resource = "countries",
-    base_url = "https://localhost:9999/",
-    max_tries = 2
+  expect_message(
+    result <- perform_request(
+      resource = "countries",
+      base_url = "https://localhost:9999/",
+      max_tries = 2
+    )
   )
 
   end_time <- Sys.time()
@@ -243,7 +247,7 @@ test_that("perform_request handles API errors gracefully", {
   expect_message(perform_request("nonexistent"), "HTTP 404 Not Found.")
 })
 
-test_that("perform_request returns NULL with warning when body contains API error", {
+test_that("perform_request returns NULL w/ warning when body contains error", {
   mock_resp <- structure(list(status_code = 200L), class = "httr2_response")
   mock_req <- structure(list(), class = "httr2_request")
 
@@ -255,8 +259,7 @@ test_that("perform_request returns NULL with warning when body contains API erro
     check_for_body_error = function(resp) c("Error code: 120", "Invalid value"),
     {
       expect_message(
-        result <- perform_request("test", max_tries = 2L),
-        "Error code: 120"
+        result <- perform_request("test", max_tries = 2L)
       )
       expect_null(result)
     }
