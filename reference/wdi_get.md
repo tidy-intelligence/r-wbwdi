@@ -129,20 +129,20 @@ results into a single tidy data frame.
 # \donttest{
 # Download single indicator for multiple entities
 wdi_get(c("USA", "CAN", "GBR"), "NY.GDP.PCAP.KD")
-#> # A tibble: 195 × 4
+#> # A tibble: 198 × 4
 #>    entity_id indicator_id    year  value
 #>    <chr>     <chr>          <int>  <dbl>
 #>  1 CAN       NY.GDP.PCAP.KD  1960 15432.
-#>  2 GBR       NY.GDP.PCAP.KD  1960 15136.
-#>  3 USA       NY.GDP.PCAP.KD  1960 18854.
+#>  2 GBR       NY.GDP.PCAP.KD  1960 15324.
+#>  3 USA       NY.GDP.PCAP.KD  1960 18899.
 #>  4 CAN       NY.GDP.PCAP.KD  1961 15606.
-#>  5 GBR       NY.GDP.PCAP.KD  1961 15427.
-#>  6 USA       NY.GDP.PCAP.KD  1961 19019.
+#>  5 GBR       NY.GDP.PCAP.KD  1961 15618.
+#>  6 USA       NY.GDP.PCAP.KD  1961 19016.
 #>  7 CAN       NY.GDP.PCAP.KD  1962 16456.
-#>  8 GBR       NY.GDP.PCAP.KD  1962 15465.
-#>  9 USA       NY.GDP.PCAP.KD  1962 19877.
+#>  8 GBR       NY.GDP.PCAP.KD  1962 15657.
+#>  9 USA       NY.GDP.PCAP.KD  1962 19868.
 #> 10 CAN       NY.GDP.PCAP.KD  1963 17008.
-#> # ℹ 185 more rows
+#> # ℹ 188 more rows
 
 # Download single indicator for a specific time frame
 wdi_get(c("USA", "CAN", "GBR"), "DPANUSSPB",
@@ -200,103 +200,94 @@ wdi_get("NGA", "DT.DOD.DECT.CD.TL.US",
 
 # Download single indicator for all entities and disable progress bar
 wdi_get("all", "NY.GDP.PCAP.KD", progress = FALSE)
-#> # A tibble: 17,290 × 4
+#> # A tibble: 17,556 × 4
 #>    entity_id indicator_id    year value
 #>    <chr>     <chr>          <int> <dbl>
-#>  1 AFE       NY.GDP.PCAP.KD  1960 1172.
-#>  2 AFW       NY.GDP.PCAP.KD  1960 1122.
+#>  1 AFE       NY.GDP.PCAP.KD  1960 1186.
+#>  2 AFW       NY.GDP.PCAP.KD  1960 1130.
 #>  3 ARB       NY.GDP.PCAP.KD  1960   NA 
-#>  4 CSS       NY.GDP.PCAP.KD  1960 4377.
+#>  4 CSS       NY.GDP.PCAP.KD  1960 4450.
 #>  5 CEB       NY.GDP.PCAP.KD  1960   NA 
-#>  6 EAR       NY.GDP.PCAP.KD  1960 1062.
-#>  7 EAS       NY.GDP.PCAP.KD  1960 1146.
+#>  6 EAR       NY.GDP.PCAP.KD  1960 1067.
+#>  7 EAS       NY.GDP.PCAP.KD  1960 1147.
 #>  8 EAP       NY.GDP.PCAP.KD  1960  325.
 #>  9 TEA       NY.GDP.PCAP.KD  1960  330.
-#> 10 EMU       NY.GDP.PCAP.KD  1960 9943.
-#> # ℹ 17,280 more rows
+#> 10 EMU       NY.GDP.PCAP.KD  1960 9952.
+#> # ℹ 17,546 more rows
 
 # Download multiple indicators for multiple entities
 wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"))
-#> # A tibble: 390 × 4
+#> # A tibble: 396 × 4
 #>    entity_id indicator_id    year  value
 #>    <chr>     <chr>          <int>  <dbl>
 #>  1 CAN       NY.GDP.PCAP.KD  1960 15432.
-#>  2 GBR       NY.GDP.PCAP.KD  1960 15136.
-#>  3 USA       NY.GDP.PCAP.KD  1960 18854.
+#>  2 GBR       NY.GDP.PCAP.KD  1960 15324.
+#>  3 USA       NY.GDP.PCAP.KD  1960 18899.
 #>  4 CAN       NY.GDP.PCAP.KD  1961 15606.
-#>  5 GBR       NY.GDP.PCAP.KD  1961 15427.
-#>  6 USA       NY.GDP.PCAP.KD  1961 19019.
+#>  5 GBR       NY.GDP.PCAP.KD  1961 15618.
+#>  6 USA       NY.GDP.PCAP.KD  1961 19016.
 #>  7 CAN       NY.GDP.PCAP.KD  1962 16456.
-#>  8 GBR       NY.GDP.PCAP.KD  1962 15465.
-#>  9 USA       NY.GDP.PCAP.KD  1962 19877.
+#>  8 GBR       NY.GDP.PCAP.KD  1962 15657.
+#>  9 USA       NY.GDP.PCAP.KD  1962 19868.
 #> 10 CAN       NY.GDP.PCAP.KD  1963 17008.
-#> # ℹ 380 more rows
+#> # ℹ 386 more rows
 
 # Download indicators for different sources
-wdi_get("DEU", "SG.LAW.INDX", source = 2)
-#> # A tibble: 65 × 4
-#>    entity_id indicator_id  year value
-#>    <chr>     <chr>        <int> <dbl>
-#>  1 DEU       SG.LAW.INDX   1960    NA
-#>  2 DEU       SG.LAW.INDX   1961    NA
-#>  3 DEU       SG.LAW.INDX   1962    NA
-#>  4 DEU       SG.LAW.INDX   1963    NA
-#>  5 DEU       SG.LAW.INDX   1964    NA
-#>  6 DEU       SG.LAW.INDX   1965    NA
-#>  7 DEU       SG.LAW.INDX   1966    NA
-#>  8 DEU       SG.LAW.INDX   1967    NA
-#>  9 DEU       SG.LAW.INDX   1968    NA
-#> 10 DEU       SG.LAW.INDX   1969    NA
-#> # ℹ 55 more rows
+wdi_get("DEU", "NY.GDP.PCAP.KD", source = 2)
+#> # A tibble: 66 × 4
+#>    entity_id indicator_id    year  value
+#>    <chr>     <chr>          <int>  <dbl>
+#>  1 DEU       NY.GDP.PCAP.KD  1960 12607.
+#>  2 DEU       NY.GDP.PCAP.KD  1961 13048.
+#>  3 DEU       NY.GDP.PCAP.KD  1962 13532.
+#>  4 DEU       NY.GDP.PCAP.KD  1963 13774.
+#>  5 DEU       NY.GDP.PCAP.KD  1964 14570.
+#>  6 DEU       NY.GDP.PCAP.KD  1965 15204.
+#>  7 DEU       NY.GDP.PCAP.KD  1966 15502.
+#>  8 DEU       NY.GDP.PCAP.KD  1967 15380.
+#>  9 DEU       NY.GDP.PCAP.KD  1968 16180.
+#> 10 DEU       NY.GDP.PCAP.KD  1969 17243.
+#> # ℹ 56 more rows
 wdi_get("DEU", "SG.LAW.INDX", source = 14)
-#> # A tibble: 65 × 4
-#>    entity_id indicator_id  year value
-#>    <chr>     <chr>        <int> <dbl>
-#>  1 DEU       SG.LAW.INDX   1960    NA
-#>  2 DEU       SG.LAW.INDX   1961    NA
-#>  3 DEU       SG.LAW.INDX   1962    NA
-#>  4 DEU       SG.LAW.INDX   1963    NA
-#>  5 DEU       SG.LAW.INDX   1964    NA
-#>  6 DEU       SG.LAW.INDX   1965    NA
-#>  7 DEU       SG.LAW.INDX   1966    NA
-#>  8 DEU       SG.LAW.INDX   1967    NA
-#>  9 DEU       SG.LAW.INDX   1968    NA
-#> 10 DEU       SG.LAW.INDX   1969    NA
-#> # ℹ 55 more rows
+#> ! Error code: 120
+#> The provided parameter value is not valid
+#> Read more at <https://datahelpdesk.worldbank.org/knowledgebase/articles/898620-api-error-codes>
+#> # A tibble: 0 × 4
+#> # ℹ 4 variables: entity_id <chr>, indicator_id <chr>, year <int>, value <dbl>
 
 # Download indicators in wide format
 wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD"),
         format = "wide")
-#> # A tibble: 195 × 3
+#> # A tibble: 198 × 3
 #>    entity_id  year NY.GDP.PCAP.KD
 #>    <chr>     <int>          <dbl>
 #>  1 CAN        1960         15432.
-#>  2 GBR        1960         15136.
-#>  3 USA        1960         18854.
+#>  2 GBR        1960         15324.
+#>  3 USA        1960         18899.
 #>  4 CAN        1961         15606.
-#>  5 GBR        1961         15427.
-#>  6 USA        1961         19019.
+#>  5 GBR        1961         15618.
+#>  6 USA        1961         19016.
 #>  7 CAN        1962         16456.
-#>  8 GBR        1962         15465.
-#>  9 USA        1962         19877.
+#>  8 GBR        1962         15657.
+#>  9 USA        1962         19868.
 #> 10 CAN        1963         17008.
-#> # ℹ 185 more rows
+#> # ℹ 188 more rows
 wdi_get(c("USA", "CAN", "GBR"), c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
         format = "wide")
-#> # A tibble: 195 × 4
+#> # A tibble: 198 × 4
 #>    entity_id  year NY.GDP.PCAP.KD SP.POP.TOTL
 #>    <chr>     <int>          <dbl>       <dbl>
 #>  1 CAN        1960         15432.    17909356
-#>  2 GBR        1960         15136.    52400000
-#>  3 USA        1960         18854.   180671000
+#>  2 GBR        1960         15324.    52400000
+#>  3 USA        1960         18899.   180671000
 #>  4 CAN        1961         15606.    18271000
-#>  5 GBR        1961         15427.    52800000
-#>  6 USA        1961         19019.   183691000
+#>  5 GBR        1961         15618.    52800000
+#>  6 USA        1961         19016.   183691000
 #>  7 CAN        1962         16456.    18614000
-#>  8 GBR        1962         15465.    53250000
-#>  9 USA        1962         19877.   186538000
+#>  8 GBR        1962         15657.    53250000
+#>  9 USA        1962         19868.   186538000
 #> 10 CAN        1963         17008.    18964000
-#> # ℹ 185 more rows
+#> # ℹ 188 more rows
 
 # Download most recent value only
 wdi_get("USA", "SP.POP.TOTL", most_recent_only = TRUE)

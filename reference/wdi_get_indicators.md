@@ -74,7 +74,7 @@ tibble format.
 # \donttest{
 # Download all supported indicators in English
 wdi_get_indicators()
-#> # A tibble: 29,299 × 7
+#> # A tibble: 29,500 × 7
 #>    indicator_id         indicator_name         source_id source_name source_note
 #>    <chr>                <chr>                      <int> <chr>       <chr>      
 #>  1 1.0.HCount.1.90usd   Poverty Headcount ($1…        37 LAC Equity… "The pover…
@@ -87,12 +87,12 @@ wdi_get_indicators()
 #>  8 1.0.PGap.2.5usd      Poverty Gap ($2.50 a …        37 LAC Equity… "The pover…
 #>  9 1.0.PGap.Poor4uds    Poverty Gap ($4 a day)        37 LAC Equity… "The pover…
 #> 10 1.0.PSev.1.90usd     Poverty Severity ($1.…        37 LAC Equity… "The pover…
-#> # ℹ 29,289 more rows
+#> # ℹ 29,490 more rows
 #> # ℹ 2 more variables: source_organization <chr>, topics <list>
 
 # Download all supported indicators in Spanish
 wdi_get_indicators(language = "es")
-#> # A tibble: 29,299 × 7
+#> # A tibble: 29,500 × 7
 #>    indicator_id         indicator_name         source_id source_name source_note
 #>    <chr>                <chr>                      <int> <chr>       <chr>      
 #>  1 1.0.HCount.1.90usd   "Tasa de Incidencia d…        37 ""          "Tasa de I…
@@ -105,7 +105,7 @@ wdi_get_indicators(language = "es")
 #>  8 1.0.PGap.2.5usd      "Brecha de Pobreza ($…        37 ""          "La Brecha…
 #>  9 1.0.PGap.Poor4uds    "Brecha de Pobreza ($…        37 ""          "La Brecha…
 #> 10 1.0.PSev.1.90usd     "Severidad de la Pobr…        37 ""          "El índice…
-#> # ℹ 29,289 more rows
+#> # ℹ 29,490 more rows
 #> # ℹ 2 more variables: source_organization <chr>, topics <list>
 # }
 ```

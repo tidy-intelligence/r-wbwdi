@@ -47,7 +47,7 @@ wdi_search(
   indicators,
   keywords = c("inequality", "gender")
 )
-#> # A tibble: 1,678 × 7
+#> # A tibble: 1,810 × 7
 #>    indicator_id      indicator_name            source_id source_name source_note
 #>    <chr>             <chr>                         <int> <chr>       <chr>      
 #>  1 1.0.PSev.1.90usd  Poverty Severity ($1.90 …        37 LAC Equity… The povert…
@@ -60,7 +60,7 @@ wdi_search(
 #>  8 1.2.PSev.2.5usd   Poverty Severity ($2.50 …        37 LAC Equity… The povert…
 #>  9 1.2.PSev.Poor4uds Poverty Severity ($4 a d…        37 LAC Equity… The povert…
 #> 10 2.0.cov.Cel       Coverage: Mobile Phone           37 LAC Equity… The covera…
-#> # ℹ 1,668 more rows
+#> # ℹ 1,800 more rows
 #> # ℹ 2 more variables: source_organization <chr>, topics <list>
 
 # Search for keywords only within the "indicator_name" column
@@ -69,7 +69,7 @@ wdi_search(
   keywords = c("inequality", "gender"),
   columns = c("indicator_name")
 )
-#> # A tibble: 466 × 7
+#> # A tibble: 476 × 7
 #>    indicator_id         indicator_name         source_id source_name source_note
 #>    <chr>                <chr>                      <int> <chr>       <chr>      
 #>  1 2.3_GIR.GPI          "Gender parity index …        34 Global Par… "Ratio of …
@@ -82,7 +82,7 @@ wdi_search(
 #>  8 BI.WAG.PREM.PB.FM    "P-Value: Public sect…        64 Worldwide …  NA        
 #>  9 BI.WAG.PREM.PB.FM.CA "P-Value: Gender wage…        64 Worldwide …  NA        
 #> 10 BI.WAG.PREM.PB.FM.ED "P-Value: Gender wage…        64 Worldwide …  NA        
-#> # ℹ 456 more rows
+#> # ℹ 466 more rows
 #> # ℹ 2 more variables: source_organization <chr>, topics <list>
 # }
 ```

@@ -69,15 +69,15 @@ wdi_get_sources()
 #>    source_id source_code source_name               update_date is_data_available
 #>        <int> <chr>       <chr>                     <date>      <lgl>            
 #>  1         1 DBS         Doing Business            2021-08-18  TRUE             
-#>  2         2 WDI         World Development Indica… 2025-10-07  TRUE             
-#>  3         3 WGI         Worldwide Governance Ind… 2024-11-05  TRUE             
+#>  2         2 WDI         World Development Indica… 2026-04-08  TRUE             
+#>  3         3 WGI         Worldwide Governance Ind… 2026-03-18  TRUE             
 #>  4         5 SNM         Subnational Malnutrition… 2016-03-21  TRUE             
-#>  5         6 IDS         International Debt Stati… 2025-02-26  TRUE             
+#>  5         6 IDS         International Debt Stati… 2025-12-03  TRUE             
 #>  6        11 ADI         Africa Development Indic… 2013-02-22  TRUE             
 #>  7        12 EDS         Education Statistics      2024-06-25  TRUE             
 #>  8        13 ESY         Enterprise Surveys        2022-03-25  TRUE             
-#>  9        14 GDS         Gender Statistics         2025-11-11  TRUE             
-#> 10        15 GEM         Global Economic Monitor   2025-11-13  TRUE             
+#>  9        14 GDS         Gender Statistics         2026-03-03  TRUE             
+#> 10        15 GEM         Global Economic Monitor   2026-03-31  TRUE             
 #> # ℹ 61 more rows
 #> # ℹ 2 more variables: is_metadata_available <lgl>, concepts <int>
 ```

@@ -22,7 +22,7 @@ measurement, source, and associated topics.
 
 ``` r
 wdi_get_indicators()
-#> # A tibble: 29,299 × 7
+#> # A tibble: 29,500 × 7
 #>    indicator_id         indicator_name         source_id source_name source_note
 #>    <chr>                <chr>                      <int> <chr>       <chr>      
 #>  1 1.0.HCount.1.90usd   Poverty Headcount ($1…        37 LAC Equity… "The pover…
@@ -35,7 +35,7 @@ wdi_get_indicators()
 #>  8 1.0.PGap.2.5usd      Poverty Gap ($2.50 a …        37 LAC Equity… "The pover…
 #>  9 1.0.PGap.Poor4uds    Poverty Gap ($4 a day)        37 LAC Equity… "The pover…
 #> 10 1.0.PSev.1.90usd     Poverty Severity ($1.…        37 LAC Equity… "The pover…
-#> # ℹ 29,289 more rows
+#> # ℹ 29,490 more rows
 #> # ℹ 2 more variables: source_organization <chr>, topics <list>
 ```
 
@@ -44,7 +44,7 @@ language. For example, to retrieve the indicators in Spanish:
 
 ``` r
 wdi_get_indicators(language = "es")
-#> # A tibble: 29,299 × 7
+#> # A tibble: 29,500 × 7
 #>    indicator_id         indicator_name         source_id source_name source_note
 #>    <chr>                <chr>                      <int> <chr>       <chr>      
 #>  1 1.0.HCount.1.90usd   "Tasa de Incidencia d…        37 ""          "Tasa de I…
@@ -57,7 +57,7 @@ wdi_get_indicators(language = "es")
 #>  8 1.0.PGap.2.5usd      "Brecha de Pobreza ($…        37 ""          "La Brecha…
 #>  9 1.0.PGap.Poor4uds    "Brecha de Pobreza ($…        37 ""          "La Brecha…
 #> 10 1.0.PSev.1.90usd     "Severidad de la Pobr…        37 ""          "El índice…
-#> # ℹ 29,289 more rows
+#> # ℹ 29,490 more rows
 #> # ℹ 2 more variables: source_organization <chr>, topics <list>
 ```
 
@@ -156,20 +156,20 @@ wdi_get(
   entities = c("MEX", "CAN", "USA"),
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL")
 )
-#> # A tibble: 390 × 4
+#> # A tibble: 396 × 4
 #>    entity_id indicator_id    year  value
 #>    <chr>     <chr>          <int>  <dbl>
 #>  1 CAN       NY.GDP.PCAP.KD  1960 15432.
 #>  2 MEX       NY.GDP.PCAP.KD  1960  4146.
-#>  3 USA       NY.GDP.PCAP.KD  1960 18854.
+#>  3 USA       NY.GDP.PCAP.KD  1960 18899.
 #>  4 CAN       NY.GDP.PCAP.KD  1961 15606.
 #>  5 MEX       NY.GDP.PCAP.KD  1961  4219.
-#>  6 USA       NY.GDP.PCAP.KD  1961 19019.
+#>  6 USA       NY.GDP.PCAP.KD  1961 19016.
 #>  7 CAN       NY.GDP.PCAP.KD  1962 16456.
 #>  8 MEX       NY.GDP.PCAP.KD  1962  4276.
-#>  9 USA       NY.GDP.PCAP.KD  1962 19877.
+#>  9 USA       NY.GDP.PCAP.KD  1962 19868.
 #> 10 CAN       NY.GDP.PCAP.KD  1963 17008.
-#> # ℹ 380 more rows
+#> # ℹ 386 more rows
 ```
 
 If you need the same indicators for all entities, you can pass `"all"`
@@ -180,20 +180,20 @@ wdi_get(
   entities = "all",
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL")
 )
-#> # A tibble: 34,580 × 4
+#> # A tibble: 35,112 × 4
 #>    entity_id indicator_id    year value
 #>    <chr>     <chr>          <int> <dbl>
-#>  1 AFE       NY.GDP.PCAP.KD  1960 1172.
-#>  2 AFW       NY.GDP.PCAP.KD  1960 1122.
+#>  1 AFE       NY.GDP.PCAP.KD  1960 1186.
+#>  2 AFW       NY.GDP.PCAP.KD  1960 1130.
 #>  3 ARB       NY.GDP.PCAP.KD  1960   NA 
-#>  4 CSS       NY.GDP.PCAP.KD  1960 4377.
+#>  4 CSS       NY.GDP.PCAP.KD  1960 4450.
 #>  5 CEB       NY.GDP.PCAP.KD  1960   NA 
-#>  6 EAR       NY.GDP.PCAP.KD  1960 1062.
-#>  7 EAS       NY.GDP.PCAP.KD  1960 1146.
+#>  6 EAR       NY.GDP.PCAP.KD  1960 1067.
+#>  7 EAS       NY.GDP.PCAP.KD  1960 1147.
 #>  8 EAP       NY.GDP.PCAP.KD  1960  325.
 #>  9 TEA       NY.GDP.PCAP.KD  1960  330.
-#> 10 EMU       NY.GDP.PCAP.KD  1960 9943.
-#> # ℹ 34,570 more rows
+#> 10 EMU       NY.GDP.PCAP.KD  1960 9952.
+#> # ℹ 35,102 more rows
 ```
 
 If you want to retrieve the indicators in a wide format, you can use the
@@ -205,20 +205,20 @@ wdi_get(
   indicators = c("NY.GDP.PCAP.KD", "SP.POP.TOTL"),
   format = "wide"
 )
-#> # A tibble: 65 × 4
+#> # A tibble: 66 × 4
 #>    entity_id  year NY.GDP.PCAP.KD SP.POP.TOTL
 #>    <chr>     <int>          <dbl>       <dbl>
-#>  1 USA        1960         18854.   180671000
-#>  2 USA        1961         19019.   183691000
-#>  3 USA        1962         19877.   186538000
-#>  4 USA        1963         20447.   189242000
-#>  5 USA        1964         21327.   191889000
-#>  6 USA        1965         22431.   194303000
-#>  7 USA        1966         23635.   196560000
-#>  8 USA        1967         24021.   198712000
-#>  9 USA        1968         24951.   200706000
-#> 10 USA        1969         25480.   202677000
-#> # ℹ 55 more rows
+#>  1 USA        1960         18899.   180671000
+#>  2 USA        1961         19016.   183691000
+#>  3 USA        1962         19868.   186538000
+#>  4 USA        1963         20446.   189242000
+#>  5 USA        1964         21333.   191889000
+#>  6 USA        1965         22417.   194303000
+#>  7 USA        1966         23600.   196560000
+#>  8 USA        1967         23928.   198712000
+#>  9 USA        1968         24827.   200706000
+#> 10 USA        1969         25348.   202677000
+#> # ℹ 56 more rows
 ```
 
 ## Other Helper Functions
@@ -246,7 +246,7 @@ wdi_search(
   keywords = c("inequality", "gender"),
   columns = c("indicator_name")
 )
-#> # A tibble: 466 × 7
+#> # A tibble: 476 × 7
 #>    indicator_id         indicator_name         source_id source_name source_note
 #>    <chr>                <chr>                      <int> <chr>       <chr>      
 #>  1 2.3_GIR.GPI          "Gender parity index …        34 Global Par… "Ratio of …
@@ -259,7 +259,7 @@ wdi_search(
 #>  8 BI.WAG.PREM.PB.FM    "P-Value: Public sect…        64 Worldwide …  NA        
 #>  9 BI.WAG.PREM.PB.FM.CA "P-Value: Gender wage…        64 Worldwide …  NA        
 #> 10 BI.WAG.PREM.PB.FM.ED "P-Value: Gender wage…        64 Worldwide …  NA        
-#> # ℹ 456 more rows
+#> # ℹ 466 more rows
 #> # ℹ 2 more variables: source_organization <chr>, topics <list>
 ```
 
