@@ -1,5 +1,7 @@
 # Changelog
 
+## wbwdi (development version)
+
 ## wbwdi 1.0.4
 
 CRAN release: 2026-04-10
